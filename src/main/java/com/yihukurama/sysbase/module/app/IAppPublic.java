@@ -4,6 +4,7 @@ import com.yihukurama.sysbase.model.AppuserEntity;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.domain.Smstemplate;
 import com.yihukurama.sysbase.module.archives.domain.User;
+import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public interface IAppPublic {
      * @date Created in 19:35 2020/3/26
      *       Modified by yihukurama in 19:35 2020/3/26
      */
-    Result appLogin(Request<Appuser> request);
+    Result appLogin(Request<Appuser> request) throws TipsException;
     /**
      * 说明： app发送短信
      * @author yihukurama
@@ -35,7 +36,7 @@ public interface IAppPublic {
      * @date Created in 19:37 2020/3/26
      *       Modified by yihukurama in 19:37 2020/3/26
      */
-    Result appLoginByToken(Request<Appuser> request);
+    Result appLoginByToken(Request<Appuser> request) throws TipsException;
 
     /**
      * 说明： 注册
@@ -43,7 +44,22 @@ public interface IAppPublic {
      * @date Created in 19:40 2020/3/26
      *       Modified by yihukurama in 19:40 2020/3/26
      */
-    Result appRegist(Request<Appuser> request);
+    Result appRegist(Request<Appuser> request) throws TipsException;
 
+    /**
+     * 说明： 发送短信验证码
+     * @author yihukurama
+     * @date Created in 13:35 2020/3/27
+     *       Modified by yihukurama in 13:35 2020/3/27
+     */
+    Result sendCode(Request<Appuser> request);
+
+    /**
+     * 说明： 校验短信验证码
+     * @author yihukurama
+     * @date Created in 13:36 2020/3/27
+     *       Modified by yihukurama in 13:36 2020/3/27
+     */
+    Result checkCode(Request<Appuser> request);
 
 }

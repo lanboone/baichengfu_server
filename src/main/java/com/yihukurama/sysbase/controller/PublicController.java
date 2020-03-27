@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PublicController  {
 
-
     @Autowired
     IPublicApi iPublicApi;
     @RequestMapping(value = "/login", method = RequestMethod.POST)
