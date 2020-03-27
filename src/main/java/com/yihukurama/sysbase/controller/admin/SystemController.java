@@ -1,4 +1,4 @@
-package com.yihukurama.sysbase.controller;
+package com.yihukurama.sysbase.controller.admin;
 
 
 import com.yihukurama.sysbase.module.archives.domain.User;
