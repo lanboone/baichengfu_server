@@ -21,9 +21,9 @@ import java.util.Date;
 public class ImageEntity extends BaseEntity
 {
 	/**
-	*操作人id
+	*最后修改人id
 	**/
-	@ApiModelProperty(value="操作人id")
+	@ApiModelProperty(value="最后修改人id")
 	@Column(name="operator_id")
 	private String operatorId;
 	/**

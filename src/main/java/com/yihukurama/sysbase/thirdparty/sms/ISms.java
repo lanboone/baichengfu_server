@@ -8,5 +8,11 @@ package com.yihukurama.sysbase.thirdparty.sms;
 public interface ISms {
 
 
-    String sendSms(String phoneNum,String content);
+    /**
+     * 说明： 发送短信验证码
+     * @author yihukurama
+     * @date Created in 20:46 2020/3/30
+     *       Modified by yihukurama in 20:46 2020/3/30
+     */
+    String sendCheckSms(String phoneNum,String content);
 }

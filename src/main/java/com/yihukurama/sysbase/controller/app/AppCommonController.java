@@ -1,12 +1,16 @@
 package com.yihukurama.sysbase.controller.app;
 
 
+import com.yihukurama.sysbase.controller.app.dto.ForgetPwdDto;
+import com.yihukurama.sysbase.controller.app.dto.LoginDto;
+import com.yihukurama.sysbase.controller.app.dto.RegistDto;
 import com.yihukurama.sysbase.module.app.IAppPublic;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.domain.User;
 import com.yihukurama.sysbase.module.archives.service.IPublicApi;
 import com.yihukurama.sysbase.module.archives.service.ISystem;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
+import com.yihukurama.tkmybatisplus.framework.service.businessservice.ISecurity;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import io.swagger.annotations.Api;
@@ -33,12 +37,8 @@ public class AppCommonController {
 
     @ApiOperation(value = "发送短信验证码",notes = "手机号必传")
     @RequestMapping(value = "/send_smscode", method = RequestMethod.POST)
-    public Result sendSmscode(@RequestBody Request<Appuser> request) throws Exception {
+    public Result sendSmscode(@RequestBody Request<String> request) throws Exception {
 
-        Appuser appuser = request.getData();
-        if(EmptyUtil.isEmpty(appuser.getPhoneNumber())){
-            return Result.failed(null,"手机号不可为空",-1);
-        }
 
         return iAppPublic.sendCode(request);
     }
@@ -57,23 +57,16 @@ public class AppCommonController {
 
     @ApiOperation(value = "注册接口",notes = "传入用户信息进行注册，手机号必传")
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
-    public Result regist(@RequestBody Request<Appuser> request) throws Exception {
+    public Result regist(@RequestBody Request<RegistDto> request) throws Exception {
 
-        Appuser appuser = request.getData();
-        if(EmptyUtil.isEmpty(appuser.getUserName()) || EmptyUtil.isEmpty(appuser.getCheckCode())){
-            return Result.failed(null,"手机号验证码不可为空",-1);
-        }
 
         return iAppPublic.appRegist(request);
     }
 
     @ApiOperation(value = "登录接口",notes = "用户名密码必传")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result login(@RequestBody Request<Appuser> request) throws Exception {
-        Appuser appuser = request.getData();
-        if(EmptyUtil.isEmpty(appuser.getUserName()) || EmptyUtil.isEmpty(appuser.getUserPassword())){
-            return Result.failed(null,"用户名密码不可为空",-1);
-        }
+    public Result login(@RequestBody Request<LoginDto> request) throws Exception {
+
 
         return iAppPublic.appLogin(request);
     }
@@ -90,6 +83,14 @@ public class AppCommonController {
         return iAppPublic.appLoginByToken(request);
     }
 
+
+    @ApiOperation(value = "忘记密码",notes = "用户id和token必传")
+    @RequestMapping(value = "/forget_pwd", method = RequestMethod.POST)
+    public Result forgetPwd(@RequestBody Request<ForgetPwdDto> request) throws Exception {
+
+
+        return iAppPublic.forgetPwd(request);
+    }
 
 }
 

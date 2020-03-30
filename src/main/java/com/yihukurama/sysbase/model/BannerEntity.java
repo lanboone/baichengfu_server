@@ -21,6 +21,12 @@ import java.util.Date;
 public class BannerEntity extends BaseEntity
 {
 	/**
+	*广告图
+	**/
+	@ApiModelProperty(value="广告图")
+	@Column(name="ads_pictures")
+	private String adsPictures;
+	/**
 	*删除状态 0正常 1删除
 	**/
 	@ApiModelProperty(value="删除状态 0正常 1删除")
@@ -65,6 +71,14 @@ public class BannerEntity extends BaseEntity
 	
 	
 
+	public String getAdsPictures(){
+		return adsPictures;
+	}
+
+	public void setAdsPictures(String adsPictures){
+		this.adsPictures = adsPictures;
+	}
+
 	public Integer getIsDelete(){
 		return isDelete;
 	}
@@ -97,20 +111,20 @@ public class BannerEntity extends BaseEntity
 		this.createrId = createrId;
 	}
 
-	public String getLinkUrl(){
-		return linkUrl;
-	}
-
-	public void setLinkUrl(String linkUrl){
-		this.linkUrl = linkUrl;
-	}
-
 	public String getId(){
 		return id;
 	}
 
 	public void setId(String id){
 		this.id = id;
+	}
+
+	public String getLinkUrl(){
+		return linkUrl;
+	}
+
+	public void setLinkUrl(String linkUrl){
+		this.linkUrl = linkUrl;
 	}
 
 	public Date getCreateDate(){

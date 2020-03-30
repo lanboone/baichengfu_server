@@ -6,7 +6,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/quanwudingzhi?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/baichengfu?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
     password: a37887245
     type: com.alibaba.druid.pool.DruidDataSource
@@ -60,3 +60,6 @@ sysconfig:
   accesslog: logs/
   loginExpireTime: 28800
   redisPrefix: sysbase-redis-devpre
+sms:
+  accesskey: vkhg0Tc54SpjigJa
+  secret: PiARb4xmDKc4ek1vit8EpQnd5tPNnqC1

@@ -11,13 +11,13 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 说明： 话题评论表
+ * 说明： 话题图片表
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="话题评论表")
-@Table(name="tb_topic_comment")
+@ApiModel(value="话题图片表")
+@Table(name="tb_topic_picture")
 public class TopicEntity extends BaseEntity
 {
 	/**
@@ -45,23 +45,23 @@ public class TopicEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*话题id
+	*管理员id
 	**/
-	@ApiModelProperty(value="话题id")
+	@ApiModelProperty(value="管理员id")
 	@Column(name="topic_id")
 	private String topicId;
 	/**
-	*父评论id
+	*展示的优先级
 	**/
-	@ApiModelProperty(value="父评论id")
-	@Column(name="c_parent_id")
-	private String cParentId;
+	@ApiModelProperty(value="展示的优先级")
+	@Column(name="priority")
+	private Integer priority;
 	/**
-	*话题评论内容
+	*图片
 	**/
-	@ApiModelProperty(value="话题评论内容")
-	@Column(name="comment_content")
-	private String commentContent;
+	@ApiModelProperty(value="图片")
+	@Column(name="picture")
+	private String picture;
 	/**
 	*创建时间
 	**/
@@ -119,20 +119,20 @@ public class TopicEntity extends BaseEntity
 		this.topicId = topicId;
 	}
 
-	public String getCParentId(){
-		return cParentId;
+	public Integer getPriority(){
+		return priority;
 	}
 
-	public void setCParentId(String cParentId){
-		this.cParentId = cParentId;
+	public void setPriority(Integer priority){
+		this.priority = priority;
 	}
 
-	public String getCommentContent(){
-		return commentContent;
+	public String getPicture(){
+		return picture;
 	}
 
-	public void setCommentContent(String commentContent){
-		this.commentContent = commentContent;
+	public void setPicture(String picture){
+		this.picture = picture;
 	}
 
 	public Date getCreateDate(){

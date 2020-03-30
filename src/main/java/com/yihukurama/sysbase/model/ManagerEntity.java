@@ -27,12 +27,6 @@ public class ManagerEntity extends BaseEntity
 	@Column(name="sys_Identity")
 	private String sysIdentity;
 	/**
-	*更新时间
-	**/
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="modify_time")
-	private Date modifyTime;
-	/**
 	*最后修改人id
 	**/
 	@ApiModelProperty(value="最后修改人id")
@@ -81,12 +75,6 @@ public class ManagerEntity extends BaseEntity
 	@Column(name="permission_list")
 	private String permissionList;
 	/**
-	*创建时间
-	**/
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_time")
-	private Date createTime;
-	/**
 	*预留字段5
 	**/
 	@ApiModelProperty(value="预留字段5")
@@ -131,14 +119,6 @@ public class ManagerEntity extends BaseEntity
 
 	public void setSysIdentity(String sysIdentity){
 		this.sysIdentity = sysIdentity;
-	}
-
-	public Date getModifyTime(){
-		return modifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime){
-		this.modifyTime = modifyTime;
 	}
 
 	public String getOperatorId(){
@@ -211,14 +191,6 @@ public class ManagerEntity extends BaseEntity
 
 	public void setId(String id){
 		this.id = id;
-	}
-
-	public Date getCreateTime(){
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime){
-		this.createTime = createTime;
 	}
 
 	public Integer getParameter5(){

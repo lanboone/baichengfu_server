@@ -11,33 +11,27 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 说明： 系统通知表
+ * 说明： 装修师表
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="系统通知表")
-@Table(name="tb_notice")
-public class NoticeEntity extends BaseEntity
+@ApiModel(value="装修师表")
+@Table(name="tb_decorator")
+public class DecoratorEntity extends BaseEntity
 {
 	/**
-	*通知标题
+	*个人图片
 	**/
-	@ApiModelProperty(value="通知标题")
-	@Column(name="notice_title")
-	private String noticeTitle;
+	@ApiModelProperty(value="个人图片")
+	@Column(name="personal_picture")
+	private String personalPicture;
 	/**
 	*最后修改人id
 	**/
 	@ApiModelProperty(value="最后修改人id")
 	@Column(name="operator_id")
 	private String operatorId;
-	/**
-	*通知内容
-	**/
-	@ApiModelProperty(value="通知内容")
-	@Column(name="notice_content")
-	private String noticeContent;
 	/**
 	*最后修改日期
 	**/
@@ -51,18 +45,6 @@ public class NoticeEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*通知链接
-	**/
-	@ApiModelProperty(value="通知链接")
-	@Column(name="notice_link")
-	private String noticeLink;
-	/**
-	*通知分类
-	**/
-	@ApiModelProperty(value="通知分类")
-	@Column(name="notice_type")
-	private String noticeType;
-	/**
 	*删除状态 0正常 1删除
 	**/
 	@ApiModelProperty(value="删除状态 0正常 1删除")
@@ -75,23 +57,29 @@ public class NoticeEntity extends BaseEntity
 	@Column(name="parameter1")
 	private String parameter1;
 	/**
-	*是否已读 0否 1是
+	*装修师技能(布线、贴砖)
 	**/
-	@ApiModelProperty(value="是否已读 0否 1是")
-	@Column(name="is_read")
-	private Integer isRead;
+	@ApiModelProperty(value="装修师技能(布线、贴砖)")
+	@Column(name="skills")
+	private String skills;
 	/**
-	*管理员id
+	*用户id
 	**/
-	@ApiModelProperty(value="管理员id")
-	@Column(name="manager_id")
-	private String managerId;
+	@ApiModelProperty(value="用户id")
+	@Column(name="user_id")
+	private String userId;
 	/**
 	*预留字段5
 	**/
 	@ApiModelProperty(value="预留字段5")
 	@Column(name="parameter5")
 	private Integer parameter5;
+	/**
+	*简介
+	**/
+	@ApiModelProperty(value="简介")
+	@Column(name="introduction")
+	private String introduction;
 	/**
 	*创建时间
 	**/
@@ -104,12 +92,6 @@ public class NoticeEntity extends BaseEntity
 	@ApiModelProperty(value="预留字段4")
 	@Column(name="parameter4")
 	private String parameter4;
-	/**
-	*通知时间
-	**/
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="notice_time")
-	private Date noticeTime;
 	/**
 	*预留字段3
 	**/
@@ -125,12 +107,12 @@ public class NoticeEntity extends BaseEntity
 	
 	
 
-	public String getNoticeTitle(){
-		return noticeTitle;
+	public String getPersonalPicture(){
+		return personalPicture;
 	}
 
-	public void setNoticeTitle(String noticeTitle){
-		this.noticeTitle = noticeTitle;
+	public void setPersonalPicture(String personalPicture){
+		this.personalPicture = personalPicture;
 	}
 
 	public String getOperatorId(){
@@ -139,14 +121,6 @@ public class NoticeEntity extends BaseEntity
 
 	public void setOperatorId(String operatorId){
 		this.operatorId = operatorId;
-	}
-
-	public String getNoticeContent(){
-		return noticeContent;
-	}
-
-	public void setNoticeContent(String noticeContent){
-		this.noticeContent = noticeContent;
 	}
 
 	public Date getOperateDate(){
@@ -165,22 +139,6 @@ public class NoticeEntity extends BaseEntity
 		this.createrId = createrId;
 	}
 
-	public String getNoticeLink(){
-		return noticeLink;
-	}
-
-	public void setNoticeLink(String noticeLink){
-		this.noticeLink = noticeLink;
-	}
-
-	public String getNoticeType(){
-		return noticeType;
-	}
-
-	public void setNoticeType(String noticeType){
-		this.noticeType = noticeType;
-	}
-
 	public Integer getIsDelete(){
 		return isDelete;
 	}
@@ -197,20 +155,20 @@ public class NoticeEntity extends BaseEntity
 		this.parameter1 = parameter1;
 	}
 
-	public Integer getIsRead(){
-		return isRead;
+	public String getSkills(){
+		return skills;
 	}
 
-	public void setIsRead(Integer isRead){
-		this.isRead = isRead;
+	public void setSkills(String skills){
+		this.skills = skills;
 	}
 
-	public String getManagerId(){
-		return managerId;
+	public String getUserId(){
+		return userId;
 	}
 
-	public void setManagerId(String managerId){
-		this.managerId = managerId;
+	public void setUserId(String userId){
+		this.userId = userId;
 	}
 
 	public String getId(){
@@ -229,6 +187,14 @@ public class NoticeEntity extends BaseEntity
 		this.parameter5 = parameter5;
 	}
 
+	public String getIntroduction(){
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction){
+		this.introduction = introduction;
+	}
+
 	public Date getCreateDate(){
 		return createDate;
 	}
@@ -243,14 +209,6 @@ public class NoticeEntity extends BaseEntity
 
 	public void setParameter4(String parameter4){
 		this.parameter4 = parameter4;
-	}
-
-	public Date getNoticeTime(){
-		return noticeTime;
-	}
-
-	public void setNoticeTime(Date noticeTime){
-		this.noticeTime = noticeTime;
 	}
 
 	public String getParameter3(){

@@ -63,9 +63,9 @@ public class FuncEntity extends BaseEntity
 	@Column(name="operator_id")
 	private String operatorId;
 	/**
-	*is_delete
+	*逻辑删除
 	**/
-	@ApiModelProperty(value="is_delete")
+	@ApiModelProperty(value="逻辑删除")
 	@Column(name="is_delete")
 	private Integer isDelete;
 	/**

@@ -1,5 +1,8 @@
 package com.yihukurama.sysbase.module.app;
 
+import com.yihukurama.sysbase.controller.app.dto.ForgetPwdDto;
+import com.yihukurama.sysbase.controller.app.dto.LoginDto;
+import com.yihukurama.sysbase.controller.app.dto.RegistDto;
 import com.yihukurama.sysbase.model.AppuserEntity;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.domain.Smstemplate;
@@ -16,13 +19,24 @@ import org.springframework.stereotype.Service;
  *       Modified by yihukurama in 19:27 2020/3/26
  */
 public interface IAppPublic {
+
+
+    /**
+     * 说明： 重置密码
+     * @author yihukurama
+     * @date Created in 23:06 2020/3/30
+     *       Modified by yihukurama in 23:06 2020/3/30
+     */
+    Result forgetPwd(Request<ForgetPwdDto> request) throws TipsException;
+
+
     /**
      * 说明： APP登录接口
      * @author yihukurama
      * @date Created in 19:35 2020/3/26
      *       Modified by yihukurama in 19:35 2020/3/26
      */
-    Result appLogin(Request<Appuser> request) throws TipsException;
+    Result appLogin(Request<LoginDto> request) throws TipsException;
     /**
      * 说明： app发送短信
      * @author yihukurama
@@ -44,7 +58,7 @@ public interface IAppPublic {
      * @date Created in 19:40 2020/3/26
      *       Modified by yihukurama in 19:40 2020/3/26
      */
-    Result appRegist(Request<Appuser> request) throws TipsException;
+    Result appRegist(Request<RegistDto> request) throws TipsException;
 
     /**
      * 说明： 发送短信验证码
@@ -52,7 +66,7 @@ public interface IAppPublic {
      * @date Created in 13:35 2020/3/27
      *       Modified by yihukurama in 13:35 2020/3/27
      */
-    Result sendCode(Request<Appuser> request);
+    Result sendCode(Request<String> request);
 
     /**
      * 说明： 校验短信验证码

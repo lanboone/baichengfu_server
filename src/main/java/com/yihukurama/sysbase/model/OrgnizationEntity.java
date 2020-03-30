@@ -39,9 +39,9 @@ public class OrgnizationEntity extends BaseEntity
 	@Column(name="address")
 	private String address;
 	/**
-	*最后操作人id
+	*最后修改人id
 	**/
-	@ApiModelProperty(value="最后操作人id")
+	@ApiModelProperty(value="最后修改人id")
 	@Column(name="operator_id")
 	private String operatorId;
 	/**
@@ -51,7 +51,7 @@ public class OrgnizationEntity extends BaseEntity
 	@Column(name="index_order")
 	private Integer indexOrder;
 	/**
-	*最后操作时间
+	*最后修改日期
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operate_date")
