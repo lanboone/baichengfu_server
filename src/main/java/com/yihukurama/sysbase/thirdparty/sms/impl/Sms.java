@@ -27,7 +27,6 @@ public class Sms implements ISms {
         jsonBody.put("templateId","180197");
         jsonBody.put("mobile",phoneNum);
         jsonBody.put("content",content);
-//        String result = iSmsFeign.singleSend(jsonBody.toString());
         String result = iSmsFeign.singleSend(smsConfig.getAccesskey(),
                 smsConfig.getSecret(),
                 "145534",
