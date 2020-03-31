@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.yihukurama.sysbase.controller.app.dto.ForgetPwdDto;
 import com.yihukurama.sysbase.controller.app.dto.LoginDto;
 import com.yihukurama.sysbase.controller.app.dto.RegistDto;
+import com.yihukurama.sysbase.controller.app.dto.TokenLoginDto;
 import com.yihukurama.sysbase.handle.NumberUtil;
 import com.yihukurama.sysbase.mapper.AppuserMapper;
 import com.yihukurama.sysbase.model.AppuserEntity;
@@ -122,10 +123,10 @@ public class AppPublic implements IAppPublic {
     }
 
     @Override
-    public Result appLoginByToken(Request<Appuser> request) throws TipsException {
+    public Result appLoginByToken(Request<TokenLoginDto> request) throws TipsException {
         Appuser reqAppuser = new Appuser();
 
-        reqAppuser.setId(request.getData().getId());
+        reqAppuser.setId(request.getData().getAppUserId());
         reqAppuser.setToken(request.getData().getToken());
 
         List<AppuserEntity> appuserEntityList = appuserService.list(reqAppuser);

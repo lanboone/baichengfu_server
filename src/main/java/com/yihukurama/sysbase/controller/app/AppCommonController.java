@@ -4,6 +4,7 @@ package com.yihukurama.sysbase.controller.app;
 import com.yihukurama.sysbase.controller.app.dto.ForgetPwdDto;
 import com.yihukurama.sysbase.controller.app.dto.LoginDto;
 import com.yihukurama.sysbase.controller.app.dto.RegistDto;
+import com.yihukurama.sysbase.controller.app.dto.TokenLoginDto;
 import com.yihukurama.sysbase.module.app.IAppPublic;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.domain.User;
@@ -73,12 +74,9 @@ public class AppCommonController {
 
     @ApiOperation(value = "token登录",notes = "用户id和token必传")
     @RequestMapping(value = "/login_by_token", method = RequestMethod.POST)
-    public Result loginByToken(@RequestBody Request<Appuser> request) throws Exception {
+    public Result loginByToken(@RequestBody Request<TokenLoginDto> request) throws Exception {
 
-        Appuser appuser = request.getData();
-        if(EmptyUtil.isEmpty(appuser.getToken())){
-            return Result.failed(null,"token不可为空",-1);
-        }
+
 
         return iAppPublic.appLoginByToken(request);
     }
