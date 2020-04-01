@@ -63,3 +63,6 @@ sysconfig:
 sms:
   accesskey: vkhg0Tc54SpjigJa
   secret: PiARb4xmDKc4ek1vit8EpQnd5tPNnqC1
+wxapp:
+  appId:
+  appSecret:

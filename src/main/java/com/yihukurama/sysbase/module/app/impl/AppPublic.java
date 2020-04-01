@@ -14,6 +14,8 @@ import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.domain.Smstemplate;
 import com.yihukurama.sysbase.module.archives.service.domainservice.AppuserService;
 import com.yihukurama.sysbase.thirdparty.sms.ISms;
+import com.yihukurama.sysbase.thirdparty.tencent.wx.app.IWxappFeign;
+import com.yihukurama.sysbase.thirdparty.tencent.wx.app.WxappConfig;
 import com.yihukurama.tkmybatisplus.app.cache.RedisUtils;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
@@ -23,7 +25,9 @@ import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -195,5 +199,36 @@ public class AppPublic implements IAppPublic {
             }
         }
         return Result.failed("","校验不通过",-1);
+    }
+
+    @Autowired
+    IWxappFeign iWxappFeign;
+    @Autowired
+    WxappConfig wxappConfig;
+
+    @Override
+    public Result weChatLogin(String code) throws TipsException{
+
+        String result = iWxappFeign.access_token(wxappConfig.getAppId(),
+                wxappConfig.getAppSecret(),code,null);
+
+        JSONObject resultJson = JSON.parseObject(result);
+        String accessToken = resultJson.getString("access_token");
+        if(EmptyUtil.isEmpty(accessToken)){
+            return Result.failed(result,"微信登录失败,无法获取accesstoken",-1);
+        }
+
+        String openid = resultJson.getString("openid");
+        if(!EmptyUtil.isEmpty(openid)){
+            AppuserEntity appuserEntity = new AppuserEntity();
+            appuserEntity.setWxappOpenid(openid);
+            List<AppuserEntity> apps = appuserService.list(appuserEntity);
+            if(EmptyUtil.isEmpty(apps)){
+                return Result.failed(resultJson,"微信登录失败,该用户未注册",-2);
+            }else if(apps.size() == 1){
+                return Result.successed(apps.get(0),"微信登录成功");
+            }
+        }
+        return Result.failed(result,"微信登录失败",-1);
     }
 }

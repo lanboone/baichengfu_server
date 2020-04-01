@@ -74,4 +74,11 @@ public interface IAppPublic {
      */
     Result checkCode(Request<Appuser> request);
 
+    /**
+     * 说明： app微信登录
+     * @author yihukurama
+     * @date Created in 20:05 2020/4/1
+     *       Modified by yihukurama in 20:05 2020/4/1
+     */
+    Result weChatLogin(String code) throws TipsException;
 }

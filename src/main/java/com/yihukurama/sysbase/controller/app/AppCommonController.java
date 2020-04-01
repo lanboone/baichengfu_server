@@ -7,14 +7,13 @@ import com.yihukurama.sysbase.controller.app.dto.RegistDto;
 import com.yihukurama.sysbase.controller.app.dto.TokenLoginDto;
 import com.yihukurama.sysbase.module.app.IAppPublic;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
-import com.yihukurama.sysbase.module.archives.domain.User;
-import com.yihukurama.sysbase.module.archives.service.IPublicApi;
-import com.yihukurama.sysbase.module.archives.service.ISystem;
+import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
-import com.yihukurama.tkmybatisplus.framework.service.businessservice.ISecurity;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +35,22 @@ public class AppCommonController {
     @Autowired
     IAppPublic iAppPublic;
 
+    /**
+     * @throws
+     * @title weChatLogin
+     * @description 微信授权登录
+     * @author Kuangzc
+     * @updateTime 2019-9-12 16:00:51
+     */
+    @ApiOperation(value = "微信授权登录")
+    @ApiImplicitParams({
+    @ApiImplicitParam(paramType = "query", name = "code", value = "用户换取access_token的code，仅在ErrCode为0时有效", required = true, dataType = "String")
+    })
+    @GetMapping("/weChatLogin")
+    protected Result weChatLogin(@RequestParam String code) throws TipsException {
+
+        return iAppPublic.weChatLogin(code);
+    }
     @ApiOperation(value = "发送短信验证码",notes = "手机号必传")
     @RequestMapping(value = "/send_smscode", method = RequestMethod.POST)
     public Result sendSmscode(@RequestBody Request<String> request) throws Exception {
