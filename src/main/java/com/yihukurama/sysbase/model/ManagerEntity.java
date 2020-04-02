@@ -99,6 +99,12 @@ public class ManagerEntity extends BaseEntity
 	@Column(name="sys_password")
 	private String sysPassword;
 	/**
+	 *管理员手机号
+	 **/
+	@ApiModelProperty(value="管理员手机号")
+	@Column(name="sys_phone")
+	private String sysPhone;
+	/**
 	*预留字段3
 	**/
 	@ApiModelProperty(value="预留字段3")
@@ -241,9 +247,12 @@ public class ManagerEntity extends BaseEntity
 		this.parameter2 = parameter2;
 	}
 
-	
-	
 
-	
-	
+	public String getSysPhone() {
+		return sysPhone;
+	}
+
+	public void setSysPhone(String sysPhone) {
+		this.sysPhone = sysPhone;
+	}
 }

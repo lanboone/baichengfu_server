@@ -4,11 +4,14 @@ server:
   http:
     port: 8444
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/baichengfu?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
-    password: a37887245
+    #password: a37887245
+    password: 199566
     type: com.alibaba.druid.pool.DruidDataSource
     initial-size: 5
     min-idle: 5
