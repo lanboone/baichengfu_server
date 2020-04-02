@@ -68,6 +68,7 @@ public class AppPublic implements IAppPublic {
         }
         reqAppuser.setUserName(phone);
         reqAppuser.setPhoneNumber(phone);
+        pwd = iSecurity.pwdEncrypt(pwd);
         reqAppuser.setUserPassword(pwd);
         appuserService.update(reqAppuser);
         return Result.successed("重置密码成功");

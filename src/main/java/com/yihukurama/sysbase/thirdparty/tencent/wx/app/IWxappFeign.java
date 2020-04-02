@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @date: Created in 16:08 2019/3/18
  * @modified: by autor in 16:08 2019/3/18
  */
-@FeignClient(name = "sms", url = "https://api.weixin.qq.com/sns/oauth2", fallback= IWxappFeign.WxappFeignFallback.class)
+@FeignClient(name = "wxapp", url = "https://api.weixin.qq.com/sns/oauth2", fallback= IWxappFeign.WxappFeignFallback.class)
 public interface IWxappFeign {
 
     /**
