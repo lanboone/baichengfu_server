@@ -1,6 +1,6 @@
 package com.yihukurama.sysbase.module.admin.impl;
 
-import com.yihukurama.sysbase.common.utils.Md5Util;
+import com.yihukurama.sysbase.handle.Md5Util;
 import com.yihukurama.sysbase.controller.admin.dto.LoginDTO;
 import com.yihukurama.sysbase.model.ManagerEntity;
 import com.yihukurama.sysbase.module.admin.Manager;
