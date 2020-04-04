@@ -57,15 +57,16 @@ mybatis:
     map-underscore-to-camel-case: true
   type-handlers-package: com.yihukurama.sysbase.model
 
-#文件存储根路径
-sysconfig:
-  urlStaticPic: E:\YST\dev\sysbase\file
-  accesslog: logs/
-  loginExpireTime: 28800
-  redisPrefix: sysbase-redis-devpre
+#短信配置
 sms:
   accesskey: vkhg0Tc54SpjigJa
   secret: PiARb4xmDKc4ek1vit8EpQnd5tPNnqC1
+#微信登录配置
 wxapp:
   appId:
   appSecret:
+#系统配置
+system:
+  saveFilePath: E:\YST\dev\baichengfu\file
+  accesslog: logs/
+  redisPrefix: baichengfu-redis-devpre

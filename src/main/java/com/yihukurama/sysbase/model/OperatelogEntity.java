@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 @ApiModel(value="操作记录表")
 @Table(name="tb_operatelog")
+@Data
 public class OperatelogEntity extends BaseEntity
 {
 	/**
@@ -68,81 +70,6 @@ public class OperatelogEntity extends BaseEntity
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	
-	
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getRelateId(){
-		return relateId;
-	}
-
-	public void setRelateId(String relateId){
-		this.relateId = relateId;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public Integer getType(){
-		return type;
-	}
-
-	public void setType(Integer type){
-		this.type = type;
-	}
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getCreaterName(){
-		return createrName;
-	}
-
-	public void setCreaterName(String createrName){
-		this.createrName = createrName;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
 	
 	
 

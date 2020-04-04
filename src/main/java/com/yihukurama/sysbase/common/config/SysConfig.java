@@ -29,11 +29,6 @@ public class SysConfig {
     private String accesslog;
 
     /**
-     * token有效续期
-     */
-    private String loginExpireTime;
-
-    /**
      * redis前缀，为区分不同项目
      */
     private String redisPrefix;

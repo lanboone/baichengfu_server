@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 @ApiModel(value="驾校表")
 @Table(name="ts_userrole")
+@Data
 public class UserroleEntity extends BaseEntity
 {
 	/**
@@ -56,65 +58,6 @@ public class UserroleEntity extends BaseEntity
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	
-	
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public String getRoleId(){
-		return roleId;
-	}
-
-	public void setRoleId(String roleId){
-		this.roleId = roleId;
-	}
-
-	public String getUserId(){
-		return userId;
-	}
-
-	public void setUserId(String userId){
-		this.userId = userId;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
 	
 	
 

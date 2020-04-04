@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 @ApiModel(value="保存系统菜单数据;")
 @Table(name="ts_menu")
+@Data
 public class MenuEntity extends BaseEntity
 {
 	/**
@@ -104,129 +106,6 @@ public class MenuEntity extends BaseEntity
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	
-	
-
-	public String getIndexOrder(){
-		return indexOrder;
-	}
-
-	public void setIndexOrder(String indexOrder){
-		this.indexOrder = indexOrder;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getParentId(){
-		return parentId;
-	}
-
-	public void setParentId(String parentId){
-		this.parentId = parentId;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public String getCode(){
-		return code;
-	}
-
-	public void setCode(String code){
-		this.code = code;
-	}
-
-	public String getNote(){
-		return note;
-	}
-
-	public void setNote(String note){
-		this.note = note;
-	}
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public String getPath(){
-		return path;
-	}
-
-	public void setPath(String path){
-		this.path = path;
-	}
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getIconClass(){
-		return iconClass;
-	}
-
-	public void setIconClass(String iconClass){
-		this.iconClass = iconClass;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public String getText(){
-		return text;
-	}
-
-	public void setText(String text){
-		this.text = text;
-	}
-
-	public String getLinkUrl(){
-		return linkUrl;
-	}
-
-	public void setLinkUrl(String linkUrl){
-		this.linkUrl = linkUrl;
-	}
-
-	public String getServerUrl(){
-		return serverUrl;
-	}
-
-	public void setServerUrl(String serverUrl){
-		this.serverUrl = serverUrl;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
 	
 	
 

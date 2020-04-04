@@ -22,14 +22,24 @@ import java.util.Date;
 @Data
 public class AppuserEntity extends BaseEntity
 {
-
 	/**
-	 *是微信登录绑定的openid
+	 *app用户头像
 	 **/
+	@ApiModelProperty(value="app用户头像")
+	@Column(name="head_url")
+	private String headUrl;
+	/**
+	 *app用户昵称
+	 **/
+	@ApiModelProperty(value="app用户昵称")
+	@Column(name="nick_name")
+	private String nickName;
+	/**
+	*微信登录绑定的openid
+	**/
 	@ApiModelProperty(value="微信登录绑定的openid")
 	@Column(name="wxapp_openid")
 	private String wxappOpenid;
-
 	/**
 	*是否限制登录 0否 1是
 	**/
@@ -145,7 +155,7 @@ public class AppuserEntity extends BaseEntity
 	@Column(name="age")
 	private Integer age;
 	
-
+	
 
 	
 	

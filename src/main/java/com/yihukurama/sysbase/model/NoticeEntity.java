@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 @ApiModel(value="系统通知表")
 @Table(name="tb_notice")
+@Data
 public class NoticeEntity extends BaseEntity
 {
 	/**
@@ -122,153 +124,6 @@ public class NoticeEntity extends BaseEntity
 	@ApiModelProperty(value="预留字段2")
 	@Column(name="parameter2")
 	private String parameter2;
-	
-	
-
-	public String getNoticeTitle(){
-		return noticeTitle;
-	}
-
-	public void setNoticeTitle(String noticeTitle){
-		this.noticeTitle = noticeTitle;
-	}
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public String getNoticeContent(){
-		return noticeContent;
-	}
-
-	public void setNoticeContent(String noticeContent){
-		this.noticeContent = noticeContent;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public String getNoticeLink(){
-		return noticeLink;
-	}
-
-	public void setNoticeLink(String noticeLink){
-		this.noticeLink = noticeLink;
-	}
-
-	public String getNoticeType(){
-		return noticeType;
-	}
-
-	public void setNoticeType(String noticeType){
-		this.noticeType = noticeType;
-	}
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getParameter1(){
-		return parameter1;
-	}
-
-	public void setParameter1(String parameter1){
-		this.parameter1 = parameter1;
-	}
-
-	public Integer getIsRead(){
-		return isRead;
-	}
-
-	public void setIsRead(Integer isRead){
-		this.isRead = isRead;
-	}
-
-	public String getManagerId(){
-		return managerId;
-	}
-
-	public void setManagerId(String managerId){
-		this.managerId = managerId;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public Integer getParameter5(){
-		return parameter5;
-	}
-
-	public void setParameter5(Integer parameter5){
-		this.parameter5 = parameter5;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
-	public String getParameter4(){
-		return parameter4;
-	}
-
-	public void setParameter4(String parameter4){
-		this.parameter4 = parameter4;
-	}
-
-	public Date getNoticeTime(){
-		return noticeTime;
-	}
-
-	public void setNoticeTime(Date noticeTime){
-		this.noticeTime = noticeTime;
-	}
-
-	public String getParameter3(){
-		return parameter3;
-	}
-
-	public void setParameter3(String parameter3){
-		this.parameter3 = parameter3;
-	}
-
-	public String getParameter2(){
-		return parameter2;
-	}
-
-	public void setParameter2(String parameter2){
-		this.parameter2 = parameter2;
-	}
-
 	
 	
 

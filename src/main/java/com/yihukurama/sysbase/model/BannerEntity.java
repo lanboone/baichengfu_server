@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 @ApiModel(value="广告图表")
 @Table(name="tb_banner")
+@Data
 public class BannerEntity extends BaseEntity
 {
 	/**
@@ -68,81 +70,6 @@ public class BannerEntity extends BaseEntity
 	@ApiModelProperty(value="图片url")
 	@Column(name="pic_url")
 	private String picUrl;
-	
-	
-
-	public String getAdsPictures(){
-		return adsPictures;
-	}
-
-	public void setAdsPictures(String adsPictures){
-		this.adsPictures = adsPictures;
-	}
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public String getLinkUrl(){
-		return linkUrl;
-	}
-
-	public void setLinkUrl(String linkUrl){
-		this.linkUrl = linkUrl;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
-	public String getPicUrl(){
-		return picUrl;
-	}
-
-	public void setPicUrl(String picUrl){
-		this.picUrl = picUrl;
-	}
-
 	
 	
 

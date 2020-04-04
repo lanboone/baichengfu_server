@@ -5,33 +5,55 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 说明： 设计师风格表
+ * 说明： 设计师表
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="设计师风格表")
-@Table(name="tb_designer_style")
+@ApiModel(value="设计师表")
+@Table(name="tb_designer")
+@Data
 public class DesignerEntity extends BaseEntity
 {
+
 	/**
-	*删除状态 0正常 1删除
-	**/
-	@ApiModelProperty(value="删除状态 0正常 1删除")
-	@Column(name="is_delete")
-	private Integer isDelete;
+	 *设计师头像
+	 **/
+	@ApiModelProperty(value="设计师头像")
+	@Column(name="head_url")
+	private String headUrl;
 	/**
-	*风格示例图
+	 *设计师昵称
+	 **/
+	@ApiModelProperty(value="设计师昵称")
+	@Column(name="nick_name")
+	private String nickName;
+	/**
+	 *设计师列表的心统计
+	 **/
+	@ApiModelProperty(value="设计师列表的心统计")
+	@Column(name="likecount")
+	private Long likecount;
+	/**
+	 *设计师里列表想让他设计统计
+	 **/
+	@ApiModelProperty(value="设计师里列表想让他设计统计")
+	@Column(name="wantcount")
+	private Long wantcount;
+
+	/**
+	*个人图片
 	**/
-	@ApiModelProperty(value="风格示例图")
-	@Column(name="eg_picture")
-	private String egPicture;
+	@ApiModelProperty(value="个人图片")
+	@Column(name="personal_picture")
+	private String personalPicture;
 	/**
 	*最后修改人id
 	**/
@@ -51,98 +73,89 @@ public class DesignerEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*设计师id
+	*作品id列表
 	**/
-	@ApiModelProperty(value="设计师id")
-	@Column(name="designer_id")
-	private String designerId;
+	@ApiModelProperty(value="作品id列表")
+	@Column(name="works_ids")
+	private String worksIds;
 	/**
-	*设计师风格(欧式、日式)
+	*荣耀值
 	**/
-	@ApiModelProperty(value="设计师风格(欧式、日式)")
+	@ApiModelProperty(value="荣耀值")
+	@Column(name="glory_value")
+	private Integer gloryValue;
+	/**
+	*删除状态 0正常 1删除
+	**/
+	@ApiModelProperty(value="删除状态 0正常 1删除")
+	@Column(name="is_delete")
+	private Integer isDelete;
+	/**
+	*预留字段1
+	**/
+	@ApiModelProperty(value="预留字段1")
+	@Column(name="parameter1")
+	private String parameter1;
+	/**
+	*用户id
+	**/
+	@ApiModelProperty(value="用户id")
+	@Column(name="user_id")
+	private String userId;
+	/**
+	*简介
+	**/
+	@ApiModelProperty(value="简介")
+	@Column(name="remark")
+	private String remark;
+	/**
+	*每平米平均价格
+	**/
+	@ApiModelProperty(value="每平米平均价格")
+	@Column(name="price_per")
+	private Integer pricePer;
+	/**
+	*设计风格，使用分号隔开前面无分号，最后有分号，如北欧;中式;
+	**/
+	@ApiModelProperty(value="设计风格，使用分号隔开前面无分号，最后有分号，如北欧;中式;")
 	@Column(name="style")
 	private String style;
+	/**
+	*预留字段5
+	**/
+	@ApiModelProperty(value="预留字段5")
+	@Column(name="parameter5")
+	private Integer parameter5;
+	/**
+	*个人介绍
+	**/
+	@ApiModelProperty(value="个人介绍")
+	@Column(name="introduction")
+	private String introduction;
 	/**
 	*创建时间
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	
-	
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getEgPicture(){
-		return egPicture;
-	}
-
-	public void setEgPicture(String egPicture){
-		this.egPicture = egPicture;
-	}
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public String getDesignerId(){
-		return designerId;
-	}
-
-	public void setDesignerId(String designerId){
-		this.designerId = designerId;
-	}
-
-	public String getStyle(){
-		return style;
-	}
-
-	public void setStyle(String style){
-		this.style = style;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
+	/**
+	*预留字段4
+	**/
+	@ApiModelProperty(value="预留字段4")
+	@Column(name="parameter4")
+	private String parameter4;
+	/**
+	*预留字段3
+	**/
+	@ApiModelProperty(value="预留字段3")
+	@Column(name="parameter3")
+	private String parameter3;
+	/**
+	*预留字段2
+	**/
+	@ApiModelProperty(value="预留字段2")
+	@Column(name="parameter2")
+	private String parameter2;
 	
 	
 

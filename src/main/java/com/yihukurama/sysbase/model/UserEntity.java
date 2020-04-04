@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 @ApiModel(value="用户表")
 @Table(name="ts_user")
+@Data
 public class UserEntity extends com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.UserEntity
 {
 	/**
@@ -140,177 +142,6 @@ public class UserEntity extends com.yihukurama.tkmybatisplus.framework.domain.tk
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	
-	
-
-	public String getTimeStamp(){
-		return timeStamp;
-	}
-
-	public void setTimeStamp(String timeStamp){
-		this.timeStamp = timeStamp;
-	}
-
-	public Integer getIndexOrder(){
-		return indexOrder;
-	}
-
-	public void setIndexOrder(Integer indexOrder){
-		this.indexOrder = indexOrder;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public Date getLastLoginDate(){
-		return lastLoginDate;
-	}
-
-	public void setLastLoginDate(Date lastLoginDate){
-		this.lastLoginDate = lastLoginDate;
-	}
-
-	public String getToken(){
-		return token;
-	}
-
-	public void setToken(String token){
-		this.token = token;
-	}
-
-	public String getOrgId(){
-		return orgId;
-	}
-
-	public void setOrgId(String orgId){
-		this.orgId = orgId;
-	}
-
-	public String getPhone(){
-		return phone;
-	}
-
-	public void setPhone(String phone){
-		this.phone = phone;
-	}
-
-	public String getUsername(){
-		return username;
-	}
-
-	public void setUsername(String username){
-		this.username = username;
-	}
-
-	public Integer getStatus(){
-		return status;
-	}
-
-	public void setStatus(Integer status){
-		this.status = status;
-	}
-
-	public String getIpAddr(){
-		return ipAddr;
-	}
-
-	public void setIpAddr(String ipAddr){
-		this.ipAddr = ipAddr;
-	}
-
-	public String getNote(){
-		return note;
-	}
-
-	public void setNote(String note){
-		this.note = note;
-	}
-
-	public String getRequestStatus(){
-		return requestStatus;
-	}
-
-	public void setRequestStatus(String requestStatus){
-		this.requestStatus = requestStatus;
-	}
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public String getRealName(){
-		return realName;
-	}
-
-	public void setRealName(String realName){
-		this.realName = realName;
-	}
-
-	public Integer getType(){
-		return type;
-	}
-
-	public void setType(Integer type){
-		this.type = type;
-	}
-
-	public Integer getLoginCount(){
-		return loginCount;
-	}
-
-	public void setLoginCount(Integer loginCount){
-		this.loginCount = loginCount;
-	}
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getPassword(){
-		return password;
-	}
-
-	public void setPassword(String password){
-		this.password = password;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
 	
 	
 

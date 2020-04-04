@@ -5,33 +5,41 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 说明： 操作权限表
+ * 说明： 商品表
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="操作权限表")
-@Table(name="tb_product_permissions")
+@ApiModel(value="商品表")
+@Table(name="tb_product")
+@Data
 public class ProductEntity extends BaseEntity
 {
 	/**
-	*查
+	*面积
 	**/
-	@ApiModelProperty(value="查")
-	@Column(name="query_")
-	private String query;
+	@ApiModelProperty(value="面积")
+	@Column(name="area")
+	private Integer area;
 	/**
-	*改
+	*数量
 	**/
-	@ApiModelProperty(value="改")
-	@Column(name="change_")
-	private String change;
+	@ApiModelProperty(value="数量")
+	@Column(name="quantity")
+	private Integer quantity;
+	/**
+	*分类id
+	**/
+	@ApiModelProperty(value="分类id")
+	@Column(name="categories_id")
+	private String categoriesId;
 	/**
 	*最后修改人id
 	**/
@@ -39,11 +47,29 @@ public class ProductEntity extends BaseEntity
 	@Column(name="operator_id")
 	private String operatorId;
 	/**
+	*简介
+	**/
+	@ApiModelProperty(value="简介")
+	@Column(name="profile")
+	private String profile;
+	/**
+	*预付价
+	**/
+	@ApiModelProperty(value="预付价")
+	@Column(name="prepaid_price")
+	private Integer prepaidPrice;
+	/**
 	*最后修改日期
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operate_date")
 	private Date operateDate;
+	/**
+	*预付比例
+	**/
+	@ApiModelProperty(value="预付比例")
+	@Column(name="prepaid_ratio")
+	private String prepaidRatio;
 	/**
 	*创建人id
 	**/
@@ -51,35 +77,41 @@ public class ProductEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
+	*商品名
+	**/
+	@ApiModelProperty(value="商品名")
+	@Column(name="product_name")
+	private String productName;
+	/**
 	*删除状态 0正常 1删除
 	**/
 	@ApiModelProperty(value="删除状态 0正常 1删除")
 	@Column(name="is_delete")
 	private Integer isDelete;
 	/**
-	*拥有操作权限的商品分类id
+	*收藏数
 	**/
-	@ApiModelProperty(value="拥有操作权限的商品分类id")
-	@Column(name="category_id")
-	private String categoryId;
+	@ApiModelProperty(value="收藏数")
+	@Column(name="favorite_number")
+	private Integer favoriteNumber;
 	/**
-	*管理员id
+	*是否推荐到首页 0否 1是
 	**/
-	@ApiModelProperty(value="管理员id")
-	@Column(name="manager_id")
-	private String managerId;
+	@ApiModelProperty(value="是否推荐到首页 0否 1是")
+	@Column(name="is_recommend")
+	private Integer isRecommend;
 	/**
-	*删
+	*单位数量（39扇）
 	**/
-	@ApiModelProperty(value="删")
-	@Column(name="delete_")
-	private String delete;
+	@ApiModelProperty(value="单位数量（39扇）")
+	@Column(name="unit_quantity")
+	private String unitQuantity;
 	/**
-	*增
+	*实付价
 	**/
-	@ApiModelProperty(value="增")
-	@Column(name="increase_")
-	private String increase;
+	@ApiModelProperty(value="实付价")
+	@Column(name="actual_paid_price")
+	private String actualPaidPrice;
 	/**
 	*创建时间
 	**/
@@ -87,118 +119,11 @@ public class ProductEntity extends BaseEntity
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
 	/**
-	*销售员id
+	*销量
 	**/
-	@ApiModelProperty(value="销售员id")
-	@Column(name="seller_id")
-	private String sellerId;
-	
-	
-
-	public String getQuery(){
-		return query;
-	}
-
-	public void setQuery(String query){
-		this.query = query;
-	}
-
-	public String getChange(){
-		return change;
-	}
-
-	public void setChange(String change){
-		this.change = change;
-	}
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getCategoryId(){
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId){
-		this.categoryId = categoryId;
-	}
-
-	public String getManagerId(){
-		return managerId;
-	}
-
-	public void setManagerId(String managerId){
-		this.managerId = managerId;
-	}
-
-	public String getDelete(){
-		return delete;
-	}
-
-	public void setDelete(String delete){
-		this.delete = delete;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public String getIncrease(){
-		return increase;
-	}
-
-	public void setIncrease(String increase){
-		this.increase = increase;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
-	public String getSellerId(){
-		return sellerId;
-	}
-
-	public void setSellerId(String sellerId){
-		this.sellerId = sellerId;
-	}
-
+	@ApiModelProperty(value="销量")
+	@Column(name="sales_volume")
+	private Integer salesVolume;
 	
 	
 

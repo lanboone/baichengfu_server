@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 @ApiModel(value="装修师表")
 @Table(name="tb_decorator")
+@Data
 public class DecoratorEntity extends BaseEntity
 {
 	/**
@@ -104,129 +106,6 @@ public class DecoratorEntity extends BaseEntity
 	@ApiModelProperty(value="预留字段2")
 	@Column(name="parameter2")
 	private String parameter2;
-	
-	
-
-	public String getPersonalPicture(){
-		return personalPicture;
-	}
-
-	public void setPersonalPicture(String personalPicture){
-		this.personalPicture = personalPicture;
-	}
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getParameter1(){
-		return parameter1;
-	}
-
-	public void setParameter1(String parameter1){
-		this.parameter1 = parameter1;
-	}
-
-	public String getSkills(){
-		return skills;
-	}
-
-	public void setSkills(String skills){
-		this.skills = skills;
-	}
-
-	public String getUserId(){
-		return userId;
-	}
-
-	public void setUserId(String userId){
-		this.userId = userId;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public Integer getParameter5(){
-		return parameter5;
-	}
-
-	public void setParameter5(Integer parameter5){
-		this.parameter5 = parameter5;
-	}
-
-	public String getIntroduction(){
-		return introduction;
-	}
-
-	public void setIntroduction(String introduction){
-		this.introduction = introduction;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
-	public String getParameter4(){
-		return parameter4;
-	}
-
-	public void setParameter4(String parameter4){
-		this.parameter4 = parameter4;
-	}
-
-	public String getParameter3(){
-		return parameter3;
-	}
-
-	public void setParameter3(String parameter3){
-		this.parameter3 = parameter3;
-	}
-
-	public String getParameter2(){
-		return parameter2;
-	}
-
-	public void setParameter2(String parameter2){
-		this.parameter2 = parameter2;
-	}
-
 	
 	
 

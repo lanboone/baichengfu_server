@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 @ApiModel(value="回调表 tb_callagain(回调表)")
 @Table(name="tb_callagain")
+@Data
 public class CallagainEntity extends BaseEntity
 {
 	/**
@@ -68,81 +70,6 @@ public class CallagainEntity extends BaseEntity
 	@ApiModelProperty(value=" 回调类型")
 	@Column(name="type")
 	private String type;
-	
-	
-
-	public String getIntervals(){
-		return intervals;
-	}
-
-	public void setIntervals(String intervals){
-		this.intervals = intervals;
-	}
-
-	public Date getLastTime(){
-		return lastTime;
-	}
-
-	public void setLastTime(Date lastTime){
-		this.lastTime = lastTime;
-	}
-
-	public String getRelateId(){
-		return relateId;
-	}
-
-	public void setRelateId(String relateId){
-		this.relateId = relateId;
-	}
-
-	public Integer getCount(){
-		return count;
-	}
-
-	public void setCount(Integer count){
-		this.count = count;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
-	public String getParams(){
-		return params;
-	}
-
-	public void setParams(String params){
-		this.params = params;
-	}
-
-	public String getType(){
-		return type;
-	}
-
-	public void setType(String type){
-		this.type = type;
-	}
-
 	
 	
 

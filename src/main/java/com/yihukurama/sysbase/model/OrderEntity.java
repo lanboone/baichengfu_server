@@ -5,45 +5,53 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 说明： 订单评论表
+ * 说明： 订单表
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="订单评论表")
-@Table(name="tb_order_evaluation")
+@ApiModel(value="订单表")
+@Table(name="tb_order")
+@Data
 public class OrderEntity extends BaseEntity
 {
 	/**
-	*删除状态 0正常 1删除
+	*实付价格（待支付状态可修改）
 	**/
-	@ApiModelProperty(value="删除状态 0正常 1删除")
-	@Column(name="is_delete")
-	private Integer isDelete;
+	@ApiModelProperty(value="实付价格（待支付状态可修改）")
+	@Column(name="paid_price")
+	private String paidPrice;
 	/**
-	*是否可显示
+	*发货时间
 	**/
-	@ApiModelProperty(value="是否可显示")
-	@Column(name="displayability")
-	private String displayability;
-	/**
-	*评论星级
-	**/
-	@ApiModelProperty(value="评论星级")
-	@Column(name="star_rating")
-	private Integer starRating;
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="delivery_time")
+	private Date deliveryTime;
 	/**
 	*最后修改人id
 	**/
 	@ApiModelProperty(value="最后修改人id")
 	@Column(name="operator_id")
 	private String operatorId;
+	/**
+	*装修师id
+	**/
+	@ApiModelProperty(value="装修师id")
+	@Column(name="decorator_id")
+	private String decoratorId;
+	/**
+	*收货人地址
+	**/
+	@ApiModelProperty(value="收货人地址")
+	@Column(name="consignee_address")
+	private String consigneeAddress;
 	/**
 	*最后修改日期
 	**/
@@ -57,120 +65,53 @@ public class OrderEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*订单id
+	*退货人电话
 	**/
-	@ApiModelProperty(value="订单id")
-	@Column(name="order_id")
-	private String orderId;
+	@ApiModelProperty(value="退货人电话")
+	@Column(name="returne_phone")
+	private String returnePhone;
+	/**
+	*收货人电话
+	**/
+	@ApiModelProperty(value="收货人电话")
+	@Column(name="consignee_phone")
+	private String consigneePhone;
+	/**
+	*删除状态 0正常 1删除
+	**/
+	@ApiModelProperty(value="删除状态 0正常 1删除")
+	@Column(name="is_delete")
+	private Integer isDelete;
+	/**
+	*用户id
+	**/
+	@ApiModelProperty(value="用户id")
+	@Column(name="user_id")
+	private String userId;
+	/**
+	*商品id
+	**/
+	@ApiModelProperty(value="商品id")
+	@Column(name="product_id")
+	private String productId;
+	/**
+	*退货地址
+	**/
+	@ApiModelProperty(value="退货地址")
+	@Column(name="return_address")
+	private String returnAddress;
+	/**
+	*订单状态（待支付、待发货、已发货、已收货、待退款、已同意退款、已退款）
+	**/
+	@ApiModelProperty(value="订单状态（待支付、待发货、已发货、已收货、待退款、已同意退款、已退款）")
+	@Column(name="order_type")
+	private String orderType;
 	/**
 	*创建时间
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	/**
-	*评论类型
-	**/
-	@ApiModelProperty(value="评论类型")
-	@Column(name="review_type")
-	private String reviewType;
-	/**
-	*评论内容
-	**/
-	@ApiModelProperty(value="评论内容")
-	@Column(name="content")
-	private String content;
-	
-	
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getDisplayability(){
-		return displayability;
-	}
-
-	public void setDisplayability(String displayability){
-		this.displayability = displayability;
-	}
-
-	public Integer getStarRating(){
-		return starRating;
-	}
-
-	public void setStarRating(Integer starRating){
-		this.starRating = starRating;
-	}
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public String getOrderId(){
-		return orderId;
-	}
-
-	public void setOrderId(String orderId){
-		this.orderId = orderId;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
-	public String getReviewType(){
-		return reviewType;
-	}
-
-	public void setReviewType(String reviewType){
-		this.reviewType = reviewType;
-	}
-
-	public String getContent(){
-		return content;
-	}
-
-	public void setContent(String content){
-		this.content = content;
-	}
-
 	
 	
 

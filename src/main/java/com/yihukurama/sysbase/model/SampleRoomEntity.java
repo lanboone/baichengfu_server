@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,7 +19,8 @@ import java.util.Date;
  */
 @ApiModel(value="样板间表")
 @Table(name="tb_sample_room")
-public class SampleEntity extends BaseEntity
+@Data
+public class SampleRoomEntity extends BaseEntity
 {
 	/**
 	*最后修改人id
@@ -104,129 +106,6 @@ public class SampleEntity extends BaseEntity
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	
-	
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public String getUploaderType(){
-		return uploaderType;
-	}
-
-	public void setUploaderType(String uploaderType){
-		this.uploaderType = uploaderType;
-	}
-
-	public String getSampleType(){
-		return sampleType;
-	}
-
-	public void setSampleType(String sampleType){
-		this.sampleType = sampleType;
-	}
-
-	public String getSampleTitle(){
-		return sampleTitle;
-	}
-
-	public void setSampleTitle(String sampleTitle){
-		this.sampleTitle = sampleTitle;
-	}
-
-	public String getSampleLink(){
-		return sampleLink;
-	}
-
-	public void setSampleLink(String sampleLink){
-		this.sampleLink = sampleLink;
-	}
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getSampleImage(){
-		return sampleImage;
-	}
-
-	public void setSampleImage(String sampleImage){
-		this.sampleImage = sampleImage;
-	}
-
-	public String getManagerId(){
-		return managerId;
-	}
-
-	public void setManagerId(String managerId){
-		this.managerId = managerId;
-	}
-
-	public String getUserId(){
-		return userId;
-	}
-
-	public void setUserId(String userId){
-		this.userId = userId;
-	}
-
-	public Integer getSFavoriteNumber(){
-		return sFavoriteNumber;
-	}
-
-	public void setSFavoriteNumber(Integer sFavoriteNumber){
-		this.sFavoriteNumber = sFavoriteNumber;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public String getSampleArea(){
-		return sampleArea;
-	}
-
-	public void setSampleArea(String sampleArea){
-		this.sampleArea = sampleArea;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
 	
 	
 

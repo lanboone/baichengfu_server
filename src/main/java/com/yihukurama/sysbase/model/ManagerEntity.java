@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 @ApiModel(value="管理员表")
 @Table(name="tb_manager")
+@Data
 public class ManagerEntity extends BaseEntity
 {
 	/**
@@ -50,6 +52,12 @@ public class ManagerEntity extends BaseEntity
 	@ApiModelProperty(value="分销订单id列表")
 	@Column(name="distribution")
 	private String distribution;
+	/**
+	*管理员手机号
+	**/
+	@ApiModelProperty(value="管理员手机号")
+	@Column(name="sys_phone")
+	private String sysPhone;
 	/**
 	*删除状态 0正常 1删除
 	**/
@@ -99,12 +107,6 @@ public class ManagerEntity extends BaseEntity
 	@Column(name="sys_password")
 	private String sysPassword;
 	/**
-	 *管理员手机号
-	 **/
-	@ApiModelProperty(value="管理员手机号")
-	@Column(name="sys_phone")
-	private String sysPhone;
-	/**
 	*预留字段3
 	**/
 	@ApiModelProperty(value="预留字段3")
@@ -119,140 +121,6 @@ public class ManagerEntity extends BaseEntity
 	
 	
 
-	public String getSysIdentity(){
-		return sysIdentity;
-	}
-
-	public void setSysIdentity(String sysIdentity){
-		this.sysIdentity = sysIdentity;
-	}
-
-	public String getOperatorId(){
-		return operatorId;
-	}
-
-	public void setOperatorId(String operatorId){
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
-	}
-
-	public String getCreaterId(){
-		return createrId;
-	}
-
-	public void setCreaterId(String createrId){
-		this.createrId = createrId;
-	}
-
-	public String getDistribution(){
-		return distribution;
-	}
-
-	public void setDistribution(String distribution){
-		this.distribution = distribution;
-	}
-
-	public Integer getIsDelete(){
-		return isDelete;
-	}
-
-	public void setIsDelete(Integer isDelete){
-		this.isDelete = isDelete;
-	}
-
-	public String getParameter1(){
-		return parameter1;
-	}
-
-	public void setParameter1(String parameter1){
-		this.parameter1 = parameter1;
-	}
-
-	public String getSysName(){
-		return sysName;
-	}
-
-	public void setSysName(String sysName){
-		this.sysName = sysName;
-	}
-
-	public String getPermissionList(){
-		return permissionList;
-	}
-
-	public void setPermissionList(String permissionList){
-		this.permissionList = permissionList;
-	}
-
-	public String getId(){
-		return id;
-	}
-
-	public void setId(String id){
-		this.id = id;
-	}
-
-	public Integer getParameter5(){
-		return parameter5;
-	}
-
-	public void setParameter5(Integer parameter5){
-		this.parameter5 = parameter5;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
-	}
-
-	public String getParameter4(){
-		return parameter4;
-	}
-
-	public void setParameter4(String parameter4){
-		this.parameter4 = parameter4;
-	}
-
-	public String getSysPassword(){
-		return sysPassword;
-	}
-
-	public void setSysPassword(String sysPassword){
-		this.sysPassword = sysPassword;
-	}
-
-	public String getParameter3(){
-		return parameter3;
-	}
-
-	public void setParameter3(String parameter3){
-		this.parameter3 = parameter3;
-	}
-
-	public String getParameter2(){
-		return parameter2;
-	}
-
-	public void setParameter2(String parameter2){
-		this.parameter2 = parameter2;
-	}
-
-
-	public String getSysPhone() {
-		return sysPhone;
-	}
-
-	public void setSysPhone(String sysPhone) {
-		this.sysPhone = sysPhone;
-	}
+	
+	
 }

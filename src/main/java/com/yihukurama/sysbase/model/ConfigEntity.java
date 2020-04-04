@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 @ApiModel(value="")
 @Table(name="sys_config")
+@Data
 public class ConfigEntity extends BaseEntity
 {
 	/**
@@ -44,41 +46,6 @@ public class ConfigEntity extends BaseEntity
 	@ApiModelProperty(value="variable")
 	@Column(name="variable")
 	private String variable;
-	
-	
-
-	public String getSetBy(){
-		return setBy;
-	}
-
-	public void setSetBy(String setBy){
-		this.setBy = setBy;
-	}
-
-	public Date getSetTime(){
-		return setTime;
-	}
-
-	public void setSetTime(Date setTime){
-		this.setTime = setTime;
-	}
-
-	public String getValue(){
-		return value;
-	}
-
-	public void setValue(String value){
-		this.value = value;
-	}
-
-	public String getVariable(){
-		return variable;
-	}
-
-	public void setVariable(String variable){
-		this.variable = variable;
-	}
-
 	
 	
 
