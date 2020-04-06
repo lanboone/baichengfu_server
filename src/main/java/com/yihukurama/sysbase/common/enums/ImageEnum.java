@@ -8,6 +8,7 @@ public enum ImageEnum {
 
     OTHER_IMG(10, "common", "未分类图片"),
     DESIGNER_IMG(20, "remark", "设计师简介图片"),
+    APP_USER_HEAD_IMG(30, "appUserHead", "app用户头像图片"),
     ;
 
     //类型

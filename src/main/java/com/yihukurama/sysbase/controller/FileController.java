@@ -39,7 +39,7 @@ public class FileController {
     @ApiOperation(value = "文件上传，表单模式",notes = "表单上传模式，返回文件路径，不带域名，可返回文件base64")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "fileType", value = "文件类型:1普通文件2图片文件3语音文件4视频文件5临时文件", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType = "query", name = "imgType", value = "图片类型:10未分类20设计师简介", required = true, dataType = "int"),
+            @ApiImplicitParam(paramType = "query", name = "imgType", value = "图片类型:10未分类20设计师简介30app用户头像", required = true, dataType = "int"),
             @ApiImplicitParam(paramType = "query", name = "base64", value = "base64", required = false, dataType = "String"),
     })
     @RequestMapping(value="/uploadPic", method= RequestMethod.POST)
@@ -76,7 +76,7 @@ public class FileController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "dataStr", value = "文件base64数据", required = true, dataType = "String"),
             @ApiImplicitParam(paramType = "query", name = "fileType", value = "文件类型:1普通文件2图片文件3语音文件4视频文件5临时文件", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType = "query", name = "imgType", value = "图片类型:10未分类20设计师简介", required = true, dataType = "int"),
+            @ApiImplicitParam(paramType = "query", name = "imgType", value = "图片类型:10未分类20设计师简介30app用户头像", required = true, dataType = "int"),
     })
     @RequestMapping(value="/uploadPicBase64", method= RequestMethod.POST)
     public Result uploadPicBase64(

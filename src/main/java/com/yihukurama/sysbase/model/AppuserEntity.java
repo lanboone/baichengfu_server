@@ -23,6 +23,12 @@ import java.util.Date;
 public class AppuserEntity extends BaseEntity
 {
 	/**
+	 *app用户类型0普通用户,10设计师,20安装师傅
+	 **/
+	@ApiModelProperty(value="app用户类型0普通用户,10设计师,20安装师傅")
+	@Column(name="type")
+	private Integer type;
+	/**
 	 *app用户头像
 	 **/
 	@ApiModelProperty(value="app用户头像")

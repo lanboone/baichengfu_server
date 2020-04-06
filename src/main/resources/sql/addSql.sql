@@ -16,3 +16,6 @@ alter table tb_appuser ADD nick_name varchar(20) Default NULL COMMENT  'app用�
 alter table tb_appuser ADD head_url varchar(255) Default NULL COMMENT  'app用户头像';
 alter table tb_designer ADD nick_name varchar(20) Default NULL COMMENT  '设计师用户昵称';
 alter table tb_designer ADD head_url varchar(255) Default NULL COMMENT  '设计师用户头像';
+
+##20200406
+alter table tb_appuser ADD type int(11) Default 0 COMMENT  'app用户类型0普通用户,10设计师,20安装师傅';

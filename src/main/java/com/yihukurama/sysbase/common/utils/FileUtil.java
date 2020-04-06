@@ -29,7 +29,7 @@ import java.util.zip.ZipOutputStream;
 public class FileUtil {
 
     //文件名称格式 %s时间字符串 %s随机加密字符串 %.后缀
-    public static final String FILE_NAME_FORMAT_STRING = "gdyunst_%s_%s_%s";
+    public static final String FILE_NAME_FORMAT_STRING = "baichengfu_%s_%s_%s";
 
 
     public static String encodeBase64File(String path) {
