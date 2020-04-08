@@ -70,9 +70,20 @@ public class BannerEntity extends BaseEntity
 	@ApiModelProperty(value="图片url")
 	@Column(name="pic_url")
 	private String picUrl;
-	
-	
+	/**
+	 *banner描述
+	 **/
+	@ApiModelProperty(value="banner描述")
+	@Column(name="description")
+	private String description;
+	/**
+	 * 是否投放 0否 1是
+	 **/
+	@ApiModelProperty(value="是否投放 0否 1是")
+	@Column(name="is_drop")
+	private Boolean isDrop;
 
-	
-	
+
+
+
 }
