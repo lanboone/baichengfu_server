@@ -66,6 +66,6 @@ wxapp:
   appSecret:
 #系统配置
 system:
-  saveFilePath: E:\YST\dev\baichengfu\file
+  saveFilePath: D:\ideaProject\baichengfu_server\file
   accesslog: logs/
   redisPrefix: baichengfu-redis-devpre

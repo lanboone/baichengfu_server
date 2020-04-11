@@ -27,7 +27,7 @@ public class ManagerController {
     @Resource
     Manager manager;
 
-    @ApiOperation(value = "登录接口",notes = "用户名密码必传-密码后端加密")
+    @ApiOperation(value = "登录接口",notes = "用户名密码必传-密码前端加密")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(@RequestBody Request<LoginDTO> request) throws Exception {
         return manager.adminLogin(request);
@@ -39,7 +39,7 @@ public class ManagerController {
         return manager.modifyNameAndPhone(request);
     }
 
-    @ApiOperation(value = "修改密码接口",notes = "修改密码接口-带检验")
+    @ApiOperation(value = "修改密码接口",notes = "修改密码接口-带检验-前端加密")
     @RequestMapping(value = "/modifyPassWord", method = RequestMethod.POST)
     public Result modifyPassWord(@RequestBody Request<ModifyPassWordDTO> request) throws Exception {
         return manager.modifyPassWord(request);
