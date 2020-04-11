@@ -52,6 +52,13 @@ public class LoginpromptEntity extends BaseEntity {
     private String type;
 
     /**
+     * 类型code
+     **/
+    @ApiModelProperty(value = "类型code（10全屋定制20板材定制30了解定制）")
+    @Column(name = "type_code")
+    private String typeCode;
+
+    /**
      * 最后修改人id
      **/
     @ApiModelProperty(value = "最后修改人id")
