@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 11/04/2020 15:26:08
+ Date: 11/04/2020 16:07:25
 */
 
 SET NAMES utf8mb4;
@@ -32,6 +32,7 @@ CREATE TABLE `tb_sample_room`  (
   `sample_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '样板间风格',
   `sample_image` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '样板间封面图，每个图片链接使用分号分割',
   `s_favorite_number` int(30) NULL DEFAULT 0 COMMENT '样板间收藏数',
+  `order_count` int(11) NULL DEFAULT NULL COMMENT '排序权重，收藏数+浏览数',
   `focus_count` int(30) NULL DEFAULT 0 COMMENT '样板间浏览数',
   `is_delete` int(11) NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
   `creater_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
@@ -41,7 +42,7 @@ CREATE TABLE `tb_sample_room`  (
   `furniture` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '定制家具',
   `material` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '材质',
   `cost` decimal(10, 2) NULL DEFAULT NULL COMMENT '费用',
-  `desc` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '简介',
+  `note` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '简介',
   `tips` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '摘要',
   `designer_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设计师id',
   `designer_head` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设计师头像',

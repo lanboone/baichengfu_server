@@ -73,5 +73,13 @@ public class PersonController {
 
         return person.storeSampleRoom(request);
     }
+
+    @ApiOperation(value = "浏览样板间",notes = "浏览样板间，传入样板间id和自己的appuserId")
+    @RequestMapping(value = "/read_sample_room", method = RequestMethod.POST)
+    public Result readSampleRoom(@RequestBody Request<StoreSampleRoomDto> request) throws Exception {
+
+
+        return person.readSampleRoom(request);
+    }
 }
 

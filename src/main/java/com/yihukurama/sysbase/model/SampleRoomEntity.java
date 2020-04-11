@@ -22,6 +22,16 @@ import java.util.Date;
 @Data
 public class SampleRoomEntity extends BaseEntity
 {
+
+
+	/**
+	 *排序权重，收藏数+浏览数
+	 **/
+	@ApiModelProperty(value="排序权重，收藏数+浏览数")
+	@Column(name="order_count")
+	private Integer orderCount;
+
+
 	/**
 	*费用
 	**/
@@ -80,8 +90,8 @@ public class SampleRoomEntity extends BaseEntity
 	*简介
 	**/
 	@ApiModelProperty(value="简介")
-	@Column(name="desc")
-	private String desc;
+	@Column(name="note")
+	private String note;
 	/**
 	*设计师头像
 	**/

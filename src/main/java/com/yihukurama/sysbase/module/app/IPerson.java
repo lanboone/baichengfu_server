@@ -39,4 +39,12 @@ public interface IPerson {
      *       Modified by yihukurama in 17:05 2020/4/4
      */
     Result unFocusDesigner(Request<FocusDesignerDto> request) throws TipsException;
+
+    /**
+     * 说明： 浏览样板间
+     * @author yihukurama
+     * @date Created in 16:20 2020/4/11
+     *       Modified by yihukurama in 16:20 2020/4/11
+     */
+    Result readSampleRoom(Request<StoreSampleRoomDto> request) throws TipsException;
 }

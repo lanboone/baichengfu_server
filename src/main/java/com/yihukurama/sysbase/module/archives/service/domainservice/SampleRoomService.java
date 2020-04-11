@@ -9,6 +9,7 @@ import com.yihukurama.sysbase.module.archives.domain.SampleRoom;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.TransferUtils;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
+import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,5 +86,30 @@ public class SampleRoomService extends CrudService<SampleRoomEntity> {
         }
 
 
+    }
+
+
+    @Override
+    public Result list(SampleRoomEntity sampleRoomEntity, Integer page, Integer limit) throws TipsException {
+        if(sampleRoomEntity instanceof SampleRoom){
+            SampleRoom listSample = (SampleRoom) sampleRoomEntity;
+            Integer searchType = listSample.getSearchType();
+            if(searchType == null){
+                //默认时间倒叙不处理
+            }else if(searchType == 10){
+                //权重排序
+                sampleRoomEntity.setSortSql("order_count desc");
+            }else if(searchType == 20){
+                //浏览数排序
+                sampleRoomEntity.setSortSql("focus_count desc");
+            }
+            return super.list(sampleRoomEntity,page,limit);
+
+
+
+            }
+
+
+        return super.list(sampleRoomEntity, page, limit);
     }
 }
