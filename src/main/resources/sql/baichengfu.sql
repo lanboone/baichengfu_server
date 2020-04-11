@@ -189,6 +189,7 @@ CREATE TABLE `tb_manager`
     `permission_list` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作权限id列表',
     `distribution`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分销订单id列表',
     `sys_phone`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '管理员手机号',
+    `token`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登录token',
     `is_delete`       int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
     `create_date`     TIMESTAMP                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

@@ -121,4 +121,11 @@ public class ManagerEntity extends BaseEntity {
     @ApiModelProperty(value = "预留字段2")
     @Column(name = "parameter2")
     private String parameter2;
+
+    /**
+     * 登录token
+     **/
+    @ApiModelProperty(value = "登录token")
+    @Column(name = "token")
+    private String token;
 }

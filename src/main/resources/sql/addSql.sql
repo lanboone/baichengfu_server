@@ -37,7 +37,9 @@ alter table tb_banner
 alter table tb_banner
     ADD description varchar(255) Default NULL COMMENT 'banner描述';
 
-
+-- manager新增字段
+alter table tb_manager
+    ADD token varchar(255) Default NULL COMMENT '登录token';
 -- 登录提示表
 -- ----------------------------
 -- Table structure for tb_login_prompt
