@@ -23,11 +23,11 @@ import java.util.Date;
 public class SampleRoomEntity extends BaseEntity
 {
 	/**
-	*最后修改人id
+	*费用
 	**/
-	@ApiModelProperty(value="最后修改人id")
-	@Column(name="operator_id")
-	private String operatorId;
+	@ApiModelProperty(value="费用")
+	@Column(name="cost")
+	private String cost;
 	/**
 	*最后修改日期
 	**/
@@ -35,23 +35,23 @@ public class SampleRoomEntity extends BaseEntity
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operate_date")
 	private Date operateDate;
 	/**
+	*设计师昵称
+	**/
+	@ApiModelProperty(value="设计师昵称")
+	@Column(name="designer_name")
+	private String designerName;
+	/**
 	*创建人id
 	**/
 	@ApiModelProperty(value="创建人id")
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*上传者类型（管理员或用户）
+	*设计师id
 	**/
-	@ApiModelProperty(value="上传者类型（管理员或用户）")
-	@Column(name="uploader_type")
-	private String uploaderType;
-	/**
-	*样板间分类
-	**/
-	@ApiModelProperty(value="样板间分类")
-	@Column(name="sample_type")
-	private String sampleType;
+	@ApiModelProperty(value="设计师id")
+	@Column(name="designer_id")
+	private String designerId;
 	/**
 	*样板间标题
 	**/
@@ -59,11 +59,65 @@ public class SampleRoomEntity extends BaseEntity
 	@Column(name="sample_title")
 	private String sampleTitle;
 	/**
+	*样板间浏览数
+	**/
+	@ApiModelProperty(value="样板间浏览数")
+	@Column(name="focus_count")
+	private Integer focusCount;
+	/**
 	*样板间链接
 	**/
 	@ApiModelProperty(value="样板间链接")
 	@Column(name="sample_link")
 	private String sampleLink;
+	/**
+	*材质
+	**/
+	@ApiModelProperty(value="材质")
+	@Column(name="material")
+	private String material;
+	/**
+	*简介
+	**/
+	@ApiModelProperty(value="简介")
+	@Column(name="desc")
+	private String desc;
+	/**
+	*设计师头像
+	**/
+	@ApiModelProperty(value="设计师头像")
+	@Column(name="designer_head")
+	private String designerHead;
+	/**
+	*摘要
+	**/
+	@ApiModelProperty(value="摘要")
+	@Column(name="tips")
+	private String tips;
+	/**
+	*最后修改人id
+	**/
+	@ApiModelProperty(value="最后修改人id")
+	@Column(name="operator_id")
+	private String operatorId;
+	/**
+	*上传者类型10管理员20用户）
+	**/
+	@ApiModelProperty(value="上传者类型10管理员20用户）")
+	@Column(name="uploader_type")
+	private Integer uploaderType;
+	/**
+	*样板间风格
+	**/
+	@ApiModelProperty(value="样板间风格")
+	@Column(name="sample_type")
+	private String sampleType;
+	/**
+	*app用户id
+	**/
+	@ApiModelProperty(value="app用户id")
+	@Column(name="appuser_id")
+	private String appuserId;
 	/**
 	*删除状态 0正常 1删除
 	**/
@@ -71,9 +125,9 @@ public class SampleRoomEntity extends BaseEntity
 	@Column(name="is_delete")
 	private Integer isDelete;
 	/**
-	*样板间图片
+	*样板间封面图，每个图片链接使用分号分割
 	**/
-	@ApiModelProperty(value="样板间图片")
+	@ApiModelProperty(value="样板间封面图，每个图片链接使用分号分割")
 	@Column(name="sample_image")
 	private String sampleImage;
 	/**
@@ -83,17 +137,17 @@ public class SampleRoomEntity extends BaseEntity
 	@Column(name="manager_id")
 	private String managerId;
 	/**
-	*用户id
-	**/
-	@ApiModelProperty(value="用户id")
-	@Column(name="user_id")
-	private String userId;
-	/**
 	*样板间收藏数
 	**/
 	@ApiModelProperty(value="样板间收藏数")
 	@Column(name="s_favorite_number")
 	private Integer sFavoriteNumber;
+	/**
+	*定制家具
+	**/
+	@ApiModelProperty(value="定制家具")
+	@Column(name="furniture")
+	private String furniture;
 	/**
 	*样板间面积（平方）
 	**/

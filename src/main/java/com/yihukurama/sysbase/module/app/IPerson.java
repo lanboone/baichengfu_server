@@ -1,12 +1,30 @@
 package com.yihukurama.sysbase.module.app;
 
 import com.yihukurama.sysbase.controller.app.dto.FocusDesignerDto;
+import com.yihukurama.sysbase.controller.app.dto.StoreSampleRoomDto;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 
 public interface IPerson {
 
+    /**
+     * 说明： 收藏样板间
+     * @author yihukurama
+     * @date Created in 14:15 2020/4/11
+     *       Modified by yihukurama in 14:15 2020/4/11
+     */
+    Result storeSampleRoom(Request<StoreSampleRoomDto> request) throws TipsException;
+
+
+
+    /**
+     * 说明： 取消收藏样板间
+     * @author yihukurama
+     * @date Created in 14:15 2020/4/11
+     *       Modified by yihukurama in 14:15 2020/4/11
+     */
+    Result unStoreSampleRoom(Request<StoreSampleRoomDto> request) throws TipsException;
     /**
      * 说明： 关注设计师
      * @author yihukurama
