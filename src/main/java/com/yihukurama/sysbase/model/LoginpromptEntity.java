@@ -45,6 +45,13 @@ public class LoginpromptEntity extends BaseEntity {
     private String remark;
 
     /**
+     * 类型
+     **/
+    @ApiModelProperty(value = "类型")
+    @Column(name = "type")
+    private String type;
+
+    /**
      * 最后修改人id
      **/
     @ApiModelProperty(value = "最后修改人id")
