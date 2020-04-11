@@ -2,7 +2,10 @@ package com.yihukurama.sysbase.controller.app;
 
 
 import com.yihukurama.sysbase.controller.app.dto.FocusDesignerDto;
+import com.yihukurama.sysbase.controller.app.dto.StoreSampleRoomDto;
+import com.yihukurama.sysbase.mapper.AppuserSampleMapper;
 import com.yihukurama.sysbase.model.AppuserDesignerEntity;
+import com.yihukurama.sysbase.model.AppuserSampleEntity;
 import com.yihukurama.sysbase.module.app.IPerson;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.domain.AppuserDesigner;
@@ -15,6 +18,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 说明： 系统模块接口
@@ -50,5 +55,31 @@ public class PersonController {
         return person.unFocusDesigner(request);
     }
 
+
+    @ApiOperation(value = "取消收藏样板间",notes = "取消收藏，样板间Id和自己的appuserId")
+    @RequestMapping(value = "/un_store_sample_room", method = RequestMethod.POST)
+    public Result unStoreSampleRoom(@RequestBody Request<StoreSampleRoomDto> request) throws Exception {
+
+
+
+
+        return person.unStoreSampleRoom(request);
+    }
+
+    @ApiOperation(value = "收藏样板间",notes = "收藏样板间，传入样板间id和自己的appuserId")
+    @RequestMapping(value = "/store_sample_room", method = RequestMethod.POST)
+    public Result storeSampleRoom(@RequestBody Request<StoreSampleRoomDto> request) throws Exception {
+
+
+        return person.storeSampleRoom(request);
+    }
+
+    @ApiOperation(value = "浏览样板间",notes = "浏览样板间，传入样板间id和自己的appuserId")
+    @RequestMapping(value = "/read_sample_room", method = RequestMethod.POST)
+    public Result readSampleRoom(@RequestBody Request<StoreSampleRoomDto> request) throws Exception {
+
+
+        return person.readSampleRoom(request);
+    }
 }
 

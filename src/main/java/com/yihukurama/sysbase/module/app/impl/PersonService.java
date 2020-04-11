@@ -1,15 +1,13 @@
 package com.yihukurama.sysbase.module.app.impl;
 
 import com.yihukurama.sysbase.controller.app.dto.FocusDesignerDto;
+import com.yihukurama.sysbase.controller.app.dto.StoreSampleRoomDto;
 import com.yihukurama.sysbase.mapper.AppuserMapper;
 import com.yihukurama.sysbase.mapper.DesignerMapper;
-import com.yihukurama.sysbase.model.AppuserDesignerEntity;
-import com.yihukurama.sysbase.model.AppuserEntity;
-import com.yihukurama.sysbase.model.DesignerEntity;
+import com.yihukurama.sysbase.model.*;
 import com.yihukurama.sysbase.module.app.IPerson;
-import com.yihukurama.sysbase.module.archives.service.domainservice.AppuserDesignerService;
-import com.yihukurama.sysbase.module.archives.service.domainservice.AppuserService;
-import com.yihukurama.sysbase.module.archives.service.domainservice.DesignerService;
+import com.yihukurama.sysbase.module.archives.domain.SampleRoom;
+import com.yihukurama.sysbase.module.archives.service.domainservice.*;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
@@ -38,6 +36,68 @@ public class PersonService implements IPerson {
     DesignerService designerService;
     @Autowired
     DesignerMapper designerMapper;
+    @Autowired
+    AppuserSampleService appuserSampleService;
+    @Autowired
+    SampleRoomService sampleRoomService;
+
+    @Override
+    public Result storeSampleRoom(Request<StoreSampleRoomDto> request) throws TipsException {
+        AppuserSampleEntity appuserSampleEntity = new AppuserSampleEntity();
+        appuserSampleEntity.setAppuserId(request.getData().getAppuserId());
+        appuserSampleEntity.setSampleId(request.getData().getSampleId());
+
+        List<AppuserSampleEntity> appuserSampleEntityList = appuserSampleService.list(appuserSampleEntity);
+        if(!EmptyUtil.isEmpty(appuserSampleEntityList)){
+            return Result.failed(null,"您已收藏",-1);
+        }
+        appuserSampleEntity = appuserSampleService.create(appuserSampleEntity);
+        if(appuserSampleEntity == null){
+            return Result.failed(null,"收藏失败",-20);
+
+        }
+        //增加收藏数和权重数
+        SampleRoomEntity sampleRoomEntity = new SampleRoomEntity();
+        sampleRoomEntity.setId(request.getData().getSampleId());
+        sampleRoomEntity = sampleRoomService.load(sampleRoomEntity);
+        sampleRoomEntity.setFocusCount(sampleRoomEntity.getFocusCount()+1);
+        sampleRoomEntity.setOrderCount(sampleRoomEntity.getOrderCount()+1);
+        sampleRoomService.update(sampleRoomEntity);
+        return Result.successed(appuserSampleEntity,"收藏成功");
+    }
+
+    @Override
+    public Result unStoreSampleRoom(Request<StoreSampleRoomDto> request) throws TipsException {
+        AppuserSampleEntity appuserSampleEntity = new AppuserSampleEntity();
+        appuserSampleEntity.setAppuserId(request.getData().getAppuserId());
+        appuserSampleEntity.setSampleId(request.getData().getSampleId());
+
+        List<AppuserSampleEntity> appuserSampleEntityList = appuserSampleService.list(appuserSampleEntity);
+        if(EmptyUtil.isEmpty(appuserSampleEntityList)){
+            return Result.failed(null,"您已取消收藏",-1);
+        }
+        int removeCount = appuserSampleService.remove(appuserSampleEntityList.get(0));
+        if(removeCount == 1){
+            //减少收藏数和权重数
+            SampleRoomEntity sampleRoomEntity = new SampleRoomEntity();
+            sampleRoomEntity.setId(request.getData().getSampleId());
+            sampleRoomEntity = sampleRoomService.load(sampleRoomEntity);
+            if(sampleRoomEntity.getFocusCount() !=  null || sampleRoomEntity.getFocusCount() > 0){
+                sampleRoomEntity.setFocusCount(sampleRoomEntity.getFocusCount()-1);
+            }else{
+                sampleRoomEntity.setFocusCount(0);
+            }
+            if(sampleRoomEntity.getFocusCount() !=  null || sampleRoomEntity.getFocusCount() > 0){
+                sampleRoomEntity.setOrderCount(sampleRoomEntity.getOrderCount()-1);
+            }else{
+                sampleRoomEntity.setOrderCount(0);
+            }
+            sampleRoomService.update(sampleRoomEntity);
+            return Result.successed(appuserSampleEntity,"取消收藏成功");
+        }
+        return Result.failed(null,"取消收藏失败",-20);
+    }
+
     @Override
     public Result focusDesigner(Request<FocusDesignerDto> request) throws TipsException {
         FocusDesignerDto focusDesignerDto = request.getData();
@@ -86,5 +146,17 @@ public class PersonService implements IPerson {
 
         return Result.successed(appuserDesignerEntity,"取消关注成功");
 
+    }
+
+    @Override
+    public Result readSampleRoom(Request<StoreSampleRoomDto> request) throws TipsException {
+        //增加浏览数和权重数
+        SampleRoomEntity sampleRoomEntity = new SampleRoomEntity();
+        sampleRoomEntity.setId(request.getData().getSampleId());
+        sampleRoomEntity = sampleRoomService.load(sampleRoomEntity);
+        sampleRoomEntity.setSFavoriteNumber(sampleRoomEntity.getSFavoriteNumber()+1);
+        sampleRoomEntity.setOrderCount(sampleRoomEntity.getOrderCount()+1);
+        sampleRoomService.update(sampleRoomEntity);
+        return Result.successed("添加浏览数成功");
     }
 }
