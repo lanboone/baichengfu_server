@@ -65,6 +65,12 @@ public class NoticeEntity extends BaseEntity
 	@Column(name="notice_type")
 	private String noticeType;
 	/**
+	 *通知分类code
+	 **/
+	@ApiModelProperty(value="通知分类code（1设计师申请2装修师申请3退款申请）")
+	@Column(name="notice_type_code")
+	private String noticeTypeCode;
+	/**
 	*删除状态 0正常 1删除
 	**/
 	@ApiModelProperty(value="删除状态 0正常 1删除")
@@ -124,9 +130,34 @@ public class NoticeEntity extends BaseEntity
 	@ApiModelProperty(value="预留字段2")
 	@Column(name="parameter2")
 	private String parameter2;
-	
-	
 
-	
+
+	/**
+	 *申请人姓名
+	 **/
+	@ApiModelProperty(value="申请人姓名")
+	@Column(name="applicant_name")
+	private String applicantName;
+
+	/**
+	 *描述
+	 **/
+	@ApiModelProperty(value="描述")
+	@Column(name="description")
+	private String description;
+
+	/**
+	 *简介
+	 **/
+	@ApiModelProperty(value="简介")
+	@Column(name="remark")
+	private String remark;
+
+	/**
+	 *价格
+	 **/
+	@ApiModelProperty(value="价格")
+	@Column(name="price")
+	private int price;
 	
 }

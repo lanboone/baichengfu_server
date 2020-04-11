@@ -44,9 +44,7 @@ public interface Manager {
 
     /**
      * token登录
-     *
-     * @param request
      * @return
      */
-    Result managerLoginByToken(Request<TokenLoginDTO> request) throws TipsException;
+    Result managerLoginByToken(String id, String token) throws TipsException;
 }

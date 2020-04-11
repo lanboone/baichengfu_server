@@ -3,7 +3,6 @@ package com.yihukurama.sysbase.module.admin.impl;
 import com.yihukurama.sysbase.controller.admin.dto.LoginDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ManagerModifyDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ModifyPassWordDTO;
-import com.yihukurama.sysbase.controller.admin.dto.TokenLoginDTO;
 import com.yihukurama.sysbase.model.ManagerEntity;
 import com.yihukurama.sysbase.module.admin.Manager;
 import com.yihukurama.sysbase.module.archives.service.domainservice.ManagerService;
@@ -102,11 +101,11 @@ public class ManagerServiceImpl implements Manager {
     }
 
     @Override
-    public Result managerLoginByToken(Request<TokenLoginDTO> request) throws TipsException {
+    public Result managerLoginByToken(String id, String token) throws TipsException {
         ManagerEntity managerEntity = new ManagerEntity();
 
-        managerEntity.setId(request.getData().getAppUserId());
-        managerEntity.setToken(request.getData().getToken());
+        managerEntity.setId(id);
+        managerEntity.setToken(token);
 
         List<ManagerEntity> managerEntities = managerService.list(managerEntity);
         if (CollectionUtils.isEmpty(managerEntities)) {

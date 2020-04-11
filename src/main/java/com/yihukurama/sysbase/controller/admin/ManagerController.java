@@ -9,9 +9,12 @@ import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author: liyuan
@@ -47,8 +50,9 @@ public class ManagerController {
 
     @ApiOperation(value = "token登录", notes = "用户id和token必传")
     @RequestMapping(value = "/loginByToken", method = RequestMethod.POST)
-    public Result loginByToken(@RequestBody Request<TokenLoginDTO> request) throws Exception {
-        return manager.managerLoginByToken(request);
+    public Result loginByToken(@Validated @NotBlank(message = "manager id can not be null") @RequestParam String id ,
+                               @Validated @NotBlank(message = "token can not be null") @RequestParam String token) throws Exception {
+        return manager.managerLoginByToken(id,token);
     }
 
 }

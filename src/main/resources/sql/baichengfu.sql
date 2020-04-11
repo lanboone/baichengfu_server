@@ -214,7 +214,12 @@ CREATE TABLE `tb_notice`
 (
     `id`             varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL,
     `manager_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL COMMENT '管理员id',
+    `applicant_name`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL COMMENT '申请人姓名',
+    `price`        int(11)                                                 NULL DEFAULT 0 COMMENT '价格',
+    `description`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+    `remark`       text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL COMMENT '简介',
     `notice_type`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知分类',
+    `notice_type_code`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知分类code（1设计师申请2装修师申请3退款申请）',
     `notice_title`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知标题',
     `notice_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知内容',
     `notice_time`    datetime                                                NULL DEFAULT CURRENT_TIMESTAMP COMMENT '通知时间',

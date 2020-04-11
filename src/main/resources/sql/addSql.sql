@@ -65,3 +65,15 @@ CREATE TABLE `tb_login_prompt`
   ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- tb_notice 通知表新增字段
+alter table tb_notice
+    ADD notice_type_code varchar(255) Default NULL COMMENT '通知分类code（1设计师申请2装修师申请3退款申请）';
+alter table tb_notice
+    ADD `applicant_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '申请人姓名';
+alter table tb_notice
+    ADD `price` int(11) NULL DEFAULT 0 COMMENT '价格';
+alter table tb_notice
+    ADD `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述';
+alter table tb_notice
+    ADD `remark` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '简介';
