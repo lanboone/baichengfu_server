@@ -11,11 +11,11 @@ CREATE TABLE `tb_banner`
     `pic_url`      text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci        NULL COMMENT '图片url',
     `link_url`     text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci        NULL COMMENT '链接url',
     `ads_pictures` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci        NULL COMMENT '广告图',
-    `is_delete`    int(11)                                                      NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
-    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci       NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                         DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci       NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                         default now() on update now() COMMENT '最后修改日期',
+    `is_delete`    int(11)                                                      NULL     DEFAULT 0 COMMENT '删除状态 0正常 1删除',
+    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci       NULL     DEFAULT NULL COMMENT '创建人id',
+    `create_date`  timestamp                                                    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci       NULL     DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date` datetime                                                              DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -29,23 +29,23 @@ DROP TABLE IF EXISTS `tb_designer`;
 CREATE TABLE `tb_designer`
 (
     `id`               varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL COMMENT '主键id',
-    `user_id`          varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '用户id',
-    `introduction`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '个人介绍',
+    `user_id`          varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '用户id',
+    `introduction`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '个人介绍',
     `remark`           text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL COMMENT '简介',
-    `personal_picture` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '个人图片',
-    `glory_value`      int(255)                                                NULL DEFAULT NULL COMMENT '荣耀值',
-    `price_per`        int(255)                                                NULL DEFAULT NULL COMMENT '每平米平均价格',
-    `works_ids`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作品id列表',
-    `is_delete`        int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
-    `creater_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`      datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`     datetime                                                    default now() on update now() COMMENT '最后修改日期',
-    `parameter1`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段1',
-    `parameter2`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段2',
-    `parameter3`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段3',
-    `parameter4`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段4',
-    `parameter5`       int(255)                                                NULL DEFAULT NULL COMMENT '预留字段5',
+    `personal_picture` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '个人图片',
+    `glory_value`      int(255)                                                NULL     DEFAULT NULL COMMENT '荣耀值',
+    `price_per`        int(255)                                                NULL     DEFAULT NULL COMMENT '每平米平均价格',
+    `works_ids`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '作品id列表',
+    `is_delete`        int(11)                                                 NULL     DEFAULT 0 COMMENT '删除状态 0正常 1删除',
+    `creater_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '创建人id',
+    `create_date`      timestamp                                               NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date`     datetime                                                         DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
+    `parameter1`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '预留字段1',
+    `parameter2`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '预留字段2',
+    `parameter3`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '预留字段3',
+    `parameter4`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '预留字段4',
+    `parameter5`       int(255)                                                NULL     DEFAULT NULL COMMENT '预留字段5',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -64,9 +64,9 @@ CREATE TABLE `tb_designer_style`
     `style`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设计师风格(欧式、日式)',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -80,20 +80,20 @@ DROP TABLE IF EXISTS `tb_decorator`;
 CREATE TABLE `tb_decorator`
 (
     `id`               varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL COMMENT '主键id',
-    `user_id`          varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '用户id',
-    `introduction`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '简介',
-    `personal_picture` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '个人图片',
-    `skills`           varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '装修师技能(布线、贴砖)',
-    `is_delete`        int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
-    `creater_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`      datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`     datetime                                                    default now() on update now() COMMENT '最后修改日期',
-    `parameter1`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段1',
-    `parameter2`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段2',
-    `parameter3`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段3',
-    `parameter4`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段4',
-    `parameter5`       int(255)                                                NULL DEFAULT NULL COMMENT '预留字段5',
+    `user_id`          varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '用户id',
+    `introduction`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '简介',
+    `personal_picture` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '个人图片',
+    `skills`           varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '装修师技能(布线、贴砖)',
+    `is_delete`        int(11)                                                 NULL     DEFAULT 0 COMMENT '删除状态 0正常 1删除',
+    `creater_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '创建人id',
+    `create_date`      timestamp                                               NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date`     datetime                                                         DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
+    `parameter1`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '预留字段1',
+    `parameter2`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '预留字段2',
+    `parameter3`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '预留字段3',
+    `parameter4`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '预留字段4',
+    `parameter5`       int(255)                                                NULL     DEFAULT NULL COMMENT '预留字段5',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -116,9 +116,9 @@ CREATE TABLE `tb_sample_room`
     `price`        int(13)                                                 NULL DEFAULT NULL COMMENT '费用',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     `parameter1`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段1',
     `parameter2`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段2',
     `parameter3`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段3',
@@ -142,9 +142,9 @@ CREATE TABLE `tb_sample_image`
     `video`        text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL COMMENT '视频',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     `parameter1`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段1',
     `parameter2`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段2',
     `parameter3`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段3',
@@ -165,11 +165,11 @@ CREATE TABLE `tb_sample_link`
     `id`           varchar(32)                                            NOT NULL COMMENT '主键',
     `sample_id`    varchar(32)                                            NOT NULL COMMENT '样板间id',
     `product_link` text CHARACTER SET utf8 COLLATE utf8_general_ci        NULL COMMENT '商品链接',
-    `is_delete`    int(11)                                                NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
-    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                   DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                   default now() on update now() COMMENT '最后修改日期',
+    `is_delete`    int(11)                                                NULL     DEFAULT 0 COMMENT '删除状态 0正常 1删除',
+    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '创建人id',
+    `create_date`  timestamp                                              NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date` datetime                                                        DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -188,11 +188,13 @@ CREATE TABLE `tb_manager`
     `sys_Identity`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '系统身份',
     `permission_list` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作权限id列表',
     `distribution`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分销订单id列表',
+    `sys_phone`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '管理员手机号',
+    `token`           varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登录token',
     `is_delete`       int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`     datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`     TIMESTAMP                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`    datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date`    datetime                                                     default '0000-00-00 00:00:00' COMMENT '最后修改日期',
     `parameter1`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段1',
     `parameter2`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段2',
     `parameter3`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段3',
@@ -210,24 +212,29 @@ CREATE TABLE `tb_manager`
 DROP TABLE IF EXISTS `tb_notice`;
 CREATE TABLE `tb_notice`
 (
-    `id`             varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL,
-    `manager_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL COMMENT '管理员id',
-    `notice_type`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知分类',
-    `notice_title`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知标题',
-    `notice_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知内容',
-    `notice_time`    datetime                                               NULL DEFAULT CURRENT_TIMESTAMP COMMENT '通知时间',
-    `notice_link`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知链接',
-    `is_delete`      int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
-    `is_read`        int(11)                                                 NULL DEFAULT 0 COMMENT '是否已读 0否 1是',
-    `creater_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`    datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`    varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`   datetime                                                    default now() on update now() COMMENT '最后修改日期',
-    `parameter1`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段1',
-    `parameter2`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段2',
-    `parameter3`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段3',
-    `parameter4`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段4',
-    `parameter5`     int(255)                                                NULL DEFAULT NULL COMMENT '预留字段5',
+    `id`               varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL,
+    `manager_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '管理员id',
+    `applicant_name`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL COMMENT '申请人姓名',
+    `price`            int(11)                                                 NULL DEFAULT 0 COMMENT '价格',
+    `description`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+    `remark`           text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL COMMENT '简介',
+    `notice_type`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知分类',
+    `notice_type_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知分类code（1设计师申请2装修师申请3退款申请）',
+    `notice_title`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知标题',
+    `notice_content`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知内容',
+    `notice_time`      datetime                                                NULL DEFAULT CURRENT_TIMESTAMP COMMENT '通知时间',
+    `notice_link`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知链接',
+    `is_delete`        int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
+    `is_read`          int(11)                                                 NULL DEFAULT 0 COMMENT '是否已读 0否 1是',
+    `creater_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
+    `create_date`      TIMESTAMP                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date`     datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
+    `parameter1`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段1',
+    `parameter2`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段2',
+    `parameter3`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段3',
+    `parameter4`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段4',
+    `parameter5`       int(255)                                                NULL DEFAULT NULL COMMENT '预留字段5',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -246,12 +253,12 @@ CREATE TABLE `tb_order`
     `product_id`        varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '商品id',
     `order_type`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单状态（待支付、待发货、已发货、已收货、待退款、已同意退款、已退款）',
     `paid_price`        decimal(10, 2)                                          NULL DEFAULT NULL COMMENT '实付价格（待支付状态可修改）',
-    `delivery_time`     datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '发货时间',
+    `delivery_time`     datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '发货时间',
     `is_delete`         int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`        varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`       datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`       datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`      datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date`      datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     `consignee_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收货人地址',
     `consignee_phone`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收货人电话',
     `return_address`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '退货地址',
@@ -276,9 +283,9 @@ CREATE TABLE `tb_order_evaluation`
     `content`        text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL COMMENT '评论内容',
     `is_delete`      int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`    datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`    datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`    varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`   datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date`   datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -307,9 +314,9 @@ CREATE TABLE `tb_product`
     `is_recommend`      int(3)                                                  NULL DEFAULT 0 COMMENT '是否推荐到首页 0否 1是',
     `is_delete`         int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`        varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`       datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`       datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`      datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date`      datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -329,9 +336,9 @@ CREATE TABLE `tb_product_categories`
     `priority`           int(255)                                                NULL DEFAULT NULL COMMENT '优先级（展示顺序）',
     `is_delete`          int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`         varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`        datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`        datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`        varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`       datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date`       datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -355,9 +362,9 @@ CREATE TABLE `tb_product_permissions`
     `query_`       tinyint(255)                                            NULL DEFAULT NULL COMMENT '查',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -383,9 +390,9 @@ CREATE TABLE `tb_sample_room`
     `s_favorite_number` int(30)                                                 NULL DEFAULT NULL COMMENT '样板间收藏数',
     `is_delete`         int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`        varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`       datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`       datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`      datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date`      datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -400,16 +407,16 @@ DROP TABLE IF EXISTS `tb_seller`;
 CREATE TABLE `tb_seller`
 (
     `id`               varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL COMMENT '主键id',
-    `seller_name`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '销售员名称',
-    `seller_passwaord` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '销售员密码',
-    `type`             varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型（总售前、总售后、售前、售后）',
-    `belong_manager`   bigint(255)                                             NULL DEFAULT NULL COMMENT '所属管理员id',
-    `permission_list`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '关联权限id列表',
-    `is_delete`        int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
-    `creater_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`      datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`     datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `seller_name`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '销售员名称',
+    `seller_passwaord` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '销售员密码',
+    `type`             varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '类型（总售前、总售后、售前、售后）',
+    `belong_manager`   bigint(255)                                             NULL     DEFAULT NULL COMMENT '所属管理员id',
+    `permission_list`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '关联权限id列表',
+    `is_delete`        int(11)                                                 NULL     DEFAULT 0 COMMENT '删除状态 0正常 1删除',
+    `creater_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '创建人id',
+    `create_date`      timestamp                                               NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date`     datetime                                                         DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -433,9 +440,9 @@ CREATE TABLE `tb_topic`
     `t_viewing_count`   int(30)                                                 NULL DEFAULT NULL COMMENT '话题浏览数',
     `is_delete`         int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`        varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`       datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`       datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`      datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date`      datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -450,14 +457,14 @@ DROP TABLE IF EXISTS `tb_topic_picture`;
 CREATE TABLE `tb_topic_picture`
 (
     `id`           varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
-    `topic_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '管理员id',
+    `topic_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '管理员id',
     `picture`      text CHARACTER SET utf8 COLLATE utf8_general_ci        NULL COMMENT '图片',
-    `priority`     int(30)                                                NULL DEFAULT NULL COMMENT '展示的优先级',
-    `is_delete`    int(11)                                                NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
-    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                   DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                   default now() on update now() COMMENT '最后修改日期',
+    `priority`     int(30)                                                NULL     DEFAULT NULL COMMENT '展示的优先级',
+    `is_delete`    int(11)                                                NULL     DEFAULT 0 COMMENT '删除状态 0正常 1删除',
+    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '创建人id',
+    `create_date`  timestamp                                              NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date` datetime                                                        DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -476,9 +483,9 @@ CREATE TABLE `tb_topic_comment`
     `comment_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '话题评论内容',
     `is_delete`       int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`     datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`     datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`    datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date`    datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -508,9 +515,9 @@ CREATE TABLE `tb_appuser`
     `is_limit_login`  int(3)                                                  NULL DEFAULT 0 COMMENT '是否限制登录 0否 1是',
     `is_delete`       int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`     datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`     datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`    datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date`    datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -525,18 +532,18 @@ DROP TABLE IF EXISTS `tb_user_address`;
 CREATE TABLE `tb_user_address`
 (
     `id`               varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL COMMENT '主键id',
-    `country`          varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '国家',
-    `province`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '省份',
-    `city`             varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '城市',
-    `region`           varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '区',
-    `street`           varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '街道',
-    `detailed_address` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '详细地址',
-    `code`             varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '邮政编码',
-    `is_delete`        int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
-    `creater_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`      datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`     datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `country`          varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '国家',
+    `province`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '省份',
+    `city`             varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '城市',
+    `region`           varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '区',
+    `street`           varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '街道',
+    `detailed_address` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '详细地址',
+    `code`             varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '邮政编码',
+    `is_delete`        int(11)                                                 NULL     DEFAULT 0 COMMENT '删除状态 0正常 1删除',
+    `creater_id`       varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '创建人id',
+    `create_date`      timestamp                                               NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL     DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date`     datetime                                                         DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -551,14 +558,14 @@ DROP TABLE IF EXISTS `tb_image`;
 CREATE TABLE `tb_image`
 (
     `id`           varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'id',
-    `relate_id`    varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '关联id',
+    `relate_id`    varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '关联id',
     `file_path`    text CHARACTER SET utf8 COLLATE utf8_general_ci        NULL COMMENT '图片地址',
-    `type`         int(11)                                                NULL DEFAULT NULL COMMENT '图片类型',
-    `is_delete`    int(11)                                                NULL DEFAULT 0 COMMENT '是否删除 0否 1是',
-    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                   DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                   default now() on update now() COMMENT '最后修改日期',
+    `type`         int(11)                                                NULL     DEFAULT NULL COMMENT '图片类型',
+    `is_delete`    int(11)                                                NULL     DEFAULT 0 COMMENT '是否删除 0否 1是',
+    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '创建人id',
+    `create_date`  timestamp                                              NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date` datetime                                                        DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
 
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -577,9 +584,9 @@ CREATE TABLE `tb_operatelog`
     `type`         int(11)                                                 NULL DEFAULT 0 COMMENT '操作记录类型',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     `creater_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
 
     PRIMARY KEY (`id`) USING BTREE
@@ -601,9 +608,9 @@ CREATE TABLE `ts_configuration`
     `index_order`  int(11)                                                 NULL DEFAULT 0 COMMENT '排序字段',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -625,9 +632,9 @@ CREATE TABLE `ts_func`
     `note`         varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '备注信息',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '逻辑删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -652,9 +659,9 @@ CREATE TABLE `ts_menu`
     `note`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注信息',
     `is_delete`    int(11)                                                 NULL DEFAULT 0,
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -681,9 +688,9 @@ CREATE TABLE `ts_orgnization`
     `type`         int(11)                                                 NULL DEFAULT NULL COMMENT '机构类型 ',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -702,9 +709,9 @@ CREATE TABLE `ts_privilege`
     `note`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注信息',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -723,9 +730,9 @@ CREATE TABLE `ts_role`
     `type`         int(11)                                                 NULL DEFAULT NULL COMMENT '1联动2交警3保险',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -739,14 +746,14 @@ DROP TABLE IF EXISTS `ts_roleprivilege`;
 CREATE TABLE `ts_roleprivilege`
 (
     `id`           varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-    `privilege_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单/功能id',
-    `role_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色id',
-    `type`         int(11)                                                NULL DEFAULT NULL COMMENT '权限类型,1系统,3菜单,4功能',
-    `is_delete`    int(11)                                                NULL DEFAULT 0,
-    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                   DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                   default now() on update now() COMMENT '最后修改日期',
+    `privilege_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '菜单/功能id',
+    `role_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '角色id',
+    `type`         int(11)                                                NULL     DEFAULT NULL COMMENT '权限类型,1系统,3菜单,4功能',
+    `is_delete`    int(11)                                                NULL     DEFAULT 0,
+    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '创建人id',
+    `create_date`  timestamp                                              NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date` datetime                                                        DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -763,7 +770,7 @@ CREATE TABLE `ts_smsrecord`
     `record_id`    varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci   NULL DEFAULT NULL COMMENT '短信关联事故id',
     `receiver`     varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci   NULL DEFAULT NULL COMMENT '接收人姓名',
     `mobile`       varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci   NULL DEFAULT NULL COMMENT '接收人手机号码',
-    `send_date`    datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '发送时间',
+    `send_date`    datetime                                                      DEFAULT CURRENT_TIMESTAMP COMMENT '发送时间',
     `content`      varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '短信内容',
     `type`         int(11)                                                  NULL DEFAULT NULL COMMENT '类型',
     `status`       int(11)                                                  NULL DEFAULT 1 COMMENT '状态,1未发送,2发送成功,3发送失败',
@@ -771,9 +778,9 @@ CREATE TABLE `ts_smsrecord`
     `reason`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '失败原因',
     `is_delete`    int(11)                                                  NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci   NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci   NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                     default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                      DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -795,9 +802,9 @@ CREATE TABLE `ts_smstemplate`
     `note`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '备注信息',
     `is_delete`    int(11)                                                  NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci   NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`  timestamp                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci   NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                     default now() on update now() COMMENT '最后修改日期',
+    `operate_date` datetime                                                      DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -817,7 +824,7 @@ CREATE TABLE `ts_user`
     `password`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
     `status`          int(11)                                                 NULL DEFAULT 1 COMMENT '账号状态 1正常 2禁用',
     `type`            int(11)                                                 NULL DEFAULT 1 COMMENT '账号类型 1工作人员 2超级管理员',
-    `last_login_date` datetime                                                    default CURRENT_TIMESTAMP COMMENT '最后登录时间',
+    `last_login_date` datetime                                                     default CURRENT_TIMESTAMP COMMENT '最后登录时间',
     `login_count`     int(11)                                                 NULL DEFAULT 0 COMMENT '登录次数',
     `ip_addr`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户最后登录时的ip地址',
     `index_order`     int(7)                                                  NULL DEFAULT 0 COMMENT '排序字段',
@@ -827,9 +834,9 @@ CREATE TABLE `ts_user`
     `is_delete`       int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `request_status`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '申请状态',
     `creater_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`     datetime                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_date`     datetime                                                     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `operator_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date`    datetime                                                    default now() on update now() COMMENT '最后修改日期',
+    `operate_date`    datetime                                                     DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     `org_id`          varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '所属机构id',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -844,16 +851,41 @@ DROP TABLE IF EXISTS `ts_userrole`;
 CREATE TABLE `ts_userrole`
 (
     `id`           varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'id',
-    `user_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '驾校简称',
-    `role_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '驾校名',
-    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
-    `create_date`  datetime                                                   DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
-    `operate_date` datetime                                                   default now() on update now() COMMENT '最后修改日期',
+    `user_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '驾校简称',
+    `role_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '驾校名',
+    `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '创建人id',
+    `create_date`  timestamp                                              NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date` datetime                                                        DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '驾校表'
   ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+-- ----------------------------
+-- Table structure for tb_login_prompt
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_login_prompt`;
+CREATE TABLE `tb_login_prompt`
+(
+    `id`              varchar(35) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键',
+    `type`            varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci         DEFAULT NULL COMMENT '类型',
+    `add_person_id`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci         DEFAULT NULL COMMENT 'app用户id',
+    `add_person_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci         DEFAULT NULL COMMENT '添加人名称(app用户名)',
+    `remark`          varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci         DEFAULT NULL COMMENT '备注',
+    `is_delete`       int(11)                                                         DEFAULT 0 COMMENT '删除状态 0正常 1删除',
+    `creater_id`      varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci          DEFAULT NULL COMMENT '创建人id(管理员id)',
+    `create_date`     timestamp                                              NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `operator_id`     varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci          DEFAULT NULL COMMENT '最后修改人id',
+    `operate_date`    datetime                                                        DEFAULT '0000-00-00 00:00:00' COMMENT '最后修改日期',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci COMMENT = 'app用户登录提示表'
+  ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
