@@ -88,7 +88,7 @@ public class NoticeEntity extends BaseEntity {
      **/
     @ApiModelProperty(value = "是否已读 0否 1是")
     @Column(name = "is_read")
-    private Integer isRead;
+    private Boolean isRead;
     /**
      * 管理员id
      **/
@@ -166,9 +166,9 @@ public class NoticeEntity extends BaseEntity {
     /**
      * 状态
      **/
-    @ApiModelProperty(value = "状态 拒绝0 通过1")
+    @ApiModelProperty(value = "状态 拒绝10 通过20 未审核30")
     @Column(name = "status")
-    private Boolean status;
+    private String status;
 
     /**
      * 拒绝理由

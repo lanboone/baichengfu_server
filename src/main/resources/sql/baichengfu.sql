@@ -62,6 +62,8 @@ CREATE TABLE `tb_designer_style`
     `designer_id`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '设计师id',
     `eg_picture`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '风格示例图',
     `style`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设计师风格(欧式、日式)',
+    `number`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '风格序号',
+    `description`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '风格描述',
     `is_delete`    int(11)                                                 NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
     `creater_id`   varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建人id',
     `create_date`  timestamp                                                    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

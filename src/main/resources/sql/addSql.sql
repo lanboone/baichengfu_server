@@ -56,3 +56,9 @@ alter table tb_notice
     ADD `status` int(11) NULL DEFAULT 0 COMMENT '状态 拒绝0 通过1';
 alter table tb_notice
     ADD `reject_reason` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '拒绝理由';
+
+-- 20200411 设计师风格表
+alter table tb_designer_style
+    ADD `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '风格描述';
+alter table tb_designer_style
+    ADD `number` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '风格序号';
