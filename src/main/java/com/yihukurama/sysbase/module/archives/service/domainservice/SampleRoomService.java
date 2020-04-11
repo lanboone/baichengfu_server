@@ -105,9 +105,7 @@ public class SampleRoomService extends CrudService<SampleRoomEntity> {
             }
             return super.list(sampleRoomEntity,page,limit);
 
-
-
-            }
+        }
 
 
         return super.list(sampleRoomEntity, page, limit);

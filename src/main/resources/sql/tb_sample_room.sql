@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 11/04/2020 16:07:25
+ Date: 11/04/2020 16:37:16
 */
 
 SET NAMES utf8mb4;
@@ -31,9 +31,9 @@ CREATE TABLE `tb_sample_room`  (
   `sample_link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '样板间链接',
   `sample_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '样板间风格',
   `sample_image` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '样板间封面图，每个图片链接使用分号分割',
-  `s_favorite_number` int(30) NULL DEFAULT 0 COMMENT '样板间收藏数',
+  `s_favorite_number` int(30) NULL DEFAULT 0 COMMENT '样板间浏览',
   `order_count` int(11) NULL DEFAULT NULL COMMENT '排序权重，收藏数+浏览数',
-  `focus_count` int(30) NULL DEFAULT 0 COMMENT '样板间浏览数',
+  `focus_count` int(30) NULL DEFAULT 0 COMMENT '样板间收藏',
   `is_delete` int(11) NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
   `creater_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
   `create_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
@@ -49,5 +49,10 @@ CREATE TABLE `tb_sample_room`  (
   `designer_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设计师昵称',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '样板间表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of tb_sample_room
+-- ----------------------------
+INSERT INTO `tb_sample_room` VALUES ('1', NULL, NULL, NULL, '1234', NULL, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, '2020-04-11 16:09:43', NULL, '2020-04-11 16:09:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
