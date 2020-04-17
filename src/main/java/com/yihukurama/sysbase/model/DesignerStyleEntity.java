@@ -70,9 +70,19 @@ public class DesignerStyleEntity extends BaseEntity
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	
-	
 
-	
+	/**
+	 *风格描述
+	 **/
+	@ApiModelProperty(value="风格描述")
+	@Column(name="description")
+	private String styleDescription;
+
+	/**
+	 *序号
+	 **/
+	@ApiModelProperty(value="序号")
+	@Column(name="number")
+	private String number;
 	
 }

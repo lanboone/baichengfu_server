@@ -89,7 +89,6 @@ public class SampleRoomService extends CrudService<SampleRoomEntity> {
             SampleRoom sampleRoom = TransferUtils.transferEntity2Domain(loadSampleRoom, SampleRoom.class);
             sampleRoom.setProductEntityList(productEntityList);
             return sampleRoom;
-
         } else {
             return loadSampleRoom;
         }
