@@ -4,6 +4,11 @@
 ### 执行命令
 mvn clean package
 
+### linux启动，停止，重启
+sh bin/startup.sh   启动项目
+sh bin/shutdown.sh  停止服务
+sh bin/restart.sh   重启服务
+
 ### maven profiles配置
 ```xml
 <!--MAVEN打包选择运行环境-->
