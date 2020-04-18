@@ -9,6 +9,15 @@ sh bin/startup.sh   启动项目
 sh bin/shutdown.sh  停止服务
 sh bin/restart.sh   重启服务
 
+#### 如果遇到类似报错
+: not foundn.sh: 2: bin/startup.sh: 
+: not foundn.sh: 11: bin/startup.sh: 
+: not foundn.sh: 14: bin/startup.sh: 
+: not foundn.sh: 17: bin/startup.sh: 
+bin/shutdown.sh: 26: bin/startup.sh: Syntax error: "fi" unexpected (expecting "then")
+#### 则执行以下命令
+1、vi startup.sh  2、:set ff=unix
+
 ### maven profiles配置
 ```xml
 <!--MAVEN打包选择运行环境-->
