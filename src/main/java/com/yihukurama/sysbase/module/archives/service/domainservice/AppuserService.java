@@ -9,6 +9,7 @@ import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public class AppuserService extends CrudService<AppuserEntity>{
 
     @Autowired
     AppEventPublisher appEventPublisher;
+
+
     @Override
     public AppuserEntity update(AppuserEntity appuserEntity) throws TipsException {
         if(appuserEntity instanceof Appuser){

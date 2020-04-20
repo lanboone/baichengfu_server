@@ -3,6 +3,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,7 +19,7 @@ public class AppEventPublisher implements ApplicationContextAware {
         // TODO Auto-generated method stub
         this.applicationContext=applicationContext;
     }
-
+    @Async("asyncServiceExecutor")
     public void publishEvent(ApplicationEvent event){
 
         applicationContext.publishEvent(event);
