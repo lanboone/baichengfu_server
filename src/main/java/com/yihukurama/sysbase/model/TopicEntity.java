@@ -23,9 +23,15 @@ import java.util.Date;
 public class TopicEntity extends BaseEntity
 {
 	/**
-	*创建者类型（管理员或用户）
+	*话题评论数
 	**/
-	@ApiModelProperty(value="创建者类型（管理员或用户）")
+	@ApiModelProperty(value="话题评论数")
+	@Column(name="comment_count")
+	private Integer commentCount;
+	/**
+	*创建者类型（10管理员，20App用户）
+	**/
+	@ApiModelProperty(value="创建者类型（10管理员，20App用户）")
 	@Column(name="creator_type")
 	private String creatorType;
 	/**
@@ -47,6 +53,18 @@ public class TopicEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
+	*话题封面图，每个图片链接使用分号分割
+	**/
+	@ApiModelProperty(value="话题封面图，每个图片链接使用分号分割")
+	@Column(name="topic_image")
+	private String topicImage;
+	/**
+	*创建者头像
+	**/
+	@ApiModelProperty(value="创建者头像")
+	@Column(name="topic_head")
+	private String topicHead;
+	/**
 	*删除状态 0正常 1删除
 	**/
 	@ApiModelProperty(value="删除状态 0正常 1删除")
@@ -58,18 +76,6 @@ public class TopicEntity extends BaseEntity
 	@ApiModelProperty(value="话题浏览数")
 	@Column(name="t_viewing_count")
 	private Integer tViewingCount;
-	/**
-	*管理员id
-	**/
-	@ApiModelProperty(value="管理员id")
-	@Column(name="manager_id")
-	private String managerId;
-	/**
-	*用户id
-	**/
-	@ApiModelProperty(value="用户id")
-	@Column(name="user_id")
-	private String userId;
 	/**
 	*话题收藏数
 	**/
@@ -88,6 +94,12 @@ public class TopicEntity extends BaseEntity
 	@ApiModelProperty(value="话题标题")
 	@Column(name="topic_title")
 	private String topicTitle;
+	/**
+	*创建者昵称
+	**/
+	@ApiModelProperty(value="创建者昵称")
+	@Column(name="topic_name")
+	private String topicName;
 	/**
 	*创建时间
 	**/

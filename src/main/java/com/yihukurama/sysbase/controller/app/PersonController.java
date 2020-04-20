@@ -1,8 +1,10 @@
 package com.yihukurama.sysbase.controller.app;
 
 
+import com.yihukurama.sysbase.controller.app.dto.ClickGoodDto;
 import com.yihukurama.sysbase.controller.app.dto.FocusDesignerDto;
 import com.yihukurama.sysbase.controller.app.dto.StoreSampleRoomDto;
+import com.yihukurama.sysbase.controller.app.dto.StoreTopicDto;
 import com.yihukurama.sysbase.mapper.AppuserSampleMapper;
 import com.yihukurama.sysbase.model.AppuserDesignerEntity;
 import com.yihukurama.sysbase.model.AppuserSampleEntity;
@@ -80,6 +82,47 @@ public class PersonController {
 
 
         return person.readSampleRoom(request);
+    }
+
+
+    @ApiOperation(value = "浏览话题",notes = "浏览话题，传入话题id和自己的appuserId")
+    @RequestMapping(value = "/read_topic", method = RequestMethod.POST)
+    public Result readTopic(@RequestBody Request<StoreTopicDto> request) throws Exception {
+
+
+        return person.readTopic(request);
+    }
+
+    @ApiOperation(value = "收藏话题",notes = "收藏话题，传入话题id和自己的appuserId")
+    @RequestMapping(value = "/store_topic", method = RequestMethod.POST)
+    public Result storeTopic(@RequestBody Request<StoreTopicDto> request) throws Exception {
+
+
+        return person.storeTopic(request);
+    }
+
+    @ApiOperation(value = "取消收藏话题",notes = "取消收藏话题，传入话题id和自己的appuserId")
+    @RequestMapping(value = "/un_store_topic", method = RequestMethod.POST)
+    public Result unStoreTopic(@RequestBody Request<StoreTopicDto> request) throws Exception {
+
+
+        return person.unStoreTopic(request);
+    }
+
+    @ApiOperation(value ="点赞评论",notes = "点赞评论，传入话题id，评论id和自己的appuserId")
+    @RequestMapping(value = "/click_good", method = RequestMethod.POST)
+    public Result clickGood(@RequestBody Request<ClickGoodDto> request) throws Exception {
+
+
+        return person.clickGood(request);
+    }
+
+    @ApiOperation(value = "取消点赞",notes = "取消点赞，传入话题id和自己的appuserId")
+    @RequestMapping(value = "/un_click_good", method = RequestMethod.POST)
+    public Result unClickGood(@RequestBody Request<ClickGoodDto> request) throws Exception {
+
+
+        return person.unClickGood(request);
     }
 }
 
