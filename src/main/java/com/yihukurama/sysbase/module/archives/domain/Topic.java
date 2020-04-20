@@ -7,6 +7,9 @@ import lombok.Data;
 @Data
 public class Topic extends TopicEntity {
 
+    // 发布人
+    String publisherName;
+
     @SqlWhere(value = SqlWhere.SqlWhereValue.LIKE,proprtityName = "topic_title")
     @Override
     public String getTopicTitle() {
