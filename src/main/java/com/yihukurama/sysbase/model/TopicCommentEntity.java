@@ -71,6 +71,12 @@ public class TopicCommentEntity extends BaseEntity
 	@Column(name="topic_id")
 	private String topicId;
 	/**
+	 *要显示的评论json
+	 **/
+	@ApiModelProperty(value="要显示的评论json")
+	@Column(name="reply")
+	private String reply;
+	/**
 	*该评论回复的id集合，时间越早的在约前面
 	**/
 	@ApiModelProperty(value="该评论回复的id集合，时间越早的在约前面")
