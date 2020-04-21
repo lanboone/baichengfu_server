@@ -53,6 +53,7 @@ public class CommentEvent extends ApplicationEvent {
     }
 
     private void createReply()  {
+        LogUtil.debugLog(this,"begin comment event");
         if (!(source instanceof TopicCommentEntity)) {
             LogUtil.errorLog(this,"处理创建评论事件出错，事件源不是AppuserEntity");
             return;
@@ -66,13 +67,20 @@ public class CommentEvent extends ApplicationEvent {
         String lastReplyId = "";
         if(!EmptyUtil.isEmpty(replyPath)){
             lastReplyId = replyPath.split("/")[0];
+
         }
-        parentComment.setReplyPath(topicCommentEntity.getId()+"/"+parentComment.getReplyPath());
-        TopicCommentEntity childrenComment = topicCommentMapper.selectByPrimaryKey(lastReplyId);
+        parentComment.setReplyPath(topicCommentEntity.getId()+"/"+(parentComment.getReplyPath()==null?"":parentComment.getReplyPath()));
+
         //把topicCommentEntity和childrenComment加入到最新的评论字段中
         List<TopicCommentEntity> topicCommentEntityList = new ArrayList<>();
         topicCommentEntityList.add(topicCommentEntity);
-        topicCommentEntityList.add(childrenComment);
+
+        if(!EmptyUtil.isEmpty(lastReplyId)){
+            TopicCommentEntity childrenComment = topicCommentMapper.selectByPrimaryKey(lastReplyId);
+            topicCommentEntityList.add(childrenComment);
+        }
+
+
         parentComment.setReply(JSON.toJSONString(topicCommentEntityList));
         topicCommentMapper.updateByPrimaryKeySelective(parentComment);
 

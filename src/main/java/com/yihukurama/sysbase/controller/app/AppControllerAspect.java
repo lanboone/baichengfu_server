@@ -61,9 +61,9 @@ public class AppControllerAspect {
                 //设置token
                 request.setToken(token);
 
-                if (EmptyUtil.isEmpty(request.getToken())) {
-                    return Result.failed("请求参数中没有token!收到的请求是>>>>>" + JSON.toJSONString(request));
-                }
+//                if (EmptyUtil.isEmpty(request.getToken())) {
+//                    return Result.failed("请求参数中没有token!收到的请求是>>>>>" + JSON.toJSONString(request));
+//                }
 
                 if (simpleMethodName.startsWith("list")) {
                     //改变做法，page为空 自动添加page
