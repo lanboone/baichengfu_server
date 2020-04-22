@@ -40,6 +40,21 @@ public class ProductCategoriesEntity extends BaseEntity
 	@ApiModelProperty(value="分类名")
 	@Column(name="category_name")
 	private String categoryName;
+
+	/**
+	 *分类描述
+	 **/
+	@ApiModelProperty(value="分类描述")
+	@Column(name="description")
+	private String description;
+
+	/**
+	 *分类图片链接
+	 **/
+	@ApiModelProperty(value="分类图片链接")
+	@Column(name="picture_url")
+	private String pictureUrl;
+
 	/**
 	*最后修改人id
 	**/
