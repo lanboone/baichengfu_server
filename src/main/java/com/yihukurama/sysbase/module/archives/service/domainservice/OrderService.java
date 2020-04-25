@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
+import com.yihukurama.sysbase.model.OrderEntity;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @modified: by yihukurama in 11:37 2018/4/2
  */
 @Service
-public class OrderService extends CrudService{
+public class OrderService extends CrudService<OrderEntity>{
 
 
 

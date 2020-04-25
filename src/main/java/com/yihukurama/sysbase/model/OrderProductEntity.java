@@ -12,28 +12,22 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 说明： 订单表
+ * 说明： APP用户表
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="订单表")
-@Table(name="tb_order")
+@ApiModel(value="订单商品")
+@Table(name="tb_order_product")
 @Data
-public class OrderEntity extends BaseEntity
+public class OrderProductEntity extends BaseEntity
 {
 	/**
-	*实付价格（待支付状态可修改）
+	*商品图片
 	**/
-	@ApiModelProperty(value="实付价格（待支付状态可修改）")
-	@Column(name="paid_price")
-	private String paidPrice;
-	/**
-	*订单号
-	**/
-	@ApiModelProperty(value="订单号")
-	@Column(name="num")
-	private String num;
+	@ApiModelProperty(value="商品图片")
+	@Column(name="product_pic")
+	private String productPic;
 	/**
 	*最后修改人id
 	**/
@@ -41,17 +35,17 @@ public class OrderEntity extends BaseEntity
 	@Column(name="operator_id")
 	private String operatorId;
 	/**
-	*订单金额
-	**/
-	@ApiModelProperty(value="订单金额")
-	@Column(name="order_price")
-	private String orderPrice;
-	/**
 	*最后修改日期
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operate_date")
 	private Date operateDate;
+	/**
+	*购买数量
+	**/
+	@ApiModelProperty(value="购买数量")
+	@Column(name="count")
+	private Integer count;
 	/**
 	*创建人id
 	**/
@@ -59,15 +53,9 @@ public class OrderEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*装修师id
+	*app用户id
 	**/
-	@ApiModelProperty(value="装修师id")
-	@Column(name="address_id")
-	private String addressId;
-	/**
-	*用户id
-	**/
-	@ApiModelProperty(value="用户id")
+	@ApiModelProperty(value="app用户id")
 	@Column(name="appuser_id")
 	private String appuserId;
 	/**
@@ -77,21 +65,33 @@ public class OrderEntity extends BaseEntity
 	@Column(name="is_delete")
 	private Integer isDelete;
 	/**
+	*快递单号
+	**/
+	@ApiModelProperty(value="快递单号")
+	@Column(name="ems_cod")
+	private String emsCod;
+	/**
 	*商品id
 	**/
 	@ApiModelProperty(value="商品id")
 	@Column(name="product_id")
 	private String productId;
 	/**
-	*支付方式 10微信 20支付宝 30二维码
+	*商品价格
 	**/
-	@ApiModelProperty(value="支付方式 10微信 20支付宝 30二维码")
-	@Column(name="pay_type")
-	private Integer payType;
+	@ApiModelProperty(value="商品价格")
+	@Column(name="price")
+	private String price;
 	/**
-	*订单状态（10待支付、20待发货、30待收货、40待评价、50待退款、60已退款）
+	*商品简介
 	**/
-	@ApiModelProperty(value="订单状态（10待支付、20待发货、30待收货、40待评价、50待退款、60已退款）")
+	@ApiModelProperty(value="商品简介")
+	@Column(name="product_note")
+	private String productNote;
+	/**
+	*状态 10待发货  20待收货  30待退款  40已退款  50已确认
+	**/
+	@ApiModelProperty(value="状态 10待发货  20待收货  30待退款  40已退款  50已确认")
 	@Column(name="status")
 	private Integer status;
 	/**
