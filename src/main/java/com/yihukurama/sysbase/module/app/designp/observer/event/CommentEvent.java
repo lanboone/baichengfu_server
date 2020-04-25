@@ -2,8 +2,10 @@ package com.yihukurama.sysbase.module.app.designp.observer.event;
 
 import com.alibaba.fastjson.JSON;
 import com.yihukurama.sysbase.mapper.DesignerMapper;
+import com.yihukurama.sysbase.mapper.ProductCommentMapper;
 import com.yihukurama.sysbase.mapper.SampleRoomMapper;
 import com.yihukurama.sysbase.mapper.TopicCommentMapper;
+import com.yihukurama.sysbase.model.ProductCommentEntity;
 import com.yihukurama.sysbase.model.TopicCommentEntity;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.service.domainservice.TopicCommentService;
@@ -25,9 +27,15 @@ import java.util.List;
  */
 public class CommentEvent extends ApplicationEvent {
     /**
-     * 创建评论事件
+     * 创建话题评论事件
      */
     public final static int TYPE_10 = 10;
+
+
+    /**
+     * 创建商品评论事件
+     */
+    public final static int TYPE_20 = 20;
 
 
     /**
@@ -46,13 +54,16 @@ public class CommentEvent extends ApplicationEvent {
     public void handleEvent(){
         switch (type){
             case TYPE_10:
-                createReply();
+                createTopicReply();
+                break;
+            case TYPE_20:
+                createProductReply();
                 break;
             default:
         }
     }
 
-    private void createReply()  {
+    private void createTopicReply()  {
         LogUtil.debugLog(this,"begin comment event");
         if (!(source instanceof TopicCommentEntity)) {
             LogUtil.errorLog(this,"处理创建评论事件出错，事件源不是AppuserEntity");
@@ -87,5 +98,38 @@ public class CommentEvent extends ApplicationEvent {
     }
 
 
+    private void createProductReply()  {
+        LogUtil.debugLog(this,"begin comment event");
+        if (!(source instanceof ProductCommentEntity)) {
+            LogUtil.errorLog(this,"处理创建商品评论事件出错，事件源不是 ProductCommentEntity");
+            return;
+        }
+        //给父评论增加回复路径，并且把回复加入到父评论的字段中
+        ProductCommentEntity productCommentEntity = (ProductCommentEntity) source;
+        ProductCommentMapper productCommentMapper = (ProductCommentMapper) SpringBeanTools.getBean(ProductCommentMapper.class);
+        ProductCommentEntity parentComment = productCommentMapper.selectByPrimaryKey(productCommentEntity.getCParentId());
+
+        String replyPath = parentComment.getReplyPath();
+        String lastReplyId = "";
+        if(!EmptyUtil.isEmpty(replyPath)){
+            lastReplyId = replyPath.split("/")[0];
+
+        }
+        parentComment.setReplyPath(productCommentEntity.getId()+"/"+(parentComment.getReplyPath()==null?"":parentComment.getReplyPath()));
+
+        //把productCommentEntity和childrenComment加入到最新的评论字段中
+        List<ProductCommentEntity> productCommentEntityList = new ArrayList<>();
+        productCommentEntityList.add(productCommentEntity);
+
+        if(!EmptyUtil.isEmpty(lastReplyId)){
+            ProductCommentEntity childrenComment = productCommentMapper.selectByPrimaryKey(lastReplyId);
+            productCommentEntityList.add(childrenComment);
+        }
+
+
+        parentComment.setReply(JSON.toJSONString(productCommentEntityList));
+        productCommentMapper.updateByPrimaryKeySelective(parentComment);
+
+    }
 
 }

@@ -22,6 +22,14 @@ import java.util.Date;
 @Data
 public class ProductCommentEntity extends BaseEntity
 {
+
+	/**
+	 *要显示的评论json
+	 **/
+	@ApiModelProperty(value="要显示的评论json")
+	@Column(name="reply")
+	private String reply;
+
 	/**
 	*创建者昵称
 	**/
