@@ -46,6 +46,9 @@ public class AppuserService extends CrudService<AppuserEntity>{
                 //更新昵称
                 appEventPublisher.publishEvent(new AppuserEvent(appuserEntity,AppuserEvent.TYPE_20));
             }
+            if(EmptyUtil.isEmpty(orgAppuser.getHeadUrl())){
+                orgAppuser.setHeadUrl("");
+            }
             if(!orgAppuser.getHeadUrl().equals(appuserEntity.getHeadUrl())){
                 //更新头像
                 appEventPublisher.publishEvent(new AppuserEvent(appuserEntity,AppuserEvent.TYPE_10));
