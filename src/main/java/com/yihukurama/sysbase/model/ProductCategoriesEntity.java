@@ -79,15 +79,19 @@ public class ProductCategoriesEntity extends BaseEntity
 	@ApiModelProperty(value="优先级（展示顺序）")
 	@Column(name="priority")
 	private Integer priority;
+
+	/**
+	 *是否返积分 0不返 1返积分
+	 **/
+	@ApiModelProperty(value="是否返积分 0不返 1返积分")
+	@Column(name="is_rebated")
+	private Integer isRebated;
+
 	/**
 	*创建时间
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	
-	
 
-	
-	
 }
