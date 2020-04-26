@@ -4,10 +4,20 @@
 ### 执行命令
 mvn clean package
 
-### linux启动，停止，重启
-sh bin/startup.sh   启动项目
-sh bin/shutdown.sh  停止服务
-sh bin/restart.sh   重启服务
+### linux 后台java服务启动，停止
+进入到   /home 目录
+./startup.sh  启动服务
+./shutdown.sh 停止服务
+脚本里的jar包名要与home目录下的jar名一致，建议打包时不更改
+
+### linux nginx安装目录与配置目录
+进入到   /etc/nginx 目录
+service nginx start  启动服务
+service nginx start 停止服务
+配置文件在/etc/nginx/conf.d/example.conf
+
+
+
 
 #### 如果遇到类似报错
 ```

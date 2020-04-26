@@ -10,8 +10,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/baichengfu?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
-    password: a37887245
-#    password: 199566
+    password: root
     type: com.alibaba.druid.pool.DruidDataSource
     initial-size: 5
     min-idle: 5
@@ -34,7 +33,7 @@ spring:
       url-pattern: /druid/*
       allow: 127.0.0.1
       login-username: root
-      login-password: a37887245
+      login-password: root
   ############################################### REDIS ###################################################################
   redis:
     host: 127.0.0.1
@@ -67,6 +66,6 @@ wxapp:
   appSecret:
 #系统配置
 system:
-  saveFilePath: D:\ideaProject\baichengfu_server\file
+  saveFilePath: ./baichengfu_server/file
   accesslog: logs/
   redisPrefix: baichengfu-redis-devpre

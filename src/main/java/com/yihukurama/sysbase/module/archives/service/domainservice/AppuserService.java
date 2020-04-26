@@ -7,6 +7,7 @@ import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
 import com.yihukurama.sysbase.module.app.designp.observer.event.AppuserEvent;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
+import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -38,6 +39,9 @@ public class AppuserService extends CrudService<AppuserEntity>{
     public AppuserEntity update(AppuserEntity appuserEntity) throws TipsException {
         if(appuserEntity instanceof Appuser){
             AppuserEntity orgAppuser = this.load(appuserEntity);
+            if(EmptyUtil.isEmpty(orgAppuser.getNickName())){
+                orgAppuser.setNickName("");
+            }
             if(!orgAppuser.getNickName().equals(appuserEntity.getNickName())){
                 //更新昵称
                 appEventPublisher.publishEvent(new AppuserEvent(appuserEntity,AppuserEvent.TYPE_20));
