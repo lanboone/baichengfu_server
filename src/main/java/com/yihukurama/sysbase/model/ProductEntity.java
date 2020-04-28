@@ -74,6 +74,12 @@ public class ProductEntity extends BaseEntity {
     @Column(name = "is_recommend")
     private boolean recommend;
     /**
+     * 是否上下架 0下架 1上架
+     **/
+    @ApiModelProperty(value = "是否上下架 0下架 1上架")
+    @Column(name = "status")
+    private boolean status;
+    /**
      * 推荐位排序号
      **/
     @ApiModelProperty(value = "推荐位排序号")
@@ -125,7 +131,7 @@ public class ProductEntity extends BaseEntity {
         return recommend;
     }
 
-    public void setRecommend(boolean recommend) {
-        this.recommend = recommend;
+    public boolean getStatus() {
+        return status;
     }
 }

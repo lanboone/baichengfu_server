@@ -8,4 +8,13 @@ import com.yihukurama.sysbase.model.ProductEntity;
  * @description: 商品
  */
 public class Product extends ProductEntity {
+    /**
+     * 商品规格
+     */
+    Productstandard productstandard;
+
+    /**
+     * 规格配置列表
+     */
+    Standardconfig standardconfig;
 }
