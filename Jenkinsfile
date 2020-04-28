@@ -56,14 +56,9 @@ pipeline {
               remote.password = password
 
 
-              sshCommand remote: remote, sudo: true, command: "cd /home"
-              
-              sshCommand remote: remote, sudo: true, command: "./shutdown.sh"
-
               // SSH 上传文件到远端服务器
-              sshPut remote: remote, from: '**/target/*.jar', into: '/home/'
+              sshPut remote: remote, from: '**/target/*.jar', into: '/home/lastest'
 
-              sshCommand remote: remote, sudo: true, command: "./startup.sh"
 
             }
           }
