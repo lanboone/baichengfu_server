@@ -56,14 +56,14 @@ public class TopicService extends CrudService<TopicEntity>{
                 if ("20".equals(topicEntityFromDB.getCreatorType())){
                     ManagerEntity managerEntity = new ManagerEntity();
                     managerEntity.setId(topicEntityFromDB.getCreaterId());
-                    ManagerEntity managerEntityFromDB = managerMapper.selectOne(managerEntity);
+                    ManagerEntity managerEntityFromDB = managerMapper.selectByPrimaryKey(managerEntity);
                     if (managerEntityFromDB != null){
                         topic.setPublisherName(managerEntityFromDB.getSysName());
                     }
                 }else if ("10".equals(topicEntityFromDB.getCreatorType())){
                     AppuserEntity appuserEntity = new AppuserEntity();
                     appuserEntity.setId(topicEntityFromDB.getCreaterId());
-                    AppuserEntity appuserEntityFromDB = appuserMapper.selectOne(appuserEntity);
+                    AppuserEntity appuserEntityFromDB = appuserMapper.selectByPrimaryKey(appuserEntity);
                     if (appuserEntityFromDB != null){
                         topic.setPublisherName(appuserEntityFromDB.getUserName());
                     }

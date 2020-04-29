@@ -35,7 +35,7 @@ public class ProductcategoriesService extends CrudService<ProductCategoriesEntit
                 BeanUtils.copyProperties(productCategoriesFromDB, productcategories);
                 if (productCategoriesFromDB.getCreaterId() != null) {
                     managerEntity.setId(productCategoriesFromDB.getCreaterId());
-                    ManagerEntity managerEntityFromDB = managerMapper.selectOne(managerEntity);
+                    ManagerEntity managerEntityFromDB = managerMapper.selectByPrimaryKey(managerEntity);
                     if (managerEntityFromDB != null) {
                         productcategories.setCreator(managerEntityFromDB.getSysName());
                     }
