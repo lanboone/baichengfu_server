@@ -62,3 +62,7 @@ alter table tb_designer_style
     ADD `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '风格描述';
 alter table tb_designer_style
     ADD `number` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '风格序号';
+
+-- 20200428 商品表
+alter table tb_product
+    ADD `status` int(11) NULL DEFAULT 0 COMMENT '是否上下架 0下架 1上架';
