@@ -1,0 +1,72 @@
+# 端口配置
+server:
+  port: 8081
+  http:
+    port: 8444
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/baichengfu?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: a37887245
+#    password: 199566
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 5
+    min-idle: 5
+    max-active: 200
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    validation-query: SELECT 1 FROM DUAL
+    validation-query-timeout: 3000
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    filters: stat,wall,slf4j
+    remove-abandoned: true
+    remove-abandoned-time-out: 1800
+    stat-view-servlet:
+      url-pattern: /druid/*
+      allow: 127.0.0.1
+      login-username: root
+      login-password: a37887245
+  ############################################### REDIS ###################################################################
+  redis:
+    host: 127.0.0.1
+    database: 1
+    port: 6379
+    password:
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 20
+        min-idle: 10
+        max-wait: -1ms
+
+
+############################################## MYBATIS #################################################################
+mybatis:
+  mapper-locations[0]: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  type-handlers-package: com.yihukurama.sysbase.model
+
+#短信配置
+sms:
+  accesskey: vkhg0Tc54SpjigJa
+  secret: PiARb4xmDKc4ek1vit8EpQnd5tPNnqC1
+#微信登录配置
+wxapp:
+  appId:
+  appSecret:
+#系统配置
+system:
+  saveFilePath: D:\ideaProject\baichengfu_server\file
+  accesslog: logs/
+  redisPrefix: baichengfu-redis-devpre
