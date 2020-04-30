@@ -58,7 +58,7 @@ pipeline {
 
 
               // SSH 上传文件到远端服务器
-              sshPut remote: remote, from: '/*.jar', into: '/home/lastest'
+              //sshPut remote: remote, from: '/*.jar', into: '/home/lastest'
 
 
             }
