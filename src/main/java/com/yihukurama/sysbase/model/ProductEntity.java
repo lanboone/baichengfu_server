@@ -13,120 +13,125 @@ import java.util.Date;
 
 /**
  * 说明： 商品表
+ *
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="商品表")
-@Table(name="tb_product")
+@ApiModel(value = "商品表")
+@Table(name = "tb_product")
 @Data
-public class ProductEntity extends BaseEntity
-{
-	/**
-	*面积
-	**/
-	@ApiModelProperty(value="面积")
-	@Column(name="area")
-	private Integer area;
-	/**
-	*数量
-	**/
-	@ApiModelProperty(value="数量")
-	@Column(name="quantity")
-	private Integer quantity;
-	/**
-	*分类id
-	**/
-	@ApiModelProperty(value="分类id")
-	@Column(name="categories_id")
-	private String categoriesId;
-	/**
-	*最后修改人id
-	**/
-	@ApiModelProperty(value="最后修改人id")
-	@Column(name="operator_id")
-	private String operatorId;
-	/**
-	*简介
-	**/
-	@ApiModelProperty(value="简介")
-	@Column(name="profile")
-	private String profile;
-	/**
-	*预付价
-	**/
-	@ApiModelProperty(value="预付价")
-	@Column(name="prepaid_price")
-	private Integer prepaidPrice;
-	/**
-	*最后修改日期
-	**/
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operate_date")
-	private Date operateDate;
-	/**
-	*预付比例
-	**/
-	@ApiModelProperty(value="预付比例")
-	@Column(name="prepaid_ratio")
-	private String prepaidRatio;
-	/**
-	*创建人id
-	**/
-	@ApiModelProperty(value="创建人id")
-	@Column(name="creater_id")
-	private String createrId;
-	/**
-	*商品名
-	**/
-	@ApiModelProperty(value="商品名")
-	@Column(name="product_name")
-	private String productName;
-	/**
-	*删除状态 0正常 1删除
-	**/
-	@ApiModelProperty(value="删除状态 0正常 1删除")
-	@Column(name="is_delete")
-	private Integer isDelete;
-	/**
-	*收藏数
-	**/
-	@ApiModelProperty(value="收藏数")
-	@Column(name="favorite_number")
-	private Integer favoriteNumber;
-	/**
-	*是否推荐到首页 0否 1是
-	**/
-	@ApiModelProperty(value="是否推荐到首页 0否 1是")
-	@Column(name="is_recommend")
-	private Integer isRecommend;
-	/**
-	*单位数量（39扇）
-	**/
-	@ApiModelProperty(value="单位数量（39扇）")
-	@Column(name="unit_quantity")
-	private String unitQuantity;
-	/**
-	*实付价
-	**/
-	@ApiModelProperty(value="实付价")
-	@Column(name="actual_paid_price")
-	private String actualPaidPrice;
-	/**
-	*创建时间
-	**/
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
-	private Date createDate;
-	/**
-	*销量
-	**/
-	@ApiModelProperty(value="销量")
-	@Column(name="sales_volume")
-	private Integer salesVolume;
-	
-	
+public class ProductEntity extends BaseEntity {
 
-	
-	
+    /**
+     * 商品名
+     **/
+    @ApiModelProperty(value = "商品名")
+    @Column(name = "product_name")
+    private String productName;
+    /**
+     * 简介
+     **/
+    @ApiModelProperty(value = "简介")
+    @Column(name = "profile")
+    private String profile;
+    /**
+     * 子分类id
+     **/
+    @ApiModelProperty(value = "子分类id")
+    @Column(name = "categories_id")
+    private String categoriesId;
+
+    /**
+     * 封面图片链接列表,用;分号分割
+     **/
+    @ApiModelProperty(value = "封面图片链接列表,用;分号分割")
+    @Column(name = "cover_images")
+    private String coverImages;
+    /**
+     * 封面视频链接
+     **/
+    @ApiModelProperty(value = "封面视频链接")
+    @Column(name = "cover_video")
+    private String coverVideo;
+    /**
+     * 预付比例
+     **/
+    @ApiModelProperty(value = "预付比例")
+    @Column(name = "prepaid_ratio")
+    private String prepaidRatio;
+
+    /**
+     * 收藏数
+     **/
+    @ApiModelProperty(value = "收藏数")
+    @Column(name = "favorite_number")
+    private Integer favoriteNumber;
+    /**
+     * 是否推荐到首页 0否 1是
+     **/
+    @ApiModelProperty(value = "是否推荐到首页 0否 1是")
+    @Column(name = "is_recommend")
+    private boolean recommend;
+    /**
+     * 是否上下架 0下架 1上架
+     **/
+    @ApiModelProperty(value = "是否上下架 0下架 1上架")
+    @Column(name = "status")
+    private boolean status;
+    /**
+     * 推荐位排序号
+     **/
+    @ApiModelProperty(value = "推荐位排序号")
+    @Column(name = "recommend_sort")
+    private Integer recommendSort;
+    /**
+     * 销量
+     **/
+    @ApiModelProperty(value = "销量")
+    @Column(name = "sales_volume")
+    private Integer salesVolume;
+    /**
+     * 最后修改日期
+     **/
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @Column(name = "operate_date")
+    private Date operateDate;
+
+
+    /**
+     * 创建人id
+     **/
+    @ApiModelProperty(value = "创建人id")
+    @Column(name = "creater_id")
+    private String createrId;
+    /**
+     * 删除状态 0正常 1删除
+     **/
+    @ApiModelProperty(value = "删除状态 0正常 1删除")
+    @Column(name = "is_delete")
+    private Integer isDelete;
+    /**
+     * 最后修改人id
+     **/
+    @ApiModelProperty(value = "最后修改人id")
+    @Column(name = "operator_id")
+    private String operatorId;
+
+    /**
+     * 创建时间
+     **/
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @Column(name = "create_date")
+    private Date createDate;
+
+    public boolean getRecommend() {
+        return recommend;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
 }

@@ -81,8 +81,7 @@ public class SampleRoomService extends CrudService<SampleRoomEntity> {
             sampleProductEntity.setSampleId(sId);
             List<SampleProductEntity> sampleProductEntityList = sampleProductMapper.select(sampleProductEntity);
             List<ProductEntity> productEntityList = new ArrayList<>();
-            for (SampleProductEntity sp : sampleProductEntityList
-            ) {
+            for (SampleProductEntity sp : sampleProductEntityList) {
                 ProductEntity productEntity = productMapper.selectByPrimaryKey(sp.getProductId());
                 productEntityList.add(productEntity);
             }

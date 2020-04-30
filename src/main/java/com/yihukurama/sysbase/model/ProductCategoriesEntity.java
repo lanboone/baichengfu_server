@@ -40,6 +40,21 @@ public class ProductCategoriesEntity extends BaseEntity
 	@ApiModelProperty(value="分类名")
 	@Column(name="category_name")
 	private String categoryName;
+
+	/**
+	 *分类描述
+	 **/
+	@ApiModelProperty(value="分类描述")
+	@Column(name="description")
+	private String description;
+
+	/**
+	 *分类图片链接
+	 **/
+	@ApiModelProperty(value="分类图片链接")
+	@Column(name="picture_url")
+	private String pictureUrl;
+
 	/**
 	*最后修改人id
 	**/
@@ -64,15 +79,19 @@ public class ProductCategoriesEntity extends BaseEntity
 	@ApiModelProperty(value="优先级（展示顺序）")
 	@Column(name="priority")
 	private Integer priority;
+
+	/**
+	 *是否返积分 0不返 1返积分
+	 **/
+	@ApiModelProperty(value="是否返积分 0不返 1返积分")
+	@Column(name="is_rebated")
+	private Integer isRebated;
+
 	/**
 	*创建时间
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	
-	
 
-	
-	
 }
