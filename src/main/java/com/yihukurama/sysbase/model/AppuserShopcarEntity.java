@@ -17,17 +17,17 @@ import java.util.Date;
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="APP用户表")
+@ApiModel(value="APP用户购物车表")
 @Table(name="tb_appuser_shopcar")
 @Data
 public class AppuserShopcarEntity extends BaseEntity
 {
 	/**
-	*删除状态 0正常 1删除
+	*商品图片
 	**/
-	@ApiModelProperty(value="删除状态 0正常 1删除")
-	@Column(name="is_delete")
-	private Integer isDelete;
+	@ApiModelProperty(value="商品图片")
+	@Column(name="product_pic")
+	private String productPic;
 	/**
 	*最后修改人id
 	**/
@@ -35,17 +35,17 @@ public class AppuserShopcarEntity extends BaseEntity
 	@Column(name="operator_id")
 	private String operatorId;
 	/**
-	*商品id
-	**/
-	@ApiModelProperty(value="商品id")
-	@Column(name="product_id")
-	private String productId;
-	/**
 	*最后修改日期
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operate_date")
 	private Date operateDate;
+	/**
+	*规格图片路径
+	**/
+	@ApiModelProperty(value="规格图片路径")
+	@Column(name="picture_url")
+	private String pictureUrl;
 	/**
 	*购买数量
 	**/
@@ -53,29 +53,59 @@ public class AppuserShopcarEntity extends BaseEntity
 	@Column(name="count")
 	private Integer count;
 	/**
-	*商品价格
-	**/
-	@ApiModelProperty(value="商品价格")
-	@Column(name="phone_number")
-	private String phoneNumber;
-	/**
 	*创建人id
 	**/
 	@ApiModelProperty(value="创建人id")
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*创建时间
-	**/
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
-	private Date createDate;
-	/**
 	*app用户id
 	**/
 	@ApiModelProperty(value="app用户id")
 	@Column(name="appuser_id")
 	private String appuserId;
+	/**
+	*删除状态 0正常 1删除
+	**/
+	@ApiModelProperty(value="删除状态 0正常 1删除")
+	@Column(name="is_delete")
+	private Integer isDelete;
+	/**
+	*商品id
+	**/
+	@ApiModelProperty(value="商品id")
+	@Column(name="product_id")
+	private String productId;
+	/**
+	*子规格组合,分号分割，如红色;20x20;A
+	**/
+	@ApiModelProperty(value="子规格组合,分号分割，如红色;20x20;A")
+	@Column(name="compose")
+	private String compose;
+	/**
+	*商品价格
+	**/
+	@ApiModelProperty(value="商品价格")
+	@Column(name="price")
+	private String price;
+	/**
+	*商品简介
+	**/
+	@ApiModelProperty(value="商品简介")
+	@Column(name="product_note")
+	private String productNote;
+	/**
+	*市场价
+	**/
+	@ApiModelProperty(value="市场价")
+	@Column(name="market_price")
+	private String marketPrice;
+	/**
+	*创建时间
+	**/
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
+	private Date createDate;
 	
 	
 

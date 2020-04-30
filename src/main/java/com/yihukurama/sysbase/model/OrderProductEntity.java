@@ -17,7 +17,7 @@ import java.util.Date;
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="订单商品")
+@ApiModel(value="订单商品表")
 @Table(name="tb_order_product")
 @Data
 public class OrderProductEntity extends BaseEntity
@@ -40,6 +40,12 @@ public class OrderProductEntity extends BaseEntity
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operate_date")
 	private Date operateDate;
+	/**
+	*规格图片路径
+	**/
+	@ApiModelProperty(value="规格图片路径")
+	@Column(name="picture_url")
+	private String pictureUrl;
 	/**
 	*购买数量
 	**/
@@ -77,6 +83,12 @@ public class OrderProductEntity extends BaseEntity
 	@Column(name="product_id")
 	private String productId;
 	/**
+	*子规格组合,分号分割，如红色;20x20;A
+	**/
+	@ApiModelProperty(value="子规格组合,分号分割，如红色;20x20;A")
+	@Column(name="compose")
+	private String compose;
+	/**
 	*商品价格
 	**/
 	@ApiModelProperty(value="商品价格")
@@ -88,6 +100,12 @@ public class OrderProductEntity extends BaseEntity
 	@ApiModelProperty(value="商品简介")
 	@Column(name="product_note")
 	private String productNote;
+	/**
+	*市场价
+	**/
+	@ApiModelProperty(value="市场价")
+	@Column(name="market_price")
+	private String marketPrice;
 	/**
 	*状态 10待发货  20待收货  30待退款  40已退款  50已确认
 	**/
