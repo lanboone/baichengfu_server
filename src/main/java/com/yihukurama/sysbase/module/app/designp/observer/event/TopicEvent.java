@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.module.app.designp.observer.event;
 
+import com.yihukurama.sysbase.common.utils.NumberUtil;
 import com.yihukurama.sysbase.mapper.AppuserTopicMapper;
 import com.yihukurama.sysbase.mapper.DesignerMapper;
 import com.yihukurama.sysbase.mapper.SampleRoomMapper;
@@ -77,7 +78,7 @@ public class TopicEvent extends ApplicationEvent {
         TopicEntity topicEntity = topicMapper.selectByPrimaryKey(appuserTopicEntity.getTopicId());
         TopicEntity updateTopicEntity = new TopicEntity();
         updateTopicEntity.setId(topicEntity.getId());
-        updateTopicEntity.setTFavoriteNumber(topicEntity.getTFavoriteNumber()+1);
+        updateTopicEntity.setTFavoriteNumber(NumberUtil.NullPlus(topicEntity.getTFavoriteNumber(),1));
         topicMapper.updateByPrimaryKeySelective(updateTopicEntity);
 
     }

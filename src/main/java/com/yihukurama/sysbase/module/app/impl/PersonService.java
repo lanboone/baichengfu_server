@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.module.app.impl;
 
+import com.yihukurama.sysbase.common.utils.NumberUtil;
 import com.yihukurama.sysbase.controller.app.dto.ClickGoodDto;
 import com.yihukurama.sysbase.controller.app.dto.FocusDesignerDto;
 import com.yihukurama.sysbase.controller.app.dto.StoreSampleRoomDto;
@@ -10,7 +11,6 @@ import com.yihukurama.sysbase.model.*;
 import com.yihukurama.sysbase.module.app.IPerson;
 import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
 import com.yihukurama.sysbase.module.app.designp.observer.event.TopicEvent;
-import com.yihukurama.sysbase.module.archives.domain.SampleRoom;
 import com.yihukurama.sysbase.module.archives.service.domainservice.*;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
@@ -72,8 +72,8 @@ public class PersonService implements IPerson {
         SampleRoomEntity sampleRoomEntity = new SampleRoomEntity();
         sampleRoomEntity.setId(request.getData().getSampleId());
         sampleRoomEntity = sampleRoomService.load(sampleRoomEntity);
-        sampleRoomEntity.setFocusCount(sampleRoomEntity.getFocusCount()+1);
-        sampleRoomEntity.setOrderCount(sampleRoomEntity.getOrderCount()+1);
+        sampleRoomEntity.setFocusCount(NumberUtil.NullPlus(sampleRoomEntity.getFocusCount(),1));
+        sampleRoomEntity.setOrderCount(NumberUtil.NullPlus(sampleRoomEntity.getOrderCount(),1));
         sampleRoomService.update(sampleRoomEntity);
         return Result.successed(appuserSampleEntity,"收藏成功");
     }
@@ -166,8 +166,8 @@ public class PersonService implements IPerson {
         SampleRoomEntity sampleRoomEntity = new SampleRoomEntity();
         sampleRoomEntity.setId(request.getData().getSampleId());
         sampleRoomEntity = sampleRoomService.load(sampleRoomEntity);
-        sampleRoomEntity.setSFavoriteNumber(sampleRoomEntity.getSFavoriteNumber()+1);
-        sampleRoomEntity.setOrderCount(sampleRoomEntity.getOrderCount()+1);
+        sampleRoomEntity.setSFavoriteNumber(NumberUtil.NullPlus(sampleRoomEntity.getSFavoriteNumber(),1));
+        sampleRoomEntity.setOrderCount(NumberUtil.NullPlus(sampleRoomEntity.getOrderCount(),1));
         sampleRoomService.update(sampleRoomEntity);
         return Result.successed("添加浏览数成功");
     }
@@ -180,7 +180,7 @@ public class PersonService implements IPerson {
         TopicEntity topicEntity = new TopicEntity();
         topicEntity.setId(request.getData().getTopicId());
         topicEntity = topicService.load(topicEntity);
-        topicEntity.setTViewingCount(topicEntity.getTViewingCount()+1);
+        topicEntity.setTViewingCount(NumberUtil.NullPlus(topicEntity.getTViewingCount(),1));
         topicService.update(topicEntity);
         return Result.successed("添加话题浏览数成功");
     }
