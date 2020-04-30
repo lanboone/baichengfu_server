@@ -91,11 +91,11 @@ public class DesignerEntity extends BaseEntity
 	@Column(name="is_delete")
 	private Integer isDelete;
 	/**
-	*预留字段1
+	*设计师地址
 	**/
-	@ApiModelProperty(value="预留字段1")
-	@Column(name="parameter1")
-	private String parameter1;
+	@ApiModelProperty(value="设计师地址")
+	@Column(name="address")
+	private String address;
 	/**
 	*用户id
 	**/

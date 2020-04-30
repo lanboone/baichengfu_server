@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yihukurama.sysbase.mapper.DesignerMapper">
+
+    <select id="selectByKeyWords"
+            resultType="com.yihukurama.sysbase.module.archives.domain.Designer" parameterType="com.yihukurama.sysbase.module.archives.domain.Designer">
+        <![CDATA[
+            select *
+            from tb_designer
+            where is_delete = 0
+        ]]>
+        <if test="keyWords != null and keyWords != ''">
+            and (nick_name like '%${keyWords}%' or style like '%${keyWords}%')
+        </if>
+        <if test="address != null and address != ''">
+            and (address like '%${address}%')
+        </if>
+
+        order by create_date desc
+    </select>
+</mapper>

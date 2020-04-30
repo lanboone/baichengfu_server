@@ -1,10 +1,14 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.yihukurama.sysbase.mapper.AppuserMapper;
+import com.yihukurama.sysbase.mapper.DesignerMapper;
 import com.yihukurama.sysbase.model.AppuserEntity;
 import com.yihukurama.sysbase.model.DesignerEntity;
 import com.yihukurama.sysbase.module.archives.domain.Designer;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
+import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.app.utils.LogUtil;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
@@ -29,8 +33,22 @@ public class DesignerService extends CrudService<DesignerEntity> {
     @Autowired
     AppuserMapper appuserMapper;
 
+    @Autowired
+    DesignerMapper designerMapper;
     @Override
     public Result list(DesignerEntity designerEntity, Integer page, Integer limit) throws TipsException {
+        if(designerEntity instanceof Designer){
+            Designer designer = (Designer) designerEntity;
+            if(!EmptyUtil.isEmpty(designer.getKeyWords())){
+                //关键字查询
+                PageHelper.startPage(page, limit);
+
+                List<DesignerEntity> designers = designerMapper.selectByKeyWords(designer);
+                PageInfo<DesignerEntity> pageInfo = new PageInfo(designers);
+                return Result.listSuccessed(designers, pageInfo.getTotal());
+            }
+        }
+
         Result result = super.list(designerEntity, page, limit);
         List<DesignerEntity> designerEntities = (List<DesignerEntity>) result.getData();
         List<Designer> designers = new ArrayList<>();
