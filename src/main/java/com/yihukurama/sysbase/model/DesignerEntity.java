@@ -41,6 +41,14 @@ public class DesignerEntity extends BaseEntity
 	@ApiModelProperty(value="设计师列表的心统计")
 	@Column(name="likecount")
 	private Long likecount;
+
+	/**
+	 *设计师状态 10 待审核   20已审核
+	 **/
+	@ApiModelProperty(value="设计师状态 10 待审核   20已审核")
+	@Column(name="status")
+	private Long status;
+
 	/**
 	 *设计师里列表想让他设计统计
 	 **/
