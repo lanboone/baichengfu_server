@@ -33,4 +33,16 @@ public class SampleRoom extends SampleRoomEntity {
     public String getSampleTitle() {
         return super.getSampleTitle();
     }
+
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LIKE,proprtityName = "sample_type")
+    @Override
+    public String getSampleType() {
+        return super.getSampleType();
+    }
+
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LIKE,proprtityName = "furniture")
+    @Override
+    public String getFurniture() {
+        return super.getFurniture();
+    }
 }
