@@ -34,7 +34,15 @@ public class SampleRoom extends SampleRoomEntity {
         return super.getSampleTitle();
     }
 
+    /**
+     * 查询时 大于等于该价格
+     */
+    @ApiModelProperty(value = "查询时 大于等于该价格")
     private Double GTECost;
+    /**
+     * 查询时 小于等于该价格
+     */
+    @ApiModelProperty(value = "查询时 小于等于该价格")
     private Double LTECost;
     @SqlWhere(value = SqlWhere.SqlWhereValue.GTE,proprtityName = "cost")
     public Double getGTECost() {
