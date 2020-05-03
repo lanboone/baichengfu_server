@@ -34,6 +34,17 @@ public class SampleRoom extends SampleRoomEntity {
         return super.getSampleTitle();
     }
 
+    private Double GTECost;
+    private Double LTECost;
+    @SqlWhere(value = SqlWhere.SqlWhereValue.GTE,proprtityName = "cost")
+    public Double getGTECost() {
+        return GTECost;
+    }
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LTE,proprtityName = "cost")
+    public Double getLTECost() {
+        return LTECost;
+    }
+
     @SqlWhere(value = SqlWhere.SqlWhereValue.LOCATE,proprtityName = "sample_type")
     @Override
     public String getSampleType() {
