@@ -21,6 +21,7 @@ pipeline {
           echo '构建完成.'
           archiveArtifacts(artifacts: 'README.md', fingerprint: true)
           archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
+          codingArtifactsGeneric(files: '**/target/*.jar', repoName: 'generic')
         }
       }
       stage('测试') {
