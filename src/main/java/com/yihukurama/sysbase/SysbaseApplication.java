@@ -18,9 +18,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 public class SysbaseApplication {
 
     public static void main(String[] args) {
-        AppFrame.initAll();
         ApplicationContext context = SpringApplication.run(SysbaseApplication.class, args);
         SpringBeanTools.setApplicationContext1(context);
+        AppFrame.initAll();
     }
 
 }

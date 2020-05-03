@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.bean;
 
+import com.yihukurama.sysbase.thirdparty.ali.easysdk.AliSdkInit;
 import com.yihukurama.tkmybatisplus.app.component.FrameInit;
 
 /**
@@ -20,7 +21,7 @@ public class AppFrame extends FrameInit {
     public static final String mapperPackage = "com.yihukurama.sysbase.mapper.";
     public static void initAll() {
         init(mapperPackage);
-
+        AliSdkInit.init();
     }
 
 
