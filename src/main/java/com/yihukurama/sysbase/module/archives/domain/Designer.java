@@ -19,4 +19,10 @@ public class Designer extends DesignerEntity {
     @ApiModelProperty(value = "对设计师名或风格模糊搜索")
     private String keyWords;
 
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LOCATE,proprtityName = "style")
+    @Override
+    public String getStyle() {
+        return super.getStyle();
+    }
+
 }

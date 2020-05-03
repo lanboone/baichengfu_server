@@ -19,9 +19,9 @@ public class SampleRoom extends SampleRoomEntity {
 
 
     /**
-     * 搜索条件   10默认   20最热
+     * 搜索条件   10默认时间   20最热权重
      */
-    @ApiModelProperty(value = "搜索条件10默认   20最热")
+    @ApiModelProperty(value = "搜索条件10默认时间   20最热权重")
     private Integer searchType;
     /**
      * 样板间关联的商品
@@ -34,15 +34,21 @@ public class SampleRoom extends SampleRoomEntity {
         return super.getSampleTitle();
     }
 
-    @SqlWhere(value = SqlWhere.SqlWhereValue.LIKE,proprtityName = "sample_type")
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LOCATE,proprtityName = "sample_type")
     @Override
     public String getSampleType() {
         return super.getSampleType();
     }
 
-    @SqlWhere(value = SqlWhere.SqlWhereValue.LIKE,proprtityName = "furniture")
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LOCATE,proprtityName = "furniture")
     @Override
     public String getFurniture() {
         return super.getFurniture();
+    }
+
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LOCATE,proprtityName = "material")
+    @Override
+    public String getMaterial() {
+        return super.getMaterial();
     }
 }
