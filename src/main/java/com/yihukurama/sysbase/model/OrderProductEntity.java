@@ -22,6 +22,14 @@ import java.util.Date;
 @Data
 public class OrderProductEntity extends BaseEntity
 {
+
+	/**
+	 *订单id
+	 **/
+	@ApiModelProperty(value="订单id")
+	@Column(name="order_id")
+	private String orderId;
+
 	/**
 	*商品图片
 	**/
