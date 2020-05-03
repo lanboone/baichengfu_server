@@ -17,11 +17,9 @@ pipeline {
           echo '构建中...'
           sh 'mvn clean'
           sh 'mvn package'
-          sh 'ls ./target'
           echo '构建完成.'
-          archiveArtifacts(artifacts: 'README.md', fingerprint: true)
           archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
-          codingArtifactsGeneric(files: 'target/*.jar', repoName: 'generic')
+          codingArtifactsGeneric(files: 'target/*.jar', repoName: 'generic', credentialsId: '${env.CODING_ARTIFACTS_CREDENTIALS_ID}', withBuildProps: true)
         }
       }
       stage('测试') {
