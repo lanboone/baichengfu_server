@@ -75,6 +75,9 @@ public class SampleRoomService extends CrudService<SampleRoomEntity> {
     @Transient
     public SampleRoomEntity load(SampleRoomEntity sampleRoomEntity) throws TipsException {
         SampleRoomEntity loadSampleRoom = super.load(sampleRoomEntity);
+        if(loadSampleRoom == null){
+            throw new TipsException("无法加载此样板间");
+        }
         if (sampleRoomEntity instanceof SampleRoom) {
             String sId = sampleRoomEntity.getId();
             SampleProductEntity sampleProductEntity = new SampleProductEntity();
@@ -108,8 +111,9 @@ public class SampleRoomService extends CrudService<SampleRoomEntity> {
                 sampleRoomEntity.setSortSql("order_count desc");
             } else if (searchType == 20) {
                 //浏览数排序
-                sampleRoomEntity.setSortSql("focus_count desc");
+                sampleRoomEntity.setSortSql("s_favorite_number desc");
             }
+
             return super.list(sampleRoomEntity, page, limit);
 
         }

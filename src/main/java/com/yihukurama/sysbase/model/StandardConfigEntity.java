@@ -12,22 +12,16 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 说明： 商品分类表
+ * 说明： 商品规格配置表
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="商品分类表")
-@Table(name="tb_product_categories")
+@ApiModel(value="商品规格配置表")
+@Table(name="tb_standard_config")
 @Data
-public class ProductCategoriesEntity extends BaseEntity
+public class StandardConfigEntity extends BaseEntity
 {
-	/**
-	*分类名
-	**/
-	@ApiModelProperty(value="分类名")
-	@Column(name="category_name")
-	private String categoryName;
 	/**
 	*最后修改人id
 	**/
@@ -35,9 +29,9 @@ public class ProductCategoriesEntity extends BaseEntity
 	@Column(name="operator_id")
 	private String operatorId;
 	/**
-	*分类图片链接
+	*规格图片路径
 	**/
-	@ApiModelProperty(value="分类图片链接")
+	@ApiModelProperty(value="规格图片路径")
 	@Column(name="picture_url")
 	private String pictureUrl;
 	/**
@@ -53,41 +47,47 @@ public class ProductCategoriesEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*排序优先级（展示顺序）
-	**/
-	@ApiModelProperty(value="排序优先级（展示顺序）")
-	@Column(name="priority")
-	private Integer priority;
-	/**
-	*分类描述
-	**/
-	@ApiModelProperty(value="分类描述")
-	@Column(name="description")
-	private String description;
-	/**
-	*父类id
-	**/
-	@ApiModelProperty(value="父类id")
-	@Column(name="parent_category_id")
-	private String parentCategoryId;
-	/**
 	*删除状态 0正常 1删除
 	**/
 	@ApiModelProperty(value="删除状态 0正常 1删除")
 	@Column(name="is_delete")
 	private Integer isDelete;
 	/**
-	*是否返积分 0不返 1返积分
+	*商品id
 	**/
-	@ApiModelProperty(value="是否返积分 0不返 1返积分")
-	@Column(name="is_rebated")
-	private Integer isRebated;
+	@ApiModelProperty(value="商品id")
+	@Column(name="product_id")
+	private String productId;
+	/**
+	*子规格组合,分号分割，如红色;20x20;A
+	**/
+	@ApiModelProperty(value="子规格组合,分号分割，如红色;20x20;A")
+	@Column(name="compose")
+	private String compose;
+	/**
+	*价格
+	**/
+	@ApiModelProperty(value="价格")
+	@Column(name="price")
+	private String price;
+	/**
+	*市场价
+	**/
+	@ApiModelProperty(value="市场价")
+	@Column(name="market_price")
+	private String marketPrice;
 	/**
 	*创建时间
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
+	/**
+	*库存
+	**/
+	@ApiModelProperty(value="库存")
+	@Column(name="stock")
+	private String stock;
 	
 	
 

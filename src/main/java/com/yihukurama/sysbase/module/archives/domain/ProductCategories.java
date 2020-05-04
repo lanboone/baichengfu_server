@@ -9,7 +9,7 @@ import lombok.Data;
  * @description: 商品分类对象
  */
 @Data
-public class Productcategories extends ProductCategoriesEntity {
+public class ProductCategories extends ProductCategoriesEntity {
     /**
      * 创建人姓名
      */

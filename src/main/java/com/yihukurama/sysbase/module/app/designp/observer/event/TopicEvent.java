@@ -74,7 +74,7 @@ public class TopicEvent extends ApplicationEvent {
 
         //话题收藏数+1
         AppuserTopicEntity appuserTopicEntity = (AppuserTopicEntity) source;
-        TopicMapper topicMapper = (TopicMapper) SpringBeanTools.getBean(AppuserTopicService.class);
+        TopicMapper topicMapper = (TopicMapper) SpringBeanTools.getBean(TopicMapper.class);
         TopicEntity topicEntity = topicMapper.selectByPrimaryKey(appuserTopicEntity.getTopicId());
         TopicEntity updateTopicEntity = new TopicEntity();
         updateTopicEntity.setId(topicEntity.getId());
@@ -98,7 +98,7 @@ public class TopicEvent extends ApplicationEvent {
 
         //话题收藏数-1
         AppuserTopicEntity appuserTopicEntity = (AppuserTopicEntity) source;
-        TopicMapper topicMapper = (TopicMapper) SpringBeanTools.getBean(AppuserTopicService.class);
+        TopicMapper topicMapper = (TopicMapper) SpringBeanTools.getBean(TopicMapper.class);
         TopicEntity topicEntity = topicMapper.selectByPrimaryKey(appuserTopicEntity.getTopicId());
         TopicEntity updateTopicEntity = new TopicEntity();
         updateTopicEntity.setId(topicEntity.getId());

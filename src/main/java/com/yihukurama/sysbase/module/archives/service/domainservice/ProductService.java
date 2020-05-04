@@ -1,8 +1,8 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
 import com.yihukurama.sysbase.model.ProductEntity;
-import com.yihukurama.sysbase.model.ProductstandardEntity;
-import com.yihukurama.sysbase.model.StandardconfigEntity;
+import com.yihukurama.sysbase.model.ProductStandardEntity;
+import com.yihukurama.sysbase.model.StandardConfigEntity;
 import com.yihukurama.sysbase.module.archives.domain.Product;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
@@ -27,10 +27,10 @@ import java.util.List;
 public class ProductService extends CrudService<ProductEntity> {
 
     @Autowired
-    ProductstandardService productstandardService;
+    ProductStandardService productstandardService;
 
     @Autowired
-    StandardconfigService standardconfigService;
+    StandardConfigService standardconfigService;
 
     @Override
     public Result list(ProductEntity productEntity, Integer page, Integer limit) throws TipsException {
@@ -43,14 +43,14 @@ public class ProductService extends CrudService<ProductEntity> {
                 BeanUtils.copyProperties(productEntityFromDB, product);
                 String productId = productEntityFromDB.getId();
 
-                ProductstandardEntity productstandardEntity = new ProductstandardEntity();
+                ProductStandardEntity productstandardEntity = new ProductStandardEntity();
                 productstandardEntity.setProductId(productId);
-                List<ProductstandardEntity> productStandradList = productstandardService.list(productstandardEntity);
+                List<ProductStandardEntity> productStandradList = productstandardService.list(productstandardEntity);
                 product.setProductStandardEntityList(productStandradList);
 
-                StandardconfigEntity standardconfigEntity = new StandardconfigEntity();
+                StandardConfigEntity standardconfigEntity = new StandardConfigEntity();
                 standardconfigEntity.setProductId(productId);
-                List<StandardconfigEntity> standardconfigEntityList = standardconfigService.list(standardconfigEntity);
+                List<StandardConfigEntity> standardconfigEntityList = standardconfigService.list(standardconfigEntity);
                 product.setStandardConfigEntityList(standardconfigEntityList);
 
                 products.add(product);
@@ -64,9 +64,9 @@ public class ProductService extends CrudService<ProductEntity> {
     @Override
     public ProductEntity create(ProductEntity productEntity) throws TipsException {
         if (productEntity instanceof Product) {
-            List<ProductstandardEntity> productstandardEntityList =
+            List<ProductStandardEntity> productstandardEntityList =
                     ((Product) productEntity).getProductStandardEntityList();
-            List<StandardconfigEntity> standardconfigEntityList =
+            List<StandardConfigEntity> standardconfigEntityList =
                     ((Product) productEntity).getStandardConfigEntityList();
             productstandardService.creates(productstandardEntityList);
             standardconfigService.creates(standardconfigEntityList);
@@ -84,14 +84,14 @@ public class ProductService extends CrudService<ProductEntity> {
             BeanUtils.copyProperties(productEntityFromDB, product);
             String productId = productEntityFromDB.getId();
 
-            ProductstandardEntity productstandardEntity = new ProductstandardEntity();
+            ProductStandardEntity productstandardEntity = new ProductStandardEntity();
             productstandardEntity.setProductId(productId);
-            List<ProductstandardEntity> productStandradList = productstandardService.list(productstandardEntity);
+            List<ProductStandardEntity> productStandradList = productstandardService.list(productstandardEntity);
             product.setProductStandardEntityList(productStandradList);
 
-            StandardconfigEntity standardconfigEntity = new StandardconfigEntity();
+            StandardConfigEntity standardconfigEntity = new StandardConfigEntity();
             standardconfigEntity.setProductId(productId);
-            List<StandardconfigEntity> standardconfigEntityList = standardconfigService.list(standardconfigEntity);
+            List<StandardConfigEntity> standardconfigEntityList = standardconfigService.list(standardconfigEntity);
             product.setStandardConfigEntityList(standardconfigEntityList);
 
             return product;

@@ -11,6 +11,6 @@ import tk.mybatis.mapper.common.Mapper;
  * @modified: by yihukurama in 15:18 2018/4/4
  */
 @Repository
-public interface ProductcategoriesMapper extends Mapper<ProductCategoriesEntity> {
+public interface ProductCategoriesMapper extends Mapper<ProductCategoriesEntity> {
 }
 

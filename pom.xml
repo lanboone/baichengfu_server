@@ -119,7 +119,7 @@
         <dependency>
             <groupId>com.github.yihukurama</groupId>
             <artifactId>tkmybatisplus</artifactId>
-            <version>0.0.4-RELEASE</version>
+            <version>0.0.6-RELEASE</version>
             <exclusions>
                 <exclusion>
                     <artifactId>mapper-spring-boot-starter</artifactId>

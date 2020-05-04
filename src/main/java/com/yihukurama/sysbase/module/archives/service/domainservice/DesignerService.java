@@ -6,6 +6,8 @@ import com.yihukurama.sysbase.mapper.AppuserMapper;
 import com.yihukurama.sysbase.mapper.DesignerMapper;
 import com.yihukurama.sysbase.model.AppuserEntity;
 import com.yihukurama.sysbase.model.DesignerEntity;
+import com.yihukurama.sysbase.model.DesignerEntity;
+import com.yihukurama.sysbase.module.archives.domain.Designer;
 import com.yihukurama.sysbase.module.archives.domain.Designer;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
@@ -37,44 +39,31 @@ public class DesignerService extends CrudService<DesignerEntity> {
     DesignerMapper designerMapper;
     @Override
     public Result list(DesignerEntity designerEntity, Integer page, Integer limit) throws TipsException {
-        if(designerEntity instanceof Designer){
+        if (designerEntity instanceof Designer) {
             Designer designer = (Designer) designerEntity;
+            Integer searchType = designer.getSearchType();
+            if (searchType == null) {
+                //默认时间倒叙不处理
+            } else if (searchType == 10) {
+                //权重排序
+                designerEntity.setSortSql("order_count,create_date desc");
+            } else if (searchType == 20) {
+                //浏览数排序
+                designerEntity.setSortSql("likecount,create_date desc");
+            }
+
             if(!EmptyUtil.isEmpty(designer.getKeyWords())){
                 //关键字查询
-                PageHelper.startPage(page, limit);
-
-                List<DesignerEntity> designers = designerMapper.selectByKeyWords(designer);
-                PageInfo<DesignerEntity> pageInfo = new PageInfo(designers);
-                return Result.listSuccessed(designers, pageInfo.getTotal());
+                String whereSql = "(nick_name like '%s' or style like '%s')";
+                whereSql = String.format(whereSql, designer.getKeyWords(),"%"+designer.getKeyWords()+"%");
+                designer.setWhereSql(whereSql);
             }
+
+            return super.list(designerEntity, page, limit);
         }
 
-        Result result = super.list(designerEntity, page, limit);
-        List<DesignerEntity> designerEntities = (List<DesignerEntity>) result.getData();
-        List<Designer> designers = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(designerEntities)) {
-            designerEntities.forEach(designerEntityFromDb -> {
-                Designer designer = new Designer();
-                BeanUtils.copyProperties(designerEntityFromDb, designer);
-                String userId = designerEntity.getUserId();
-                // 查找对应的用户信息
-                AppuserEntity appuserEntity = new AppuserEntity();
-                appuserEntity.setId(userId);
-                List<AppuserEntity> appuserEntityList = appuserMapper.select(appuserEntity);
-                if (CollectionUtils.isEmpty(appuserEntityList)) {
-                    LogUtil.errorLog(designerEntityFromDb, "this Designer does not have a right userId:  " + userId);
-                } else {
-                    AppuserEntity appuserEntityFromDb = appuserEntityList.get(0);
-                    designer.setAppUserName(appuserEntityFromDb.getUserName());
-                    designer.setAppUserPhone(appuserEntityFromDb.getPhoneNumber());
-                }
-                designers.add(designer);
-            });
-            result.setData(designers);
-            return result;
-        } else {
-            return result;
-        }
+
+        return super.list(designerEntity, page, limit);
     }
 
 }

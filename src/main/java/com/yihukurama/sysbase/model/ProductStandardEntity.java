@@ -12,22 +12,28 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 说明： 商品分类表
+ * 说明： 商品规格表
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="商品分类表")
-@Table(name="tb_product_categories")
+@ApiModel(value="商品规格表")
+@Table(name="tb_product_standard")
 @Data
-public class ProductCategoriesEntity extends BaseEntity
+public class ProductStandardEntity extends BaseEntity
 {
 	/**
-	*分类名
+	*删除状态 0正常 1删除
 	**/
-	@ApiModelProperty(value="分类名")
-	@Column(name="category_name")
-	private String categoryName;
+	@ApiModelProperty(value="删除状态 0正常 1删除")
+	@Column(name="is_delete")
+	private Integer isDelete;
+	/**
+	*子规格列表,用分号分割,如红色;蓝色波纹;砖红色
+	**/
+	@ApiModelProperty(value="子规格列表,用分号分割,如红色;蓝色波纹;砖红色")
+	@Column(name="child_list")
+	private String childList;
 	/**
 	*最后修改人id
 	**/
@@ -35,11 +41,11 @@ public class ProductCategoriesEntity extends BaseEntity
 	@Column(name="operator_id")
 	private String operatorId;
 	/**
-	*分类图片链接
+	*商品id
 	**/
-	@ApiModelProperty(value="分类图片链接")
-	@Column(name="picture_url")
-	private String pictureUrl;
+	@ApiModelProperty(value="商品id")
+	@Column(name="product_id")
+	private String productId;
 	/**
 	*最后修改日期
 	**/
@@ -53,35 +59,11 @@ public class ProductCategoriesEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*排序优先级（展示顺序）
+	*父规格名称,如 颜色
 	**/
-	@ApiModelProperty(value="排序优先级（展示顺序）")
-	@Column(name="priority")
-	private Integer priority;
-	/**
-	*分类描述
-	**/
-	@ApiModelProperty(value="分类描述")
-	@Column(name="description")
-	private String description;
-	/**
-	*父类id
-	**/
-	@ApiModelProperty(value="父类id")
-	@Column(name="parent_category_id")
-	private String parentCategoryId;
-	/**
-	*删除状态 0正常 1删除
-	**/
-	@ApiModelProperty(value="删除状态 0正常 1删除")
-	@Column(name="is_delete")
-	private Integer isDelete;
-	/**
-	*是否返积分 0不返 1返积分
-	**/
-	@ApiModelProperty(value="是否返积分 0不返 1返积分")
-	@Column(name="is_rebated")
-	private Integer isRebated;
+	@ApiModelProperty(value="父规格名称,如 颜色")
+	@Column(name="standard_name")
+	private String standardName;
 	/**
 	*创建时间
 	**/
