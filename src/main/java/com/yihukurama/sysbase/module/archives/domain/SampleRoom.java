@@ -19,9 +19,9 @@ public class SampleRoom extends SampleRoomEntity {
 
 
     /**
-     * 搜索条件   10默认时间   20最热权重
+     * 搜索条件   10默认综合权重排序   20最热排序
      */
-    @ApiModelProperty(value = "搜索条件10默认时间   20最热权重")
+    @ApiModelProperty(value = "搜索条件   10默认综合权重排序   20最热排序")
     private Integer searchType;
     /**
      * 样板间关联的商品
@@ -38,19 +38,19 @@ public class SampleRoom extends SampleRoomEntity {
      * 查询时 大于等于该价格
      */
     @ApiModelProperty(value = "查询时 大于等于该价格")
-    private Double GTECost;
+    private Double gtCost;
     /**
      * 查询时 小于等于该价格
      */
     @ApiModelProperty(value = "查询时 小于等于该价格")
-    private Double LTECost;
-    @SqlWhere(value = SqlWhere.SqlWhereValue.GTE,proprtityName = "cost")
-    public Double getGTECost() {
-        return GTECost;
+    private Double ltCost;
+    @SqlWhere(value = SqlWhere.SqlWhereValue.GT,proprtityName = "cost")
+    public Double getGtCost() {
+        return gtCost;
     }
-    @SqlWhere(value = SqlWhere.SqlWhereValue.LTE,proprtityName = "cost")
-    public Double getLTECost() {
-        return LTECost;
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LT,proprtityName = "cost")
+    public Double getLtCost() {
+        return ltCost;
     }
 
     @SqlWhere(value = SqlWhere.SqlWhereValue.LOCATE,proprtityName = "sample_type")

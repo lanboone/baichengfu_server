@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 01/05/2020 00:55:52
+ Date: 04/05/2020 13:07:39
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,7 @@ CREATE TABLE `tb_designer`  (
   `introduction` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '个人介绍',
   `remark` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '简介',
   `personal_picture` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '个人图片',
-  `glory_value` int(255) NULL DEFAULT NULL COMMENT '荣耀值',
+  `glory_value` int(255) NULL DEFAULT NULL COMMENT '荣耀值，装修案例数',
   `price_per` int(255) NULL DEFAULT NULL COMMENT '每平米平均价格',
   `works_ids` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作品id列表',
   `is_delete` int(11) NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
@@ -45,6 +45,8 @@ CREATE TABLE `tb_designer`  (
   `wantcount` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '设计师里列表想让他设计统计',
   `nick_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设计师用户昵称',
   `head_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设计师用户头像',
+  `status` int(11) NULL DEFAULT NULL COMMENT '设计师状态 10 待审核   20已审核',
+  `order_count` int(11) NULL DEFAULT NULL COMMENT '排序权重，心数+案例数',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '设计师表' ROW_FORMAT = Compact;
 

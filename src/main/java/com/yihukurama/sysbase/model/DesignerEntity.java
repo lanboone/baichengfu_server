@@ -86,10 +86,18 @@ public class DesignerEntity extends BaseEntity
 	@ApiModelProperty(value="作品id列表")
 	@Column(name="works_ids")
 	private String worksIds;
+
 	/**
-	*荣耀值
+	 *默认排序权重，心数+案例数
+	 **/
+	@ApiModelProperty(value="默认排序权重，心数+案例数")
+	@Column(name="order_count")
+	private Integer orderCount;
+
+	/**
+	*荣耀值，装修案例数
 	**/
-	@ApiModelProperty(value="荣耀值")
+	@ApiModelProperty(value="荣耀值,装修案例数")
 	@Column(name="glory_value")
 	private Integer gloryValue;
 	/**
