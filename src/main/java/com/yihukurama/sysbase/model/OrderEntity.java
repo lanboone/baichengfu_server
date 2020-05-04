@@ -9,6 +9,7 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -22,12 +23,29 @@ import java.util.Date;
 @Data
 public class OrderEntity extends BaseEntity
 {
+
+
+	/**
+	 *支付宝或微信的订单号
+	 **/
+	@ApiModelProperty(value="支付宝或微信的订单号")
+	@Column(name="trade_no")
+	private String tradeNo;
+
+
+	/**
+	 *订单来源，可存手机型号
+	 **/
+	@ApiModelProperty(value="订单来源，可存手机型号")
+	@Column(name="origin")
+	private String origin;
+
 	/**
 	*实付价格（待支付状态可修改）
 	**/
 	@ApiModelProperty(value="实付价格（待支付状态可修改）")
 	@Column(name="paid_price")
-	private String paidPrice;
+	private BigDecimal paidPrice;
 	/**
 	*订单号
 	**/
@@ -45,7 +63,7 @@ public class OrderEntity extends BaseEntity
 	**/
 	@ApiModelProperty(value="订单金额")
 	@Column(name="order_price")
-	private String orderPrice;
+	private BigDecimal orderPrice;
 	/**
 	*最后修改日期
 	**/

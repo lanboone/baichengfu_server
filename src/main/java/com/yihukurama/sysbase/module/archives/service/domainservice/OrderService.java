@@ -3,6 +3,7 @@ package com.yihukurama.sysbase.module.archives.service.domainservice;
 import com.yihukurama.sysbase.common.utils.NumberUtil;
 import com.yihukurama.sysbase.model.OrderEntity;
 import com.yihukurama.sysbase.model.OrderProductEntity;
+import com.yihukurama.sysbase.model.StandardConfigEntity;
 import com.yihukurama.sysbase.module.archives.domain.Order;
 import com.yihukurama.sysbase.module.archives.domain.OrderProduct;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.util.StringUtil;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,8 @@ public class OrderService extends CrudService<OrderEntity>{
     @Autowired
     OrderProductService orderProductService;
 
+    @Autowired
+    StandardConfigService standardConfigService;
     @Override
     public OrderEntity create(OrderEntity orderEntity) throws TipsException {
         List<OrderProductEntity> resultOrderProduct = new ArrayList<>();
@@ -43,7 +47,21 @@ public class OrderService extends CrudService<OrderEntity>{
                 resultOrderProduct.add(resultOrderProductEntity);
             }
         }
+        //创建单号
         orderEntity.setNum(NumberUtil.getNum());
+        //计算价格
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (int i = 0; i < resultOrderProduct.size(); i++) {
+            OrderProductEntity  orderProductEntity = resultOrderProduct.get(i);
+            String sellProductId = orderProductEntity.getProductId();
+            StandardConfigEntity standardConfigEntity = new StandardConfigEntity();
+            standardConfigEntity.setId(sellProductId);
+            standardConfigEntity = standardConfigService.load(standardConfigEntity);
+            BigDecimal productPrict = new BigDecimal(standardConfigEntity.getPrice());
+            totalPrice.add(productPrict);
+        }
+        orderEntity.setPaidPrice(totalPrice);
+        orderEntity.setOrderPrice(totalPrice);
         OrderEntity resultOrderEntity = super.create(orderEntity);
         Order order = TransferUtils.transferEntity2Domain(resultOrderEntity,Order.class);
         order.setOrderProducts(resultOrderProduct);

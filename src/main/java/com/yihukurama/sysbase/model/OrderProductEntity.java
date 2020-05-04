@@ -24,6 +24,13 @@ public class OrderProductEntity extends BaseEntity
 {
 
 	/**
+	 *快递100要求存入的快递公司编码
+	 **/
+	@ApiModelProperty(value="快递100要求存入的快递公司编码")
+	@Column(name="com")
+	private String com;
+
+	/**
 	 *订单id
 	 **/
 	@ApiModelProperty(value="订单id")

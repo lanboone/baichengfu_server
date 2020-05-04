@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 25/04/2020 18:00:29
+ Date: 04/05/2020 19:23:34
 */
 
 SET NAMES utf8mb4;
@@ -36,6 +36,7 @@ CREATE TABLE `tb_order`  (
   `operate_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后修改日期',
   `pay_type` int(11) NULL DEFAULT NULL COMMENT '支付方式 10微信 20支付宝 30二维码',
   `order_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '订单金额',
+  `origin` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '来源',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单表' ROW_FORMAT = Compact;
 

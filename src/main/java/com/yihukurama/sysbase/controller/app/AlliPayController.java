@@ -1,12 +1,21 @@
 package com.yihukurama.sysbase.controller.app;
 
+import com.yihukurama.sysbase.module.archives.domain.Order;
+import com.yihukurama.sysbase.module.pay.IPay;
+import com.yihukurama.sysbase.module.pay.impl.AliPayService;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
+import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import io.swagger.annotations.ApiOperation;
+import org.checkerframework.checker.units.qual.A;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * 说明： 阿里支付业务接口
@@ -19,12 +28,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class AlliPayController {
 
 
+    @Resource(name="AliPayService")
+    IPay iPay;
+
+
     @ApiOperation(httpMethod = "POST", value = "阿里支付下单接口", notes = "阿里支付下单接口")
     @RequestMapping(value = "/unified_order")
-    public Result unifiedOrder(@RequestBody Request<Object> request) throws TipsException {
-
-
-        return Result.successed("");
+    public Result unifiedOrder(@RequestBody Request<Order> request) throws TipsException {
+        Order order = request.getData();
+        if(EmptyUtil.isEmpty(order.getId())){
+            return Result.failed("订单id不可为空");
+        }
+        return iPay.unifiedOrder(request);
     }
 
 

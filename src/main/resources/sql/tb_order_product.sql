@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : baichengfucloudsit
  Source Server Type    : MySQL
- Source Server Version : 50729
- Source Host           : localhost:3306
+ Source Server Version : 50717
+ Source Host           : 8.129.180.116:3306
  Source Schema         : baichengfu
 
  Target Server Type    : MySQL
- Target Server Version : 50729
+ Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 01/05/2020 01:38:20
+ Date: 04/05/2020 18:54:36
 */
 
 SET NAMES utf8mb4;
@@ -36,10 +36,9 @@ CREATE TABLE `tb_order_product`  (
   `operate_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后修改日期',
   `ems_cod` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '快递单号',
   `status` int(11) NULL DEFAULT NULL COMMENT '状态 10待发货  20待收货  30待退款  40已退款  50已确认',
-  `compose` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '子规格组合,分号分割，如红色;20x20;A',
-  `picture_url` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '规格图片路径',
-  `market_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '市场价',
+  `order_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单id',
+  `com` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '快递100要求存入的快递公司编码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单商品表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'APP用户表' ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
