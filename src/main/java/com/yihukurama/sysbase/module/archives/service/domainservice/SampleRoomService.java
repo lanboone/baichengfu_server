@@ -75,6 +75,9 @@ public class SampleRoomService extends CrudService<SampleRoomEntity> {
     @Transient
     public SampleRoomEntity load(SampleRoomEntity sampleRoomEntity) throws TipsException {
         SampleRoomEntity loadSampleRoom = super.load(sampleRoomEntity);
+        if(loadSampleRoom == null){
+            throw new TipsException("无法加载此样板间");
+        }
         if (sampleRoomEntity instanceof SampleRoom) {
             String sId = sampleRoomEntity.getId();
             SampleProductEntity sampleProductEntity = new SampleProductEntity();

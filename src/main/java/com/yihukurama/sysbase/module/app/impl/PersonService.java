@@ -172,6 +172,9 @@ public class PersonService implements IPerson {
         SampleRoomEntity sampleRoomEntity = new SampleRoomEntity();
         sampleRoomEntity.setId(request.getData().getSampleId());
         sampleRoomEntity = sampleRoomService.load(sampleRoomEntity);
+        if(sampleRoomEntity == null){
+            return Result.failed("样板间不存在,id为："+request.getData().getSampleId());
+        }
         sampleRoomEntity.setSFavoriteNumber(NumberUtil.NullPlus(sampleRoomEntity.getSFavoriteNumber(),1));
         sampleRoomEntity.setOrderCount(NumberUtil.NullPlus(sampleRoomEntity.getOrderCount(),1));
         sampleRoomService.update(sampleRoomEntity);
