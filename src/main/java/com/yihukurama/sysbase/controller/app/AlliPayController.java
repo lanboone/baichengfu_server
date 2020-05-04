@@ -45,17 +45,20 @@ public class AlliPayController {
 
     @ApiOperation(httpMethod = "POST", value = "阿里支付申请退款接口", notes = "阿里支付申请退款接口")
     @RequestMapping(value = "/refund")
-    public Result refund(@RequestBody Request<Object> request) throws TipsException {
+    public Result refund(@RequestBody Request<Order> request) throws TipsException {
+        Order order = request.getData();
+        if(EmptyUtil.isEmpty(order.getId())){
+            return Result.failed("订单id不可为空");
+        }
 
-
-        return Result.successed("");
+        return iPay.refund(request);
     }
 
     @ApiOperation(httpMethod = "GET", value = "阿里服务器支付通知接口", notes = "阿里服务器支付通知接口 \n\r")
     @RequestMapping(value = "/pay_notify", produces = "text/plain;charset=UTF-8")
-    public String payNotfiy(@RequestBody(required = true) String requestBody){
+    public String payNotfiy(@RequestBody(required = true) String requestBody) throws TipsException {
 
-        return "";
+        return iPay.payNotfiy(requestBody);
     }
 
 
