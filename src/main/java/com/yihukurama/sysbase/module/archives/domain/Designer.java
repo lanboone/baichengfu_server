@@ -8,6 +8,27 @@ import lombok.Data;
 @Data
 public class Designer extends DesignerEntity {
 
+
+    /**
+     * 查询时 大于等于该价格
+     */
+    @ApiModelProperty(value = "查询时 大于等于该价格")
+    private Double gtCost;
+    /**
+     * 查询时 小于等于该价格
+     */
+    @ApiModelProperty(value = "查询时 小于等于该价格")
+    private Double ltCost;
+    @SqlWhere(value = SqlWhere.SqlWhereValue.GT,proprtityName = "price_per")
+    public Double getGtCost() {
+        return gtCost;
+    }
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LT,proprtityName = "price_per")
+    public Double getLtCost() {
+        return ltCost;
+    }
+
+
     /**
      * 搜索条件   10默认综合权重排序   20最热排序
      */
