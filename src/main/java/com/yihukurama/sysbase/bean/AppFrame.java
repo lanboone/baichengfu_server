@@ -21,7 +21,6 @@ public class AppFrame extends FrameInit {
     public static final String mapperPackage = "com.yihukurama.sysbase.mapper.";
     public static void initAll() {
         init(mapperPackage);
-        AliSdkInit.init();
     }
 
 

@@ -6,28 +6,40 @@ import com.alipay.easysdk.kernel.BaseClient.Config;
 import com.mysql.cj.util.LogUtils;
 import com.yihukurama.tkmybatisplus.app.component.SpringBeanTools;
 import com.yihukurama.tkmybatisplus.app.utils.LogUtil;
+import org.checkerframework.checker.units.qual.A;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  * 说明： 阿里sdk初始化
  * @author yihukurama
  * @date Created in 14:10 2020/5/3
  *       Modified by yihukurama in 14:10 2020/5/3
  */
+@Service
 public class AliSdkInit {
 
-    public static void init(){
+    @Autowired
+    AliEasySDKConfig aliEasySDKConfig;
+
+    public static boolean hasInit = false;
+    public synchronized void init(){
+        if(hasInit){
+            return;
+        }
         LogUtil.infoLog(AliSdkInit.class,"阿里 SDK初始化开始");
         Factory.setOptions(getOptions());
         LogUtil.infoLog(AliSdkInit.class,"阿里 SDK初始化完毕");
+        hasInit = true;
     }
 
-    private static Config getOptions() {
+    private Config getOptions() {
         Config config = new Config();
         config.protocol = "https";
         config.gatewayHost = "openapi.alipay.com";
         config.signType = "RSA2";
 
 
-        AliEasySDKConfig aliEasySDKConfig = (AliEasySDKConfig) SpringBeanTools.getBean(AliEasySDKConfig.class);
         LogUtil.debugLog(AliSdkInit.class, "获取的alieasysdk配置是："+JSON.toJSONString(aliEasySDKConfig));
 
         // 请更换为您的AppId

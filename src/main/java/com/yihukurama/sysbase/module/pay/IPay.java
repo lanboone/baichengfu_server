@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public interface IPay {
 
-    public Result unifiedOrder(@RequestBody Request<Order> request) throws TipsException;
-    public Result refund(Request<Order> request) throws TipsException;
-    public String payNotfiy(String requestBody) throws TipsException;
+    Result unifiedOrder(@RequestBody Request<Order> request) throws TipsException;
+    Result refund(Request<Order> request) throws TipsException;
+    String payNotfiy(String requestBody) throws TipsException;
 }

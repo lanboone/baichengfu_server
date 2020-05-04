@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
-@Service
+@Service("AliPayService")
 public class AliPayService implements IPay {
 
     @Autowired

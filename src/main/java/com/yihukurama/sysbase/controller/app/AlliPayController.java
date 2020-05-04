@@ -3,6 +3,7 @@ package com.yihukurama.sysbase.controller.app;
 import com.yihukurama.sysbase.module.archives.domain.Order;
 import com.yihukurama.sysbase.module.pay.IPay;
 import com.yihukurama.sysbase.module.pay.impl.AliPayService;
+import com.yihukurama.sysbase.thirdparty.ali.easysdk.AliSdkInit;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
@@ -28,9 +29,10 @@ import javax.annotation.Resource;
 public class AlliPayController {
 
 
-    @Resource(name="AliPayService")
+    @Qualifier("AliPayService")
     IPay iPay;
-
+    @Autowired
+    AliSdkInit aliSdkInit;
 
     @ApiOperation(httpMethod = "POST", value = "阿里支付下单接口", notes = "阿里支付下单接口")
     @RequestMapping(value = "/unified_order")
@@ -39,6 +41,7 @@ public class AlliPayController {
         if(EmptyUtil.isEmpty(order.getId())){
             return Result.failed("订单id不可为空");
         }
+        aliSdkInit.init();
         return iPay.unifiedOrder(request);
     }
 
