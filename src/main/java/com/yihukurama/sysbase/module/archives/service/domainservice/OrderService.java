@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
+import com.yihukurama.sysbase.common.utils.NumberUtil;
 import com.yihukurama.sysbase.model.OrderEntity;
 import com.yihukurama.sysbase.model.OrderProductEntity;
 import com.yihukurama.sysbase.module.archives.domain.Order;
@@ -11,6 +12,7 @@ import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,7 @@ public class OrderService extends CrudService<OrderEntity>{
                 resultOrderProduct.add(resultOrderProductEntity);
             }
         }
+        orderEntity.setNum(NumberUtil.getNum());
         OrderEntity resultOrderEntity = super.create(orderEntity);
         Order order = TransferUtils.transferEntity2Domain(resultOrderEntity,Order.class);
         order.setOrderProducts(resultOrderProduct);

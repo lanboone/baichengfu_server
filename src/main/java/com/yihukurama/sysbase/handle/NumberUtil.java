@@ -4,6 +4,7 @@ import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -56,6 +57,10 @@ public abstract class NumberUtil {
         buffer.deleteCharAt(buffer.length() - 1);
 
         return buffer.toString();
+    }
+
+    public static String getNum() {
+        return DateUtil.toString(new Date(), "yyyyMMddHHmm") + NumberUtil.getRandNum(5);
     }
 
     public static String getRandStr(int charCount) {
