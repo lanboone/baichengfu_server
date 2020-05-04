@@ -3,7 +3,7 @@ package com.yihukurama.sysbase.module.archives.service.domainservice;
 import com.yihukurama.sysbase.mapper.ManagerMapper;
 import com.yihukurama.sysbase.model.ManagerEntity;
 import com.yihukurama.sysbase.model.ProductCategoriesEntity;
-import com.yihukurama.sysbase.module.archives.domain.Productcategories;
+import com.yihukurama.sysbase.module.archives.domain.ProductCategories;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ProductcategoriesService extends CrudService<ProductCategoriesEntity> {
+public class ProductCategoriesService extends CrudService<ProductCategoriesEntity> {
 
     @Autowired
     ManagerMapper managerMapper;
@@ -27,11 +27,11 @@ public class ProductcategoriesService extends CrudService<ProductCategoriesEntit
         Result result = super.list(productCategoriesEntity, page, limit);
 
         List<ProductCategoriesEntity> productCategoriesEntityList = (List<ProductCategoriesEntity>) result.getData();
-        List<Productcategories> productcategoriesList = new ArrayList<>();
+        List<ProductCategories> productcategoriesList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(productCategoriesEntityList)) {
             productCategoriesEntityList.forEach(productCategoriesFromDB -> {
                 ManagerEntity managerEntity = new ManagerEntity();
-                Productcategories productcategories = new Productcategories();
+                ProductCategories productcategories = new ProductCategories();
                 BeanUtils.copyProperties(productCategoriesFromDB, productcategories);
                 if (productCategoriesFromDB.getCreaterId() != null) {
                     managerEntity.setId(productCategoriesFromDB.getCreaterId());

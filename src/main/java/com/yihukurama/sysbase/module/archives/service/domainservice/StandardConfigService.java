@@ -1,6 +1,6 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
-import com.yihukurama.sysbase.model.StandardconfigEntity;
+import com.yihukurama.sysbase.model.StandardConfigEntity;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import org.springframework.stereotype.Service;
 
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Service;
  * @description: 规格配置服务
  */
 @Service
-public class StandardconfigService extends CrudService<StandardconfigEntity> {
+public class StandardConfigService extends CrudService<StandardConfigEntity> {
 }

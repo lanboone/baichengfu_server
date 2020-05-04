@@ -1,8 +1,8 @@
 package com.yihukurama.sysbase.module.archives.domain;
 
 import com.yihukurama.sysbase.model.ProductEntity;
-import com.yihukurama.sysbase.model.ProductstandardEntity;
-import com.yihukurama.sysbase.model.StandardconfigEntity;
+import com.yihukurama.sysbase.model.ProductStandardEntity;
+import com.yihukurama.sysbase.model.StandardConfigEntity;
 import lombok.Data;
 
 import java.util.List;
@@ -17,10 +17,10 @@ public class Product extends ProductEntity {
     /**
      * 商品规格列表
      */
-    List<ProductstandardEntity> productStandardEntityList;
+    List<ProductStandardEntity> productStandardEntityList;
 
     /**
      * 规格配置列表
      */
-    List<StandardconfigEntity> standardConfigEntityList;
+    List<StandardConfigEntity> standardConfigEntityList;
 }
