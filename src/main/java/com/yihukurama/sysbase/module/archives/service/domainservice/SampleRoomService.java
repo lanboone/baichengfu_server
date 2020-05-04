@@ -110,6 +110,7 @@ public class SampleRoomService extends CrudService<SampleRoomEntity> {
                 //浏览数排序
                 sampleRoomEntity.setSortSql("s_favorite_number desc");
             }
+
             return super.list(sampleRoomEntity, page, limit);
 
         }
