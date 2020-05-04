@@ -72,13 +72,5 @@ system:
   redisPrefix: baichengfu-redis-devpre
   
 alieasysdk:
-  // 阿里SDK的AppId
-  appId: "2019091767145019";
-  // 阿里SDK的应用公钥证书文件路径
-  merchantCertPath: "/home/foo/appCertPublicKey_2019051064521003.crt";
-  // 阿里SDK的支付宝公钥证书文件路径
-  alipayCertPath: "/home/foo/alipayCertPublicKey_RSA2.crt";
-  // 阿里SDK的支付宝根证书文件路径
-  alipayRootCertPath: "/home/foo/alipayRootCert.crt";
-  // 阿里SDK的PKCS8格式的应用私钥
-  merchantPrivateKey: "MIIEvQIBADANB ... ...";
+  appId: 2019091767145019
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsXQ9kIrXEg13mveMCqeFNQOECLvc8DU0vRGtJgs4xl1pRM2GVzUmc48ryJSizKcU19OTMWh8t5rH1IU/l3UzYHKI9SmKUkBzYAddelRBiNNBBvazeKXmjcro/WNKeyS9qnjx2lLzfqgH+MLO24dA2EIyS6U+MYN6dHEC7P7hl5gO/4eoSWtN9pWW7XlsUMmC3490har+TrIkQZ4cFOwz7g1f+kAfJ7eTaFiad81fS4QSKtTj6qM6nfswcT3bEch5g/bk2L2498Lk1kKOqaaJ6TCKAI1R4Um4h5yAyGsjDkyZLacsssnY/3SS8LGXNYPetE/w79M0gQ+am4Udy/wYZwIDAQAB

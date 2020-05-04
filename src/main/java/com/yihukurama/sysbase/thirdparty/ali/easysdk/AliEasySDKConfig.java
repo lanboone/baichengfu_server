@@ -11,13 +11,5 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class AliEasySDKConfig extends Config {
 
-    // 应用公钥证书文件路径
-    private String merchantCertPath;
-    // 支付宝公钥证书文件路径
-    private String alipayCertPath;
-    // 支付宝根证书文件路径
-    private String alipayRootCertPath;
-    // PKCS8格式的应用私钥
-    private String merchantPrivateKey;
-
+    private String alipayPublicKey;
 }

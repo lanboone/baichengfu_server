@@ -32,17 +32,8 @@ public class AliSdkInit {
 
         // 请更换为您的AppId
         config.appId = aliEasySDKConfig.getAppid();
-        // 请更换为您的应用公钥证书文件路径
-        config.merchantCertPath = aliEasySDKConfig.getMerchantCertPath();
-        // 请更换为您的支付宝公钥证书文件路径
-        config.alipayCertPath = aliEasySDKConfig.getAlipayCertPath();
-        // 请更换为您的支付宝根证书文件路径
-        config.alipayRootCertPath = aliEasySDKConfig.getAlipayRootCertPath();
-        // 请更换为您的PKCS8格式的应用私钥
-        config.merchantPrivateKey = aliEasySDKConfig.getMerchantPrivateKey();
-
         // 如果采用非证书模式，则无需赋值上面的三个证书路径，改为赋值如下的支付宝公钥字符串即可
-        // config.alipayPublicKey = "MIIBIjANBg...";
+        config.alipayPublicKey = aliEasySDKConfig.getAlipayPublicKey();
         return config;
     }
 }
