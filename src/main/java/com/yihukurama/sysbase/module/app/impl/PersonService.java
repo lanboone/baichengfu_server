@@ -72,6 +72,10 @@ public class PersonService implements IPerson {
         SampleRoomEntity sampleRoomEntity = new SampleRoomEntity();
         sampleRoomEntity.setId(request.getData().getSampleId());
         sampleRoomEntity = sampleRoomService.load(sampleRoomEntity);
+        if(sampleRoomEntity == null){
+            return Result.failed("无此样板间，id为:"+request.getData().getSampleId());
+        }
+
         sampleRoomEntity.setFocusCount(NumberUtil.NullPlus(sampleRoomEntity.getFocusCount(),1));
         sampleRoomEntity.setOrderCount(NumberUtil.NullPlus(sampleRoomEntity.getOrderCount(),1));
         sampleRoomService.update(sampleRoomEntity);
@@ -125,7 +129,9 @@ public class PersonService implements IPerson {
         //获取设计师身份数据
         String designerId = focusDesignerDto.getDesignerId();
         DesignerEntity designerEntity = designerMapper.selectByPrimaryKey(designerId);
-
+        if(designerEntity == null){
+            return Result.failed("无此设计师,设计师id为:"+designerId);
+        }
         appuserDesignerEntity.setGloryValue(designerEntity.getGloryValue());
         appuserDesignerEntity.setHeadUrl(designerEntity.getHeadUrl());
         appuserDesignerEntity.setNickName(designerEntity.getNickName());
