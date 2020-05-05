@@ -14,6 +14,13 @@ import java.util.List;
  */
 @Data
 public class Product extends ProductEntity {
+
+    /**
+     * 商品筛选分类id
+     */
+    private String searchCategoriesIds;
+
+
     /**
      * 商品规格列表
      */

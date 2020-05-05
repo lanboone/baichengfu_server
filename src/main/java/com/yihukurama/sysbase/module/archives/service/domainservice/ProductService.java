@@ -5,6 +5,7 @@ import com.yihukurama.sysbase.model.ProductStandardEntity;
 import com.yihukurama.sysbase.model.StandardConfigEntity;
 import com.yihukurama.sysbase.module.archives.domain.Product;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
+import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.BeanUtils;
@@ -34,30 +35,24 @@ public class ProductService extends CrudService<ProductEntity> {
 
     @Override
     public Result list(ProductEntity productEntity, Integer page, Integer limit) throws TipsException {
-        Result result = super.list(productEntity, page, limit);
-        List<ProductEntity> productEntities = (List<ProductEntity>) result.getData();
-        List<Product> products = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(productEntities)) {
-            for (ProductEntity productEntityFromDB : productEntities) {
-                Product product = new Product();
-                BeanUtils.copyProperties(productEntityFromDB, product);
-                String productId = productEntityFromDB.getId();
-
-                ProductStandardEntity productstandardEntity = new ProductStandardEntity();
-                productstandardEntity.setProductId(productId);
-                List<ProductStandardEntity> productStandradList = productstandardService.list(productstandardEntity);
-                product.setProductStandardEntityList(productStandradList);
-
-                StandardConfigEntity standardconfigEntity = new StandardConfigEntity();
-                standardconfigEntity.setProductId(productId);
-                List<StandardConfigEntity> standardconfigEntityList = standardconfigService.list(standardconfigEntity);
-                product.setStandardConfigEntityList(standardconfigEntityList);
-
-                products.add(product);
+        if(productEntity instanceof Product){
+            Product product = (Product) productEntity;
+            String searchCategoriesIds = product.getSearchCategoriesIds();
+            String whereSql = "";
+            if (!EmptyUtil.isEmpty(searchCategoriesIds)) {
+                String ids[] = searchCategoriesIds.split(";");
+                for (int i = 0; i < ids.length; i++) {
+                    if (!EmptyUtil.isEmpty(whereSql)) {
+                        whereSql = whereSql + " or categories_id = "+ ids[i];
+                    } else {
+                        whereSql = "categories_id = " + ids[i];
+                    }
+                }
             }
-            result.setData(products);
+            product.setWhereSql(whereSql);
+            product.setSortSql("is_recommend desc,create_date desc");
         }
-        return result;
+        return super.list(productEntity, page, limit);
     }
 
 
