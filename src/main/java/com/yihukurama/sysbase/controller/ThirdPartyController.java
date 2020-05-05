@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @date Created in 下午 1:21 2019/7/27 0027
  * modified by autor in 下午 1:21 2019/7/27 0027
  */
-@Api(value = "系统回调接口", tags = "系统接口")
+@Api(value = "第三方接口", tags = "第三方接口")
 @RestController
 @RequestMapping("/third_party")
 @CrossOrigin(origins = "*", maxAge = 3600)

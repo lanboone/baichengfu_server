@@ -7,6 +7,7 @@ import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date Created in 18:13 2020/5/3
  *       Modified by yihukurama in 18:13 2020/5/3
  */
+@Api(value = "微信支付", tags = "支付接口")
 @RestController
 @RequestMapping("/wx/pay")
 public class WxPayController {
