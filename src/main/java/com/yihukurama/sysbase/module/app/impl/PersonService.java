@@ -160,6 +160,12 @@ public class PersonService implements IPerson {
         appuserDesignerEntity.setAppuserId(focusDesignerDto.getAppuserId());
         appuserDesignerEntity.setDesignerId(focusDesignerDto.getDesignerId());
 
+        //获取设计师身份数据
+        String designerId = focusDesignerDto.getDesignerId();
+        DesignerEntity designerEntity = designerMapper.selectByPrimaryKey(designerId);
+        if(designerEntity == null){
+            return Result.failed("无此设计师,设计师id为:"+designerId);
+        }
 
         List<AppuserDesignerEntity> appuserDesignerEntities =  appuserDesignerService.list(appuserDesignerEntity);
         if(EmptyUtil.isEmpty(appuserDesignerEntities)){
@@ -167,6 +173,11 @@ public class PersonService implements IPerson {
         }
 
         appuserDesignerService.remove(appuserDesignerEntities.get(0));
+
+
+        //更新设计师关注数
+        designerEntity.setLikecount(NumberUtil.NullSub(designerEntity.getLikecount(),1));
+        designerService.update(designerEntity);
 
         return Result.successed(appuserDesignerEntity,"取消关注成功");
 

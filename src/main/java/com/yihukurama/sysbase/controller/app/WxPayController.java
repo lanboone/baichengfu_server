@@ -2,7 +2,6 @@ package com.yihukurama.sysbase.controller.app;
 
 import com.yihukurama.sysbase.module.archives.domain.Order;
 import com.yihukurama.sysbase.module.pay.IPay;
-import com.yihukurama.sysbase.module.pay.impl.AliPayService;
 import com.yihukurama.sysbase.thirdparty.ali.easysdk.AliSdkInit;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
@@ -10,14 +9,11 @@ import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * 说明： 阿里支付业务接口
@@ -25,13 +21,13 @@ import javax.annotation.Resource;
  * @date Created in 18:13 2020/5/3
  *       Modified by yihukurama in 18:13 2020/5/3
  */
-@Api(value = "支付宝支付", tags = "支付接口")
+@Api(value = "微信支付", tags = "支付接口")
 @RestController
-@RequestMapping("/ali/pay")
-public class AlliPayController {
+@RequestMapping("/wx/pay")
+public class WxPayController {
 
 
-    @Qualifier("AliPayService")
+    @Qualifier("WxPayService")
     IPay iPay;
     @Autowired
     AliSdkInit aliSdkInit;
