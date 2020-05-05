@@ -102,7 +102,7 @@ public class TopicEvent extends ApplicationEvent {
         TopicEntity topicEntity = topicMapper.selectByPrimaryKey(appuserTopicEntity.getTopicId());
         TopicEntity updateTopicEntity = new TopicEntity();
         updateTopicEntity.setId(topicEntity.getId());
-        updateTopicEntity.setTFavoriteNumber(topicEntity.getTFavoriteNumber()-1);
+        updateTopicEntity.setTFavoriteNumber(NumberUtil.NullSub(topicEntity.getTFavoriteNumber(),1));
         topicMapper.updateByPrimaryKeySelective(updateTopicEntity);
 
     }

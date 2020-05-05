@@ -1,10 +1,7 @@
 package com.yihukurama.sysbase.controller.app;
 
 
-import com.yihukurama.sysbase.controller.app.dto.ClickGoodDto;
-import com.yihukurama.sysbase.controller.app.dto.FocusDesignerDto;
-import com.yihukurama.sysbase.controller.app.dto.StoreSampleRoomDto;
-import com.yihukurama.sysbase.controller.app.dto.StoreTopicDto;
+import com.yihukurama.sysbase.controller.app.dto.*;
 import com.yihukurama.sysbase.mapper.AppuserSampleMapper;
 import com.yihukurama.sysbase.model.AppuserDesignerEntity;
 import com.yihukurama.sysbase.model.AppuserSampleEntity;
@@ -24,13 +21,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 说明： 系统模块接口
+ * 说明： 个人模块接口
  *
  * @author yihukurma
  * @date Created in 下午 1:21 2019/7/27 0027
  * modified by autor in 下午 1:21 2019/7/27 0027
  */
-@Api(value = "APP个人中心", tags = "APP个人中心")
+@Api(value = "APP个人模块", tags = "APP个人模块")
 @RestController
 @RequestMapping("/person")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -38,6 +35,23 @@ public class PersonController {
 
     @Autowired
     IPerson person;
+
+    @ApiOperation(value = "收藏商品",notes = "收藏商品，传入商品id和自己的appuserId")
+    @RequestMapping(value = "/store_product", method = RequestMethod.POST)
+    public Result storeProduct(@RequestBody Request<StoreProductDto> request) throws Exception {
+
+
+        return person.storeProduct(request);
+    }
+
+    @ApiOperation(value = "取消收藏商品",notes = "取消收藏商品，传入商品id和自己的appuserId")
+    @RequestMapping(value = "/un_store_product", method = RequestMethod.POST)
+    public Result unStoreProduct(@RequestBody Request<StoreProductDto> request) throws Exception {
+
+
+        return person.unStoreProduct(request);
+    }
+
 
     @ApiOperation(value = "关注设计师",notes = "关注设计师，传入设计师的designerId和自己的appuserId")
     @RequestMapping(value = "/focus_designer", method = RequestMethod.POST)

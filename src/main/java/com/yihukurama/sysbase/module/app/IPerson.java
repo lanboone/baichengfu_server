@@ -1,9 +1,6 @@
 package com.yihukurama.sysbase.module.app;
 
-import com.yihukurama.sysbase.controller.app.dto.ClickGoodDto;
-import com.yihukurama.sysbase.controller.app.dto.FocusDesignerDto;
-import com.yihukurama.sysbase.controller.app.dto.StoreSampleRoomDto;
-import com.yihukurama.sysbase.controller.app.dto.StoreTopicDto;
+import com.yihukurama.sysbase.controller.app.dto.*;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
@@ -88,4 +85,18 @@ public interface IPerson {
      *       Modified by yihukurama in 17:30 2020/4/19
      */
     Result unClickGood(Request<ClickGoodDto> request) throws TipsException;
+
+    /**
+     * 取消收藏商品
+     * @param request
+     * @return
+     */
+    Result unStoreProduct(Request<StoreProductDto> request) throws TipsException;
+
+    /**
+     * 收藏商品
+     * @param request
+     * @return
+     */
+    Result storeProduct(Request<StoreProductDto> request) throws TipsException;
 }

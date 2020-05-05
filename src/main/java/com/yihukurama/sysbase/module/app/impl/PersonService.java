@@ -1,15 +1,13 @@
 package com.yihukurama.sysbase.module.app.impl;
 
 import com.yihukurama.sysbase.common.utils.NumberUtil;
-import com.yihukurama.sysbase.controller.app.dto.ClickGoodDto;
-import com.yihukurama.sysbase.controller.app.dto.FocusDesignerDto;
-import com.yihukurama.sysbase.controller.app.dto.StoreSampleRoomDto;
-import com.yihukurama.sysbase.controller.app.dto.StoreTopicDto;
+import com.yihukurama.sysbase.controller.app.dto.*;
 import com.yihukurama.sysbase.mapper.AppuserMapper;
 import com.yihukurama.sysbase.mapper.DesignerMapper;
 import com.yihukurama.sysbase.model.*;
 import com.yihukurama.sysbase.module.app.IPerson;
 import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
+import com.yihukurama.sysbase.module.app.designp.observer.event.ProductEvent;
 import com.yihukurama.sysbase.module.app.designp.observer.event.TopicEvent;
 import com.yihukurama.sysbase.module.archives.service.domainservice.*;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
@@ -35,6 +33,10 @@ public class PersonService implements IPerson {
     AppuserCommentService appuserCommentService;
     @Autowired
     AppuserTopicService appuserTopicService;
+
+    @Autowired
+    AppuserProductService appuserProductService;
+
     @Autowired
     AppEventPublisher appEventPublisher;
 
@@ -269,5 +271,43 @@ public class PersonService implements IPerson {
             return Result.successed(appuserCommentEntity,"取消点赞成功");
         }
         return Result.failed(null,"取消点赞失败",-20);
+    }
+
+    @Override
+    public Result unStoreProduct(Request<StoreProductDto> request) throws TipsException {
+        AppuserProductEntity appuserProductEntity = new AppuserProductEntity();
+        appuserProductEntity.setAppuserId(request.getData().getAppuserId());
+        appuserProductEntity.setProductId(request.getData().getProductId());
+
+        List<AppuserProductEntity> appuserProductEntityList = appuserProductService.list(appuserProductEntity);
+        if(EmptyUtil.isEmpty(appuserProductEntityList)){
+            return Result.failed(null,"您已取消收藏",-1);
+        }
+        int removeCount = appuserProductService.remove(appuserProductEntityList.get(0));
+        if(removeCount == 1){
+            //减少收藏数
+            appEventPublisher.publishEvent(new ProductEvent(appuserProductEntity,ProductEvent.TYPE_20));
+            return Result.successed(appuserProductEntity,"取消收藏成功");
+        }
+        return Result.failed(null,"取消收藏失败",-20);
+    }
+
+    @Override
+    public Result storeProduct(Request<StoreProductDto> request) throws TipsException {
+        AppuserProductEntity appuserProductEntity = new AppuserProductEntity();
+        appuserProductEntity.setAppuserId(request.getData().getAppuserId());
+        appuserProductEntity.setProductId(request.getData().getProductId());
+
+        List<AppuserProductEntity> appuserProductEntityList = appuserProductService.list(appuserProductEntity);
+        if(!EmptyUtil.isEmpty(appuserProductEntityList)){
+            return Result.failed(null,"您已收藏",-1);
+        }
+        appuserProductEntity = appuserProductService.create(appuserProductEntity);
+        if(appuserProductEntity == null){
+            return Result.failed(null,"收藏失败",-20);
+
+        }
+        appEventPublisher.publishEvent(new ProductEvent(appuserProductEntity,ProductEvent.TYPE_10));
+        return Result.successed(appuserProductEntity,"收藏成功");
     }
 }
