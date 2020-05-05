@@ -68,4 +68,16 @@ wxapp:
 system:
   saveFilePath: /home/baichengfu_server/file
   accesslog: logs/
-  redisPrefix: baichengfu-redis-devpre
+  redisPrefix: baichengfu-redis-sitpre
+
+alieasysdk:
+  appId: 2020042833292334
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsXQ9kIrXEg13mveMCqeFNQOECLvc8DU0vRGtJgs4xl1pRM2GVzUmc48ryJSizKcU19OTMWh8t5rH1IU/l3UzYHKI9SmKUkBzYAddelRBiNNBBvazeKXmjcro/WNKeyS9qnjx2lLzfqgH+MLO24dA2EIyS6U+MYN6dHEC7P7hl5gO/4eoSWtN9pWW7XlsUMmC3490har+TrIkQZ4cFOwz7g1f+kAfJ7eTaFiad81fS4QSKtTj6qM6nfswcT3bEch5g/bk2L2498Lk1kKOqaaJ6TCKAI1R4Um4h5yAyGsjDkyZLacsssnY/3SS8LGXNYPetE/w79M0gQ+am4Udy/wYZwIDAQAB
+
+wxpayconfig:
+  appId: xxxxx
+  miniAppId: xxxxx
+  appAppId: xxxxx
+  mchId: xxxxxx
+  mchKey: xxxxxxx
+  notifyUrl: http://xxxxx
