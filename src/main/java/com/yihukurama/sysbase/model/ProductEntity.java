@@ -9,6 +9,7 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -22,6 +23,16 @@ import java.util.Date;
 @Data
 public class ProductEntity extends BaseEntity
 {
+
+
+	/**
+	 *参考价
+	 **/
+	@ApiModelProperty(value="参考价")
+	@Column(name="ref_price")
+	private BigDecimal refPrice;
+
+
 	/**
 	*子分类id
 	**/
