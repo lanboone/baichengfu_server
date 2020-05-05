@@ -8,6 +8,10 @@ import lombok.Data;
 @Data
 public class Designer extends DesignerEntity {
 
+    /**
+     * 传入的多个风格，用;隔开
+     */
+    private String searchStyles;
 
     /**
      * 查询时 大于等于该价格
@@ -46,12 +50,6 @@ public class Designer extends DesignerEntity {
      */
     @ApiModelProperty(value = "对设计师名或风格模糊搜索")
     private String keyWords;
-
-    @SqlWhere(value = SqlWhere.SqlWhereValue.LOCATE,proprtityName = "style")
-    @Override
-    public String getStyle() {
-        return super.getStyle();
-    }
 
     @SqlWhere(value = SqlWhere.SqlWhereValue.LOCATE,proprtityName = "address")
     @Override

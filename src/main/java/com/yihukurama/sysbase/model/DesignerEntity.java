@@ -40,7 +40,7 @@ public class DesignerEntity extends BaseEntity
 	 **/
 	@ApiModelProperty(value="设计师列表的心统计")
 	@Column(name="likecount")
-	private Long likecount;
+	private Integer likecount;
 
 	/**
 	 *设计师状态 10 待审核   20已审核

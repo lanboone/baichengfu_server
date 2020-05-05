@@ -143,6 +143,10 @@ public class PersonService implements IPerson {
             return Result.failed(null,"关注失败",-1);
         }
 
+        //更新设计师关注数
+        designerEntity.setLikecount(NumberUtil.NullPlus(designerEntity.getLikecount(),1));
+        designerService.update(designerEntity);
+
         return Result.successed(appuserDesignerEntity,"新增关注成功");
 
     }

@@ -52,7 +52,7 @@ public class SwaggerConfig {
                 .title("百城福全屋定制")
                 .description("百城福全屋定制项目接口文档")
                 .termsOfServiceUrl("")
-                .version("0.0.6")
+                .version("0.0.7")
                 .build();
     }
 
