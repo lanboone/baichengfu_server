@@ -55,7 +55,23 @@ public class ProductService extends CrudService<ProductEntity> {
                 }
             }
             product.setWhereSql(whereSql);
-            product.setSortSql("is_recommend desc,create_date desc");
+            product.setSortSql("recommend_sort desc,create_date desc");
+            if(product.getSearchType()!=null){
+                if(product.getSearchType() == Product.SEARCH_TYPE_10){
+                    product.setSortSql("order_count desc,create_date desc");
+                }else if(product.getSearchType() == Product.SEARCH_TYPE_20){
+                    product.setSortSql("sales_volume desc,create_date desc");
+                }else if(product.getSearchType() == Product.SEARCH_TYPE_30){
+                    product.setSortSql("hot_count desc,create_date desc");
+                }else if(product.getSearchType() == Product.SEARCH_TYPE_40){
+                    product.setSortSql("ref_price asc,create_date desc");
+                }else if(product.getSearchType() == Product.SEARCH_TYPE_50){
+                    product.setSortSql("ref_price desc,create_date desc");
+                }
+
+            }
+
+
         }
         return super.list(productEntity, page, limit);
     }

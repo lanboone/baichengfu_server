@@ -39,10 +39,18 @@ public class Product extends ProductEntity {
     List<StandardConfigEntity> standardConfigEntityList;
 
     /**
-     * 搜索条件   10默认综合权重排序   20最热排序
+     * 搜索条件   10综合排序   20销量排序  30热门   40价格升序  50价格降序
      */
-    @ApiModelProperty(value = "搜索条件   10默认综合权重排序   20最热排序")
+    @ApiModelProperty(value = "10综合排序   20销量排序  30热门   40价格升序  50价格降序")
     private Integer searchType;
+    public static final int SEARCH_TYPE_10 = 10;
+    public static final int SEARCH_TYPE_20 = 20;
+    public static final int SEARCH_TYPE_30 = 30;
+    public static final int SEARCH_TYPE_40 = 40;
+    public static final int SEARCH_TYPE_50 = 50;
+
+
+
     /**
      * 样板间关联的商品
      */

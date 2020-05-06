@@ -24,6 +24,20 @@ import java.util.Date;
 public class ProductEntity extends BaseEntity
 {
 
+	/**
+	 *热门排序字段
+	 **/
+	@ApiModelProperty(value="热门排序字段")
+	@Column(name="hot_count")
+	private String hotCount;
+
+	/**
+	 *综合排序字段
+	 **/
+	@ApiModelProperty(value="综合排序字段")
+	@Column(name="order_count")
+	private String orderCount;
+
 
 	/**
 	 *分类名
