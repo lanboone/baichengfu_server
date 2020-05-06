@@ -39,13 +39,18 @@ public class ProductService extends CrudService<ProductEntity> {
             Product product = (Product) productEntity;
             String searchCategoriesIds = product.getSearchCategoriesIds();
             String whereSql = "";
+            if (!EmptyUtil.isEmpty(product.getKeyWords())) {
+                whereSql = "(product_name like '%s' or locate(product_name,'%s')>0 or categorie_name like '%s' or locate(categorie_name,'%s')>0 )";
+                whereSql = String.format(whereSql, "%" + product.getKeyWords() + "%",product.getKeyWords(),"%" + product.getKeyWords() + "%",product.getKeyWords() );
+                product.setWhereSql(whereSql);
+            }
             if (!EmptyUtil.isEmpty(searchCategoriesIds)) {
-                String ids[] = searchCategoriesIds.split(";");
-                for (int i = 0; i < ids.length; i++) {
+                String categoriesIds[] = searchCategoriesIds.split(";");
+                for (int i = 0; i < categoriesIds.length; i++) {
                     if (!EmptyUtil.isEmpty(whereSql)) {
-                        whereSql = whereSql + " or categories_id = "+ ids[i];
+                        whereSql = whereSql + " or categories_id = '" + categoriesIds[i] + "'";
                     } else {
-                        whereSql = "categories_id = " + ids[i];
+                        whereSql = "categories_id = '" + categoriesIds[i] + "'";
                     }
                 }
             }
@@ -78,7 +83,6 @@ public class ProductService extends CrudService<ProductEntity> {
             Product product = new Product();
             BeanUtils.copyProperties(productEntityFromDB, product);
             String productId = productEntityFromDB.getId();
-
             ProductStandardEntity productstandardEntity = new ProductStandardEntity();
             productstandardEntity.setProductId(productId);
             List<ProductStandardEntity> productStandradList = productstandardService.list(productstandardEntity);

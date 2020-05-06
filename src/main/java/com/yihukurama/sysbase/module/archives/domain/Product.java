@@ -3,6 +3,8 @@ package com.yihukurama.sysbase.module.archives.domain;
 import com.yihukurama.sysbase.model.ProductEntity;
 import com.yihukurama.sysbase.model.ProductStandardEntity;
 import com.yihukurama.sysbase.model.StandardConfigEntity;
+import com.yihukurama.tkmybatisplus.app.annotation.SqlWhere;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -18,8 +20,13 @@ public class Product extends ProductEntity {
     /**
      * 商品筛选分类id
      */
+    @ApiModelProperty(value = "按分类搜索多选")
     private String searchCategoriesIds;
-
+    /**
+     * 搜索框传入的值
+     */
+    @ApiModelProperty(value = "搜索框传入的值")
+    private String keyWords;
 
     /**
      * 商品规格列表
@@ -30,4 +37,34 @@ public class Product extends ProductEntity {
      * 规格配置列表
      */
     List<StandardConfigEntity> standardConfigEntityList;
+
+    /**
+     * 搜索条件   10默认综合权重排序   20最热排序
+     */
+    @ApiModelProperty(value = "搜索条件   10默认综合权重排序   20最热排序")
+    private Integer searchType;
+    /**
+     * 样板间关联的商品
+     */
+    private List<ProductEntity> productEntityList;
+
+    /**
+     * 查询时 大于等于该价格
+     */
+    @ApiModelProperty(value = "查询时 大于等于该价格")
+    private Double gtCost;
+    /**
+     * 查询时 小于等于该价格
+     */
+    @ApiModelProperty(value = "查询时 小于等于该价格")
+    private Double ltCost;
+    @SqlWhere(value = SqlWhere.SqlWhereValue.GT,proprtityName = "ref_price")
+    public Double getGtCost() {
+        return gtCost;
+    }
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LT,proprtityName = "ref_price")
+    public Double getLtCost() {
+        return ltCost;
+    }
+
 }

@@ -26,6 +26,14 @@ public class ProductEntity extends BaseEntity
 
 
 	/**
+	 *分类名
+	 **/
+	@ApiModelProperty(value="分类名")
+	@Column(name="categorie_name")
+	private String categorieName;
+
+
+	/**
 	 *参考价
 	 **/
 	@ApiModelProperty(value="参考价")
