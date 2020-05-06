@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 06/05/2020 21:40:58
+ Date: 06/05/2020 22:23:59
 */
 
 SET NAMES utf8mb4;
@@ -41,6 +41,8 @@ CREATE TABLE `tb_product`  (
   `operate_date` datetime(0) NULL COMMENT '最后修改日期',
   `ref_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '参考价',
   `categorie_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分类名',
+  `order_count` int(11) NULL DEFAULT NULL COMMENT '综合排序字段',
+  `hot_count` int(11) NULL DEFAULT NULL COMMENT '热门排序字段',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品表' ROW_FORMAT = Compact;
 
