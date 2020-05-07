@@ -82,6 +82,7 @@ public class ProductService extends CrudService<ProductEntity> {
     @Transactional
     @Override
     public ProductEntity create(ProductEntity productEntity) throws TipsException {
+        ProductEntity productEntityFromDB = null;
         if (productEntity instanceof Product) {
             List<ProductStandardEntity> productstandardEntityList =
                     ((Product) productEntity).getProductStandardEntityList();
@@ -91,16 +92,23 @@ public class ProductService extends CrudService<ProductEntity> {
             if(EmptyUtil.isEmpty(productstandardEntityList) || EmptyUtil.isEmpty(standardconfigEntityList)){
                 throw new TipsException("创建商品必须要有规格和规格明细");
             }
+
+            productEntityFromDB = super.create(productEntity);
+
+            for (int i = 0; i < productstandardEntityList.size(); i++) {
+                productstandardEntityList.get(i).setProductId(productEntityFromDB.getId());
+            }
             for (StandardConfigEntity standardConfig:standardconfigEntityList
                  ) {
                 if(standardConfig == null || standardConfig.getPrice() == null){
                     throw new TipsException("创建商品时具体规格商品价格必须要价格");
                 }
+                standardConfig.setProductId(productEntityFromDB.getId());
             }
             productstandardService.creates(productstandardEntityList);
             standardconfigService.creates(standardconfigEntityList);
         }
-        ProductEntity productEntityFromDB = super.create(productEntity);
+
         return productEntityFromDB;
     }
 
