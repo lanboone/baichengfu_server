@@ -3,6 +3,7 @@ package com.yihukurama.sysbase.module.archives.service.domainservice;
 import com.yihukurama.sysbase.model.ProductEntity;
 import com.yihukurama.sysbase.model.ProductStandardEntity;
 import com.yihukurama.sysbase.model.StandardConfigEntity;
+import com.yihukurama.sysbase.module.archives.domain.AppuserShopcar;
 import com.yihukurama.sysbase.module.archives.domain.Product;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
@@ -11,6 +12,7 @@ import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.beans.Transient;
@@ -77,6 +79,7 @@ public class ProductService extends CrudService<ProductEntity> {
     }
 
 
+    @Transactional
     @Override
     public ProductEntity create(ProductEntity productEntity) throws TipsException {
         if (productEntity instanceof Product) {
@@ -84,6 +87,16 @@ public class ProductService extends CrudService<ProductEntity> {
                     ((Product) productEntity).getProductStandardEntityList();
             List<StandardConfigEntity> standardconfigEntityList =
                     ((Product) productEntity).getStandardConfigEntityList();
+
+            if(EmptyUtil.isEmpty(productstandardEntityList) || EmptyUtil.isEmpty(standardconfigEntityList)){
+                throw new TipsException("创建商品必须要有规格和规格明细");
+            }
+            for (StandardConfigEntity standardConfig:standardconfigEntityList
+                 ) {
+                if(standardConfig == null || standardConfig.getPrice() == null){
+                    throw new TipsException("创建商品时具体规格商品价格必须要价格");
+                }
+            }
             productstandardService.creates(productstandardEntityList);
             standardconfigService.creates(standardconfigEntityList);
         }
