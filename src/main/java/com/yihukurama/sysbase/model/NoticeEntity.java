@@ -22,6 +22,23 @@ import java.util.Date;
 @Table(name = "tb_notice")
 @Data
 public class NoticeEntity extends BaseEntity {
+
+
+
+    /**
+     * 通知标题
+     **/
+    @ApiModelProperty(value = "类型  10设计师申请 20装修师申请  30退款申请")
+    @Column(name = "type")
+    private Integer type;
+
+    /**
+     * 通知标题
+     **/
+    @ApiModelProperty(value = "关联id")
+    @Column(name = "relate_id")
+    private String  relate_id;
+
     /**
      * 通知标题
      **/
