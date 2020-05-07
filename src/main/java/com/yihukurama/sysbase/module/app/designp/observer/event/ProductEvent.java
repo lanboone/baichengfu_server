@@ -23,6 +23,13 @@ public class ProductEvent extends ApplicationEvent {
      * 取消收藏商品事件
      */
     public final static int TYPE_20 = 20;
+
+    /**
+     * 出售商品事件
+     */
+    public final static int TYPE_30 = 30;
+
+
     /**
      * 事件类型 10收藏商品   20取消收藏商品
      */
@@ -47,9 +54,34 @@ public class ProductEvent extends ApplicationEvent {
             case TYPE_20:
                 unStoreProduct();
                 break;
+            case TYPE_30:
+                soldProduct();
+                break;
             default:
         }
     }
+
+    /**
+     * 出售商品事件
+     */
+    private void soldProduct() {
+        if (!(source instanceof AppuserProductEntity)) {
+            LogUtil.errorLog(this,"处理收藏事件出错，事件源不是 AppuserProductEntity");
+            return;
+        }
+
+        //商品销量+1
+        AppuserProductEntity appuserProductEntity = (AppuserProductEntity) source;
+        ProductMapper productMapper = (ProductMapper) SpringBeanTools.getBean(ProductMapper.class);
+        ProductEntity productEntity = productMapper.selectByPrimaryKey(appuserProductEntity.getProductId());
+        ProductEntity updateProductEntity = new ProductEntity();
+        updateProductEntity.setId(productEntity.getId());
+        updateProductEntity.setSalesVolume(NumberUtil.NullPlus(productEntity.getSalesVolume(),1));
+        updateProductEntity.setOrderCount(NumberUtil.NullPlus(productEntity.getOrderCount(),1));
+        productMapper.updateByPrimaryKeySelective(updateProductEntity);
+
+    }
+
     /**
      * 说明： 收藏商品事件
      * @author yihukurama
@@ -64,12 +96,13 @@ public class ProductEvent extends ApplicationEvent {
 
         //商品收藏数+1
         AppuserProductEntity appuserProductEntity = (AppuserProductEntity) source;
-        ProductMapper topicMapper = (ProductMapper) SpringBeanTools.getBean(ProductMapper.class);
-        ProductEntity topicEntity = topicMapper.selectByPrimaryKey(appuserProductEntity.getProductId());
+        ProductMapper productMapper = (ProductMapper) SpringBeanTools.getBean(ProductMapper.class);
+        ProductEntity productEntity = productMapper.selectByPrimaryKey(appuserProductEntity.getProductId());
         ProductEntity updateProductEntity = new ProductEntity();
-        updateProductEntity.setId(topicEntity.getId());
-        updateProductEntity.setFavoriteNumber(NumberUtil.NullPlus(topicEntity.getFavoriteNumber(),1));
-        topicMapper.updateByPrimaryKeySelective(updateProductEntity);
+        updateProductEntity.setId(productEntity.getId());
+        updateProductEntity.setFavoriteNumber(NumberUtil.NullPlus(productEntity.getFavoriteNumber(),1));
+        updateProductEntity.setOrderCount(NumberUtil.NullPlus(productEntity.getOrderCount(),1));
+        productMapper.updateByPrimaryKeySelective(updateProductEntity);
 
     }
 
@@ -88,12 +121,12 @@ public class ProductEvent extends ApplicationEvent {
 
         //商品收藏数-1
         AppuserProductEntity appuserProductEntity = (AppuserProductEntity) source;
-        ProductMapper topicMapper = (ProductMapper) SpringBeanTools.getBean(ProductMapper.class);
-        ProductEntity topicEntity = topicMapper.selectByPrimaryKey(appuserProductEntity.getProductId());
+        ProductMapper productMapper = (ProductMapper) SpringBeanTools.getBean(ProductMapper.class);
+        ProductEntity productEntity = productMapper.selectByPrimaryKey(appuserProductEntity.getProductId());
         ProductEntity updateProductEntity = new ProductEntity();
-        updateProductEntity.setId(topicEntity.getId());
+        updateProductEntity.setId(productEntity.getId());
         updateProductEntity.setFavoriteNumber(NumberUtil.NullSub(updateProductEntity.getFavoriteNumber(),1));
-        topicMapper.updateByPrimaryKeySelective(updateProductEntity);
+        productMapper.updateByPrimaryKeySelective(updateProductEntity);
 
     }
 }

@@ -12,7 +12,12 @@ import com.lly835.bestpay.model.RefundRequest;
 import com.lly835.bestpay.model.RefundResponse;
 import com.lly835.bestpay.service.impl.BestPayServiceImpl;
 import com.yihukurama.sysbase.model.OrderEntity;
+import com.yihukurama.sysbase.model.OrderProductEntity;
+import com.yihukurama.sysbase.model.ProductEntity;
+import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
+import com.yihukurama.sysbase.module.app.designp.observer.event.ProductEvent;
 import com.yihukurama.sysbase.module.archives.domain.Order;
+import com.yihukurama.sysbase.module.archives.service.domainservice.OrderProductService;
 import com.yihukurama.sysbase.module.archives.service.domainservice.OrderService;
 import com.yihukurama.sysbase.module.pay.IPay;
 import com.yihukurama.sysbase.thirdparty.tencent.wx.pay.WxPaySDKConfig;
@@ -26,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @Service("WxPayService")
@@ -36,7 +42,10 @@ public class WxPayService implements IPay {
 
     @Autowired
     WxPaySDKConfig wxPayConfig;
-
+    @Autowired
+    OrderProductService orderProductService;
+    @Autowired
+    AppEventPublisher appEventPublisher;
 
     @Override
     public Result unifiedOrder(Request<Order> request) throws TipsException {
@@ -136,6 +145,17 @@ public class WxPayService implements IPay {
             updateOrderEntity.setStatus(Order.PAY_STATUS_20);
             updateOrderEntity.setTradeNo(payResponse.getOutTradeNo());
             orderService.update(updateOrderEntity);
+
+            OrderProductEntity orderProductEntity = new OrderProductEntity();
+            orderProductEntity.setOrderId(orderEntity.getId());
+            List<OrderProductEntity> orderProductEntityList = orderProductService.list(orderProductEntity);
+            for (OrderProductEntity orderProduct:orderProductEntityList) {
+                ProductEntity productEntity = new ProductEntity();
+                productEntity.setId(orderProduct.getProductId());
+                appEventPublisher.publishEvent(new ProductEvent(productEntity,ProductEvent.TYPE_30));
+            }
+
+
             return responseWxPaySuccess();
         }catch (Throwable e){
             LogUtil.errorLog(this, "处理付款成功事件时报错, 报错信息：" + e.getMessage());

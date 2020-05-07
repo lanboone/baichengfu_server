@@ -6,7 +6,13 @@ import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
 import com.alipay.easysdk.payment.common.models.AlipayTradeRefundResponse;
 import com.yihukurama.sysbase.model.OrderEntity;
+import com.yihukurama.sysbase.model.OrderProductEntity;
+import com.yihukurama.sysbase.model.ProductEntity;
+import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
+import com.yihukurama.sysbase.module.app.designp.observer.event.ProductEvent;
 import com.yihukurama.sysbase.module.archives.domain.Order;
+import com.yihukurama.sysbase.module.archives.domain.OrderProduct;
+import com.yihukurama.sysbase.module.archives.service.domainservice.OrderProductService;
 import com.yihukurama.sysbase.module.archives.service.domainservice.OrderService;
 import com.yihukurama.sysbase.module.pay.IPay;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
@@ -18,12 +24,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service("AliPayService")
 public class AliPayService implements IPay {
 
     @Autowired
     OrderService orderService;
+    @Autowired
+    OrderProductService orderProductService;
+
+    @Autowired
+    AppEventPublisher appEventPublisher;
 
     @Override
     public Result unifiedOrder(Request<Order> request) throws TipsException {
@@ -103,6 +115,15 @@ public class AliPayService implements IPay {
                     }
                     orderEntity.setTradeNo(trade_no);
                     orderService.update(orderEntity);
+                    OrderProductEntity orderProductEntity = new OrderProductEntity();
+                    orderProductEntity.setOrderId(orderEntity.getId());
+                    List<OrderProductEntity> orderProductEntityList = orderProductService.list(orderProductEntity);
+                    for (OrderProductEntity orderProduct:orderProductEntityList) {
+                        ProductEntity productEntity = new ProductEntity();
+                        productEntity.setId(orderProduct.getProductId());
+                        appEventPublisher.publishEvent(new ProductEvent(productEntity,ProductEvent.TYPE_30));
+                    }
+
                 }
             }else{
                 LogUtil.errorLog(this,"支付宝回调出现问题,参数为:"+JSON.toJSONString(requestBody));

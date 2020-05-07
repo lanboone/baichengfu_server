@@ -29,16 +29,30 @@ public class ProductEntity extends BaseEntity
 	 **/
 	@ApiModelProperty(value="热门排序字段")
 	@Column(name="hot_count")
-	private String hotCount;
+	private Integer hotCount;
 
 	/**
 	 *综合排序字段
 	 **/
 	@ApiModelProperty(value="综合排序字段")
 	@Column(name="order_count")
-	private String orderCount;
+	private Integer orderCount;
 
 
+	/**
+	 *快递100要求存入的快递公司编码
+	 **/
+	@ApiModelProperty(value="快递100要求存入的快递公司编码")
+	@Column(name="com")
+	private String com;
+
+
+	/**
+	 *快递单号
+	 **/
+	@ApiModelProperty(value="快递单号")
+	@Column(name="ems_cod")
+	private String emsCod;
 	/**
 	 *分类名
 	 **/

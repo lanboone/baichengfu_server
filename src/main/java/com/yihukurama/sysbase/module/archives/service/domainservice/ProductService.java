@@ -64,7 +64,7 @@ public class ProductService extends CrudService<ProductEntity> {
                 }else if(product.getSearchType() == Product.SEARCH_TYPE_20){
                     product.setSortSql("sales_volume desc,create_date desc");
                 }else if(product.getSearchType() == Product.SEARCH_TYPE_30){
-                    product.setSortSql("hot_count desc,create_date desc");
+                    product.setSortSql("favorite_number desc,create_date desc");
                 }else if(product.getSearchType() == Product.SEARCH_TYPE_40){
                     product.setSortSql("ref_price asc,create_date desc");
                 }else if(product.getSearchType() == Product.SEARCH_TYPE_50){

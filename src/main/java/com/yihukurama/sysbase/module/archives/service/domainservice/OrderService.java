@@ -97,4 +97,16 @@ public class OrderService extends CrudService<OrderEntity>{
         result.setData(orderList);
         return Result.successed(result);
     }
+
+
+    @Override
+    public OrderEntity load(OrderEntity orderEntity) throws TipsException {
+        orderEntity = super.load(orderEntity);
+        OrderProductEntity orderProductEntity = new OrderProductEntity();
+        orderProductEntity.setOrderId(orderEntity.getId());
+        List<OrderProductEntity>  orderProductEntities = orderProductService.list(orderProductEntity);
+        Order order = TransferUtils.transferEntity2Domain(orderEntity,Order.class);
+        order.setOrderProducts(orderProductEntities);
+        return order;
+    }
 }

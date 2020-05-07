@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : baichengfucloudsit
  Source Server Type    : MySQL
- Source Server Version : 50729
- Source Host           : localhost:3306
+ Source Server Version : 50717
+ Source Host           : 8.129.180.116:3306
  Source Schema         : baichengfu
 
  Target Server Type    : MySQL
- Target Server Version : 50729
+ Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 04/05/2020 19:23:34
+ Date: 07/05/2020 23:21:46
 */
 
 SET NAMES utf8mb4;
@@ -37,6 +37,9 @@ CREATE TABLE `tb_order`  (
   `pay_type` int(11) NULL DEFAULT NULL COMMENT '支付方式 10微信 20支付宝 30二维码',
   `order_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '订单金额',
   `origin` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '来源',
+  `trade_no` varchar(0) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '支付宝或者微信的订单号',
+  `com` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '快递100要求存入的快递公司编码',
+  `ems_cod` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '快递单号',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单表' ROW_FORMAT = Compact;
 

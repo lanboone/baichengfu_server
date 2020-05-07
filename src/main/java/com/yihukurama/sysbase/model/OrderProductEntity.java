@@ -24,13 +24,6 @@ public class OrderProductEntity extends BaseEntity
 {
 
 	/**
-	 *快递100要求存入的快递公司编码
-	 **/
-	@ApiModelProperty(value="快递100要求存入的快递公司编码")
-	@Column(name="com")
-	private String com;
-
-	/**
 	 *订单id
 	 **/
 	@ApiModelProperty(value="订单id")
@@ -85,12 +78,7 @@ public class OrderProductEntity extends BaseEntity
 	@ApiModelProperty(value="删除状态 0正常 1删除")
 	@Column(name="is_delete")
 	private Integer isDelete;
-	/**
-	*快递单号
-	**/
-	@ApiModelProperty(value="快递单号")
-	@Column(name="ems_cod")
-	private String emsCod;
+
 	/**
 	*商品id
 	**/
