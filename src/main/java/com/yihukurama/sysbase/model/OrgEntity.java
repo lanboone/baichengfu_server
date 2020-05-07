@@ -22,6 +22,21 @@ import java.util.Date;
 @Data
 public class OrgEntity extends BaseEntity
 {
+
+	/**
+	 *快递单号
+	 **/
+	@ApiModelProperty(value="快递单号")
+	@Column(name="ems_cod")
+	private String emsCod;
+
+	/**
+	 *快递100要求存入的快递公司编码
+	 **/
+	@ApiModelProperty(value="快递100要求存入的快递公司编码")
+	@Column(name="com")
+	private String com;
+
 	/**
 	*机构编码
 	**/
