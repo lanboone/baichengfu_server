@@ -26,6 +26,28 @@ public class OrderEntity extends BaseEntity
 
 
 	/**
+	 *收件人姓名
+	 **/
+	@ApiModelProperty(value="收件人姓名")
+	@Column(name="receive_person")
+	private String receivePerson;
+
+	/**
+	 *收件人电话
+	 **/
+	@ApiModelProperty(value="收件人电话")
+	@Column(name="receive_phone")
+	private String receivePhone;
+
+	/**
+	 *收件人地址
+	 **/
+	@ApiModelProperty(value="收件人地址")
+	@Column(name="receive_address")
+	private String receiveAddress;
+
+
+	/**
 	 *支付宝或微信的订单号
 	 **/
 	@ApiModelProperty(value="支付宝或微信的订单号")
