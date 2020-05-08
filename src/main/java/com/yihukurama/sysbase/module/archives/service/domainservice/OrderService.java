@@ -83,7 +83,7 @@ public class OrderService extends CrudService<OrderEntity>{
         if(orderEntity instanceof Order){
             Order order = (Order) orderEntity;
             Integer type = order.getSearchType();
-            if(Order.SEARCH_TYPE_10 == type){
+            if(type!=null && Order.SEARCH_TYPE_10 == type){
                 //带出商品详情
                 List<OrderEntity> orderEntityList = (List<OrderEntity>) result.getData();
                 if(EmptyUtil.isEmpty(orderEntityList)){
