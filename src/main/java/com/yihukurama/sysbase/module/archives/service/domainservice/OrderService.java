@@ -13,6 +13,7 @@ import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.util.StringUtil;
 
 import java.math.BigDecimal;
@@ -33,9 +34,15 @@ public class OrderService extends CrudService<OrderEntity>{
 
     @Autowired
     StandardConfigService standardConfigService;
+
+    @Transactional
     @Override
     public OrderEntity create(OrderEntity orderEntity) throws TipsException {
         List<OrderProductEntity> resultOrderProduct = new ArrayList<>();
+        //创建单号
+        orderEntity.setNum(NumberUtil.getNum());
+        OrderEntity resultOrderEntity = super.create(orderEntity);
+
         if(orderEntity instanceof Order){
             Order order = (Order) orderEntity;
             List<OrderProductEntity> orderProductEntityList = order.getOrderProducts();
@@ -47,8 +54,6 @@ public class OrderService extends CrudService<OrderEntity>{
                 resultOrderProduct.add(resultOrderProductEntity);
             }
         }
-        //创建单号
-        orderEntity.setNum(NumberUtil.getNum());
         //计算价格
         BigDecimal totalPrice = new BigDecimal(0);
         for (int i = 0; i < resultOrderProduct.size(); i++) {
@@ -65,10 +70,13 @@ public class OrderService extends CrudService<OrderEntity>{
             }
             BigDecimal productPrict = new BigDecimal(standardConfigEntity.getPrice());
             totalPrice.add(productPrict);
+            orderProductEntity.setOrderId(resultOrderEntity.getId());
+            orderProductService.create(orderProductEntity);
         }
         orderEntity.setPaidPrice(totalPrice);
         orderEntity.setOrderPrice(totalPrice);
-        OrderEntity resultOrderEntity = super.create(orderEntity);
+        //更新订单金额
+        super.update(orderEntity);
         Order order = TransferUtils.transferEntity2Domain(resultOrderEntity,Order.class);
         order.setOrderProducts(resultOrderProduct);
         return order;
