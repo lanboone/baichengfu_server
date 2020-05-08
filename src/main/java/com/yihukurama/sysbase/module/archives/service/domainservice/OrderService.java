@@ -53,15 +53,15 @@ public class OrderService extends CrudService<OrderEntity>{
         BigDecimal totalPrice = new BigDecimal(0);
         for (int i = 0; i < resultOrderProduct.size(); i++) {
             OrderProductEntity  orderProductEntity = resultOrderProduct.get(i);
-            String sellProductId = orderProductEntity.getProductId();
-            if(EmptyUtil.isEmpty(sellProductId)){
-                throw new TipsException("订单商品中没有productId");
+            String standConfigId = orderProductEntity.getStandConfigId();
+            if(EmptyUtil.isEmpty(standConfigId)){
+                throw new TipsException("订单商品中没有 standConfigId");
             }
             StandardConfigEntity standardConfigEntity = new StandardConfigEntity();
-            standardConfigEntity.setId(sellProductId);
+            standardConfigEntity.setId(standConfigId);
             standardConfigEntity = standardConfigService.load(standardConfigEntity);
             if(standardConfigEntity == null){
-                throw new TipsException("订单商品中没有具体规格的productId");
+                throw new TipsException("没有改规格商品");
             }
             BigDecimal productPrict = new BigDecimal(standardConfigEntity.getPrice());
             totalPrice.add(productPrict);

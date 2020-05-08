@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : baichengfucloudsit
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50717
- Source Host           : 8.129.180.116:3306
+ Source Server Version : 50729
+ Source Host           : localhost:3306
  Source Schema         : baichengfu
 
  Target Server Type    : MySQL
- Target Server Version : 50717
+ Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 07/05/2020 23:21:35
+ Date: 08/05/2020 21:37:52
 */
 
 SET NAMES utf8mb4;
@@ -42,6 +42,7 @@ CREATE TABLE `tb_order_product`  (
   `compose` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '子规格组合,分号分割，如红色;20x20;A',
   `market_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '市场价',
   `stock` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '库存',
+  `stand_config_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '具体规格商品id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'APP用户表' ROW_FORMAT = Compact;
 
