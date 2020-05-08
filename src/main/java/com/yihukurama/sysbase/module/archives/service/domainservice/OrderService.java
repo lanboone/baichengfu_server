@@ -60,6 +60,9 @@ public class OrderService extends CrudService<OrderEntity>{
             StandardConfigEntity standardConfigEntity = new StandardConfigEntity();
             standardConfigEntity.setId(sellProductId);
             standardConfigEntity = standardConfigService.load(standardConfigEntity);
+            if(standardConfigEntity == null){
+                throw new TipsException("订单商品中没有具体规格的productId");
+            }
             BigDecimal productPrict = new BigDecimal(standardConfigEntity.getPrice());
             totalPrice.add(productPrict);
         }

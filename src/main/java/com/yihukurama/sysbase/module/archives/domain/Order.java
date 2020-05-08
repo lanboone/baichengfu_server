@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.module.archives.domain;
 
+import com.yihukurama.sysbase.model.AppuserShopcarEntity;
 import com.yihukurama.sysbase.model.OrderEntity;
 import com.yihukurama.sysbase.model.OrderProductEntity;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,4 +31,5 @@ public class Order extends OrderEntity {
     public static int SEARCH_TYPE_10  = 10;
     @ApiModelProperty(value="创建订单时关联的商品")
     List<OrderProductEntity> orderProducts;
+
 }
