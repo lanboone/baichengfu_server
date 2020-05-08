@@ -35,7 +35,7 @@ public class OrderService extends CrudService<OrderEntity>{
     @Autowired
     StandardConfigService standardConfigService;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public OrderEntity create(OrderEntity orderEntity) throws TipsException {
         List<OrderProductEntity> resultOrderProduct = new ArrayList<>();
@@ -61,7 +61,7 @@ public class OrderService extends CrudService<OrderEntity>{
                 standardConfigEntity.setId(standConfigId);
                 standardConfigEntity = standardConfigService.load(standardConfigEntity);
                 if(standardConfigEntity == null){
-                    throw new TipsException("没有改规格商品");
+                    throw new TipsException("没有该规格商品");
                 }
                 BigDecimal productPrict = new BigDecimal(standardConfigEntity.getPrice());
                 orderProductEntity.setProductPic(standardConfigEntity.getPrice());
