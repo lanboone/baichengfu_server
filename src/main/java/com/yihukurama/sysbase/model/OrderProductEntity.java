@@ -24,6 +24,13 @@ public class OrderProductEntity extends BaseEntity
 {
 
 	/**
+	 *具体规格商品
+	 **/
+	@ApiModelProperty(value="订单id")
+	@Column(name="stand_config_id")
+	private String standConfigId;
+
+	/**
 	 *订单id
 	 **/
 	@ApiModelProperty(value="订单id")

@@ -22,6 +22,14 @@ import java.util.Date;
 @Data
 public class AppuserShopcarEntity extends BaseEntity
 {
+
+	/**
+	 *具体规格商品
+	 **/
+	@ApiModelProperty(value="订单id")
+	@Column(name="stand_config_id")
+	private String standConfigId;
+
 	/**
 	*商品图片
 	**/
