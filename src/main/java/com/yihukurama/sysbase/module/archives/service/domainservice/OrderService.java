@@ -54,6 +54,9 @@ public class OrderService extends CrudService<OrderEntity>{
         for (int i = 0; i < resultOrderProduct.size(); i++) {
             OrderProductEntity  orderProductEntity = resultOrderProduct.get(i);
             String sellProductId = orderProductEntity.getProductId();
+            if(EmptyUtil.isEmpty(sellProductId)){
+                throw new TipsException("订单商品中没有productId");
+            }
             StandardConfigEntity standardConfigEntity = new StandardConfigEntity();
             standardConfigEntity.setId(sellProductId);
             standardConfigEntity = standardConfigService.load(standardConfigEntity);
