@@ -49,12 +49,10 @@ public class OrderService extends CrudService<OrderEntity>{
             if(EmptyUtil.isEmpty(orderProductEntityList)){
                 throw new TipsException("创建订单时必须要有关联的商品");
             }
-
-
             //计算价格
             BigDecimal totalPrice = new BigDecimal(0);
-            for (int i = 0; i < resultOrderProduct.size(); i++) {
-                OrderProductEntity  orderProductEntity = resultOrderProduct.get(i);
+            for (int i = 0; i < orderProductEntityList.size(); i++) {
+                OrderProductEntity  orderProductEntity = orderProductEntityList.get(i);
                 String standConfigId = orderProductEntity.getStandConfigId();
                 if(EmptyUtil.isEmpty(standConfigId)){
                     throw new TipsException("订单商品中没有 standConfigId");
@@ -66,6 +64,9 @@ public class OrderService extends CrudService<OrderEntity>{
                     throw new TipsException("没有改规格商品");
                 }
                 BigDecimal productPrict = new BigDecimal(standardConfigEntity.getPrice());
+                orderProductEntity.setProductPic(standardConfigEntity.getPrice());
+                orderProductEntity.setMarketPrice(standardConfigEntity.getMarketPrice());
+                orderProductEntity.setPrice(standardConfigEntity.getPrice());
                 totalPrice.add(productPrict);
                 orderProductEntity.setOrderId(resultOrderEntity.getId());
                 OrderProductEntity resultOrderProductEntity = orderProductService.create(orderProductEntity);
