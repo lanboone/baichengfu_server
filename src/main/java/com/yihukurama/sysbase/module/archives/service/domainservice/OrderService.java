@@ -49,34 +49,33 @@ public class OrderService extends CrudService<OrderEntity>{
             if(EmptyUtil.isEmpty(orderProductEntityList)){
                 throw new TipsException("创建订单时必须要有关联的商品");
             }
-            for (int i = 0; i < orderProductEntityList.size(); i++) {
-                OrderProductEntity resultOrderProductEntity = orderProductService.create(orderProductEntityList.get(i));
+
+
+            //计算价格
+            BigDecimal totalPrice = new BigDecimal(0);
+            for (int i = 0; i < resultOrderProduct.size(); i++) {
+                OrderProductEntity  orderProductEntity = resultOrderProduct.get(i);
+                String standConfigId = orderProductEntity.getStandConfigId();
+                if(EmptyUtil.isEmpty(standConfigId)){
+                    throw new TipsException("订单商品中没有 standConfigId");
+                }
+                StandardConfigEntity standardConfigEntity = new StandardConfigEntity();
+                standardConfigEntity.setId(standConfigId);
+                standardConfigEntity = standardConfigService.load(standardConfigEntity);
+                if(standardConfigEntity == null){
+                    throw new TipsException("没有改规格商品");
+                }
+                BigDecimal productPrict = new BigDecimal(standardConfigEntity.getPrice());
+                totalPrice.add(productPrict);
+                orderProductEntity.setOrderId(resultOrderEntity.getId());
+                OrderProductEntity resultOrderProductEntity = orderProductService.create(orderProductEntity);
                 resultOrderProduct.add(resultOrderProductEntity);
             }
+            orderEntity.setPaidPrice(totalPrice);
+            orderEntity.setOrderPrice(totalPrice);
+            //更新订单金额
+            super.update(orderEntity);
         }
-        //计算价格
-        BigDecimal totalPrice = new BigDecimal(0);
-        for (int i = 0; i < resultOrderProduct.size(); i++) {
-            OrderProductEntity  orderProductEntity = resultOrderProduct.get(i);
-            String standConfigId = orderProductEntity.getStandConfigId();
-            if(EmptyUtil.isEmpty(standConfigId)){
-                throw new TipsException("订单商品中没有 standConfigId");
-            }
-            StandardConfigEntity standardConfigEntity = new StandardConfigEntity();
-            standardConfigEntity.setId(standConfigId);
-            standardConfigEntity = standardConfigService.load(standardConfigEntity);
-            if(standardConfigEntity == null){
-                throw new TipsException("没有改规格商品");
-            }
-            BigDecimal productPrict = new BigDecimal(standardConfigEntity.getPrice());
-            totalPrice.add(productPrict);
-            orderProductEntity.setOrderId(resultOrderEntity.getId());
-            orderProductService.create(orderProductEntity);
-        }
-        orderEntity.setPaidPrice(totalPrice);
-        orderEntity.setOrderPrice(totalPrice);
-        //更新订单金额
-        super.update(orderEntity);
         Order order = TransferUtils.transferEntity2Domain(resultOrderEntity,Order.class);
         order.setOrderProducts(resultOrderProduct);
         return order;
