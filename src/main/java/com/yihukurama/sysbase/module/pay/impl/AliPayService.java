@@ -2,12 +2,11 @@ package com.yihukurama.sysbase.module.pay.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alipay.easysdk.factory.Factory;
-import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
-import com.alipay.easysdk.payment.common.models.AlipayTradeRefundResponse;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
+import com.lly835.bestpay.model.RefundRequest;
+import com.lly835.bestpay.model.RefundResponse;
 import com.lly835.bestpay.service.impl.BestPayServiceImpl;
 import com.yihukurama.sysbase.model.OrderEntity;
 import com.yihukurama.sysbase.model.OrderProductEntity;
@@ -70,23 +69,18 @@ public class AliPayService implements IPay {
     public Result refund(Request<Order> request) throws TipsException {
         Order order = request.getData();
         OrderEntity orderEntity = orderService.load(order);
-        try {
-            // 2. 发起API调用（以支付能力下的统一收单交易创建接口为例）
-            AlipayTradeRefundResponse response = Factory.Payment.Common().refund(
-                    order.getNum(), orderEntity.getPaidPrice().toString());
-            // 3. 处理响应或异常
-            if ("10000".equals(response.code)) {
-                return Result.successed(response,"退款成功");
-            } else {
-                String errMsg = "退款失败，原因：" + response.msg + "，" + response.subMsg;
-                LogUtil.errorLog(this,errMsg);
-                return Result.failed("退款失败，原因：" + response.msg + "，" + response.subMsg);
-            }
-        } catch (Exception e) {
-            String errMsg = "退款遭遇异常，原因：" + e.getMessage();
-            LogUtil.errorLog(this,errMsg);
-            throw new RuntimeException(e.getMessage(), e);
-        }
+        //支付类, 所有方法都在这个类里
+        BestPayServiceImpl bestPayService = new BestPayServiceImpl();
+        bestPayService.setAliPayConfig(alipayConfig);
+
+        RefundRequest refundRequest = new RefundRequest();
+        refundRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_APP);
+        refundRequest.setOrderId(orderEntity.getNum());
+        refundRequest.setOrderAmount(orderEntity.getPaidPrice().doubleValue());
+        RefundResponse refundResponse = bestPayService.refund(refundRequest);
+
+        return Result.successed(refundResponse);
+
     }
 
     @Override
