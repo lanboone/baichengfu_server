@@ -109,7 +109,7 @@ public class OrderService extends CrudService<OrderEntity>{
             }
         }
         result.setData(orderList);
-        return Result.successed(result);
+        return result;
     }
 
 
