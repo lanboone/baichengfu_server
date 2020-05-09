@@ -72,12 +72,7 @@ public class AppuserShopcarEntity extends BaseEntity
 	@ApiModelProperty(value="app用户id")
 	@Column(name="appuser_id")
 	private String appuserId;
-	/**
-	*删除状态 0正常 1删除
-	**/
-	@ApiModelProperty(value="删除状态 0正常 1删除")
-	@Column(name="is_delete")
-	private Integer isDelete;
+
 	/**
 	*商品id
 	**/

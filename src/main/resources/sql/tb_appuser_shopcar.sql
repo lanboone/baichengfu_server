@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 01/05/2020 01:38:00
+ Date: 09/05/2020 23:04:22
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,6 @@ CREATE TABLE `tb_appuser_shopcar`  (
   `price` decimal(30, 0) NULL DEFAULT NULL COMMENT '商品价格',
   `product_pic` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品图片',
   `product_note` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品简介',
-  `is_delete` int(11) NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
   `creater_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
   `create_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `operator_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
@@ -37,7 +36,9 @@ CREATE TABLE `tb_appuser_shopcar`  (
   `compose` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '子规格组合,分号分割，如红色;20x20;A',
   `picture_url` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '规格图片路径',
   `market_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '市场价',
-  PRIMARY KEY (`id`) USING BTREE
+  `stand_config_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '具体规格商品id',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `appuser_id`(`appuser_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户购物车表' ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
