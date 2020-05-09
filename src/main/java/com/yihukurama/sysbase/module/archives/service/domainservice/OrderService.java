@@ -67,7 +67,7 @@ public class OrderService extends CrudService<OrderEntity>{
                 orderProductEntity.setProductPic(standardConfigEntity.getPrice());
                 orderProductEntity.setMarketPrice(standardConfigEntity.getMarketPrice());
                 orderProductEntity.setPrice(standardConfigEntity.getPrice());
-                totalPrice.add(productPrict);
+                totalPrice = totalPrice.add(productPrict);
                 orderProductEntity.setOrderId(resultOrderEntity.getId());
                 OrderProductEntity resultOrderProductEntity = orderProductService.create(orderProductEntity);
                 resultOrderProduct.add(resultOrderProductEntity);
