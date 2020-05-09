@@ -1,6 +1,5 @@
 package com.yihukurama.sysbase.bean;
 
-import com.yihukurama.sysbase.thirdparty.ali.easysdk.AliSdkInit;
 import com.yihukurama.tkmybatisplus.app.component.FrameInit;
 
 /**
