@@ -38,7 +38,6 @@ public class AlliPayController {
         if(EmptyUtil.isEmpty(order.getId())){
             return Result.failed("订单id不可为空");
         }
-//        aliSdkInit.init();
         return iPay.unifiedOrder(request);
     }
 
