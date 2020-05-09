@@ -61,7 +61,7 @@ public class AliPayService implements IPay {
         payRequest.setOrderAmount(orderEntity.getPaidPrice().doubleValue());
         PayResponse payResponse = bestPayService.pay(payRequest);
 
-        return Result.successed(payResponse);
+        return Result.successed(payResponse,"支付宝下单成功");
 
     }
 

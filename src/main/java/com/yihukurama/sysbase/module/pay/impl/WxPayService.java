@@ -58,7 +58,7 @@ public class WxPayService implements IPay {
         payRequest.setOrderAmount(orderEntity.getPaidPrice().doubleValue());
         PayResponse payResponse = bestPayService.pay(payRequest);
 
-        return Result.successed(payResponse);
+        return Result.successed(payResponse,"微信下单成功");
     }
 
     @Override
