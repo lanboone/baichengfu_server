@@ -56,7 +56,7 @@ public class AliPayService implements IPay {
         try {
             // 2. 发起API调用（以支付能力下的统一收单交易创建接口为例）
             AlipayTradeCreateResponse response = Factory.Payment.Common().create("App",
-                    order.getNum(), orderEntity.getPaidPrice().toString(), order.getAppuserId());
+                    order.getNum(), orderEntity.getPaidPrice().toString(), order.getBuyerId());
             // 3. 处理响应或异常
             if ("10000".equals(response.code)) {
                 return Result.successed(response,"阿里下单成功");

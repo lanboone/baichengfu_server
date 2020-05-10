@@ -25,6 +25,12 @@ public class Order extends OrderEntity {
      * 查询方式 10带出订单商品列表
      */
     private Integer searchType;
+
+    /**
+     * 支付宝下单时需要上传购买者id
+     */
+    @ApiModelProperty(value="支付宝下单时需要上传购买者id")
+    private String buyerId;
     /**
      * 带出订单商品列表
      */
