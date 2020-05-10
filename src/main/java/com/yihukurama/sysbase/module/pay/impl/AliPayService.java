@@ -59,7 +59,13 @@ public class AliPayService implements IPay {
             // 2. 发起API调用（以支付能力下的统一收单交易创建接口为例）
             AlipayTradeAppPayResponse response = Factory.Payment.App().pay(order.getOrigin(),order.getNum(),orderEntity.getPaidPrice().toString());
             LogUtil.debugLog(this,JSON.toJSONString(response==null?"阿里返回空":response));
-            return Result.successed(response);
+
+            JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(response));
+            String orderInfo = jsonObject.getString("body");
+            orderInfo = orderInfo.replaceAll("alipay_sdk=alipay-easysdk-java-1.2.0&","");
+
+            LogUtil.debugLog(this,"返回的orderInfo为:"+orderInfo);
+            return Result.successed(orderInfo);
         } catch (Exception e) {
             String errMsg = "阿里下单遭遇异常，原因：" + e.getMessage();
             LogUtil.errorLog(this,errMsg);
