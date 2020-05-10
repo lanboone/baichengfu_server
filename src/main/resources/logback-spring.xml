@@ -209,7 +209,7 @@
         </root>
     </springProfile>
     <springProfile name="sit">
-        <root level="INFO">
+        <root level="DEBUG">
             <appender-ref ref="file.async"/>
             <appender-ref ref="console"/>
             <appender-ref ref="file.error"/>
@@ -219,7 +219,7 @@
         </root>
     </springProfile>
     <springProfile name="prod">
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="file.async"/>
             <appender-ref ref="console.error"/>
             <appender-ref ref="file.error"/>
