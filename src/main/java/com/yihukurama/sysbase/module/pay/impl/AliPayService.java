@@ -3,6 +3,8 @@ package com.yihukurama.sysbase.module.pay.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.easysdk.factory.Factory;
+import com.alipay.easysdk.payment.app.models.AlipayTradeAppPayResponse;
+import com.alipay.easysdk.payment.common.Client;
 import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
 import com.alipay.easysdk.payment.common.models.AlipayTradeRefundResponse;
 import com.lly835.bestpay.config.AliPayConfig;
@@ -55,16 +57,20 @@ public class AliPayService implements IPay {
         OrderEntity orderEntity = orderService.load(order);
         try {
             // 2. 发起API调用（以支付能力下的统一收单交易创建接口为例）
-            AlipayTradeCreateResponse response = Factory.Payment.Common().create("App",
-                    order.getNum(), orderEntity.getPaidPrice().toString(), order.getBuyerId());
+            AlipayTradeAppPayResponse response = Factory.Payment.App().pay(order.getOrigin(),order.getNum(),orderEntity.getPaidPrice().toString());
+//            AlipayTradeCreateResponse response = Factory.Payment.Common().create("App",
+//                    order.getNum(), orderEntity.getPaidPrice().toString(), order.getBuyerId());
             // 3. 处理响应或异常
-            if ("10000".equals(response.code)) {
-                return Result.successed(response,"阿里下单成功");
-            } else {
-                String errMsg = "阿里下单失败，原因：" + response.msg + "，" + response.subMsg;
-                LogUtil.errorLog(this,errMsg);
-                return Result.failed("阿里下单失败，原因：" + response.msg + "，" + response.subMsg);
-            }
+//            if ("10000".equals(response.body)) {
+//                return Result.successed(response,"阿里下单成功");
+//            } else {
+//                String errMsg = "阿里下单失败，原因：" + response.msg + "，" + response.subMsg;
+//                LogUtil.errorLog(this,errMsg);
+//                return Result.failed("阿里下单失败，原因：" + response.msg + "，" + response.subMsg);
+//            }
+
+            LogUtil.debugLog(this,JSON.toJSONString(response==null?"阿里返回空":response));
+            return Result.successed(response);
         } catch (Exception e) {
             String errMsg = "阿里下单遭遇异常，原因：" + e.getMessage();
             LogUtil.errorLog(this,errMsg);
