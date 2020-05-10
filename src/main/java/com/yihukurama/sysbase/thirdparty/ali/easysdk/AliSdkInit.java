@@ -3,6 +3,7 @@ package com.yihukurama.sysbase.thirdparty.ali.easysdk;
 import com.alibaba.fastjson.JSON;
 import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.kernel.BaseClient.Config;
+import com.lly835.bestpay.config.AliPayConfig;
 import com.yihukurama.sysbase.thirdparty.ali.MyAlipayConfig;
 import com.yihukurama.tkmybatisplus.app.utils.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,10 @@ public class AliSdkInit {
         config.gatewayHost = "openapi.alipay.com";
         config.signType = "RSA2";
 
-
-        LogUtil.debugLog(AliSdkInit.class, "获取的alieasysdk配置是："+aliEasySDKConfig.getAliPayPublicKey());
-
         // 请更换为您的AppId
         config.appId = aliEasySDKConfig.getAppId();
+        // 请更换为您的PKCS8格式的应用私钥
+        config.merchantPrivateKey = aliEasySDKConfig.getPrivateKey();
         // 如果采用非证书模式，则无需赋值上面的三个证书路径，改为赋值如下的支付宝公钥字符串即可
         config.alipayPublicKey = aliEasySDKConfig.getAliPayPublicKey();
         return config;
