@@ -37,7 +37,7 @@ public class AliSdkInit {
         config.protocol = "https";
         config.gatewayHost = "openapi.alipay.com";
         config.signType = "RSA2";
-        config.gatewayHost = "https://openapi.alipay.com/gateway.do";
+
         // 请更换为您的AppId
         config.appId = aliEasySDKConfig.getAppId();
         // 请更换为您的PKCS8格式的应用私钥
