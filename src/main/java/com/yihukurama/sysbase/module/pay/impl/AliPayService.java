@@ -2,6 +2,7 @@ package com.yihukurama.sysbase.module.pay.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lly835.bestpay.config.AliPayConfig;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
@@ -37,7 +38,7 @@ public class AliPayService implements IPay {
     OrderService orderService;
 
     @Autowired
-    MyAlipayConfig alipayConfig;
+    MyAlipayConfig myAlipayConfig;
 
     @Autowired
     OrderProductService orderProductService;
@@ -52,6 +53,14 @@ public class AliPayService implements IPay {
 
         //支付类, 所有方法都在这个类里
         BestPayServiceImpl bestPayService = new BestPayServiceImpl();
+        AliPayConfig alipayConfig = new AliPayConfig();
+        alipayConfig.setAppId(myAlipayConfig.getAppId());
+        alipayConfig.setAliPayPublicKey(myAlipayConfig.getAliPayPublicKey());
+        alipayConfig.setPrivateKey(myAlipayConfig.getPrivateKey());
+        alipayConfig.setSandbox(false);
+        alipayConfig.setNotifyUrl(myAlipayConfig.getNotifyUrl());
+        alipayConfig.setReturnUrl(myAlipayConfig.getReturnUrl());
+
         bestPayService.setAliPayConfig(alipayConfig);
         LogUtil.debugLog(this,JSON.toJSONString(alipayConfig));
         PayRequest payRequest = new PayRequest();
@@ -71,6 +80,15 @@ public class AliPayService implements IPay {
         OrderEntity orderEntity = orderService.load(order);
         //支付类, 所有方法都在这个类里
         BestPayServiceImpl bestPayService = new BestPayServiceImpl();
+        AliPayConfig alipayConfig = new AliPayConfig();
+        alipayConfig.setAppId(myAlipayConfig.getAppId());
+        alipayConfig.setAliPayPublicKey(myAlipayConfig.getAliPayPublicKey());
+        alipayConfig.setPrivateKey(myAlipayConfig.getPrivateKey());
+        alipayConfig.setSandbox(false);
+        alipayConfig.setNotifyUrl(myAlipayConfig.getNotifyUrl());
+        alipayConfig.setReturnUrl(myAlipayConfig.getReturnUrl());
+
+
         bestPayService.setAliPayConfig(alipayConfig);
 
         RefundRequest refundRequest = new RefundRequest();

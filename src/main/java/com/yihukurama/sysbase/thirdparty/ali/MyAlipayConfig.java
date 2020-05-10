@@ -8,5 +8,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix ="alipay")
 @Data
-public class MyAlipayConfig extends AliPayConfig {
+public class MyAlipayConfig {
+    private String appId;
+    private String aliPayPublicKey;
+    private String privateKey;
+    private String returnUrl;
+    private String notifyUrl;
 }
