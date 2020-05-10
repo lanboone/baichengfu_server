@@ -63,9 +63,9 @@ public class AliPayService implements IPay {
             JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(response));
             String orderInfo = jsonObject.getString("body");
             orderInfo = orderInfo.replaceAll("alipay_sdk=alipay-easysdk-java-1.2.0&","");
-
+            jsonObject.put("body",orderInfo);
             LogUtil.debugLog(this,"返回的orderInfo为:"+orderInfo);
-            return Result.successed(orderInfo);
+            return Result.successed(jsonObject);
         } catch (Exception e) {
             String errMsg = "阿里下单遭遇异常，原因：" + e.getMessage();
             LogUtil.errorLog(this,errMsg);
