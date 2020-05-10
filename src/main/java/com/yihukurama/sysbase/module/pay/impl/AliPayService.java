@@ -53,7 +53,7 @@ public class AliPayService implements IPay {
         //支付类, 所有方法都在这个类里
         BestPayServiceImpl bestPayService = new BestPayServiceImpl();
         bestPayService.setAliPayConfig(alipayConfig);
-
+        LogUtil.debugLog(this,JSON.toJSONString(alipayConfig));
         PayRequest payRequest = new PayRequest();
         payRequest.setPayTypeEnum(BestPayTypeEnum.ALIPAY_APP);
         payRequest.setOrderId(orderEntity.getNum());
