@@ -2,6 +2,9 @@ package com.yihukurama.sysbase.module.pay.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alipay.easysdk.factory.Factory;
+import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
+import com.alipay.easysdk.payment.common.models.AlipayTradeRefundResponse;
 import com.lly835.bestpay.config.AliPayConfig;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
@@ -50,27 +53,23 @@ public class AliPayService implements IPay {
     public Result unifiedOrder(Request<Order> request) throws TipsException {
         Order order = request.getData();
         OrderEntity orderEntity = orderService.load(order);
-
-        //支付类, 所有方法都在这个类里
-        BestPayServiceImpl bestPayService = new BestPayServiceImpl();
-        AliPayConfig alipayConfig = new AliPayConfig();
-        alipayConfig.setAppId(myAlipayConfig.getAppId());
-        alipayConfig.setAliPayPublicKey(myAlipayConfig.getAliPayPublicKey());
-        alipayConfig.setPrivateKey(myAlipayConfig.getPrivateKey());
-        alipayConfig.setSandbox(false);
-        alipayConfig.setNotifyUrl(myAlipayConfig.getNotifyUrl());
-        alipayConfig.setReturnUrl(myAlipayConfig.getReturnUrl());
-
-        bestPayService.setAliPayConfig(alipayConfig);
-        LogUtil.debugLog(this,JSON.toJSONString(alipayConfig));
-        PayRequest payRequest = new PayRequest();
-        payRequest.setPayTypeEnum(BestPayTypeEnum.ALIPAY_APP);
-        payRequest.setOrderId(orderEntity.getNum());
-        payRequest.setOrderName("用户"+orderEntity.getAppuserId()+"支付账单");
-        payRequest.setOrderAmount(orderEntity.getPaidPrice().doubleValue());
-        PayResponse payResponse = bestPayService.pay(payRequest);
-
-        return Result.successed(payResponse,"支付宝下单成功");
+        try {
+            // 2. 发起API调用（以支付能力下的统一收单交易创建接口为例）
+            AlipayTradeCreateResponse response = Factory.Payment.Common().create("App",
+                    order.getNum(), orderEntity.getPaidPrice().toString(), order.getAppuserId());
+            // 3. 处理响应或异常
+            if ("10000".equals(response.code)) {
+                return Result.successed(response,"阿里下单成功");
+            } else {
+                String errMsg = "阿里下单失败，原因：" + response.msg + "，" + response.subMsg;
+                LogUtil.errorLog(this,errMsg);
+                return Result.failed("阿里下单失败，原因：" + response.msg + "，" + response.subMsg);
+            }
+        } catch (Exception e) {
+            String errMsg = "阿里下单遭遇异常，原因：" + e.getMessage();
+            LogUtil.errorLog(this,errMsg);
+            throw new RuntimeException(e.getMessage(), e);
+        }
 
     }
 
@@ -78,27 +77,23 @@ public class AliPayService implements IPay {
     public Result refund(Request<Order> request) throws TipsException {
         Order order = request.getData();
         OrderEntity orderEntity = orderService.load(order);
-        //支付类, 所有方法都在这个类里
-        BestPayServiceImpl bestPayService = new BestPayServiceImpl();
-        AliPayConfig alipayConfig = new AliPayConfig();
-        alipayConfig.setAppId(myAlipayConfig.getAppId());
-        alipayConfig.setAliPayPublicKey(myAlipayConfig.getAliPayPublicKey());
-        alipayConfig.setPrivateKey(myAlipayConfig.getPrivateKey());
-        alipayConfig.setSandbox(false);
-        alipayConfig.setNotifyUrl(myAlipayConfig.getNotifyUrl());
-        alipayConfig.setReturnUrl(myAlipayConfig.getReturnUrl());
-
-
-        bestPayService.setAliPayConfig(alipayConfig);
-
-        RefundRequest refundRequest = new RefundRequest();
-        refundRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_APP);
-        refundRequest.setOrderId(orderEntity.getNum());
-        refundRequest.setOrderAmount(orderEntity.getPaidPrice().doubleValue());
-        RefundResponse refundResponse = bestPayService.refund(refundRequest);
-
-        return Result.successed(refundResponse);
-
+        try {
+            // 2. 发起API调用（以支付能力下的统一收单交易创建接口为例）
+            AlipayTradeRefundResponse response = Factory.Payment.Common().refund(
+                    order.getNum(), orderEntity.getPaidPrice().toString());
+            // 3. 处理响应或异常
+            if ("10000".equals(response.code)) {
+                return Result.successed(response,"退款成功");
+            } else {
+                String errMsg = "退款失败，原因：" + response.msg + "，" + response.subMsg;
+                LogUtil.errorLog(this,errMsg);
+                return Result.failed("退款失败，原因：" + response.msg + "，" + response.subMsg);
+            }
+        } catch (Exception e) {
+            String errMsg = "退款遭遇异常，原因：" + e.getMessage();
+            LogUtil.errorLog(this,errMsg);
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
     @Override
