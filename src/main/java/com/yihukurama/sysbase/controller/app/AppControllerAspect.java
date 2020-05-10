@@ -92,13 +92,10 @@ public class AppControllerAspect {
                 tips = "请检查路径是否合法!";
             }
 
-            if (e != null && e.getMessage() != null && !"".equals(e.getMessage())) {
-                tips += e.getMessage();
-                LogUtil.errorLog(this, tips);
-            } else {
-                tips += "后台异常信息为:" + StringUtil.exceptionToString(e);
-                LogUtil.errorLog(this, tips);
-            }
+            tips += "后台异常信息为:" + StringUtil.exceptionToString(e);
+            LogUtil.errorLog(this, tips);
+            e.printStackTrace();
+
             return Result.failed(tips);
         }
 
