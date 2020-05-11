@@ -33,7 +33,7 @@ public class MasterEntity extends BaseEntity
 	**/
 	@ApiModelProperty(value="列表的心统计")
 	@Column(name="likecount")
-	private String likecount;
+	private Integer likecount;
 	/**
 	*装修师傅地址
 	**/

@@ -95,6 +95,7 @@ public class AliPayService implements IPay {
 
     @Override
     public String payNotfiy(String requestBody) throws TipsException {
+        LogUtil.debugLog(this,"收到支付宝回调");
         JSONObject payResponse = JSON.parseObject(requestBody);
         if(payResponse!=null){
             String resultStatus = payResponse.getString("resultStatus");

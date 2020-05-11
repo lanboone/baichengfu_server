@@ -10,6 +10,7 @@ import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.domain.AppuserDesigner;
 import com.yihukurama.sysbase.module.archives.domain.User;
 import com.yihukurama.sysbase.module.archives.service.ISystem;
+import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
@@ -35,6 +36,12 @@ public class PersonController {
 
     @Autowired
     IPerson person;
+
+    @ApiOperation(value = "获取个人中心各订单数量",notes = "获取个人中心各订单数量,data传入用户id")
+    @RequestMapping(value = "/person_count", method = RequestMethod.POST)
+    public Result personCount(@RequestBody Request<String> request) throws TipsException {
+        return person.personCount(request);
+    }
 
     @ApiOperation(value = "收藏商品",notes = "收藏商品，传入商品id和自己的appuserId")
     @RequestMapping(value = "/store_product", method = RequestMethod.POST)

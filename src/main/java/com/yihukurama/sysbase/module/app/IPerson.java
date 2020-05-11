@@ -8,6 +8,13 @@ import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 public interface IPerson {
 
     /**
+     * 获取个人中心各数量
+     * @param request
+     * @return
+     * @throws TipsException
+     */
+    Result personCount(Request<String> request) throws TipsException;
+    /**
      * 说明： 收藏样板间
      * @author yihukurama
      * @date Created in 14:15 2020/4/11

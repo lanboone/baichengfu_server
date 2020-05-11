@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : baichengfucloudsit
  Source Server Type    : MySQL
- Source Server Version : 50729
- Source Host           : localhost:3306
+ Source Server Version : 50717
+ Source Host           : 8.129.180.116:3306
  Source Schema         : baichengfu
 
  Target Server Type    : MySQL
- Target Server Version : 50729
+ Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 04/05/2020 13:07:39
+ Date: 11/05/2020 22:55:50
 */
 
 SET NAMES utf8mb4;
@@ -41,7 +41,7 @@ CREATE TABLE `tb_designer`  (
   `parameter4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段4',
   `parameter5` int(255) NULL DEFAULT NULL COMMENT '预留字段5',
   `style` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '设计风格，使用分号隔开前面无分号，最后有分号，如北欧;中式;',
-  `likecount` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '设计师列表的心统计',
+  `likecount` int(11) NULL DEFAULT NULL COMMENT '设计师列表的心统计',
   `wantcount` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '设计师里列表想让他设计统计',
   `nick_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设计师用户昵称',
   `head_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设计师用户头像',

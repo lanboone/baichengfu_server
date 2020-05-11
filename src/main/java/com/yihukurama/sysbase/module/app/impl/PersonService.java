@@ -9,6 +9,7 @@ import com.yihukurama.sysbase.module.app.IPerson;
 import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
 import com.yihukurama.sysbase.module.app.designp.observer.event.ProductEvent;
 import com.yihukurama.sysbase.module.app.designp.observer.event.TopicEvent;
+import com.yihukurama.sysbase.module.archives.domain.Order;
 import com.yihukurama.sysbase.module.archives.service.domainservice.*;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
@@ -45,8 +46,6 @@ public class PersonService implements IPerson {
     @Autowired
     AppuserService appuserService;
     @Autowired
-    AppuserMapper appuserMapper;
-    @Autowired
     DesignerService designerService;
     @Autowired
     DesignerMapper designerMapper;
@@ -54,6 +53,67 @@ public class PersonService implements IPerson {
     AppuserSampleService appuserSampleService;
     @Autowired
     SampleRoomService sampleRoomService;
+    @Autowired
+    OrderService orderService;
+
+    @Override
+    public Result personCount(Request<String> request) throws TipsException {
+        String appuserId = request.getData();
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setAppuserId(appuserId);
+        List<OrderEntity> orderEntityList = orderService.list(orderEntity);
+
+        PersonCountDto personCountDto = new PersonCountDto();
+        /**
+         * 待支付
+         */
+        int waitPay = 0;
+        /**
+         * 待发货
+         */
+        int waitSend = 0;
+        /**
+         * 待收货
+         */
+        int waitReceive = 0;
+        /**
+         * 待评论
+         */
+        int waitComment = 0;
+        /**
+         * 待退款
+         */
+        int waitRefund = 0;
+        for (OrderEntity order:orderEntityList
+             ) {
+            Integer status = order.getStatus();
+            switch (status){
+                case Order.PAY_STATUS_10:
+                    waitPay++;
+                    break;
+                case Order.PAY_STATUS_20:
+                    waitSend++;
+                    break;
+                case Order.PAY_STATUS_30:
+                    waitReceive++;
+                    break;
+                case Order.PAY_STATUS_40:
+                    waitComment++;
+                    break;
+                case Order.PAY_STATUS_50:
+                    waitRefund++;
+                    break;
+            }
+        }
+        personCountDto.setWaitComment(waitComment);
+        personCountDto.setWaitPay(waitPay);
+        personCountDto.setWaitReceive(waitReceive);
+        personCountDto.setWaitRefund(waitRefund);
+        personCountDto.setWaitSend(waitSend);
+
+
+        return Result.successed(personCountDto);
+    }
 
     @Override
     public Result storeSampleRoom(Request<StoreSampleRoomDto> request) throws TipsException {
