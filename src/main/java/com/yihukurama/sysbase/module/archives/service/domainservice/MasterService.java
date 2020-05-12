@@ -39,7 +39,7 @@ public class MasterService extends CrudService<MasterEntity>{
             String whereSql = "";
             if (!EmptyUtil.isEmpty(master.getKeyWords())) {
                 whereSql = "(nick_name like '%s' or style like '%s')";
-                whereSql = String.format(whereSql, master.getKeyWords(), "%" + master.getKeyWords() + "%");
+                whereSql = String.format(whereSql, "%"+master.getKeyWords()+"%", "%" + master.getKeyWords() + "%");
                 master.setWhereSql(whereSql);
             }
             if (!EmptyUtil.isEmpty(searchSkills)) {
