@@ -4,6 +4,7 @@ import com.yihukurama.sysbase.common.utils.NumberUtil;
 import com.yihukurama.sysbase.controller.app.dto.*;
 import com.yihukurama.sysbase.mapper.AppuserMapper;
 import com.yihukurama.sysbase.mapper.DesignerMapper;
+import com.yihukurama.sysbase.mapper.MasterMapper;
 import com.yihukurama.sysbase.model.*;
 import com.yihukurama.sysbase.module.app.IPerson;
 import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
@@ -29,6 +30,12 @@ import java.util.List;
 @Service
 public class PersonService implements IPerson {
 
+    @Autowired
+    MasterMapper masterMapper;
+    @Autowired
+    MasterService masterService;
+    @Autowired
+    AppuserMasterService appuserMasterService;
 
     @Autowired
     AppuserCommentService appuserCommentService;
@@ -380,5 +387,72 @@ public class PersonService implements IPerson {
         }
         appEventPublisher.publishEvent(new ProductEvent(appuserProductEntity,ProductEvent.TYPE_10));
         return Result.successed(appuserProductEntity,"收藏成功");
+    }
+
+    @Override
+    public Result focusMaster(Request<FocusMasterDto> request) throws TipsException {
+        FocusMasterDto focusMasterDto = request.getData();
+        AppuserMasterEntity appuserMasterEntity = new AppuserMasterEntity();
+        appuserMasterEntity.setAppuserId(focusMasterDto.getAppuserId());
+        appuserMasterEntity.setMasterId(focusMasterDto.getMasterId());
+
+
+        List<AppuserMasterEntity> appuserMasterEntities =  appuserMasterService.list(appuserMasterEntity);
+        if(!EmptyUtil.isEmpty(appuserMasterEntities)){
+            return Result.failed(appuserMasterEntities.get(0),"用户已关注",-1);
+        }
+        //获取设计师身份数据
+        String masterId = focusMasterDto.getMasterId();
+        MasterEntity masterEntity = masterMapper.selectByPrimaryKey(masterId);
+        if(masterEntity == null){
+            return Result.failed("无此设计师,设计师id为:"+masterId);
+        }
+        appuserMasterEntity.setGloryValue(masterEntity.getGloryValue());
+        appuserMasterEntity.setHeadUrl(masterEntity.getHeadUrl());
+        appuserMasterEntity.setNickName(masterEntity.getNickName());
+        appuserMasterEntity.setStyle(masterEntity.getStyle());
+
+        appuserMasterEntity = appuserMasterService.create(appuserMasterEntity);
+
+        if(appuserMasterEntity == null){
+            return Result.failed(null,"关注失败",-1);
+        }
+
+        //更新设计师关注数
+        masterEntity.setLikecount(NumberUtil.NullPlus(masterEntity.getLikecount(),1));
+        masterService.update(masterEntity);
+
+        return Result.successed(appuserMasterEntity,"新增关注成功");
+
+    }
+
+    @Override
+    public Result unFocusMaster(Request<FocusMasterDto> request) throws TipsException {
+        FocusMasterDto focusMasterDto = request.getData();
+        AppuserMasterEntity appuserMasterEntity = new AppuserMasterEntity();
+        appuserMasterEntity.setAppuserId(focusMasterDto.getAppuserId());
+        appuserMasterEntity.setMasterId(focusMasterDto.getMasterId());
+
+        //获取设计师身份数据
+        String masterId = focusMasterDto.getMasterId();
+        MasterEntity masterEntity = masterMapper.selectByPrimaryKey(masterId);
+        if(masterEntity == null){
+            return Result.failed("无此设计师,设计师id为:"+masterId);
+        }
+
+        List<AppuserMasterEntity> appuserMasterEntities =  appuserMasterService.list(appuserMasterEntity);
+        if(EmptyUtil.isEmpty(appuserMasterEntities)){
+            return Result.failed(appuserMasterEntities.get(0),"已取消关注",-1);
+        }
+
+        appuserMasterService.remove(appuserMasterEntities.get(0));
+
+
+        //更新设计师关注数
+        masterEntity.setLikecount(NumberUtil.NullSub(masterEntity.getLikecount(),1));
+        masterService.update(masterEntity);
+
+        return Result.successed(appuserMasterEntity,"取消关注成功");
+
     }
 }

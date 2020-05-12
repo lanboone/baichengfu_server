@@ -106,4 +106,18 @@ public interface IPerson {
      * @return
      */
     Result storeProduct(Request<StoreProductDto> request) throws TipsException;
+
+    /**
+     * 关注装修师
+     * @param request
+     * @return
+     */
+    Result focusMaster(Request<FocusMasterDto> request) throws TipsException;
+
+    /**
+     * 取关装修师
+     * @param request
+     * @return
+     */
+    Result unFocusMaster(Request<FocusMasterDto> request) throws TipsException;
 }

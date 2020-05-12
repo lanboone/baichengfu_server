@@ -37,6 +37,25 @@ public class PersonController {
     @Autowired
     IPerson person;
 
+    @ApiOperation(value = "关注装修师",notes = "关注装修师，传入装修师的designerId和自己的appuserId")
+    @RequestMapping(value = "/focus_master", method = RequestMethod.POST)
+    public Result focusMaster(@RequestBody Request<FocusMasterDto> request) throws Exception {
+
+
+
+        return person.focusMaster(request);
+    }
+
+    @ApiOperation(value = "取消关注装修师",notes = "关注装修师，传入装修师的masterId和自己的appuserId")
+    @RequestMapping(value = "/un_focus_master", method = RequestMethod.POST)
+    public Result unFocusMaster(@RequestBody Request<FocusMasterDto> request) throws Exception {
+
+
+
+        return person.unFocusMaster(request);
+    }
+
+
     @ApiOperation(value = "获取个人中心各订单数量",notes = "获取个人中心各订单数量,data传入用户id")
     @RequestMapping(value = "/person_count", method = RequestMethod.POST)
     public Result personCount(@RequestBody Request<String> request) throws TipsException {
