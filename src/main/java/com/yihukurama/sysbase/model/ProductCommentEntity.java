@@ -24,6 +24,13 @@ public class ProductCommentEntity extends BaseEntity
 {
 
 	/**
+	 *评论的图片，视频访问路径，用分号隔开，用后缀区分
+	 **/
+	@ApiModelProperty(value="评论的图片，视频访问路径，用分号隔开，用后缀区分")
+	@Column(name="pics")
+	private String pics;
+
+	/**
 	 *要显示的评论json
 	 **/
 	@ApiModelProperty(value="要显示的评论json")
