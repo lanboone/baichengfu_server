@@ -107,9 +107,9 @@ public class AppuserEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*地址id
+	*用户地址字符串
 	**/
-	@ApiModelProperty(value="地址id")
+	@ApiModelProperty(value="用户地址字符串")
 	@Column(name="address_id")
 	private String addressId;
 	/**
