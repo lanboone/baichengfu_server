@@ -86,6 +86,12 @@ public class ProductCommentEntity extends BaseEntity
 	@Column(name="product_id")
 	private String productId;
 	/**
+	 *商品详情，不与商品同步
+	 **/
+	@ApiModelProperty(value="商品详情，不与商品同步")
+	@Column(name="product_detail")
+	private String productDetail;
+	/**
 	*创建者头像
 	**/
 	@ApiModelProperty(value="创建者头像")
