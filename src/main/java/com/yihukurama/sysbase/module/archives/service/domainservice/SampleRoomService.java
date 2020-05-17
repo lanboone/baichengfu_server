@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 说明： 样板间服务类
@@ -52,6 +53,7 @@ public class SampleRoomService extends CrudService<SampleRoomEntity> {
                     //创建关联关系
                     String pId = product.getId();
                     SampleProductEntity sampleProductEntity = new SampleProductEntity();
+                    sampleProductEntity.setId(UUID.randomUUID().toString().replaceAll("-",""));
                     sampleProductEntity.setProductId(pId);
                     sampleProductEntity.setSampleId(sId);
                     sampleProductMapper.insert(sampleProductEntity);
