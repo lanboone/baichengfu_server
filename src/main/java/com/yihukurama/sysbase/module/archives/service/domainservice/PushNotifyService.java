@@ -8,10 +8,13 @@ import cn.jpush.api.push.PushResult;
 import cn.jpush.api.push.model.PushPayload;
 import com.mysql.cj.util.LogUtils;
 import com.yihukurama.sysbase.model.PushNotifyEntity;
+import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
+import com.yihukurama.sysbase.module.app.designp.observer.event.PushEvent;
 import com.yihukurama.sysbase.module.archives.domain.PushNotify;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.LogUtil;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static cn.jpush.api.push.model.notification.PlatformNotification.ALERT;
@@ -20,6 +23,8 @@ import static org.bouncycastle.jcajce.spec.TLSKeyMaterialSpec.MASTER_SECRET;
 @Service
 public class PushNotifyService extends CrudService<PushNotifyEntity> {
 
+    @Autowired
+    AppEventPublisher appEventPublisher;
     
     @Override
     public PushNotifyEntity create(PushNotifyEntity pushNotifyEntity) throws TipsException {
@@ -45,6 +50,7 @@ public class PushNotifyService extends CrudService<PushNotifyEntity> {
                 LogUtil.infoLog(this,"Error Message: " + e.getErrorMessage());
             }
         }
+        appEventPublisher.publishEvent(new PushEvent(pushNotifyEntity));
         return super.create(pushNotifyEntity);
     }
 }
