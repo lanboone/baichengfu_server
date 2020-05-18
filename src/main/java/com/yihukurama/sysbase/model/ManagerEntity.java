@@ -75,12 +75,6 @@ public class ManagerEntity extends BaseEntity {
     @Column(name = "is_delete")
     private Integer isDelete;
     /**
-     * 预留字段1
-     **/
-    @ApiModelProperty(value = "预留字段1")
-    @Column(name = "parameter1")
-    private String parameter1;
-    /**
      * 管理员名称
      **/
     @ApiModelProperty(value = "管理员名称")
