@@ -18,9 +18,9 @@ import java.util.Date;
  * @modified: by yihukurama in 15:18 2018/4/4
  */
 @ApiModel(value="用户消息表")
-@Table(name="tb_appuser_msg")
+@Table(name="tb_appuser_notify")
 @Data
-public class AppuserMsgEntity extends BaseEntity
+public class AppuserNotifyEntity extends BaseEntity
 {
 	/**
 	*删除状态 0正常 1删除
