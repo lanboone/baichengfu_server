@@ -37,7 +37,7 @@ public class ProductCommentService extends CrudService<ProductCommentEntity> {
         //创建评论时如果是评论的回复，则需要写入父评论的reply_path
         if(productCommentEntity.getCParentId().length() == 32){
             LogUtil.debugLog(this,"into comment event");
-            appEventPublisher.publishEvent(new CommentEvent(productCommentEntity,CommentEvent.TYPE_10));
+            appEventPublisher.publishEvent(new CommentEvent(productCommentEntity,CommentEvent.TYPE_20));
         }
         return productCommentEntity;
     }
