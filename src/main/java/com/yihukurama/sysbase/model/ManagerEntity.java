@@ -23,6 +23,14 @@ import java.util.Date;
 @Table(name = "tb_manager")
 @Data
 public class ManagerEntity extends BaseEntity {
+
+    /**
+     * 头像地址
+     **/
+    @ApiModelProperty(value = "头像地址")
+    @Column(name = "head_url")
+    private String headUrl;
+
     /**
      * 系统身份
      **/
