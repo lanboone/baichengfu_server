@@ -24,6 +24,16 @@ import java.util.Date;
 public class ProductEntity extends BaseEntity
 {
 
+
+
+	/**
+	 *分类信息
+	 **/
+	@ApiModelProperty(value="分类信息")
+	@Column(name="categorie_full")
+	private String categorieFull;
+
+
 	/**
 	 *热门排序字段
 	 **/
