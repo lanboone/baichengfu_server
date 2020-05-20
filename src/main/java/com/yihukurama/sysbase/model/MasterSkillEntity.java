@@ -22,6 +22,15 @@ import java.util.Date;
 @Data
 public class MasterSkillEntity extends BaseEntity
 {
+
+	/**
+	 *排序字段越大越前
+	 **/
+	@ApiModelProperty(value="排序字段越大越前")
+	@Column(name="index_order")
+	private Integer indexOrder;
+
+
 	/**
 	*删除状态 0正常 1删除
 	**/

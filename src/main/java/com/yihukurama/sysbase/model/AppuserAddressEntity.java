@@ -23,6 +23,14 @@ import java.util.Date;
 public class AppuserAddressEntity extends BaseEntity
 {
 	/**
+	 *类型
+	 **/
+	@ApiModelProperty(value="类型 10默认地址  20普通")
+	@Column(name="type")
+	private Integer type;
+
+
+	/**
 	*详细地址
 	**/
 	@ApiModelProperty(value="详细地址")
