@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : baichengfucloudsit
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50717
- Source Host           : 8.129.180.116:3306
+ Source Server Version : 50729
+ Source Host           : localhost:3306
  Source Schema         : baichengfu
 
  Target Server Type    : MySQL
- Target Server Version : 50717
+ Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 12/05/2020 21:13:39
+ Date: 20/05/2020 23:46:29
 */
 
 SET NAMES utf8mb4;
@@ -41,12 +41,13 @@ CREATE TABLE `tb_master`  (
   `service_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '服务价位',
   `parameter5` int(255) NULL DEFAULT NULL COMMENT '预留字段5',
   `style` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '装修技能，使用分号隔开前面无分号，最后有分号;',
-  `likecount` int(11) NULL DEFAULT NULL COMMENT '列表的心统计',
+  `likecount` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '列表的心统计',
   `wantcount` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '列表想让他设计统计',
   `nick_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '师傅用户昵称',
   `head_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '师傅用户头像',
-  `status` int(11) NULL DEFAULT 10 COMMENT '师傅状态 10 待审核   20已审核',
+  `status` int(11) NULL DEFAULT NULL COMMENT '师傅状态 10 待审核   20已审核',
   `order_count` int(11) NULL DEFAULT NULL COMMENT '排序权重，装修数',
+  `phone_number` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '装修师傅表' ROW_FORMAT = Compact;
 

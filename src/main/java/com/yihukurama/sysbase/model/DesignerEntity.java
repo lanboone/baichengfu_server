@@ -24,6 +24,13 @@ public class DesignerEntity extends BaseEntity
 {
 
 	/**
+	 *手机号
+	 **/
+	@ApiModelProperty(value="手机号")
+	@Column(name="phone_number")
+	private String phoneNumber;
+
+	/**
 	 *设计师头像
 	 **/
 	@ApiModelProperty(value="设计师头像")

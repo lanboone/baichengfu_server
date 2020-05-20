@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : baichengfucloudsit
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50717
- Source Host           : 8.129.180.116:3306
+ Source Server Version : 50729
+ Source Host           : localhost:3306
  Source Schema         : baichengfu
 
  Target Server Type    : MySQL
- Target Server Version : 50717
+ Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 12/05/2020 21:13:27
+ Date: 20/05/2020 23:45:56
 */
 
 SET NAMES utf8mb4;
@@ -47,6 +47,7 @@ CREATE TABLE `tb_designer`  (
   `head_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设计师用户头像',
   `status` int(11) NULL DEFAULT 10 COMMENT '设计师状态 10 待审核   20已审核',
   `order_count` int(11) NULL DEFAULT NULL COMMENT '排序权重，心数+案例数',
+  `phone_number` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '设计师表' ROW_FORMAT = Compact;
 

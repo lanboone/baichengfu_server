@@ -23,6 +23,14 @@ import java.util.Date;
 public class MasterEntity extends BaseEntity
 {
 	/**
+	 *手机号
+	 **/
+	@ApiModelProperty(value="手机号")
+	@Column(name="phone_number")
+	private String phoneNumber;
+
+
+	/**
 	*个人图片
 	**/
 	@ApiModelProperty(value="个人图片")
