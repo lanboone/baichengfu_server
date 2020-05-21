@@ -5,6 +5,8 @@ import com.yihukurama.sysbase.model.ProductStandardEntity;
 import com.yihukurama.sysbase.model.StandardConfigEntity;
 import com.yihukurama.sysbase.module.archives.domain.AppuserShopcar;
 import com.yihukurama.sysbase.module.archives.domain.Product;
+import com.yihukurama.sysbase.module.archives.domain.ProductStandard;
+import com.yihukurama.sysbase.module.archives.domain.StandardConfig;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
@@ -135,4 +137,53 @@ public class ProductService extends CrudService<ProductEntity> {
         return productEntityFromDB;
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public ProductEntity update(ProductEntity productEntity) throws TipsException {
+        ProductEntity productEntityFromDB = null;
+        if (productEntity instanceof Product) {
+            List<ProductStandardEntity> productstandardEntityList =
+                    ((Product) productEntity).getProductStandardEntityList();
+            List<StandardConfigEntity> standardconfigEntityList =
+                    ((Product) productEntity).getStandardConfigEntityList();
+
+            if(EmptyUtil.isEmpty(productstandardEntityList) || EmptyUtil.isEmpty(standardconfigEntityList)){
+                throw new TipsException("更新商品必须要有规格和规格明细");
+            }
+
+            productEntityFromDB = super.update(productEntity);
+
+            //删除原规格和规格明细
+            ProductStandardEntity productStandardEntity = new ProductStandardEntity();
+            productStandardEntity.setProductId(productEntity.getId());
+            List<ProductStandardEntity> productStandardEntities =  productstandardService.list(productStandardEntity);
+            for (int i = 0; i < productStandardEntities.size(); i++) {
+                productstandardService.remove(productStandardEntities.get(i));
+            }
+
+            StandardConfigEntity standardConfigEntity = new StandardConfigEntity();
+            standardConfigEntity.setProductId(productEntity.getId());
+            List<StandardConfigEntity> standardConfigEntities = standardconfigService.list(standardConfigEntity);
+            for (int i = 0; i < standardConfigEntities.size(); i++) {
+                standardconfigService.remove(standardConfigEntities.get(i));
+            }
+
+
+            for (int i = 0; i < productstandardEntityList.size(); i++) {
+                productstandardEntityList.get(i).setProductId(productEntityFromDB.getId());
+            }
+            for (StandardConfigEntity standardConfig:standardconfigEntityList
+            ) {
+                if(standardConfig == null || standardConfig.getPrice() == null){
+                    throw new TipsException("创建商品时具体规格商品价格必须要价格");
+                }
+                standardConfig.setProductId(productEntityFromDB.getId());
+            }
+            productstandardService.creates(productstandardEntityList);
+            standardconfigService.creates(standardconfigEntityList);
+        }
+
+        return productEntityFromDB;
+
+    }
 }
