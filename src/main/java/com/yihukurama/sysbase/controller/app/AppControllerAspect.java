@@ -5,6 +5,7 @@ import com.yihukurama.sysbase.bean.config.SystemConfig;
 import com.yihukurama.sysbase.common.utils.StringUtil;
 import com.yihukurama.sysbase.handle.DateUtil;
 import com.yihukurama.tkmybatisplus.app.cache.RedisUtils;
+import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.app.utils.LogUtil;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
@@ -92,10 +93,12 @@ public class AppControllerAspect {
                 tips = "请检查路径是否合法!";
             }
 
-            tips += "后台异常信息为:" + StringUtil.exceptionToString(e);
-            LogUtil.errorLog(this, tips);
-            e.printStackTrace();
-
+            if(e instanceof TipsException){
+                tips = e.getMessage();
+            }else{
+                tips += "后台异常信息为:" + StringUtil.exceptionToString(e);
+                LogUtil.errorLog(this, tips);
+            }
             return Result.failed(tips);
         }
 
