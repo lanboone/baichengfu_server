@@ -140,7 +140,7 @@ public class ProductService extends CrudService<ProductEntity> {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public ProductEntity update(ProductEntity productEntity) throws TipsException {
-        ProductEntity productEntityFromDB = null;
+        ProductEntity productEntityFromDB = super.update(productEntity);
         if (productEntity instanceof Product) {
             List<ProductStandardEntity> productstandardEntityList =
                     ((Product) productEntity).getProductStandardEntityList();
@@ -148,10 +148,9 @@ public class ProductService extends CrudService<ProductEntity> {
                     ((Product) productEntity).getStandardConfigEntityList();
 
             if(EmptyUtil.isEmpty(productstandardEntityList) || EmptyUtil.isEmpty(standardconfigEntityList)){
-                throw new TipsException("更新商品必须要有规格和规格明细");
+                //若传进来的是null则不更新,规格
+                return productEntityFromDB;
             }
-
-            productEntityFromDB = super.update(productEntity);
 
             //删除原规格和规格明细
             ProductStandardEntity productStandardEntity = new ProductStandardEntity();
