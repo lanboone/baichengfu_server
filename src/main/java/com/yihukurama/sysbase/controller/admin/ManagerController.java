@@ -3,13 +3,11 @@ package com.yihukurama.sysbase.controller.admin;
 import com.yihukurama.sysbase.controller.admin.dto.LoginDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ManagerModifyDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ModifyPassWordDTO;
-import com.yihukurama.sysbase.controller.admin.dto.TokenLoginDTO;
-import com.yihukurama.sysbase.module.admin.Manager;
+import com.yihukurama.sysbase.module.admin.IManager;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +26,7 @@ import javax.validation.constraints.NotBlank;
 public class ManagerController {
 
     @Resource
-    Manager manager;
+    IManager manager;
 
     @ApiOperation(value = "登录接口", notes = "用户名密码必传-密码前端加密")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
