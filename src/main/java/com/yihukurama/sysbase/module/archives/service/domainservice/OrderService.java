@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.util.StringUtil;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,5 +137,12 @@ public class OrderService extends CrudService<OrderEntity>{
         Order order = TransferUtils.transferEntity2Domain(orderEntity,Order.class);
         order.setOrderProducts(orderProductEntities);
         return order;
+    }
+
+    public List<OrderProductEntity> doGetOrderProducts(@NotNull OrderEntity orderEntity) throws TipsException {
+        orderEntity = this.load(orderEntity);
+        OrderProductEntity orderProductEntity = new OrderProductEntity();
+        orderProductEntity.setOrderId(orderEntity.getId());
+        return orderProductService.list(orderProductEntity);
     }
 }

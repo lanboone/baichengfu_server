@@ -22,6 +22,16 @@ import java.util.Date;
 @Data
 public class ProductCategoriesEntity extends BaseEntity
 {
+
+
+	/**
+	 *分销积分
+	 **/
+	@ApiModelProperty(value="分销积分")
+	@Column(name="point")
+	private Integer point;
+
+
 	/**
 	*分类名
 	**/
