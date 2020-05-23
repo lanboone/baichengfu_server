@@ -90,7 +90,7 @@ public class ManagerServiceImpl implements IManager {
         loginManager.setProductPrivilegeEntities(productPrivilegeEntities);
         loginManager.setMenuPrivilegeEntities(menuPrivilegeEntities);
 
-        return Result.successed(managerSuc, "登录成功");
+        return Result.successed(loginManager, "登录成功");
     }
 
     @Override
