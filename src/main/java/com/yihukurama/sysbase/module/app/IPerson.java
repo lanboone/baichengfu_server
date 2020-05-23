@@ -120,4 +120,11 @@ public interface IPerson {
      * @return
      */
     Result unFocusMaster(Request<FocusMasterDto> request) throws TipsException;
+
+    /**
+     * 绑定上线
+     * @param request
+     * @return
+     */
+    Result bindParent(Request<BindParentDto> request) throws TipsException;
 }

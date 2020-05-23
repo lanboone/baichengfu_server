@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 20/05/2020 23:28:14
+ Date: 23/05/2020 19:10:29
 */
 
 SET NAMES utf8mb4;
@@ -46,6 +46,8 @@ CREATE TABLE `tb_appuser`  (
   `nick_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'app用户昵称',
   `head_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'app用户头像',
   `type` int(11) NULL DEFAULT 0 COMMENT 'app用户类型0普通用户,10设计师,20安装师傅',
+  `parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '上线id',
+  `personal_code` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '个人专属邀请码',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'APP用户表' ROW_FORMAT = Compact;
 

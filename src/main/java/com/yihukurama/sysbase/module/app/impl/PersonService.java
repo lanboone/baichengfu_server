@@ -18,6 +18,7 @@ import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -454,5 +455,23 @@ public class PersonService implements IPerson {
 
         return Result.successed(appuserMasterEntity,"取消关注成功");
 
+    }
+
+    @Override
+    public Result bindParent(Request<BindParentDto> request) throws TipsException {
+        BindParentDto bindParentDto = request.getData();
+        AppuserEntity parent = new AppuserEntity();
+        AppuserEntity child = new AppuserEntity();
+        parent.setPersonalCode(bindParentDto.getCode());
+        List<AppuserEntity> appuserEntities = appuserService.list(parent);
+        if(CollectionUtils.isEmpty(appuserEntities)){
+            return Result.failed("无此邀请码");
+        }
+        parent = appuserEntities.get(0);
+        child.setId(bindParentDto.getAppuserId());
+        child = appuserService.load(child);
+        child.setParentId(parent.getId());
+        child = appuserService.update(child);
+        return Result.successed(child,"绑定成功");
     }
 }

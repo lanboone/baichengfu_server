@@ -37,6 +37,15 @@ public class PersonController {
     @Autowired
     IPerson person;
 
+    @ApiOperation(value = "绑定上线",notes = "绑定上线")
+    @RequestMapping(value = "/bind_parent", method = RequestMethod.POST)
+    public Result bindParent(@RequestBody Request<BindParentDto> request) throws Exception {
+
+
+
+        return person.bindParent(request);
+    }
+
     @ApiOperation(value = "关注装修师",notes = "关注装修师，传入装修师的designerId和自己的appuserId")
     @RequestMapping(value = "/focus_master", method = RequestMethod.POST)
     public Result focusMaster(@RequestBody Request<FocusMasterDto> request) throws Exception {

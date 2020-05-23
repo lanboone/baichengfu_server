@@ -2,11 +2,11 @@ package com.yihukurama.sysbase.module.app.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.yihukurama.sysbase.common.utils.NumberUtil;
 import com.yihukurama.sysbase.controller.app.dto.ForgetPwdDto;
 import com.yihukurama.sysbase.controller.app.dto.LoginDto;
 import com.yihukurama.sysbase.controller.app.dto.RegistDto;
 import com.yihukurama.sysbase.controller.app.dto.TokenLoginDto;
-import com.yihukurama.sysbase.handle.NumberUtil;
 import com.yihukurama.sysbase.mapper.AppuserMapper;
 import com.yihukurama.sysbase.model.AppuserEntity;
 import com.yihukurama.sysbase.module.app.IAppPublic;
@@ -169,6 +169,8 @@ public class AppPublic implements IAppPublic {
         reqAppuser.setPhoneNumber(phone);
         pwd = iSecurity.pwdEncrypt(request.getData().getPassword());
         reqAppuser.setUserPassword(pwd);
+        //创建专属邀请码，16位uuid
+        reqAppuser.setPersonalCode(NumberUtil.getOrderIdByUUId());
         AppuserEntity appuser = appuserService.create(reqAppuser);
         return Result.successed(appuser,"注册成功");
 
