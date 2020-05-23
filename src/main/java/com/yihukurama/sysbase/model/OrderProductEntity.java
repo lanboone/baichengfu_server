@@ -23,6 +23,14 @@ import java.util.Date;
 public class OrderProductEntity extends BaseEntity
 {
 
+
+	/**
+	 *用户上线id
+	 **/
+	@ApiModelProperty(value="用户上线id")
+	@Column(name="appuser_parent_id")
+	private String appuserParentId;
+
 	/**
 	 *具体规格商品
 	 **/

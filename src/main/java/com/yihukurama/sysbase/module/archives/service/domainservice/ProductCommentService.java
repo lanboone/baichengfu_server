@@ -2,6 +2,7 @@ package com.yihukurama.sysbase.module.archives.service.domainservice;
 
 import com.yihukurama.sysbase.model.ProductCommentEntity;
 import com.yihukurama.sysbase.model.ProductCommentEntity;
+import com.yihukurama.sysbase.model.ProductEntity;
 import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
 import com.yihukurama.sysbase.module.app.designp.observer.event.CommentEvent;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductCommentService extends CrudService<ProductCommentEntity> {
 
+    @Autowired
+    ProductService productService;
 
     @Autowired
     AppEventPublisher appEventPublisher;
@@ -29,8 +32,10 @@ public class ProductCommentService extends CrudService<ProductCommentEntity> {
             throw new TipsException("发表评论时昵称、创建人id、商品id、评论内容、父评论id不可为空");
         }
 
-
-
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setId(productCommentEntity.getProductId());
+        productEntity = productService.load(productEntity);
+        productCommentEntity.setProductName(productEntity.getProductName());
         productCommentEntity = super.create(productCommentEntity);
 
 

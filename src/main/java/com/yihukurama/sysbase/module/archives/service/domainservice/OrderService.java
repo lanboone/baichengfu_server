@@ -1,6 +1,7 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
 import com.yihukurama.sysbase.common.utils.NumberUtil;
+import com.yihukurama.sysbase.model.AppuserEntity;
 import com.yihukurama.sysbase.model.OrderEntity;
 import com.yihukurama.sysbase.model.OrderProductEntity;
 import com.yihukurama.sysbase.model.StandardConfigEntity;
@@ -35,12 +36,22 @@ public class OrderService extends CrudService<OrderEntity>{
     @Autowired
     StandardConfigService standardConfigService;
 
+    @Autowired
+    AppuserService appuserService;
     @Transactional(rollbackFor = Exception.class)
     @Override
     public OrderEntity create(OrderEntity orderEntity) throws TipsException {
         List<OrderProductEntity> resultOrderProduct = new ArrayList<>();
         //创建单号
         orderEntity.setNum(NumberUtil.getNum());
+        //寻找上线
+        AppuserEntity appuserEntity = new AppuserEntity();
+        appuserEntity.setId(orderEntity.getAppuserId());
+        appuserEntity = appuserService.load(appuserEntity);
+        String appuserParentId = appuserEntity.getParentId();
+        if(!EmptyUtil.isEmpty(appuserParentId)){
+            orderEntity.setAppuserParentId(appuserParentId);
+        }
         OrderEntity resultOrderEntity = super.create(orderEntity);
 
         if(orderEntity instanceof Order){
@@ -69,6 +80,9 @@ public class OrderService extends CrudService<OrderEntity>{
                 orderProductEntity.setPrice(standardConfigEntity.getPrice());
                 totalPrice = totalPrice.add(productPrict);
                 orderProductEntity.setOrderId(resultOrderEntity.getId());
+                if(!EmptyUtil.isEmpty(appuserParentId)){
+                    orderProductEntity.setAppuserParentId(appuserParentId);
+                }
                 OrderProductEntity resultOrderProductEntity = orderProductService.create(orderProductEntity);
                 resultOrderProduct.add(resultOrderProductEntity);
             }

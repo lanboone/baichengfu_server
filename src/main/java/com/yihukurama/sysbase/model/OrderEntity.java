@@ -26,6 +26,14 @@ public class OrderEntity extends BaseEntity
 
 
 	/**
+	 *用户上线id
+	 **/
+	@ApiModelProperty(value="用户上线id")
+	@Column(name="appuser_parent_id")
+	private String appuserParentId;
+
+
+	/**
 	 *收件人姓名
 	 **/
 	@ApiModelProperty(value="收件人姓名")

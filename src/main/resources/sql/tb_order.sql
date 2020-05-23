@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : baichengfucloudsit
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50717
- Source Host           : 8.129.180.116:3306
+ Source Server Version : 50729
+ Source Host           : localhost:3306
  Source Schema         : baichengfu
 
  Target Server Type    : MySQL
- Target Server Version : 50717
+ Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 11/05/2020 21:28:18
+ Date: 23/05/2020 20:50:29
 */
 
 SET NAMES utf8mb4;
@@ -43,6 +43,7 @@ CREATE TABLE `tb_order`  (
   `receive_person` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收件人姓名',
   `receive_phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收件人电话',
   `receive_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收件地址',
+  `appuser_parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '该订单用户的上线id',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `product_id`(`product_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单表' ROW_FORMAT = Compact;
