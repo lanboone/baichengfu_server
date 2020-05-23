@@ -13,7 +13,7 @@ import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
  * @date: 2020/4/2 17:03
  * @description: 管理员相关服务
  */
-public interface Manager {
+public interface IManager {
 
     /**
      * 管理后台登录接口

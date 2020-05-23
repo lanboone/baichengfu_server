@@ -4,15 +4,24 @@ import com.yihukurama.sysbase.controller.admin.dto.LoginDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ManagerModifyDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ModifyPassWordDTO;
 import com.yihukurama.sysbase.model.ManagerEntity;
-import com.yihukurama.sysbase.module.admin.Manager;
+import com.yihukurama.sysbase.model.ManagerprivilegeEntity;
+import com.yihukurama.sysbase.model.PrivilegeEntity;
+import com.yihukurama.sysbase.module.admin.IManager;
+import com.yihukurama.sysbase.module.archives.domain.Manager;
+import com.yihukurama.sysbase.module.archives.domain.ManagerPrivilege;
+import com.yihukurama.sysbase.module.archives.domain.Privilege;
+import com.yihukurama.sysbase.module.archives.service.domainservice.ManagerPrivilegeService;
 import com.yihukurama.sysbase.module.archives.service.domainservice.ManagerService;
+import com.yihukurama.sysbase.module.archives.service.domainservice.PrivilegeService;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
+import com.yihukurama.tkmybatisplus.app.utils.TransferUtils;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,10 +31,16 @@ import java.util.UUID;
  * @description: 管理员服务
  */
 @Service
-public class ManagerServiceImpl implements Manager {
+public class ManagerServiceImpl implements IManager {
 
     @Autowired
     ManagerService managerService;
+
+    @Autowired
+    ManagerPrivilegeService managerPrivilegeService;
+
+    @Autowired
+    PrivilegeService privilegeService;
 
     @Override
     public Result adminLogin(Request<LoginDTO> request) throws TipsException {
@@ -49,6 +64,32 @@ public class ManagerServiceImpl implements Manager {
         ManagerEntity managerSetToken = managerEntityList.get(0);
         managerSetToken.setToken(token);
         ManagerEntity managerSuc = managerService.update(managerSetToken);
+        Manager loginManager = TransferUtils.transferEntity2Domain(managerSuc,Manager.class);
+
+        //增加权限
+        List<PrivilegeEntity> menuPrivilegeEntities = new ArrayList<>();
+        List<PrivilegeEntity> productPrivilegeEntities = new ArrayList<>();
+        ManagerprivilegeEntity managerPrivilege = new ManagerprivilegeEntity();
+        managerPrivilege.setManagerId(managerSuc.getId());
+        List<ManagerprivilegeEntity> managerprivilegeEntities =  managerPrivilegeService.list(managerPrivilege);
+        if(!CollectionUtils.isEmpty(managerprivilegeEntities)){
+            for (int i = 0; i < managerprivilegeEntities.size(); i++) {
+                ManagerprivilegeEntity managerprivilegeEntity = managerprivilegeEntities.get(i);
+                //获得权限
+                String priId = managerprivilegeEntity.getPrivilegeId();
+                PrivilegeEntity privilegeEntity = new PrivilegeEntity();
+                privilegeEntity.setId(priId);
+                privilegeEntity = privilegeService.load(privilegeEntity);
+                if(privilegeEntity.getType() == Privilege.PRIVILEGE_TYPE_10){
+                    menuPrivilegeEntities.add(privilegeEntity);
+                }else if(privilegeEntity.getType() == Privilege.PRIVILEGE_TYPE_10){
+                    productPrivilegeEntities.add(privilegeEntity);
+                }
+            }
+        }
+        loginManager.setProductPrivilegeEntities(productPrivilegeEntities);
+        loginManager.setMenuPrivilegeEntities(menuPrivilegeEntities);
+
         return Result.successed(managerSuc, "登录成功");
     }
 

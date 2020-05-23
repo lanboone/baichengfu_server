@@ -12,34 +12,34 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 说明： 功能表
+ * 说明： 地区信息表
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="功能表")
-@Table(name="tb_privilege")
+@ApiModel(value="地区信息表")
+@Table(name="tb_managerprivilege")
 @Data
-public class PrivilegeEntity extends BaseEntity
+public class ManagerprivilegeEntity extends BaseEntity
 {
 	/**
-	*删除状态 0正常 1删除
+	*is_delete
 	**/
-	@ApiModelProperty(value="删除状态 0正常 1删除")
+	@ApiModelProperty(value="is_delete")
 	@Column(name="is_delete")
 	private Integer isDelete;
 	/**
-	*功能代码
+	*菜单/功能id
 	**/
-	@ApiModelProperty(value="功能代码")
-	@Column(name="code")
-	private String code;
+	@ApiModelProperty(value="菜单/功能id")
+	@Column(name="privilege_id")
+	private String privilegeId;
 	/**
-	*备注信息
+	*用户id
 	**/
-	@ApiModelProperty(value="备注信息")
-	@Column(name="note")
-	private String note;
+	@ApiModelProperty(value="用户id")
+	@Column(name="manager_id")
+	private String managerId;
 	/**
 	*最后修改人id
 	**/
@@ -59,21 +59,15 @@ public class PrivilegeEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
-	*功能描述
-	**/
-	@ApiModelProperty(value="功能描述")
-	@Column(name="text")
-	private String text;
-	/**
 	*创建时间
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
 	/**
-	*10菜单权限  20商品分类权限
+	*权限类型,10菜单,20商品分类
 	**/
-	@ApiModelProperty(value="10菜单权限  20商品分类权限")
+	@ApiModelProperty(value="权限类型,10菜单,20商品分类")
 	@Column(name="type")
 	private Integer type;
 	
