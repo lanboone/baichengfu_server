@@ -127,4 +127,11 @@ public interface IPerson {
      * @return
      */
     Result bindParent(Request<BindParentDto> request) throws TipsException;
+
+    /**
+     * 修改密码
+     * @param request
+     * @return
+     */
+    Result changePwd(Request<ChangePwdDto> request) throws TipsException;
 }

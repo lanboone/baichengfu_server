@@ -37,6 +37,14 @@ public class PersonController {
     @Autowired
     IPerson person;
 
+    @ApiOperation(value = "忘记密码",notes = "用户id和token必传")
+    @RequestMapping(value = "/change_pwd", method = RequestMethod.POST)
+    public Result changePwd(@RequestBody Request<ChangePwdDto> request) throws Exception {
+
+
+        return person.changePwd(request);
+    }
+
     @ApiOperation(value = "绑定上线",notes = "绑定上线")
     @RequestMapping(value = "/bind_parent", method = RequestMethod.POST)
     public Result bindParent(@RequestBody Request<BindParentDto> request) throws Exception {

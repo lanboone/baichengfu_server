@@ -1,12 +1,10 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
+import com.yihukurama.sysbase.model.ProductCategoriesEntity;
 import com.yihukurama.sysbase.model.ProductEntity;
 import com.yihukurama.sysbase.model.ProductStandardEntity;
 import com.yihukurama.sysbase.model.StandardConfigEntity;
-import com.yihukurama.sysbase.module.archives.domain.AppuserShopcar;
-import com.yihukurama.sysbase.module.archives.domain.Product;
-import com.yihukurama.sysbase.module.archives.domain.ProductStandard;
-import com.yihukurama.sysbase.module.archives.domain.StandardConfig;
+import com.yihukurama.sysbase.module.archives.domain.*;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
@@ -36,6 +34,9 @@ public class ProductService extends CrudService<ProductEntity> {
 
     @Autowired
     StandardConfigService standardconfigService;
+
+    @Autowired
+    ProductCategoriesService productCategoriesService;
 
     @Override
     public Result list(ProductEntity productEntity, Integer page, Integer limit) throws TipsException {
@@ -132,6 +133,10 @@ public class ProductService extends CrudService<ProductEntity> {
             List<StandardConfigEntity> standardconfigEntityList = standardconfigService.list(standardconfigEntity);
             product.setStandardConfigEntityList(standardconfigEntityList);
 
+            ProductCategoriesEntity productCategoriesEntity = new ProductCategoriesEntity();
+            productCategoriesEntity.setId(product.getCategoriesId());
+            productCategoriesEntity = productCategoriesService.load(productCategoriesEntity);
+            product.setProductCategoriesEntity(productCategoriesEntity);
             return product;
         }
         return productEntityFromDB;

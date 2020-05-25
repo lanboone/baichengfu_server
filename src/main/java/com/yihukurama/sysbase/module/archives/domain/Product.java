@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.module.archives.domain;
 
+import com.yihukurama.sysbase.model.ProductCategoriesEntity;
 import com.yihukurama.sysbase.model.ProductEntity;
 import com.yihukurama.sysbase.model.ProductStandardEntity;
 import com.yihukurama.sysbase.model.StandardConfigEntity;
@@ -75,4 +76,5 @@ public class Product extends ProductEntity {
         return ltCost;
     }
 
+    ProductCategoriesEntity productCategoriesEntity;
 }

@@ -79,6 +79,10 @@ public class OrderService extends CrudService<OrderEntity>{
                 orderProductEntity.setProductPic(standardConfigEntity.getPrice());
                 orderProductEntity.setMarketPrice(standardConfigEntity.getMarketPrice());
                 orderProductEntity.setPrice(standardConfigEntity.getPrice());
+                if(orderProductEntity.getCount() == null){
+                    throw new TipsException("订单商品无数量");
+                }
+                productPrict = productPrict.multiply(new BigDecimal(orderProductEntity.getCount()));
                 totalPrice = totalPrice.add(productPrict);
                 orderProductEntity.setOrderId(resultOrderEntity.getId());
                 if(!EmptyUtil.isEmpty(appuserParentId)){

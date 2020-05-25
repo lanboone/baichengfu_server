@@ -14,6 +14,7 @@ import com.yihukurama.sysbase.module.archives.domain.Order;
 import com.yihukurama.sysbase.module.archives.service.domainservice.*;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
+import com.yihukurama.tkmybatisplus.framework.service.businessservice.ISecurity;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -473,5 +474,30 @@ public class PersonService implements IPerson {
         child.setParentId(parent.getId());
         child = appuserService.update(child);
         return Result.successed(child,"绑定成功");
+    }
+
+    @Autowired
+    ISecurity iSecurity;
+
+    @Override
+    public Result changePwd(Request<ChangePwdDto> request) throws TipsException {
+        ChangePwdDto changePwdDto = request.getData();
+        String appUserId = changePwdDto.getAppuserId();
+        AppuserEntity appuserEntity = new AppuserEntity();
+        appuserEntity.setId(appUserId);
+        appuserEntity = appuserService.load(appuserEntity);
+        String oldPwd = changePwdDto.getOldPassWord();
+        oldPwd = iSecurity.pwdEncrypt(oldPwd);
+        if(!oldPwd.equals(appuserEntity.getUserPassword())){
+            return Result.failed("旧密码不正确");
+        }
+        String pwd = changePwdDto.getPassword();
+        if(EmptyUtil.isEmpty(pwd)){
+            return Result.failed("新密码不能为空");
+        }
+        appuserEntity.setUserPassword(pwd);
+        appuserService.update(appuserEntity);
+
+        return Result.successed("修改成功");
     }
 }
