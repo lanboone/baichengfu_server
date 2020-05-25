@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
+import com.yihukurama.sysbase.common.utils.NumberUtil;
 import com.yihukurama.sysbase.model.ProductCategoriesEntity;
 import com.yihukurama.sysbase.model.ProductEntity;
 import com.yihukurama.sysbase.model.ProductStandardEntity;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.beans.Transient;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,13 +100,29 @@ public class ProductService extends CrudService<ProductEntity> {
             for (int i = 0; i < productstandardEntityList.size(); i++) {
                 productstandardEntityList.get(i).setProductId(productEntityFromDB.getId());
             }
+            BigDecimal lowRefPrice = new BigDecimal(999999999);
+            BigDecimal highRefPrice = new BigDecimal(0);
+            BigDecimal lowPrice = new BigDecimal(999999999);
+            BigDecimal highPrice = new BigDecimal(0);
+            int stock = 0;
             for (StandardConfigEntity standardConfig:standardconfigEntityList
                  ) {
                 if(standardConfig == null || standardConfig.getPrice() == null){
                     throw new TipsException("创建商品时具体规格商品价格必须要价格");
                 }
                 standardConfig.setProductId(productEntityFromDB.getId());
+                BigDecimal refPrice = standardConfig.getMarketPrice();
+                lowRefPrice = refPrice.min(lowRefPrice);
+                highRefPrice = refPrice.max(highRefPrice);
+                BigDecimal price = standardConfig.getPrice();
+                lowPrice = price.min(lowPrice);
+                highPrice = price.max(highPrice);
+                stock = NumberUtil.NullPlus(stock,standardConfig.getStock());
             }
+            productEntityFromDB.setRefPrice(lowRefPrice+"-"+highRefPrice);
+            productEntityFromDB.setPrice(lowPrice+"-"+highPrice);
+            productEntityFromDB.setStock(stock);
+            productEntityFromDB = super.update(productEntityFromDB);
             productstandardService.creates(productstandardEntityList);
             standardconfigService.creates(standardconfigEntityList);
         }

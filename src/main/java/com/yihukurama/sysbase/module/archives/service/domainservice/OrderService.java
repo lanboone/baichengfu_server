@@ -75,8 +75,8 @@ public class OrderService extends CrudService<OrderEntity>{
                 if(standardConfigEntity == null){
                     throw new TipsException("没有该规格商品");
                 }
-                BigDecimal productPrict = new BigDecimal(standardConfigEntity.getPrice());
-                orderProductEntity.setProductPic(standardConfigEntity.getPrice());
+                BigDecimal productPrict = standardConfigEntity.getPrice();
+                orderProductEntity.setProductPic(standardConfigEntity.getPictureUrl());
                 orderProductEntity.setMarketPrice(standardConfigEntity.getMarketPrice());
                 orderProductEntity.setPrice(standardConfigEntity.getPrice());
                 if(orderProductEntity.getCount() == null){

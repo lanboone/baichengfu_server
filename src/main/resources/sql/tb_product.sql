@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : baichengfucloudsit
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50717
- Source Host           : 8.129.180.116:3306
+ Source Server Version : 50729
+ Source Host           : localhost:3306
  Source Schema         : baichengfu
 
  Target Server Type    : MySQL
- Target Server Version : 50717
+ Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 25/05/2020 21:35:41
+ Date: 26/05/2020 00:11:15
 */
 
 SET NAMES utf8mb4;
@@ -39,12 +39,16 @@ CREATE TABLE `tb_product`  (
   `create_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `operator_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
   `operate_date` datetime(0) NULL DEFAULT NULL COMMENT '最后修改日期',
-  `ref_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '参考价',
+  `ref_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参考价',
   `categorie_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分类名',
   `order_count` int(11) NULL DEFAULT NULL COMMENT '综合排序字段',
   `hot_count` int(11) NULL DEFAULT NULL COMMENT '热门排序字段',
   `categorie_full` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分类信息',
   `point` int(11) NULL DEFAULT NULL COMMENT '商品积分',
+  `tag` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标签',
+  `stock` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '库存',
+  `freight` decimal(10, 0) NULL DEFAULT NULL COMMENT '运费',
+  `price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '市场价',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品表' ROW_FORMAT = Dynamic;
 

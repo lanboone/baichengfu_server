@@ -9,6 +9,7 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -69,13 +70,13 @@ public class StandardConfigEntity extends BaseEntity
 	**/
 	@ApiModelProperty(value="价格")
 	@Column(name="price")
-	private String price;
+	private BigDecimal price;
 	/**
 	*市场价
 	**/
 	@ApiModelProperty(value="市场价")
 	@Column(name="market_price")
-	private String marketPrice;
+	private BigDecimal marketPrice;
 	/**
 	*创建时间
 	**/
@@ -87,7 +88,7 @@ public class StandardConfigEntity extends BaseEntity
 	**/
 	@ApiModelProperty(value="库存")
 	@Column(name="stock")
-	private String stock;
+	private Integer stock;
 	
 	
 

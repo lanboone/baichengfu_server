@@ -9,6 +9,7 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -111,7 +112,7 @@ public class OrderProductEntity extends BaseEntity
 	**/
 	@ApiModelProperty(value="商品价格")
 	@Column(name="price")
-	private String price;
+	private BigDecimal price;
 	/**
 	*商品简介
 	**/
@@ -123,7 +124,7 @@ public class OrderProductEntity extends BaseEntity
 	**/
 	@ApiModelProperty(value="市场价")
 	@Column(name="market_price")
-	private String marketPrice;
+	private BigDecimal marketPrice;
 	/**
 	*状态 10待发货  20待收货  30待退款  40已退款  50已确认
 	**/

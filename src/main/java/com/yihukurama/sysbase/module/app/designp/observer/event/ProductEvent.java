@@ -78,6 +78,8 @@ public class ProductEvent extends ApplicationEvent {
         updateProductEntity.setId(productEntity.getId());
         updateProductEntity.setSalesVolume(NumberUtil.NullPlus(productEntity.getSalesVolume(),1));
         updateProductEntity.setOrderCount(NumberUtil.NullPlus(productEntity.getOrderCount(),1));
+        //商品库存减一
+        updateProductEntity.setStock(NumberUtil.NullSub(productEntity.getStock(),1));
         productMapper.updateByPrimaryKeySelective(updateProductEntity);
 
     }

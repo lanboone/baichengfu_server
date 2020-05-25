@@ -24,6 +24,30 @@ import java.util.Date;
 public class ProductEntity extends BaseEntity
 {
 
+
+	/**
+	 *标签
+	 **/
+	@ApiModelProperty(value="标签")
+	@Column(name="tag")
+	private String tag;
+
+	/**
+	 *库存
+	 **/
+	@ApiModelProperty(value="库存")
+	@Column(name="stock")
+	private Integer stock;
+
+	/**
+	 *运费
+	 **/
+	@ApiModelProperty(value="运费")
+	@Column(name="freight")
+	private String freight;
+
+
+
 	/**
 	 *分销积分
 	 **/
@@ -62,12 +86,18 @@ public class ProductEntity extends BaseEntity
 
 
 	/**
-	 *参考价
+	 *参考价，市场价
 	 **/
-	@ApiModelProperty(value="参考价")
+	@ApiModelProperty(value="参考价，市场价")
 	@Column(name="ref_price")
-	private BigDecimal refPrice;
+	private String refPrice;
 
+	/**
+	 *售价价
+	 **/
+	@ApiModelProperty(value="售价价")
+	@Column(name="price")
+	private String price;
 
 	/**
 	*子分类id
