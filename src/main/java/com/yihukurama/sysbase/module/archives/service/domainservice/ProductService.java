@@ -35,9 +35,6 @@ public class ProductService extends CrudService<ProductEntity> {
     @Autowired
     StandardConfigService standardconfigService;
 
-    @Autowired
-    ProductCategoriesService productCategoriesService;
-
     @Override
     public Result list(ProductEntity productEntity, Integer page, Integer limit) throws TipsException {
         if(productEntity instanceof Product){
@@ -132,11 +129,6 @@ public class ProductService extends CrudService<ProductEntity> {
             standardconfigEntity.setProductId(productId);
             List<StandardConfigEntity> standardconfigEntityList = standardconfigService.list(standardconfigEntity);
             product.setStandardConfigEntityList(standardconfigEntityList);
-
-            ProductCategoriesEntity productCategoriesEntity = new ProductCategoriesEntity();
-            productCategoriesEntity.setId(product.getCategoriesId());
-            productCategoriesEntity = productCategoriesService.load(productCategoriesEntity);
-            product.setProductCategoriesEntity(productCategoriesEntity);
             return product;
         }
         return productEntityFromDB;

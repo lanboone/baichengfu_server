@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : baichengfucloudsit
  Source Server Type    : MySQL
- Source Server Version : 50729
- Source Host           : localhost:3306
+ Source Server Version : 50717
+ Source Host           : 8.129.180.116:3306
  Source Schema         : baichengfu
 
  Target Server Type    : MySQL
- Target Server Version : 50729
+ Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 20/05/2020 00:04:22
+ Date: 25/05/2020 21:35:41
 */
 
 SET NAMES utf8mb4;
@@ -44,6 +44,7 @@ CREATE TABLE `tb_product`  (
   `order_count` int(11) NULL DEFAULT NULL COMMENT '综合排序字段',
   `hot_count` int(11) NULL DEFAULT NULL COMMENT '热门排序字段',
   `categorie_full` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分类信息',
+  `point` int(11) NULL DEFAULT NULL COMMENT '商品积分',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品表' ROW_FORMAT = Dynamic;
 

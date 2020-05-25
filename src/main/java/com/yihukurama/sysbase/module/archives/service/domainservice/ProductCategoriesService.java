@@ -3,6 +3,7 @@ package com.yihukurama.sysbase.module.archives.service.domainservice;
 import com.yihukurama.sysbase.mapper.ManagerMapper;
 import com.yihukurama.sysbase.model.ManagerEntity;
 import com.yihukurama.sysbase.model.ProductCategoriesEntity;
+import com.yihukurama.sysbase.model.ProductEntity;
 import com.yihukurama.sysbase.module.archives.domain.ProductCategories;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
@@ -45,5 +46,30 @@ public class ProductCategoriesService extends CrudService<ProductCategoriesEntit
             result.setData(productcategoriesList);
         }
         return result;
+    }
+
+    @Autowired
+    ProductService productService;
+
+    @Override
+    public ProductCategoriesEntity update(ProductCategoriesEntity productCategoriesEntity) throws TipsException {
+        if(productCategoriesEntity instanceof  ProductCategories){
+            ProductCategories productCategories = (ProductCategories) productCategoriesEntity;
+            if(productCategories.getPoint()!=null){
+                Integer point = productCategories.getPoint();
+                //更新下面所有的商品积分
+                ProductEntity productEntity = new ProductEntity();
+                productEntity.setCategoriesId(productCategories.getId());
+                List<ProductEntity> productEntityList = productService.list(productEntity);
+                if(!CollectionUtils.isEmpty(productEntityList)){
+                    for (int i = 0; i < productEntityList.size(); i++) {
+                        productEntityList.get(i).setPoint(point);
+                        productService.update(productEntityList.get(i));
+                    }
+                }
+            }
+        }
+
+        return super.update(productCategoriesEntity);
     }
 }
