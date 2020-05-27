@@ -29,23 +29,4 @@ public class ConfigurationService extends CrudService<ConfigurationEntity> {
         }
     }
 
-    @Override
-    public ConfigurationEntity create(ConfigurationEntity configurationEntity) throws TipsException {
-        return null;
-    }
-
-    @Override
-    public int creates(List<ConfigurationEntity> list) throws TipsException {
-        return 0;
-    }
-
-    @Override
-    public int removes(ConfigurationEntity configurationEntity) throws TipsException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        return 0;
-    }
-
-    @Override
-    public int remove(ConfigurationEntity configurationEntity) throws TipsException {
-        return 0;
-    }
 }
