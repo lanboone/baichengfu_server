@@ -37,7 +37,7 @@ public class PersonController {
     @Autowired
     IPerson person;
 
-    @ApiOperation(value = "忘记密码",notes = "用户id和token必传")
+    @ApiOperation(value = "修改密码",notes = "用户id和token必传")
     @RequestMapping(value = "/change_pwd", method = RequestMethod.POST)
     public Result changePwd(@RequestBody Request<ChangePwdDto> request) throws Exception {
 

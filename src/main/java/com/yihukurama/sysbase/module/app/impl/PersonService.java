@@ -495,6 +495,7 @@ public class PersonService implements IPerson {
         if(EmptyUtil.isEmpty(pwd)){
             return Result.failed("新密码不能为空");
         }
+        pwd = iSecurity.pwdEncrypt(pwd);
         appuserEntity.setUserPassword(pwd);
         appuserService.update(appuserEntity);
 
