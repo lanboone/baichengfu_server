@@ -66,6 +66,12 @@ public class AppControllerAspect {
 //                    return Result.failed("请求参数中没有token!收到的请求是>>>>>" + JSON.toJSONString(request));
 //                }
 
+
+                if (request.getData() == null) {
+                    return Result.failed("请求参数中没有data!收到的请求是>>>>>" + JSON.toJSONString(request));
+                }
+
+
                 if (simpleMethodName.startsWith("list")) {
                     //改变做法，page为空 自动添加page
                     if (request.getPage() == null) {
