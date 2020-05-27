@@ -1,8 +1,6 @@
 package com.yihukurama.sysbase.module.app.designp.observer;
 
-import com.yihukurama.sysbase.module.app.designp.observer.event.AppuserEvent;
-import com.yihukurama.sysbase.module.app.designp.observer.event.CommentEvent;
-import com.yihukurama.sysbase.module.app.designp.observer.event.TopicEvent;
+import com.yihukurama.sysbase.module.app.designp.observer.event.*;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -27,6 +25,13 @@ public class AppEventListener implements ApplicationListener {
             CommentEvent myEvent = (CommentEvent) event;
             myEvent.handleEvent();
         }
-
+        if(event instanceof PushEvent){
+            PushEvent myEvent = (PushEvent) event;
+            myEvent.handleEvent();
+        }
+        if(event instanceof ProductEvent){
+            ProductEvent myEvent = (ProductEvent) event;
+            myEvent.handleEvent();
+        }
     }
 }

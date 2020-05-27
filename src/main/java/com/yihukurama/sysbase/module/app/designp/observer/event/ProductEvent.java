@@ -49,6 +49,7 @@ public class ProductEvent extends ApplicationEvent {
     public void handleEvent(){
         switch (type){
             case TYPE_10:
+                LogUtil.debugLog(this,"收藏商品事件");
                 storeProduct();
                 break;
             case TYPE_20:
@@ -95,6 +96,8 @@ public class ProductEvent extends ApplicationEvent {
             LogUtil.errorLog(this,"处理收藏事件出错，事件源不是 AppuserProductEntity");
             return;
         }
+
+        LogUtil.debugLog(this,"收藏商品事件");
 
         //商品收藏数+1
         AppuserProductEntity appuserProductEntity = (AppuserProductEntity) source;

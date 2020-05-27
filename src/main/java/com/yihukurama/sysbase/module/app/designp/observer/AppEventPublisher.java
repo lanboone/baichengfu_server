@@ -19,7 +19,7 @@ public class AppEventPublisher implements ApplicationContextAware {
         // TODO Auto-generated method stub
         this.applicationContext=applicationContext;
     }
-    @Async("asyncServiceExecutor")
+//    @Async("asyncServiceExecutor")
     public void publishEvent(ApplicationEvent event){
 
         applicationContext.publishEvent(event);
