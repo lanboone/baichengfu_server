@@ -25,6 +25,22 @@ public class ProductCategoriesEntity extends BaseEntity
 
 
 	/**
+	 *排序
+	 **/
+	@ApiModelProperty(value="排序")
+	@Column(name="index_order")
+	private Integer indexOrder;
+
+
+	/**
+	 *创建人昵称
+	 **/
+	@ApiModelProperty(value="创建人昵称")
+	@Column(name="create_name")
+	private String createName;
+
+
+	/**
 	 *分销积分
 	 **/
 	@ApiModelProperty(value="分销积分")
