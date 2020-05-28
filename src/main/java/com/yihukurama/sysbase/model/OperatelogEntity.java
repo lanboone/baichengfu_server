@@ -23,23 +23,11 @@ import java.util.Date;
 public class OperatelogEntity extends BaseEntity
 {
 	/**
-	*最后修改人id
-	**/
-	@ApiModelProperty(value="最后修改人id")
-	@Column(name="operator_id")
-	private String operatorId;
-	/**
-	*最后修改日期
-	**/
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operate_date")
-	private Date operateDate;
-	/**
-	*关联id
+	*ip
 	**/
 	@ApiModelProperty(value="关联id")
-	@Column(name="relate_id")
-	private String relateId;
+	@Column(name="ip")
+	private String ip;
 	/**
 	*创建人id
 	**/

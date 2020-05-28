@@ -5,13 +5,16 @@ import com.yihukurama.sysbase.controller.admin.dto.ManagerModifyDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ModifyPassWordDTO;
 import com.yihukurama.sysbase.model.ManagerEntity;
 import com.yihukurama.sysbase.model.ManagerprivilegeEntity;
+import com.yihukurama.sysbase.model.OperatelogEntity;
 import com.yihukurama.sysbase.model.PrivilegeEntity;
 import com.yihukurama.sysbase.module.admin.IManager;
 import com.yihukurama.sysbase.module.archives.domain.Manager;
 import com.yihukurama.sysbase.module.archives.domain.ManagerPrivilege;
+import com.yihukurama.sysbase.module.archives.domain.Operatelog;
 import com.yihukurama.sysbase.module.archives.domain.Privilege;
 import com.yihukurama.sysbase.module.archives.service.domainservice.ManagerPrivilegeService;
 import com.yihukurama.sysbase.module.archives.service.domainservice.ManagerService;
+import com.yihukurama.sysbase.module.archives.service.domainservice.OperatelogService;
 import com.yihukurama.sysbase.module.archives.service.domainservice.PrivilegeService;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.TransferUtils;
@@ -41,6 +44,9 @@ public class ManagerServiceImpl implements IManager {
 
     @Autowired
     PrivilegeService privilegeService;
+
+    @Autowired
+    OperatelogService operatelogService;
 
     @Override
     public Result adminLogin(Request<LoginDTO> request) throws TipsException {
@@ -90,6 +96,11 @@ public class ManagerServiceImpl implements IManager {
         loginManager.setProductPrivilegeEntities(productPrivilegeEntities);
         loginManager.setMenuPrivilegeEntities(menuPrivilegeEntities);
 
+        OperatelogEntity operatelogEntity = new OperatelogEntity();
+        operatelogEntity.setCreaterId(loginManager.getId());
+        operatelogEntity.setCreaterName(loginManager.getSysName());
+        operatelogEntity.setType(Operatelog.LOGIN_TYPE);
+        operatelogService.create(operatelogEntity);
         return Result.successed(loginManager, "登录成功");
     }
 
