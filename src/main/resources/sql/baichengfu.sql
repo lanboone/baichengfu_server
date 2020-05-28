@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 27/05/2020 22:29:34
+ Date: 28/05/2020 21:05:13
 */
 
 SET NAMES utf8mb4;
@@ -755,6 +755,8 @@ CREATE TABLE `tb_product_categories`  (
   `operator_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
   `operate_date` datetime(0) NULL DEFAULT NULL COMMENT '最后修改日期',
   `point` int(11) NULL DEFAULT NULL COMMENT '分销积分',
+  `creater_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人昵称',
+  `index_order` int(11) NULL DEFAULT 0 COMMENT '排序字段',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品分类表' ROW_FORMAT = Dynamic;
 
@@ -999,6 +1001,7 @@ CREATE TABLE `tb_topic`  (
   `topic_image` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '话题封面图，每个图片链接使用分号分割',
   `topic_head` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者头像',
   `topic_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者昵称',
+  `status` int(11) NULL DEFAULT 10 COMMENT '10显示  20 隐藏',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `topic_title`(`topic_title`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '话题表' ROW_FORMAT = Compact;
@@ -1021,6 +1024,7 @@ CREATE TABLE `tb_topic_comment`  (
   `comment_head` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者头像',
   `comment_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者昵称',
   `reply` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `status` int(11) NULL DEFAULT 10 COMMENT '10显示  20 隐藏',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `topic_id_index`(`topic_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '话题评论表' ROW_FORMAT = Compact;
