@@ -17,13 +17,19 @@ import com.yihukurama.sysbase.module.archives.service.domainservice.ManagerServi
 import com.yihukurama.sysbase.module.archives.service.domainservice.OperatelogService;
 import com.yihukurama.sysbase.module.archives.service.domainservice.PrivilegeService;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
+import com.yihukurama.tkmybatisplus.app.utils.InfoUtil;
 import com.yihukurama.tkmybatisplus.app.utils.TransferUtils;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
+import io.netty.handler.codec.http.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -100,6 +106,11 @@ public class ManagerServiceImpl implements IManager {
         operatelogEntity.setCreaterId(loginManager.getId());
         operatelogEntity.setCreaterName(loginManager.getSysName());
         operatelogEntity.setType(Operatelog.LOGIN_TYPE);
+        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
+        HttpServletRequest hsRequest = sra.getRequest();
+        String ip = InfoUtil.getIpAddr(hsRequest);
+        operatelogEntity.setIp(ip);
         operatelogService.create(operatelogEntity);
         return Result.successed(loginManager, "登录成功");
     }
