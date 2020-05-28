@@ -36,8 +36,8 @@ public class ProductCategoriesEntity extends BaseEntity
 	 *创建人昵称
 	 **/
 	@ApiModelProperty(value="创建人昵称")
-	@Column(name="create_name")
-	private String createName;
+	@Column(name="creater_name")
+	private String createrName;
 
 
 	/**
