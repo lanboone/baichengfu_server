@@ -23,6 +23,14 @@ import java.util.Date;
 public class TopicEntity extends BaseEntity
 {
 	/**
+	 *10 显示  20 隐藏
+	 **/
+	@ApiModelProperty(value="10 显示  20 隐藏")
+	@Column(name="status")
+	private Integer status;
+
+
+	/**
 	*话题评论数
 	**/
 	@ApiModelProperty(value="话题评论数")

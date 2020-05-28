@@ -22,6 +22,15 @@ import java.util.Date;
 @Data
 public class TopicCommentEntity extends BaseEntity
 {
+
+	/**
+	 *10 显示  20 隐藏
+	 **/
+	@ApiModelProperty(value="10 显示  20 隐藏")
+	@Column(name="status")
+	private Integer status;
+
+
 	/**
 	*创建者昵称
 	**/
