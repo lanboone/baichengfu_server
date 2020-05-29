@@ -23,6 +23,14 @@ import java.util.Date;
 public class MasterCommentEntity extends BaseEntity
 {
 	/**
+	 *订单号
+	 **/
+	@ApiModelProperty(value="关联订单号")
+	@Column(name="order_num")
+	private String orderNum;
+
+
+	/**
 	*创建者昵称
 	**/
 	@ApiModelProperty(value="创建者昵称")

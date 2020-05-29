@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 29/05/2020 22:37:28
+ Date: 29/05/2020 22:48:48
 */
 
 SET NAMES utf8mb4;
@@ -585,6 +585,7 @@ CREATE TABLE `tb_master_comment`  (
   `reply` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `product_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品名称',
   `order_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '关联的订单id',
+  `order_num` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '关联的订单号',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `topic_id_index`(`master_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '话题评论表' ROW_FORMAT = Dynamic;
