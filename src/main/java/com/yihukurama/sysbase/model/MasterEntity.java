@@ -115,11 +115,11 @@ public class MasterEntity extends BaseEntity
 	@Column(name="style")
 	private String style;
 	/**
-	*预留字段5
+	*星评价
 	**/
-	@ApiModelProperty(value="预留字段5")
-	@Column(name="parameter5")
-	private Integer parameter5;
+	@ApiModelProperty(value="星评价")
+	@Column(name="star")
+	private Integer star;
 	/**
 	*师傅状态 10 待审核   20已审核
 	**/

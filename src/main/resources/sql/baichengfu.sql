@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 28/05/2020 22:26:33
+ Date: 29/05/2020 22:37:28
 */
 
 SET NAMES utf8mb4;
@@ -550,7 +550,7 @@ CREATE TABLE `tb_master`  (
   `certificate_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '证书路径',
   `type` int(11) NULL DEFAULT NULL COMMENT '类型  10 个人  20公司',
   `service_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '服务价位',
-  `parameter5` int(255) NULL DEFAULT NULL COMMENT '预留字段5',
+  `star` int(255) NULL DEFAULT NULL COMMENT '星评价',
   `style` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '装修技能，使用分号隔开前面无分号，最后有分号;',
   `likecount` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '列表的心统计',
   `wantcount` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '列表想让他设计统计',
@@ -561,6 +561,33 @@ CREATE TABLE `tb_master`  (
   `phone_number` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '装修师傅表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for tb_master_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_master_comment`;
+CREATE TABLE `tb_master_comment`  (
+  `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
+  `reply_path` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '该评论回复的id集合，时间越早的在约前面',
+  `c_parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '父评论id',
+  `master_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品id',
+  `comment_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评论内容',
+  `is_delete` int(11) NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
+  `creater_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
+  `create_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `operator_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
+  `operate_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后修改日期',
+  `comment_head` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者头像',
+  `comment_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者昵称',
+  `star` int(11) NULL DEFAULT NULL COMMENT '星级评价',
+  `pics` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '评论的图片，视频访问路径，用分号隔开，用后缀区分',
+  `product_detail` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '评论时的商品详情',
+  `reply` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `product_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品名称',
+  `order_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '关联的订单id',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `topic_id_index`(`master_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '话题评论表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_master_skill
@@ -648,6 +675,12 @@ CREATE TABLE `tb_order`  (
   `receive_phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收件人电话',
   `receive_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收件地址',
   `appuser_parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '该订单用户的上线id',
+  `freight` decimal(10, 0) NULL DEFAULT NULL COMMENT '运费',
+  `gen_point` int(11) NULL DEFAULT NULL COMMENT '积分产生',
+  `consum_point` int(11) NULL DEFAULT NULL COMMENT '抵扣积分',
+  `pay_time` datetime(0) NULL DEFAULT NULL COMMENT '付款时间',
+  `send_time` datetime(0) NULL DEFAULT NULL COMMENT '发货时间',
+  `master_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '安装师傅id',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `product_id`(`product_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单表' ROW_FORMAT = Compact;
@@ -976,6 +1009,7 @@ CREATE TABLE `tb_standard_config`  (
   `create_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `operator_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
   `operate_date` datetime(0) NULL DEFAULT NULL COMMENT '最后修改日期',
+  `point` int(11) NULL DEFAULT NULL COMMENT '分销积分',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci COMMENT = '商品规格配置表' ROW_FORMAT = Dynamic;
 

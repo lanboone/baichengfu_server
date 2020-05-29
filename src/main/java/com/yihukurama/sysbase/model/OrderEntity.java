@@ -25,6 +25,14 @@ public class OrderEntity extends BaseEntity
 {
 
 	/**
+	 *安装师傅id
+	 **/
+	@ApiModelProperty(value="安装师傅id")
+	@Column(name="master_id")
+	private String masterId;
+
+
+	/**
 	 *运费
 	 **/
 	@ApiModelProperty(value="运费")
