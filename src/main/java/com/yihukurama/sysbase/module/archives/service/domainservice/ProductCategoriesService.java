@@ -4,7 +4,9 @@ import com.yihukurama.sysbase.mapper.ManagerMapper;
 import com.yihukurama.sysbase.model.ManagerEntity;
 import com.yihukurama.sysbase.model.ProductCategoriesEntity;
 import com.yihukurama.sysbase.model.ProductEntity;
+import com.yihukurama.sysbase.model.StandardConfigEntity;
 import com.yihukurama.sysbase.module.archives.domain.ProductCategories;
+import com.yihukurama.sysbase.module.archives.domain.StandardConfig;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
@@ -21,6 +23,9 @@ public class ProductCategoriesService extends CrudService<ProductCategoriesEntit
 
     @Autowired
     ManagerMapper managerMapper;
+
+    @Autowired
+    private StandardConfigService standardConfigService;
 
     @Override
     public Result list(ProductCategoriesEntity productCategoriesEntity, Integer page, Integer limit) throws TipsException {
@@ -65,6 +70,16 @@ public class ProductCategoriesService extends CrudService<ProductCategoriesEntit
                     for (int i = 0; i < productEntityList.size(); i++) {
                         productEntityList.get(i).setPoint(point);
                         productService.update(productEntityList.get(i));
+
+                        //更新下面所有商品明细分类的积分
+                        StandardConfigEntity standardConfig = new StandardConfig();
+                        standardConfig.setProductId(productEntityList.get(i).getId());
+                        List<StandardConfigEntity> standardConfigEntities = standardConfigService.list(standardConfig);
+                        for (int j = 0; j < standardConfigEntities.size(); j++) {
+                            standardConfigEntities.get(j).setPoint(point);
+                            standardConfigService.update(standardConfigEntities.get(j));
+                        }
+
                     }
                 }
             }

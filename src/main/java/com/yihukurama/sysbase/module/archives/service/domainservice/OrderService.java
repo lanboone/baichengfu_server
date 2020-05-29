@@ -1,10 +1,7 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
 import com.yihukurama.sysbase.common.utils.NumberUtil;
-import com.yihukurama.sysbase.model.AppuserEntity;
-import com.yihukurama.sysbase.model.OrderEntity;
-import com.yihukurama.sysbase.model.OrderProductEntity;
-import com.yihukurama.sysbase.model.StandardConfigEntity;
+import com.yihukurama.sysbase.model.*;
 import com.yihukurama.sysbase.module.archives.domain.Order;
 import com.yihukurama.sysbase.module.archives.domain.OrderProduct;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
@@ -12,6 +9,7 @@ import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.app.utils.TransferUtils;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,6 +61,8 @@ public class OrderService extends CrudService<OrderEntity>{
             }
             //计算价格
             BigDecimal totalPrice = new BigDecimal(0);
+            Integer totalPoint = 0;
+            Integer totalConsumPoint = resultOrderEntity.getConsumPoint() == null? 0 : resultOrderEntity.getConsumPoint();
             for (int i = 0; i < orderProductEntityList.size(); i++) {
                 OrderProductEntity  orderProductEntity = orderProductEntityList.get(i);
                 String standConfigId = orderProductEntity.getStandConfigId();
@@ -76,6 +76,7 @@ public class OrderService extends CrudService<OrderEntity>{
                     throw new TipsException("没有该规格商品");
                 }
                 BigDecimal productPrict = standardConfigEntity.getPrice();
+                Integer genPoint = standardConfigEntity.getPoint() == null ? 0 : standardConfigEntity.getPoint();
                 orderProductEntity.setProductPic(standardConfigEntity.getPictureUrl());
                 orderProductEntity.setMarketPrice(standardConfigEntity.getMarketPrice());
                 orderProductEntity.setPrice(standardConfigEntity.getPrice());
@@ -84,6 +85,8 @@ public class OrderService extends CrudService<OrderEntity>{
                 }
                 productPrict = productPrict.multiply(new BigDecimal(orderProductEntity.getCount()));
                 totalPrice = totalPrice.add(productPrict);
+                genPoint = genPoint*orderProductEntity.getCount();
+                totalPoint = totalPoint+genPoint;
                 orderProductEntity.setOrderId(resultOrderEntity.getId());
                 if(!EmptyUtil.isEmpty(appuserParentId)){
                     orderProductEntity.setAppuserParentId(appuserParentId);
@@ -91,8 +94,9 @@ public class OrderService extends CrudService<OrderEntity>{
                 OrderProductEntity resultOrderProductEntity = orderProductService.create(orderProductEntity);
                 resultOrderProduct.add(resultOrderProductEntity);
             }
-            orderEntity.setPaidPrice(totalPrice);
+            orderEntity.setPaidPrice(totalPrice.subtract(new BigDecimal(totalConsumPoint)));
             orderEntity.setOrderPrice(totalPrice);
+            orderEntity.setGenPoint(totalPoint);
             //更新订单金额
             super.update(orderEntity);
         }
@@ -143,6 +147,12 @@ public class OrderService extends CrudService<OrderEntity>{
         return order;
     }
 
+    /**
+     * 获取所有订单商品
+     * @param orderEntity
+     * @return
+     * @throws TipsException
+     */
     public List<OrderProductEntity> doGetOrderProducts(@NotNull OrderEntity orderEntity) throws TipsException {
         orderEntity = this.load(orderEntity);
         OrderProductEntity orderProductEntity = new OrderProductEntity();

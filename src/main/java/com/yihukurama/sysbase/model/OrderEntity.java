@@ -36,14 +36,14 @@ public class OrderEntity extends BaseEntity
 	 **/
 	@ApiModelProperty(value="产生积分")
 	@Column(name="gen_point")
-	private BigDecimal genPoint;
+	private Integer genPoint;
 
 	/**
 	 *消费积分
 	 **/
 	@ApiModelProperty(value="消费积分")
 	@Column(name="consum_point")
-	private BigDecimal consumPoint;
+	private Integer consumPoint;
 
 
 	/**
