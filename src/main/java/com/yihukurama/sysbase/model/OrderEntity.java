@@ -24,6 +24,43 @@ import java.util.Date;
 public class OrderEntity extends BaseEntity
 {
 
+	/**
+	 *运费
+	 **/
+	@ApiModelProperty(value="运费")
+	@Column(name="freight")
+	private BigDecimal freight;
+
+	/**
+	 *产生积分
+	 **/
+	@ApiModelProperty(value="产生积分")
+	@Column(name="gen_point")
+	private BigDecimal genPoint;
+
+	/**
+	 *消费积分
+	 **/
+	@ApiModelProperty(value="消费积分")
+	@Column(name="consum_point")
+	private BigDecimal consumPoint;
+
+
+	/**
+	 *发货时间
+	 **/
+	@ApiModelProperty(value="发货时间")
+	@Column(name="send_time")
+	private Date sendTime;
+
+
+	/**
+	 *支付时间
+	 **/
+	@ApiModelProperty(value="支付时间")
+	@Column(name="pay_time")
+	private Date payTime;
+
 
 	/**
 	 *用户上线id

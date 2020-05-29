@@ -3,25 +3,17 @@ package com.yihukurama.sysbase.module.admin.impl;
 import com.yihukurama.sysbase.controller.admin.dto.LoginDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ManagerModifyDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ModifyPassWordDTO;
-import com.yihukurama.sysbase.model.ManagerEntity;
-import com.yihukurama.sysbase.model.ManagerprivilegeEntity;
-import com.yihukurama.sysbase.model.OperatelogEntity;
-import com.yihukurama.sysbase.model.PrivilegeEntity;
+import com.yihukurama.sysbase.model.*;
 import com.yihukurama.sysbase.module.admin.IManager;
 import com.yihukurama.sysbase.module.archives.domain.Manager;
-import com.yihukurama.sysbase.module.archives.domain.ManagerPrivilege;
 import com.yihukurama.sysbase.module.archives.domain.Operatelog;
 import com.yihukurama.sysbase.module.archives.domain.Privilege;
-import com.yihukurama.sysbase.module.archives.service.domainservice.ManagerPrivilegeService;
-import com.yihukurama.sysbase.module.archives.service.domainservice.ManagerService;
-import com.yihukurama.sysbase.module.archives.service.domainservice.OperatelogService;
-import com.yihukurama.sysbase.module.archives.service.domainservice.PrivilegeService;
+import com.yihukurama.sysbase.module.archives.service.domainservice.*;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.InfoUtil;
 import com.yihukurama.tkmybatisplus.app.utils.TransferUtils;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
-import io.netty.handler.codec.http.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -178,4 +170,5 @@ public class ManagerServiceImpl implements IManager {
         ManagerEntity managerSuc = managerEntities.get(0);
         return Result.successed(managerSuc, "登录成功");
     }
+
 }

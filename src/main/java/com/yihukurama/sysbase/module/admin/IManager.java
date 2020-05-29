@@ -1,9 +1,7 @@
 package com.yihukurama.sysbase.module.admin;
 
-import com.yihukurama.sysbase.controller.admin.dto.LoginDTO;
-import com.yihukurama.sysbase.controller.admin.dto.ManagerModifyDTO;
-import com.yihukurama.sysbase.controller.admin.dto.ModifyPassWordDTO;
-import com.yihukurama.sysbase.controller.admin.dto.TokenLoginDTO;
+import com.yihukurama.sysbase.controller.admin.dto.*;
+import com.yihukurama.sysbase.module.archives.domain.Order;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
@@ -47,4 +45,5 @@ public interface IManager {
      * @return
      */
     Result managerLoginByToken(String id, String token) throws TipsException;
+
 }

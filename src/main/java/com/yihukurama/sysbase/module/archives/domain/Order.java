@@ -3,9 +3,11 @@ package com.yihukurama.sysbase.module.archives.domain;
 import com.yihukurama.sysbase.model.AppuserShopcarEntity;
 import com.yihukurama.sysbase.model.OrderEntity;
 import com.yihukurama.sysbase.model.OrderProductEntity;
+import com.yihukurama.tkmybatisplus.app.annotation.SqlWhere;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -37,5 +39,24 @@ public class Order extends OrderEntity {
     public static int SEARCH_TYPE_10  = 10;
     @ApiModelProperty(value="创建订单时关联的商品")
     List<OrderProductEntity> orderProducts;
+
+    /**
+     * 查询时 大于等于该时间
+     */
+    @ApiModelProperty(value = "查询时 大于等于该时间")
+    private Date gtCreateDate;
+    /**
+     * 查询时 小于等于该时间
+     */
+    @ApiModelProperty(value = "查询时 小于等于该时间")
+    private Date ltCreateDate;
+    @SqlWhere(value = SqlWhere.SqlWhereValue.GT,proprtityName = "create_date")
+    public Date getGtCreateDate() {
+        return gtCreateDate;
+    }
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LT,proprtityName = "create_date")
+    public Date getLtCreateDate() {
+        return ltCreateDate;
+    }
 
 }
