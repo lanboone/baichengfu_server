@@ -101,3 +101,5 @@ mqtt:
   # 消费者连接服务器默认客户端ID（这里使用随机数）
   receiver:
     clientId: ${random.value}
+  # 默认的接收主题，实际可在调用接口时指定
+    defaultTopic: hangge
