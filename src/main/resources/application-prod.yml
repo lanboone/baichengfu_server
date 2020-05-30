@@ -1,14 +1,14 @@
 # 端口配置
 server:
-  port: 8081
+  port: 8083
   http:
-    port: 8444
+    port: 8333
 spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/baichengfu?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/baichengfu_prod?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
@@ -66,9 +66,10 @@ wxapp:
   appSecret:
 #系统配置
 system:
-  saveFilePath: /home/baichengfu_server/file
+  saveFilePath: /root/prod/baichengfu/file
   accesslog: logs/
   redisPrefix: baichengfu-redis-sitpre
+
 
 alipay:
   appId: 2021001159612742
@@ -84,3 +85,22 @@ wxpayconfig:
   mchId: xxxxxx
   mchKey: xxxxxxx
   notifyUrl: http://xxxxx
+
+
+# 用户名（这里为空）
+mqtt:
+  username: admin
+  # 密码（这里为空）
+  password: baichengfu
+  # 推送信息的连接地址，如果有多个，用逗号隔开，如：tcp://127.0.0.1:1883,tcp://192.168.60.133:1883
+  url: tcp://8.129.180.116:1883
+  # 生产者连接服务器默认客户端ID
+  sender:
+    clientId: mqttProducer
+    # 默认的推送主题，实际可在调用接口时指定
+    defaultTopic: hangge
+  # 消费者连接服务器默认客户端ID（这里使用随机数）
+  receiver:
+    clientId: ${random.value}
+    # 默认的接收主题，实际可在调用接口时指定
+    defaultTopic: hangge
