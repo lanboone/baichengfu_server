@@ -51,6 +51,16 @@ public class OrderService extends CrudService<OrderEntity>{
         if(!EmptyUtil.isEmpty(appuserParentId)){
             orderEntity.setAppuserParentId(appuserParentId);
         }
+        //查看积分抵扣
+        Integer integral = appuserEntity.getIntegral();
+        if(integral == null){
+            integral = 0;
+        }
+        Integer totalConsumPoint = orderEntity.getConsumPoint() == null? 0 : orderEntity.getConsumPoint();
+
+        if(totalConsumPoint<integral){
+            throw new TipsException("用户积分不足");
+        }
         OrderEntity resultOrderEntity = super.create(orderEntity);
 
         if(orderEntity instanceof Order){
@@ -62,7 +72,6 @@ public class OrderService extends CrudService<OrderEntity>{
             //计算价格
             BigDecimal totalPrice = new BigDecimal(0);
             Integer totalPoint = 0;
-            Integer totalConsumPoint = resultOrderEntity.getConsumPoint() == null? 0 : resultOrderEntity.getConsumPoint();
             for (int i = 0; i < orderProductEntityList.size(); i++) {
                 OrderProductEntity  orderProductEntity = orderProductEntityList.get(i);
                 String standConfigId = orderProductEntity.getStandConfigId();
@@ -94,11 +103,17 @@ public class OrderService extends CrudService<OrderEntity>{
                 OrderProductEntity resultOrderProductEntity = orderProductService.create(orderProductEntity);
                 resultOrderProduct.add(resultOrderProductEntity);
             }
+            totalPrice = totalPrice.add(orderEntity.getFreight());
             orderEntity.setPaidPrice(totalPrice.subtract(new BigDecimal(totalConsumPoint)));
             orderEntity.setOrderPrice(totalPrice);
             orderEntity.setGenPoint(totalPoint);
             //更新订单金额
             super.update(orderEntity);
+            //更新个人积分
+            appuserEntity = new AppuserEntity();
+            appuserEntity.setId(orderEntity.getAppuserId());
+            appuserEntity.setIntegral(integral-totalConsumPoint);
+            appuserService.update(appuserEntity);
         }
         Order order = TransferUtils.transferEntity2Domain(resultOrderEntity,Order.class);
         order.setOrderProducts(resultOrderProduct);

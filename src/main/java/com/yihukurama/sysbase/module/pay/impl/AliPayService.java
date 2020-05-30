@@ -34,6 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Service("AliPayService")
@@ -125,6 +126,7 @@ public class AliPayService implements IPay {
                         LogUtil.errorLog(this,"支付宝回调出现问题,支付金额与订单金额不一致,回调参数为:"+JSON.toJSONString(requestBody));
                     }
                     orderEntity.setTradeNo(trade_no);
+                    orderEntity.setPayTime(new Date(System.currentTimeMillis()));
                     orderService.update(orderEntity);
                     OrderProductEntity orderProductEntity = new OrderProductEntity();
                     orderProductEntity.setOrderId(orderEntity.getId());
