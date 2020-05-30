@@ -23,6 +23,14 @@ import java.util.Date;
 public class TopicCommentEntity extends BaseEntity
 {
 
+
+	/**
+	 *话题标题
+	 **/
+	@ApiModelProperty(value="话题标题")
+	@Column(name="topic_title")
+	private String topicTitle;
+
 	/**
 	 *10 显示  20 隐藏
 	 **/

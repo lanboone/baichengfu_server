@@ -1,8 +1,10 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
 import com.yihukurama.sysbase.model.TopicCommentEntity;
+import com.yihukurama.sysbase.model.TopicEntity;
 import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
 import com.yihukurama.sysbase.module.app.designp.observer.event.CommentEvent;
+import com.yihukurama.sysbase.module.archives.domain.Topic;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.app.utils.LogUtil;
@@ -17,6 +19,9 @@ public class TopicCommentService extends CrudService<TopicCommentEntity> {
     @Autowired
     AppEventPublisher appEventPublisher;
 
+    @Autowired
+    TopicService topicService;
+
     @Override
     public TopicCommentEntity create(TopicCommentEntity topicCommentEntity) throws TipsException {
         if (EmptyUtil.isEmpty(topicCommentEntity.getCommentName())
@@ -29,7 +34,10 @@ public class TopicCommentService extends CrudService<TopicCommentEntity> {
         }
 
 
-
+        TopicEntity topicEntity = new TopicEntity();
+        topicEntity.setId(topicCommentEntity.getTopicId());
+        topicService.load(topicEntity);
+        topicCommentEntity.setTopicTitle(topicEntity.getTopicTitle());
         topicCommentEntity = super.create(topicCommentEntity);
 
 
