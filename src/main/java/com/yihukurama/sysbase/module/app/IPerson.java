@@ -134,4 +134,18 @@ public interface IPerson {
      * @return
      */
     Result changePwd(Request<ChangePwdDto> request) throws TipsException;
+
+    /**
+     * 商品评论点赞
+     * @param request
+     * @return
+     */
+    Result clickGoodProductComment(Request<ClickGoodProductCommentDto> request) throws TipsException;
+
+    /**
+     * 商品评论取消点赞
+     * @param request
+     * @return
+     */
+    Result unClickGoodProductComment(Request<ClickGoodProductCommentDto> request) throws TipsException;
 }

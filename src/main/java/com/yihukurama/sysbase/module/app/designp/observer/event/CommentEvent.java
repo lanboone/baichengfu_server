@@ -39,7 +39,7 @@ public class CommentEvent extends ApplicationEvent {
 
 
     /**
-     * 事件类型  10创建评论  20取消点赞
+     * 事件类型  10创建话题评论  20创建商品评论事件
      */
     private Integer type;
     public CommentEvent(Object source) {

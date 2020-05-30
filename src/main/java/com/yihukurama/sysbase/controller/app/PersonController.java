@@ -177,9 +177,21 @@ public class PersonController {
     @ApiOperation(value = "取消点赞",notes = "取消点赞，传入话题id和自己的appuserId")
     @RequestMapping(value = "/un_click_good", method = RequestMethod.POST)
     public Result unClickGood(@RequestBody Request<ClickGoodDto> request) throws Exception {
-
-
         return person.unClickGood(request);
+    }
+
+    @ApiOperation(value ="点赞商品评论",notes = "点赞商品评论，传入话题id，评论id和自己的appuserId")
+    @RequestMapping(value = "/click_good_product_comment", method = RequestMethod.POST)
+    public Result clickGoodProductComment(@RequestBody Request<ClickGoodProductCommentDto> request) throws Exception {
+
+
+        return person.clickGoodProductComment(request);
+    }
+
+    @ApiOperation(value = "取消点赞商品评论",notes = "取消点赞商品评论，传入话题id和自己的appuserId")
+    @RequestMapping(value = "/un_click_good_product_comment", method = RequestMethod.POST)
+    public Result unClickGoodProductComment(@RequestBody Request<ClickGoodProductCommentDto> request) throws Exception {
+        return person.unClickGoodProductComment(request);
     }
 }
 

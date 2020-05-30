@@ -42,6 +42,9 @@ public class PersonService implements IPerson {
     @Autowired
     AppuserCommentService appuserCommentService;
     @Autowired
+    AppuserProductCommentService appuserProductCommentService;
+
+    @Autowired
     AppuserTopicService appuserTopicService;
 
     @Autowired
@@ -500,5 +503,41 @@ public class PersonService implements IPerson {
         appuserService.update(appuserEntity);
 
         return Result.successed("修改成功");
+    }
+
+    @Override
+    public Result clickGoodProductComment(Request<ClickGoodProductCommentDto> request) throws TipsException {
+        AppuserProductCommentEntity appuserProductCommentEntity = new AppuserProductCommentEntity();
+        appuserProductCommentEntity.setAppuserId(request.getData().getAppuserId());
+        appuserProductCommentEntity.setProductId(request.getData().getProductId());
+        appuserProductCommentEntity.setCommentId(request.getData().getCommentId());
+        List<AppuserProductCommentEntity> appuserProductCommentEntityList = appuserProductCommentService.list(appuserProductCommentEntity);
+        if(!EmptyUtil.isEmpty(appuserProductCommentEntityList)){
+            return Result.failed(null,"您已点赞",-1);
+        }
+        appuserProductCommentEntity = appuserProductCommentService.create(appuserProductCommentEntity);
+        if(appuserProductCommentEntity == null){
+            return Result.failed(null,"点赞失败",-20);
+
+        }
+        return Result.successed(appuserProductCommentEntity,"点赞成功");
+    }
+
+    @Override
+    public Result unClickGoodProductComment(Request<ClickGoodProductCommentDto> request) throws TipsException {
+        AppuserProductCommentEntity AppuserProductCommentEntity = new AppuserProductCommentEntity();
+        AppuserProductCommentEntity.setAppuserId(request.getData().getAppuserId());
+        AppuserProductCommentEntity.setProductId(request.getData().getProductId());
+        AppuserProductCommentEntity.setCommentId(request.getData().getCommentId());
+        List<AppuserProductCommentEntity> AppuserProductCommentEntityList = appuserProductCommentService.list(AppuserProductCommentEntity);
+        if(EmptyUtil.isEmpty(AppuserProductCommentEntityList)){
+            return Result.failed(null,"您已取消点赞",-1);
+        }
+        int removeCount = appuserProductCommentService.remove(AppuserProductCommentEntityList.get(0));
+        if(removeCount == 1){
+            return Result.successed(AppuserProductCommentEntity,"取消点赞成功");
+        }
+        return Result.failed(null,"取消点赞失败",-20);
+
     }
 }
