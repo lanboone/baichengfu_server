@@ -1,8 +1,8 @@
 # 端口配置
 server:
-  port: 8883
+  port: 8088
   http:
-    port: 8333
+    port: 8488
 spring:
   main:
     allow-bean-definition-overriding: true
