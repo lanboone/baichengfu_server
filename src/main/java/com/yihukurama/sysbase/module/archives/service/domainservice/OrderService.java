@@ -103,6 +103,9 @@ public class OrderService extends CrudService<OrderEntity>{
                 OrderProductEntity resultOrderProductEntity = orderProductService.create(orderProductEntity);
                 resultOrderProduct.add(resultOrderProductEntity);
             }
+            if(orderEntity.getFreight() == null){
+                orderEntity.setFreight(new BigDecimal(0));
+            }
             totalPrice = totalPrice.add(orderEntity.getFreight());
             orderEntity.setPaidPrice(totalPrice.subtract(new BigDecimal(totalConsumPoint)));
             orderEntity.setOrderPrice(totalPrice);
