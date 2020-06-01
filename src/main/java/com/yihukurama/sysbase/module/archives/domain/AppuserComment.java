@@ -5,4 +5,13 @@ import lombok.Data;
 
 @Data
 public class AppuserComment extends AppuserCommentEntity {
+    /**
+     * 纯粹搜索数据库关联id
+     */
+    public static final int SEARCH_TYPE_10 = 10;
+    /**
+     * 为10 时 纯粹搜索数据库关联id
+     */
+    int searchType;
+
 }

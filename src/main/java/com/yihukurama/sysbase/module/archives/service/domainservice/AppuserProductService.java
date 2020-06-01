@@ -4,6 +4,8 @@ import com.yihukurama.sysbase.model.AppuserProductEntity;
 import com.yihukurama.sysbase.model.ProductEntity;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.domain.AppuserProduct;
+import com.yihukurama.sysbase.module.archives.domain.AppuserSample;
+import com.yihukurama.sysbase.module.archives.domain.AppuserTopic;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.TransferUtils;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
@@ -26,6 +28,10 @@ public class AppuserProductService extends CrudService<AppuserProductEntity> {
     public Result list(AppuserProductEntity appuserProductEntity, Integer page, Integer limit) throws TipsException {
         Result result = super.list(appuserProductEntity, page, limit);
         if(appuserProductEntity instanceof AppuserProduct){
+            AppuserProduct appuserProduct  = (AppuserProduct) appuserProductEntity;
+            if(appuserProduct.getSearchType() == AppuserProduct.SEARCH_TYPE_10){
+                return result;
+            }
             List<AppuserProductEntity> appuserProductEntityList = (List<AppuserProductEntity>) result.getData();
             List<AppuserProduct> appuserProductList = TransferUtils.transferEntityList2DomainList(appuserProductEntityList,AppuserProduct.class);
             if(!CollectionUtils.isEmpty(appuserProductEntityList)){

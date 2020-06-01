@@ -10,13 +10,16 @@ import com.yihukurama.sysbase.module.im.TopicInfo;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import static com.yihukurama.sysbase.common.Cache.topicInfoSet;
 
+@Api(value = "实时通信", tags = "实时通信")
 @RestController
+@RequestMapping("/im")
 public class ImController
 {
 

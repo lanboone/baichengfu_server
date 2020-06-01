@@ -25,6 +25,10 @@ public class AppuserSampleService extends CrudService<AppuserSampleEntity> {
     public Result list(AppuserSampleEntity appuserSampleEntity, Integer page, Integer limit) throws TipsException {
         Result result = super.list(appuserSampleEntity, page, limit);
         if(appuserSampleEntity instanceof AppuserSample){
+            AppuserSample appuserSample  = (AppuserSample) appuserSampleEntity;
+            if(appuserSample.getSearchType() == AppuserSample.SEARCH_TYPE_10){
+                return result;
+            }
             List<AppuserSampleEntity> appuserSampleEntityList = (List<AppuserSampleEntity>) result.getData();
             List<AppuserSample> appuserSampleList = TransferUtils.transferEntityList2DomainList(appuserSampleEntityList,AppuserSample.class);
             if(!CollectionUtils.isEmpty(appuserSampleEntityList)){
