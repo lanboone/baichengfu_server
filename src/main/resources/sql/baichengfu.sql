@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 30/05/2020 15:54:27
+ Date: 02/06/2020 20:28:49
 */
 
 SET NAMES utf8mb4;
@@ -208,7 +208,7 @@ CREATE TABLE `tb_appuser_product_comment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `topic_id_index`(`product_id`) USING BTREE,
   INDEX `topic_user_id_index`(`product_id`, `appuser_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'app用户点赞的商品评论关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'app用户点赞商品评论关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_appuser_sample
@@ -404,7 +404,7 @@ CREATE TABLE `tb_designer`  (
   `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
   `user_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户id',
   `introduction` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '个人介绍',
-  `remark` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '简介',
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '简介',
   `personal_picture` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '个人图片',
   `glory_value` int(255) NULL DEFAULT NULL COMMENT '荣耀值，装修案例数',
   `price_per` int(255) NULL DEFAULT NULL COMMENT '每平米平均价格',

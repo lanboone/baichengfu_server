@@ -1,7 +1,17 @@
 package com.yihukurama.sysbase.module.im.config;
 
+import com.alibaba.fastjson.JSON;
+import com.yihukurama.sysbase.model.AppuserMsgEntity;
+import com.yihukurama.sysbase.module.archives.domain.AppuserMsg;
+import com.yihukurama.sysbase.module.archives.service.domainservice.AppuserMsgService;
+import com.yihukurama.sysbase.module.im.TopicInfo;
+import com.yihukurama.sysbase.module.im.websocket.WebSocket;
+import com.yihukurama.tkmybatisplus.app.utils.LogUtil;
+import com.yihukurama.tkmybatisplus.app.utils.TransferUtils;
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +26,9 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
+import sun.rmi.runtime.Log;
+
+import static com.yihukurama.sysbase.common.Cache.topicInfoSet;
 
 /**
  * MQTT配置，消费者
@@ -29,6 +42,7 @@ public class MqttReceiverConfig {
 
     // 客户端与服务器之间的连接意外中断，服务器将发布客户端的“遗嘱”消息
     private static final byte[] WILL_DATA;
+
     static {
         WILL_DATA = "offline".getBytes();
     }
@@ -52,10 +66,10 @@ public class MqttReceiverConfig {
      * MQTT连接器选项
      */
     @Bean
-    public MqttConnectOptions getReceiverMqttConnectOptions(){
+    public MqttConnectOptions getReceiverMqttConnectOptions() {
         MqttConnectOptions options = new MqttConnectOptions();
         // 设置连接的用户名
-        if(!username.trim().equals("")){
+        if (!username.trim().equals("")) {
             options.setUserName(username);
         }
         // 设置连接的密码
@@ -107,6 +121,8 @@ public class MqttReceiverConfig {
         return adapter;
     }
 
+    @Autowired
+    AppuserMsgService appuserMsgService;
     /**
      * MQTT消息处理器（消费者）
      */
@@ -114,13 +130,46 @@ public class MqttReceiverConfig {
     @ServiceActivator(inputChannel = CHANNEL_NAME_IN)
     public MessageHandler handler() {
         return new MessageHandler() {
+            @SneakyThrows
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
                 String topic = message.getHeaders().get("mqtt_receivedTopic").toString();
                 String msg = message.getPayload().toString();
-                System.out.println("\n--------------------START-------------------\n" +
-                        "接收到订阅消息:\ntopic:" + topic + "\nmessage:" + msg +
-                        "\n---------------------END--------------------");
+                AppuserMsg appuserMsg = JSON.parseObject(msg, AppuserMsg.class);
+                if (appuserMsg == null) {
+                    LogUtil.errorLog(this, "mqtt接收到不明消息");
+                    return;
+                }
+                appuserMsgService.create((AppuserMsgEntity) appuserMsg);
+                int send_type = appuserMsg.getSenderType();
+                switch (send_type) {
+                    case 10:
+                        LogUtil.infoLog(this, "发给app的信息");
+                        break;
+                    case 20:
+                        LogUtil.infoLog(this, "发给后台的信息");
+                        if (appuserMsg.getReceiverId() == null) {
+                            //放入会话列表
+                            TopicInfo topicInfo = new TopicInfo();
+                            topicInfo.setMsgTopic(appuserMsg.getMsgTopic());
+                            topicInfo.setMsgTopicName(appuserMsg.getMsgTopicName());
+                            topicInfo.setStatus(TopicInfo.WAIT_CHAT);
+                            //放入会话
+                            topicInfoSet.add(topicInfo);
+                        } else {
+                            //通过websocket发送
+                            WebSocket.sendMsgByUserId(JSON.toJSONString(appuserMsg),appuserMsg.getReceiverId());
+                            TopicInfo topicInfo = new TopicInfo();
+                            topicInfo.setMsgTopic(appuserMsg.getMsgTopic());
+                            topicInfo.setMsgTopicName(appuserMsg.getMsgTopicName());
+                            topicInfo.setStatus(TopicInfo.CHATING);
+                            //更新会话
+                            topicInfoSet.add(topicInfo);
+                        }
+                        break;
+                    default:
+                        LogUtil.errorLog(this, "无法处理的消息");
+                }
             }
         };
     }
