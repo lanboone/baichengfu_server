@@ -24,6 +24,13 @@ import java.util.Date;
 public class ProductEntity extends BaseEntity
 {
 
+	/**
+	 *发货地址
+	 **/
+	@ApiModelProperty(value="发货地址")
+	@Column(name="send_address")
+	private String sendAddress;
+
 
 	/**
 	 *标签

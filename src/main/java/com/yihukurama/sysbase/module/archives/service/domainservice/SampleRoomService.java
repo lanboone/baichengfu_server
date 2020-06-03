@@ -69,6 +69,43 @@ public class SampleRoomService extends CrudService<SampleRoomEntity> {
 
     }
 
+    @Override
+    @Transient
+    public SampleRoomEntity update(SampleRoomEntity sampleRoomEntity) throws TipsException {
+        SampleRoomEntity newSampleRoom = super.update(sampleRoomEntity);
+        if (sampleRoomEntity instanceof SampleRoom) {
+            SampleRoom sampleRoom = (SampleRoom) sampleRoomEntity;
+            List<ProductEntity> productEntityList = sampleRoom.getProductEntityList();
+            String sId = newSampleRoom.getId();
+            if (!EmptyUtil.isEmpty(productEntityList)) {
+                //删除原关联关系
+                SampleProductEntity oldSampleProductEntity = new SampleProductEntity();
+                oldSampleProductEntity.setSampleId(sampleRoomEntity.getId());
+                List<SampleProductEntity> sampleProductEntityList = sampleProductMapper.select(oldSampleProductEntity);
+                for (int i = 0; i < sampleProductEntityList.size(); i++) {
+                    sampleProductMapper.delete(sampleProductEntityList.get(i));
+                }
+                //创建新的关联关系
+                for (ProductEntity product : productEntityList
+                ) {
+                    //创建关联关系
+                    String pId = product.getId();
+                    SampleProductEntity sampleProductEntity = new SampleProductEntity();
+                    sampleProductEntity.setId(UUID.randomUUID().toString().replaceAll("-",""));
+                    sampleProductEntity.setProductId(pId);
+                    sampleProductEntity.setSampleId(sId);
+                    sampleProductMapper.insert(sampleProductEntity);
+                }
+            }
+
+            sampleRoom.setId(sId);
+            return sampleRoom;
+        } else {
+            return newSampleRoom;
+        }
+
+
+    }
 
     @Autowired
     ProductMapper productMapper;
