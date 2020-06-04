@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 02/06/2020 20:28:49
+ Date: 04/06/2020 21:47:14
 */
 
 SET NAMES utf8mb4;
@@ -307,6 +307,7 @@ CREATE TABLE `tb_banner`  (
   `operate_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后修改日期',
   `is_drop` int(11) NULL DEFAULT 0 COMMENT '是否投放 0否 1是',
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'banner描述',
+  `type` int(11) NULL DEFAULT NULL COMMENT '10-80  8种类型',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '广告图表' ROW_FORMAT = Dynamic;
 
@@ -784,6 +785,7 @@ CREATE TABLE `tb_product`  (
   `stock` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '库存',
   `freight` decimal(10, 0) NULL DEFAULT NULL COMMENT '运费',
   `price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '市场价',
+  `send_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发货地址',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品表' ROW_FORMAT = Dynamic;
 

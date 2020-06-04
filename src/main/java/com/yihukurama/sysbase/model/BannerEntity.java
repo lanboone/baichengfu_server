@@ -22,6 +22,15 @@ import java.util.Date;
 @Data
 public class BannerEntity extends BaseEntity
 {
+
+
+	/**
+	 *类型
+	 **/
+	@ApiModelProperty(value="类型")
+	@Column(name="type")
+	private Integer type;
+
 	/**
 	*广告图
 	**/
