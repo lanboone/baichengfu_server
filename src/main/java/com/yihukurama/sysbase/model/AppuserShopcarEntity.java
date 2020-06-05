@@ -9,6 +9,7 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -85,12 +86,21 @@ public class AppuserShopcarEntity extends BaseEntity
 	@ApiModelProperty(value="子规格组合,分号分割，如红色;20x20;A")
 	@Column(name="compose")
 	private String compose;
+
+	/**
+	 *商品运费
+	 **/
+	@ApiModelProperty(value="商品运费")
+	@Column(name="freight")
+	private BigDecimal freight;
+
+
 	/**
 	*商品价格
 	**/
 	@ApiModelProperty(value="商品价格")
 	@Column(name="price")
-	private String price;
+	private BigDecimal price;
 	/**
 	*商品简介
 	**/

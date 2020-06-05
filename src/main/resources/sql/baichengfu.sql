@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 05/06/2020 21:54:42
+ Date: 05/06/2020 22:18:35
 */
 
 SET NAMES utf8mb4;
@@ -295,6 +295,7 @@ CREATE TABLE `tb_appuser_shopcar`  (
   `picture_url` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '规格图片路径',
   `market_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '市场价',
   `stand_config_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '具体规格商品id',
+  `freight` decimal(11, 0) NULL DEFAULT NULL COMMENT '运费',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `appuser_id`(`appuser_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户购物车表' ROW_FORMAT = Compact;
@@ -865,6 +866,7 @@ CREATE TABLE `tb_product_comment`  (
   `product_detail` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '评论时的商品详情',
   `reply` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `product_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品名称',
+  `status` int(11) NULL DEFAULT NULL COMMENT '10显示  20隐藏',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `topic_id_index`(`product_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '话题评论表' ROW_FORMAT = Dynamic;

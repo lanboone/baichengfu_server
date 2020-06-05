@@ -24,6 +24,14 @@ public class ProductCommentEntity extends BaseEntity
 {
 
 	/**
+	 *10 显示  20 隐藏
+	 **/
+	@ApiModelProperty(value="10 显示  20 隐藏")
+	@Column(name="status")
+	private Integer status;
+
+
+	/**
 	 *商品名称
 	 **/
 	@ApiModelProperty(value="商品名称")
