@@ -12,12 +12,12 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 说明： 推送消息表
+ * 说明： 用户消息表
  * @author: yihukurama
  * @date: Created in 15:18 2018/4/4
  * @modified: by yihukurama in 15:18 2018/4/4
  */
-@ApiModel(value="推送消息表")
+@ApiModel(value="用户消息表")
 @Table(name="tb_push_notify")
 @Data
 public class PushNotifyEntity extends BaseEntity
@@ -41,6 +41,18 @@ public class PushNotifyEntity extends BaseEntity
 	@Column(name="creater_id")
 	private String createrId;
 	/**
+	*显示时间
+	**/
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="show_date")
+	private Date showDate;
+	/**
+	*链接
+	**/
+	@ApiModelProperty(value="链接")
+	@Column(name="link")
+	private String link;
+	/**
 	*接收者tag
 	**/
 	@ApiModelProperty(value="接收者tag")
@@ -53,11 +65,23 @@ public class PushNotifyEntity extends BaseEntity
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
 	/**
+	*图片
+	**/
+	@ApiModelProperty(value="图片")
+	@Column(name="picture")
+	private String picture;
+	/**
 	*推送内容
 	**/
 	@ApiModelProperty(value="推送内容")
 	@Column(name="content")
 	private String content;
+	/**
+	*10广告消息  20活动消息
+	**/
+	@ApiModelProperty(value="10广告消息  20活动消息")
+	@Column(name="type")
+	private Integer type;
 	
 	
 

@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 07/05/2020 21:55:38
+ Date: 05/06/2020 20:56:54
 */
 
 SET NAMES utf8mb4;
@@ -40,6 +40,13 @@ CREATE TABLE `tb_notice`  (
   `parameter3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段3',
   `parameter4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预留字段4',
   `parameter5` int(255) NULL DEFAULT NULL COMMENT '预留字段5',
+  `notice_type_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知分类code（1设计师申请2装修师申请3退款申请）',
+  `applicant_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '申请人姓名',
+  `price` int(11) NULL DEFAULT 0 COMMENT '价格',
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `remark` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '简介',
+  `status` int(11) NULL DEFAULT 0 COMMENT '状态 拒绝0 通过1',
+  `reject_reason` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '拒绝理由',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统通知表' ROW_FORMAT = Compact;
 
