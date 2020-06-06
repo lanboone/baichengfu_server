@@ -33,5 +33,9 @@ public class AppEventListener implements ApplicationListener {
             ProductEvent myEvent = (ProductEvent) event;
             myEvent.handleEvent();
         }
+        if(event instanceof OrderEvent){
+            OrderEvent myEvent = (OrderEvent) event;
+            myEvent.handleEvent();
+        }
     }
 }

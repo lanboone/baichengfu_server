@@ -9,6 +9,7 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -53,11 +54,11 @@ public class ProductAnalyseEntity extends BaseEntity
 	@Column(name="product_name")
 	private String productName;
 	/**
-	*类型,10 按商品，20 按商品详细分类
+	*平均额
 	**/
-	@ApiModelProperty(value="类型,10 按商品，20 按商品详细分类")
-	@Column(name="type")
-	private Integer type;
+	@ApiModelProperty(value="平均额")
+	@Column(name="avg")
+	private Integer avg;
 	/**
 	*商品id
 	**/
@@ -69,7 +70,7 @@ public class ProductAnalyseEntity extends BaseEntity
 	**/
 	@ApiModelProperty(value="销售总额")
 	@Column(name="sold_price_count")
-	private String soldPriceCount;
+	private Integer soldPriceCount;
 	/**
 	*详细分类名
 	**/

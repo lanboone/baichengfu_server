@@ -2,6 +2,8 @@ package com.yihukurama.sysbase.module.app.impl;
 
 import com.yihukurama.sysbase.model.*;
 import com.yihukurama.sysbase.module.app.IAppOrder;
+import com.yihukurama.sysbase.module.app.designp.observer.AppEventPublisher;
+import com.yihukurama.sysbase.module.app.designp.observer.event.OrderEvent;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.domain.AppuserSell;
 import com.yihukurama.sysbase.module.archives.domain.Order;
@@ -36,6 +38,9 @@ public class AppOrderService implements IAppOrder {
 
     @Autowired
     AppuserSellService appuserSellService;
+
+    @Autowired
+    AppEventPublisher appEventPublisher;
 
     @Override
     public Result confirmOrder(Request<OrderEntity> request) throws TipsException {
@@ -78,6 +83,8 @@ public class AppOrderService implements IAppOrder {
         }
         orderEntity.setStatus(Order.PAY_STATUS_40);
         orderService.update(orderEntity);
+        //完成订单收货事件
+        appEventPublisher.publishEvent(new OrderEvent(OrderEvent.TYPE_30));
         return Result.successed("确认成功");
     }
 }
