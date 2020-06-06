@@ -69,7 +69,7 @@ public class ManagerController {
     @RequestMapping(value = "/delete_operate", method = RequestMethod.POST)
     public Result deleteOperate(@RequestBody Request<DeleteOperateDTO> request) throws Exception {
         Integer type = request.getData().getMonth();
-        if(type == null || !type.equals(6) || !type.equals(3)){
+        if(type == null || (!type.equals(6) && !type.equals(3))){
             return Result.failed("参数错误，需要传入6或3");
         }
         OperatelogEntity operatelogEntity = new OperatelogEntity();
