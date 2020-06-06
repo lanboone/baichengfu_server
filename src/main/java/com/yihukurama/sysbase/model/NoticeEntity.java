@@ -94,12 +94,7 @@ public class NoticeEntity extends BaseEntity {
     @ApiModelProperty(value = "删除状态 0正常 1删除")
     @Column(name = "is_delete")
     private Integer isDelete;
-    /**
-     * 预留字段1
-     **/
-    @ApiModelProperty(value = "预留字段1")
-    @Column(name = "parameter1")
-    private String parameter1;
+
     /**
      * 是否已读 0否 1是
      **/

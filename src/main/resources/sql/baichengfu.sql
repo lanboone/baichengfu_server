@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 05/06/2020 22:18:35
+ Date: 06/06/2020 17:47:11
 */
 
 SET NAMES utf8mb4;
@@ -226,7 +226,7 @@ CREATE TABLE `tb_appuser_room`  (
   `operate_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后修改日期',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所在地',
   `address_detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详细地址',
-  `cost` decimal(10, 2) NULL DEFAULT NULL COMMENT '预算',
+  `cost` decimal(50, 2) NULL DEFAULT NULL COMMENT '预算',
   `note` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '备注',
   `pics` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '图片',
   `design_pics` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '设计效果图',
@@ -822,6 +822,26 @@ CREATE TABLE `tb_product`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for tb_product_analyse
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_product_analyse`;
+CREATE TABLE `tb_product_analyse`  (
+  `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
+  `product_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品名',
+  `sold_num_count` int(11) NULL DEFAULT NULL COMMENT '销售总数量',
+  `sold_price_count` decimal(50, 0) NULL DEFAULT NULL COMMENT '销售总额',
+  `avg` decimal(50, 0) NOT NULL COMMENT '平均额',
+  `product_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品id',
+  `standard_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详细分类id',
+  `standard_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详细分类名',
+  `creater_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
+  `create_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `operator_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
+  `operate_date` datetime(0) NULL DEFAULT NULL COMMENT '最后修改日期',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品分析' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for tb_product_categories
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_product_categories`;
@@ -925,6 +945,7 @@ CREATE TABLE `tb_push_notify`  (
   `show_date` datetime(0) NULL DEFAULT NULL COMMENT '显示时间',
   `picture` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片',
   `link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '链接',
+  `end_date` datetime(0) NULL DEFAULT NULL COMMENT '结束显示时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户消息表' ROW_FORMAT = Compact;
 
