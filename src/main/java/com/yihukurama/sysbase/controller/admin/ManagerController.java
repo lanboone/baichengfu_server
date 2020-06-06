@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.controller.admin;
 
+import com.yihukurama.sysbase.controller.admin.dto.DeleteOperateDTO;
 import com.yihukurama.sysbase.controller.admin.dto.LoginDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ManagerModifyDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ModifyPassWordDTO;
@@ -66,8 +67,8 @@ public class ManagerController {
     
     @ApiOperation(value = "删除三个月或六个月的操作记录", notes = "删除三个月或六个月的操作记录")
     @RequestMapping(value = "/delete_operate", method = RequestMethod.POST)
-    public Result deleteOperate(@RequestBody Request<Integer> request) throws Exception {
-        Integer type = request.getData();
+    public Result deleteOperate(@RequestBody Request<DeleteOperateDTO> request) throws Exception {
+        Integer type = request.getData().getMonth();
         if(type == null || !type.equals(6) || !type.equals(3)){
             return Result.failed("参数错误，需要传入6或3");
         }

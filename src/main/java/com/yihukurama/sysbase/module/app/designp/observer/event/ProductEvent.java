@@ -4,6 +4,9 @@ import com.yihukurama.sysbase.common.utils.NumberUtil;
 import com.yihukurama.sysbase.mapper.ProductMapper;
 import com.yihukurama.sysbase.model.AppuserProductEntity;
 import com.yihukurama.sysbase.model.ProductEntity;
+import com.yihukurama.sysbase.module.archives.domain.AppuserProduct;
+import com.yihukurama.sysbase.module.archives.domain.Product;
+import com.yihukurama.sysbase.module.archives.service.domainservice.ProductService;
 import com.yihukurama.tkmybatisplus.app.component.SpringBeanTools;
 import com.yihukurama.tkmybatisplus.app.utils.LogUtil;
 import org.springframework.context.ApplicationEvent;
@@ -28,6 +31,12 @@ public class ProductEvent extends ApplicationEvent {
      * 出售商品事件
      */
     public final static int TYPE_30 = 30;
+
+
+    /**
+     * 更新商品事件
+     */
+    public final static int TYPE_40 = 40;
 
 
     /**
@@ -58,8 +67,28 @@ public class ProductEvent extends ApplicationEvent {
             case TYPE_30:
                 soldProduct();
                 break;
+
+            case TYPE_40:
+                updateProduct();
+                break;
+
             default:
         }
+    }
+
+    private void updateProduct() {
+        if (!(source instanceof Product)) {
+            LogUtil.errorLog(this,"处理更新事件出错，事件源不是 Product");
+            return;
+        }
+        Product product = (Product) source;
+        ProductMapper productMapper = (ProductMapper) SpringBeanTools.getBean(ProductMapper.class);
+        ProductEntity productEntity = productMapper.selectByPrimaryKey(product.getId());
+
+        AppuserProductEntity appuserProductEntity = new AppuserProductEntity();
+        appuserProductEntity.setProductId(product.getId());
+
+
     }
 
     /**
