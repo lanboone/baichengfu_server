@@ -1,9 +1,6 @@
 package com.yihukurama.sysbase.module.app.designp.observer.event;
 
-import com.yihukurama.sysbase.mapper.DesignerMapper;
-import com.yihukurama.sysbase.mapper.SampleRoomMapper;
-import com.yihukurama.sysbase.mapper.TopicCommentMapper;
-import com.yihukurama.sysbase.mapper.TopicMapper;
+import com.yihukurama.sysbase.mapper.*;
 import com.yihukurama.sysbase.model.*;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.sysbase.module.archives.domain.TopicComment;
@@ -11,6 +8,7 @@ import com.yihukurama.tkmybatisplus.app.component.SpringBeanTools;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
 import com.yihukurama.tkmybatisplus.app.utils.LogUtil;
 import org.springframework.context.ApplicationEvent;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -30,6 +28,10 @@ public class AppuserEvent extends ApplicationEvent {
      */
     public final static int TYPE_20 = 20;
 
+    /**
+     * 更新地址事件
+     */
+    public final static int TYPE_30 = 30;
 
     private Integer type;
 
@@ -51,8 +53,42 @@ public class AppuserEvent extends ApplicationEvent {
             case TYPE_20:
                 handleUpdateNickNameEvent();
                 break;
+            case TYPE_30:
+                handleUpdateAddressEvent();
             default:
         }
+    }
+
+    private void handleUpdateAddressEvent() {
+        if (!(source instanceof Appuser)) {
+            LogUtil.errorLog(this,"处理更新地址事件出错，事件源不是AppuserEntity");
+            return;
+        }
+        Appuser appuser = (Appuser) source;
+        DesignerMapper designerMapper = (DesignerMapper) SpringBeanTools.getBean(DesignerMapper.class);
+        DesignerEntity designerEntity = new DesignerEntity();
+        designerEntity.setUserId(appuser.getId());
+        List<DesignerEntity> designerEntitys = designerMapper.select(designerEntity);
+        if (!CollectionUtils.isEmpty(designerEntitys)){
+            for (int i = 0; i < designerEntitys.size(); i++) {
+                designerEntity = designerEntitys.get(i);
+                designerEntity.setAddress(appuser.getAddressId());
+                designerMapper.updateByPrimaryKeySelective(designerEntity);
+            }
+        }
+
+        MasterMapper masterMapper = (MasterMapper) SpringBeanTools.getBean(MasterMapper.class);
+        MasterEntity masterEntity = new MasterEntity();
+        masterEntity.setUserId(appuser.getId());
+        List<MasterEntity> masterEntities = masterMapper.select(masterEntity);
+        if (!CollectionUtils.isEmpty(masterEntities)){
+            for (int i = 0; i < masterEntities.size(); i++) {
+                masterEntity = masterEntities.get(i);
+                masterEntity.setAddress(appuser.getAddressId());
+                masterMapper.updateByPrimaryKeySelective(masterEntity);
+            }
+        }
+
     }
 
     public void handleUpdateNickNameEvent() {

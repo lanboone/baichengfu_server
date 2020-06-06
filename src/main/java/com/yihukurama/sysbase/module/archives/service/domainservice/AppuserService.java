@@ -53,6 +53,10 @@ public class AppuserService extends CrudService<AppuserEntity>{
                 //更新头像
                 appEventPublisher.publishEvent(new AppuserEvent(appuserEntity,AppuserEvent.TYPE_10));
             }
+            if(!orgAppuser.getAddressId().equals(appuserEntity.getAddressId())){
+                //更新地址
+                appEventPublisher.publishEvent(new AppuserEvent(appuserEntity,AppuserEvent.TYPE_30));
+            }
         }
 
         return super.update(appuserEntity);
