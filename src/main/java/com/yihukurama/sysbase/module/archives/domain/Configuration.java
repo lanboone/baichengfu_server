@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.module.archives.domain;
 
+import com.yihukurama.sysbase.model.ConfigurationEntity;
 import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
 
 /**
@@ -8,7 +9,7 @@ import com.yihukurama.tkmybatisplus.framework.domain.tkmapper.entity.BaseEntity;
  * @date: Created in 17:10 2018/4/28
  * @modified: by autor in 17:10 2018/4/28
  */
-public class Configuration extends BaseEntity {
+public class Configuration extends ConfigurationEntity {
 
     /**
      * 登录超时，单位秒
