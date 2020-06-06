@@ -3,17 +3,24 @@ package com.yihukurama.sysbase.controller.admin;
 import com.yihukurama.sysbase.controller.admin.dto.LoginDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ManagerModifyDTO;
 import com.yihukurama.sysbase.controller.admin.dto.ModifyPassWordDTO;
+import com.yihukurama.sysbase.model.OperatelogEntity;
 import com.yihukurama.sysbase.module.admin.IManager;
+import com.yihukurama.sysbase.module.archives.domain.Operatelog;
 import com.yihukurama.sysbase.module.archives.domain.Order;
+import com.yihukurama.sysbase.module.archives.service.domainservice.OperatelogService;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author: liyuan
@@ -54,4 +61,31 @@ public class ManagerController {
         return manager.managerLoginByToken(id,token);
     }
 
+    @Autowired
+    OperatelogService operatelogService;
+    
+    @ApiOperation(value = "删除三个月或六个月的操作记录", notes = "删除三个月或六个月的操作记录")
+    @RequestMapping(value = "/delete_operate", method = RequestMethod.POST)
+    public Result deleteOperate(@RequestBody Request<Integer> request) throws Exception {
+        Integer type = request.getData();
+        if(type == null || !type.equals(6) || !type.equals(3)){
+            return Result.failed("参数错误，需要传入6或3");
+        }
+        OperatelogEntity operatelogEntity = new OperatelogEntity();
+        Date toDate = new Date(System.currentTimeMillis());
+        
+        List<OperatelogEntity> operatelogEntityList = operatelogService.list(operatelogEntity);
+        if (CollectionUtils.isEmpty(operatelogEntityList)){
+            for (int i = 0; i <operatelogEntityList.size() ; i++) {
+                Date opDate = operatelogEntityList.get(i).getCreateDate();
+                long diff = toDate.getTime() - opDate.getTime();
+                long diffDays = diff / (24 * 60 * 60 * 1000);
+                if(diffDays >= type*30){
+                    operatelogService.remove(operatelogEntityList.get(i));
+                }
+            }
+        }
+        
+        return Result.successed("删除成功");
+    }
 }
