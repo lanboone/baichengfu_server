@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 05/06/2020 21:54:31
+ Date: 06/06/2020 12:43:51
 */
 
 SET NAMES utf8mb4;
@@ -33,7 +33,7 @@ CREATE TABLE `tb_appuser_room`  (
   `operate_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后修改日期',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所在地',
   `address_detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详细地址',
-  `cost` decimal(10, 2) NULL DEFAULT NULL COMMENT '预算',
+  `cost` decimal(50, 2) NULL DEFAULT NULL COMMENT '预算',
   `note` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '备注',
   `pics` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '图片',
   `design_pics` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '设计效果图',

@@ -51,7 +51,7 @@ public class ProductEntity extends BaseEntity
 	 **/
 	@ApiModelProperty(value="运费")
 	@Column(name="freight")
-	private String freight;
+	private BigDecimal freight;
 
 
 

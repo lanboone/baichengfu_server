@@ -46,6 +46,16 @@ public class PushNotifyEntity extends BaseEntity
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="show_date")
 	private Date showDate;
+
+
+	/**
+	 *结束显示时间
+	 **/
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="end_date")
+	private Date endDate;
+
+
 	/**
 	*链接
 	**/

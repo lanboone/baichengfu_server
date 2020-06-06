@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 18/05/2020 21:31:28
+ Date: 06/06/2020 12:51:25
 */
 
 SET NAMES utf8mb4;
@@ -29,6 +29,11 @@ CREATE TABLE `tb_push_notify`  (
   `is_delete` int(11) NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
   `creater_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
   `create_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `type` int(11) NULL DEFAULT NULL COMMENT '10广告消息  20活动消息',
+  `show_date` datetime(0) NULL DEFAULT NULL COMMENT '显示时间',
+  `picture` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片',
+  `link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '链接',
+  `end_date` datetime(0) NULL DEFAULT NULL COMMENT '结束显示时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户消息表' ROW_FORMAT = Compact;
 
