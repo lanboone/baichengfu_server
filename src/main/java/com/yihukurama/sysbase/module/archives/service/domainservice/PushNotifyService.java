@@ -28,7 +28,10 @@ public class PushNotifyService extends CrudService<PushNotifyEntity> {
     
     @Override
     public PushNotifyEntity create(PushNotifyEntity pushNotifyEntity) throws TipsException {
-        if(pushNotifyEntity.getSenderType() == 10){
+        if(pushNotifyEntity.getSenderType() == null){
+            throw new TipsException("创建消息必须指定传播方式sendType 10 广播  20 组播");
+        }
+        if(pushNotifyEntity.getSenderType()!=null && pushNotifyEntity.getSenderType() == 10){
             JPushClient jpushClient = new JPushClient(MASTER_SECRET, "352895bcabd0bc001a6dbf99", null, ClientConfig.getInstance());
 
             // For push, all you need do is to build PushPayload object.
