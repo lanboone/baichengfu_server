@@ -32,7 +32,7 @@ public class PushNotifyService extends CrudService<PushNotifyEntity> {
             throw new TipsException("创建消息必须指定传播方式sendType 10 广播  20 组播");
         }
         if(pushNotifyEntity.getSenderType()!=null && pushNotifyEntity.getSenderType() == 10){
-            JPushClient jpushClient = new JPushClient(MASTER_SECRET, "352895bcabd0bc001a6dbf99", null, ClientConfig.getInstance());
+            JPushClient jpushClient = new JPushClient("535959d5625d0a93396c5bb9", "75756d9cd0de2fddaca9fe0d", null, ClientConfig.getInstance());
 
             // For push, all you need do is to build PushPayload object.
             PushPayload payload = PushPayload.alertAll(ALERT);
