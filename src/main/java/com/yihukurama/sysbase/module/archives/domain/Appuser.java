@@ -7,7 +7,15 @@ import lombok.Data;
 @Data
 public class Appuser extends AppuserEntity {
 
+    public static final int REGIST_TYPE_10 = 10;
 
+    public static final int REGIST_TYPE_20 = 20;
+
+    /**
+     * 注册时的类型  10 qq注册   20微信注册
+     */
+    @ApiModelProperty(value="注册时的类型  10 qq注册   20微信注册")
+    private Integer registType;
     /**
      * 验证码
      */

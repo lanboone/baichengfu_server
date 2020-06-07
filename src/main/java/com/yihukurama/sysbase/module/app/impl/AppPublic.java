@@ -173,7 +173,6 @@ public class AppPublic implements IAppPublic {
         reqAppuser.setPersonalCode(NumberUtil.getOrderIdByUUId());
         AppuserEntity appuser = appuserService.create(reqAppuser);
         return Result.successed(appuser,"注册成功");
-
     }
 
     @Override
@@ -233,5 +232,60 @@ public class AppPublic implements IAppPublic {
             }
         }
         return Result.failed(result,"微信登录失败",-1);
+    }
+
+    @Override
+    public Result thirdlogin(Request<Appuser> request) throws TipsException {
+        Appuser reqAppuser = request.getData();
+
+        if(EmptyUtil.isEmpty(reqAppuser.getWechatNumber()) && EmptyUtil.isEmpty(reqAppuser.getQq())){
+            return Result.failed("必须指定qq和微信标识");
+        }
+        reqAppuser.setWechatNumber(request.getData().getWechatNumber());
+        reqAppuser.setQq(request.getData().getQq());
+
+        List<AppuserEntity> appuserEntityList = appuserService.list(reqAppuser);
+        if(EmptyUtil.isEmpty(appuserEntityList)){
+            //若为空，该token已失效
+            return Result.failed(null,"该qq或微信暂未注册，请先注册",-5);
+        }
+        AppuserEntity loginAppuser = appuserEntityList.get(0);
+        //生成token
+        String token = UUID.randomUUID().toString().replaceAll("-","");
+        loginAppuser.setToken(token);
+        appuserService.update(loginAppuser);
+        return Result.successed(loginAppuser,"登录成功");
+    }
+
+    @Override
+    public Result thirdregist(Request<Appuser> request) throws TipsException {
+        Appuser reqAppuser = new Appuser();
+        String phone = request.getData().getUserName();
+        String code = request.getData().getCheckCode();
+        //进行验证码校验
+        Boolean check = iSecurity.checkCode(phone,code);
+        if(!check){
+            return Result.failed(null,"验证码错误",-1);
+        }
+        reqAppuser.setPhoneNumber(phone);
+
+        List<AppuserEntity> appuserEntityList = appuserService.list(reqAppuser);
+        if(!EmptyUtil.isEmpty(appuserEntityList)){
+            //若不为空，该手机号码已注册,更新微信或qq信息
+            appuserEntityList.get(0).setWechatNumber(reqAppuser.getWechatNumber());
+            appuserEntityList.get(0).setQq(reqAppuser.getQq());
+            String pwd = iSecurity.pwdEncrypt(request.getData().getUserPassword());
+            appuserEntityList.get(0).setUserPassword(pwd);
+            AppuserEntity appuser = appuserService.update(appuserEntityList.get(0));
+            return Result.successed(appuser,"覆盖绑定成功");
+        }
+        reqAppuser.setUserName(phone);
+        reqAppuser.setPhoneNumber(phone);
+        String pwd = iSecurity.pwdEncrypt(request.getData().getUserPassword());
+        reqAppuser.setUserPassword(pwd);
+        //创建专属邀请码，16位uuid
+        reqAppuser.setPersonalCode(NumberUtil.getOrderIdByUUId());
+        AppuserEntity appuser = appuserService.create(reqAppuser);
+        return Result.successed(appuser,"注册成功");
     }
 }

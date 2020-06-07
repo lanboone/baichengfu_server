@@ -105,5 +105,22 @@ public class AppCommonController {
         return iAppPublic.forgetPwd(request);
     }
 
+
+    @ApiOperation(value = "三方登录接口",notes = "微信号或qq号必传")
+    @RequestMapping(value = "/thirdlogin", method = RequestMethod.POST)
+    public Result thirdlogin(@RequestBody Request<Appuser> request) throws Exception {
+
+
+        return iAppPublic.thirdlogin(request);
+    }
+
+    @ApiOperation(value = "三方注册接口",notes = "微信号或qq号，手机号验证码必传")
+    @RequestMapping(value = "/thirdregist", method = RequestMethod.POST)
+    public Result thirdregist(@RequestBody Request<Appuser> request) throws Exception {
+
+
+        return iAppPublic.thirdregist(request);
+    }
+
 }
 

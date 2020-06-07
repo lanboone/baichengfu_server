@@ -81,4 +81,18 @@ public interface IAppPublic {
      *       Modified by yihukurama in 20:05 2020/4/1
      */
     Result weChatLogin(String code) throws TipsException;
+
+    /**
+     * 三方登录，微信和qq
+     * @param request
+     * @return
+     */
+    Result thirdlogin(Request<Appuser> request) throws TipsException;
+
+    /**
+     * 三方注册
+     * @param request
+     * @return
+     */
+    Result thirdregist(Request<Appuser> request) throws TipsException;
 }
