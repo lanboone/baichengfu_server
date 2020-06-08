@@ -63,7 +63,6 @@ public class ManagerServiceImpl implements IManager {
             return Result.failed(null, "用户不存在", -2);
         }
 
-        managerEntity.setSysPassword(password);
         List<ManagerEntity> managerEntityList = managerService.list(managerEntity);
         if (CollectionUtils.isEmpty(managerEntityList)) {
             return Result.failed(null, "用户名或密码错误", -2);
