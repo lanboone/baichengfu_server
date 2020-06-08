@@ -53,12 +53,6 @@ public class DecoratorEntity extends BaseEntity
 	@Column(name="is_delete")
 	private Integer isDelete;
 	/**
-	*预留字段1
-	**/
-	@ApiModelProperty(value="预留字段1")
-	@Column(name="parameter1")
-	private String parameter1;
-	/**
 	*装修师技能(布线、贴砖)
 	**/
 	@ApiModelProperty(value="装修师技能(布线、贴砖)")
@@ -71,12 +65,6 @@ public class DecoratorEntity extends BaseEntity
 	@Column(name="user_id")
 	private String userId;
 	/**
-	*预留字段5
-	**/
-	@ApiModelProperty(value="预留字段5")
-	@Column(name="parameter5")
-	private Integer parameter5;
-	/**
 	*简介
 	**/
 	@ApiModelProperty(value="简介")
@@ -88,25 +76,7 @@ public class DecoratorEntity extends BaseEntity
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	/**
-	*预留字段4
-	**/
-	@ApiModelProperty(value="预留字段4")
-	@Column(name="parameter4")
-	private String parameter4;
-	/**
-	*预留字段3
-	**/
-	@ApiModelProperty(value="预留字段3")
-	@Column(name="parameter3")
-	private String parameter3;
-	/**
-	*预留字段2
-	**/
-	@ApiModelProperty(value="预留字段2")
-	@Column(name="parameter2")
-	private String parameter2;
-	
+
 	
 
 	

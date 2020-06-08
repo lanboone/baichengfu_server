@@ -59,50 +59,17 @@ public class SampleImageEntity extends BaseEntity
 	@Column(name="is_delete")
 	private Integer isDelete;
 	/**
-	*预留字段1
-	**/
-	@ApiModelProperty(value="预留字段1")
-	@Column(name="parameter1")
-	private String parameter1;
-	/**
 	*样板间id
 	**/
 	@ApiModelProperty(value="样板间id")
 	@Column(name="sample_id")
 	private String sampleId;
 	/**
-	*预留字段5
-	**/
-	@ApiModelProperty(value="预留字段5")
-	@Column(name="parameter5")
-	private Integer parameter5;
-	/**
 	*创建时间
 	**/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	/**
-	*预留字段4
-	**/
-	@ApiModelProperty(value="预留字段4")
-	@Column(name="parameter4")
-	private String parameter4;
-	/**
-	*预留字段3
-	**/
-	@ApiModelProperty(value="预留字段3")
-	@Column(name="parameter3")
-	private String parameter3;
-	/**
-	*预留字段2
-	**/
-	@ApiModelProperty(value="预留字段2")
-	@Column(name="parameter2")
-	private String parameter2;
-	
-	
 
-	
 	
 }

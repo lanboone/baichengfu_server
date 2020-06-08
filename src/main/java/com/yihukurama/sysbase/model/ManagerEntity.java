@@ -87,12 +87,6 @@ public class ManagerEntity extends BaseEntity {
     @Column(name = "permission_list")
     private String permissionList;
     /**
-     * 预留字段5
-     **/
-    @ApiModelProperty(value = "预留字段5")
-    @Column(name = "parameter5")
-    private Integer parameter5;
-    /**
      * 创建时间
      **/
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
@@ -100,29 +94,11 @@ public class ManagerEntity extends BaseEntity {
     @Column(name = "create_date")
     private Date createDate;
     /**
-     * 预留字段4
-     **/
-    @ApiModelProperty(value = "预留字段4")
-    @Column(name = "parameter4")
-    private String parameter4;
-    /**
      * 管理员密码
      **/
     @ApiModelProperty(value = "管理员密码")
     @Column(name = "sys_password")
     private String sysPassword;
-    /**
-     * 预留字段3
-     **/
-    @ApiModelProperty(value = "预留字段3")
-    @Column(name = "parameter3")
-    private String parameter3;
-    /**
-     * 预留字段2
-     **/
-    @ApiModelProperty(value = "预留字段2")
-    @Column(name = "parameter2")
-    private String parameter2;
 
     /**
      * 登录token

@@ -144,12 +144,6 @@ public class DesignerEntity extends BaseEntity
 	@Column(name="style")
 	private String style;
 	/**
-	*预留字段5
-	**/
-	@ApiModelProperty(value="预留字段5")
-	@Column(name="parameter5")
-	private Integer parameter5;
-	/**
 	*个人介绍
 	**/
 	@ApiModelProperty(value="个人介绍")
@@ -161,27 +155,6 @@ public class DesignerEntity extends BaseEntity
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="create_date")
 	private Date createDate;
-	/**
-	*预留字段4
-	**/
-	@ApiModelProperty(value="预留字段4")
-	@Column(name="parameter4")
-	private String parameter4;
-	/**
-	*预留字段3
-	**/
-	@ApiModelProperty(value="预留字段3")
-	@Column(name="parameter3")
-	private String parameter3;
-	/**
-	*预留字段2
-	**/
-	@ApiModelProperty(value="预留字段2")
-	@Column(name="parameter2")
-	private String parameter2;
-	
-	
 
-	
 	
 }

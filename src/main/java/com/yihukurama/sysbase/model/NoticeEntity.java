@@ -108,12 +108,6 @@ public class NoticeEntity extends BaseEntity {
     @Column(name = "manager_id")
     private String managerId;
     /**
-     * 预留字段5
-     **/
-    @ApiModelProperty(value = "预留字段5")
-    @Column(name = "parameter5")
-    private Integer parameter5;
-    /**
      * 创建时间
      **/
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
@@ -121,31 +115,12 @@ public class NoticeEntity extends BaseEntity {
     @Column(name = "create_date")
     private Date createDate;
     /**
-     * 预留字段4
-     **/
-    @ApiModelProperty(value = "预留字段4")
-    @Column(name = "parameter4")
-    private String parameter4;
-    /**
      * 通知时间
      **/
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "notice_time")
     private Date noticeTime;
-    /**
-     * 预留字段3
-     **/
-    @ApiModelProperty(value = "预留字段3")
-    @Column(name = "parameter3")
-    private String parameter3;
-    /**
-     * 预留字段2
-     **/
-    @ApiModelProperty(value = "预留字段2")
-    @Column(name = "parameter2")
-    private String parameter2;
-
 
     /**
      * 申请人姓名
