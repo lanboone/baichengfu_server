@@ -79,10 +79,10 @@ alipay:
   notifyUrl: http://xxxxx
 
 wxpayconfig:
-  appId: xxxxx
+  appId: wxaf8a4c3ed53f963b
   miniAppId: xxxxx
   appAppId: xxxxx
-  mchId: xxxxxx
+  mchId: 1599215951
   mchKey: xxxxxxx
   notifyUrl: http://xxxxx
 
