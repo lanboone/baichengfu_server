@@ -272,8 +272,8 @@ public class AppPublic implements IAppPublic {
         List<AppuserEntity> appuserEntityList = appuserService.list(reqAppuser);
         if(!EmptyUtil.isEmpty(appuserEntityList)){
             //若不为空，该手机号码已注册,更新微信或qq信息
-            appuserEntityList.get(0).setWechatNumber(reqAppuser.getWechatNumber());
-            appuserEntityList.get(0).setQq(reqAppuser.getQq());
+            appuserEntityList.get(0).setWechatNumber(request.getData().getWechatNumber());
+            appuserEntityList.get(0).setQq(request.getData().getQq());
             String pwd = iSecurity.pwdEncrypt(request.getData().getUserPassword());
             appuserEntityList.get(0).setUserPassword(pwd);
             AppuserEntity appuser = appuserService.update(appuserEntityList.get(0));

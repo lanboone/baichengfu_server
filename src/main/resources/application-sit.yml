@@ -85,6 +85,7 @@ wxpayconfig:
   mchId: 1599215951
   mchKey: xxxxxxx
   notifyUrl: http://xxxxx
+  p2pwd: 180917
 
 # 用户名（这里为空）
 mqtt:
