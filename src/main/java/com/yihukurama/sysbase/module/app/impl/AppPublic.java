@@ -279,6 +279,8 @@ public class AppPublic implements IAppPublic {
             AppuserEntity appuser = appuserService.update(appuserEntityList.get(0));
             return Result.successed(appuser,"覆盖绑定成功");
         }
+        reqAppuser.setQq(request.getData().getQq());
+        reqAppuser.setWechatNumber(request.getData().getWechatNumber());
         reqAppuser.setUserName(phone);
         reqAppuser.setPhoneNumber(phone);
         String pwd = iSecurity.pwdEncrypt(request.getData().getUserPassword());
