@@ -54,7 +54,7 @@ public class ManagerServiceImpl implements IManager {
         String managerName = request.getData().getManagerName();
         String password = request.getData().getPassword();
         ManagerEntity managerEntity = new ManagerEntity();
-        String encryptPwd = securityService.pwdEncrypt(managerEntity.getSysPassword());
+        String encryptPwd = securityService.pwdEncrypt(password);
         managerEntity.setSysPassword(encryptPwd);
         managerEntity.setSysName(managerName);
 
