@@ -36,7 +36,7 @@ public class TopicCommentService extends CrudService<TopicCommentEntity> {
 
         TopicEntity topicEntity = new TopicEntity();
         topicEntity.setId(topicCommentEntity.getTopicId());
-        topicService.load(topicEntity);
+        topicEntity = topicService.load(topicEntity);
         topicCommentEntity.setTopicTitle(topicEntity.getTopicTitle());
         topicCommentEntity = super.create(topicCommentEntity);
 
