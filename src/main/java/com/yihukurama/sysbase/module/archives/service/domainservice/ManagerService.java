@@ -1,7 +1,11 @@
 package com.yihukurama.sysbase.module.archives.service.domainservice;
 
 import com.yihukurama.sysbase.model.ManagerEntity;
+import com.yihukurama.sysbase.module.archives.domain.Manager;
+import com.yihukurama.tkmybatisplus.app.exception.TipsException;
+import com.yihukurama.tkmybatisplus.framework.service.businessservice.impl.SecurityService;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +17,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class ManagerService extends CrudService<ManagerEntity>{
 
+    @Autowired
+    SecurityService securityService;
 
+    @Override
+    public ManagerEntity update(ManagerEntity managerEntity) throws TipsException {
+        if(managerEntity instanceof Manager){
+            if(managerEntity.getSysPassword()!=null) {
+                String encryptPwd = securityService.pwdEncrypt(managerEntity.getSysPassword());
+                managerEntity.setSysPassword(encryptPwd);
+            }
 
+        }
+
+        return super.update(managerEntity);
+    }
 }
