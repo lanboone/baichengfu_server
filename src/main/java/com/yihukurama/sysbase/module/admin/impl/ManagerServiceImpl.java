@@ -12,6 +12,7 @@ import com.yihukurama.sysbase.module.archives.service.domainservice.*;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.InfoUtil;
 import com.yihukurama.tkmybatisplus.app.utils.TransferUtils;
+import com.yihukurama.tkmybatisplus.framework.service.businessservice.impl.SecurityService;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Request;
 import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +47,17 @@ public class ManagerServiceImpl implements IManager {
     @Autowired
     OperatelogService operatelogService;
 
+    @Autowired
+    SecurityService securityService;
     @Override
     public Result adminLogin(Request<LoginDTO> request) throws TipsException {
         String managerName = request.getData().getManagerName();
         String password = request.getData().getPassword();
-
         ManagerEntity managerEntity = new ManagerEntity();
+        String encryptPwd = securityService.pwdEncrypt(managerEntity.getSysPassword());
+        managerEntity.setSysPassword(encryptPwd);
         managerEntity.setSysName(managerName);
+
         List<ManagerEntity> manageNameList = managerService.list(managerEntity);
         if (CollectionUtils.isEmpty(manageNameList)) {
             return Result.failed(null, "用户不存在", -2);
