@@ -84,7 +84,7 @@ wxpayconfig:
   appAppId: xxxxx
   mchId: 1599215951
   mchKey: xxxxxxx
-  notifyUrl: http://xxxxx
+  notifyUrl: http://test.baichengfu.com/baichengfu/api/wx/pay/pay_notify
 
 # 用户名（这里为空）
 mqtt:

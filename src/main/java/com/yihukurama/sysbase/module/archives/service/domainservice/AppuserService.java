@@ -8,6 +8,7 @@ import com.yihukurama.sysbase.module.app.designp.observer.event.AppuserEvent;
 import com.yihukurama.sysbase.module.archives.domain.Appuser;
 import com.yihukurama.tkmybatisplus.app.exception.TipsException;
 import com.yihukurama.tkmybatisplus.app.utils.EmptyUtil;
+import com.yihukurama.tkmybatisplus.framework.service.businessservice.impl.SecurityService;
 import com.yihukurama.tkmybatisplus.framework.service.domainservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -34,6 +35,25 @@ public class AppuserService extends CrudService<AppuserEntity>{
     @Autowired
     AppEventPublisher appEventPublisher;
 
+    @Autowired
+    SecurityService securityService;
+
+    @Override
+    public AppuserEntity create(AppuserEntity appuserEntity) throws TipsException {
+        if(appuserEntity instanceof Appuser){
+            Appuser appuser = (Appuser) appuserEntity;
+
+            if(appuser.getCreateOrign() != null){
+                if(appuser.getCreateOrign().equals(Appuser.CREATE_ORIGN_10)){
+                    //后台创建用户
+                    String pwd = securityService.pwdEncrypt(appuserEntity.getUserPassword());
+                    appuserEntity.setUserPassword(pwd);
+                    appuserEntity.setUserName(appuserEntity.getPhoneNumber());
+                }
+            }
+        }
+        return super.create(appuserEntity);
+    }
 
     @Override
     public AppuserEntity update(AppuserEntity appuserEntity) throws TipsException {

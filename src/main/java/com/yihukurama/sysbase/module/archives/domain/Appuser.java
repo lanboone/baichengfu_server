@@ -7,6 +7,15 @@ import lombok.Data;
 @Data
 public class Appuser extends AppuserEntity {
 
+
+    public static final int CREATE_ORIGN_10 = 10;
+
+    /**
+     * 创建时来源  10 后台创建
+     */
+    @ApiModelProperty(value="创建时来源  10 后台创建")
+    private Integer createOrign;
+
     public static final int REGIST_TYPE_10 = 10;
 
     public static final int REGIST_TYPE_20 = 20;
