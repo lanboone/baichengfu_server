@@ -1,5 +1,6 @@
 package com.yihukurama.sysbase.module.pay.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
@@ -50,7 +51,7 @@ public class WxPayService implements IPay {
         //支付类, 所有方法都在这个类里
         BestPayServiceImpl bestPayService = new BestPayServiceImpl();
         bestPayService.setWxPayConfig(wxPayConfig);
-
+        LogUtil.debugLog(this, JSON.toJSONString(wxPayConfig));
         PayRequest payRequest = new PayRequest();
         payRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_APP);
         payRequest.setOrderId(orderEntity.getNum());
