@@ -83,7 +83,7 @@ wxpayconfig:
   miniAppId: xxxxx
   appAppId: xxxxx
   mchId: 1599215951
-  mchKey: xxxxxxx
+  mchKey: b93f1a56f9e3261500e2dadf39c6ca70
   notifyUrl: http://test.baichengfu.com/baichengfu/api/wx/pay/pay_notify
 
 # 用户名（这里为空）
