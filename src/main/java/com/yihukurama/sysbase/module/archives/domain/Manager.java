@@ -2,6 +2,7 @@ package com.yihukurama.sysbase.module.archives.domain;
 
 import com.yihukurama.sysbase.model.ManagerEntity;
 import com.yihukurama.sysbase.model.PrivilegeEntity;
+import com.yihukurama.tkmybatisplus.app.annotation.SqlWhere;
 import lombok.Data;
 
 import java.util.List;
@@ -13,6 +14,13 @@ import java.util.List;
  */
 @Data
 public class Manager extends ManagerEntity {
+
+
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LIKE,proprtityName = "sys_name")
+    @Override
+    public String getSysName() {
+        return super.getSysName();
+    }
 
     /**
      * 登录时返回的菜单权限列表

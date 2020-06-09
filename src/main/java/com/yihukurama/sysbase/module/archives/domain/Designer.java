@@ -8,6 +8,13 @@ import lombok.Data;
 @Data
 public class Designer extends DesignerEntity {
 
+
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LIKE,proprtityName = "nick_name")
+    @Override
+    public String getNickName() {
+        return super.getNickName();
+    }
+
     /**
      * 传入的多个风格，用;隔开
      */

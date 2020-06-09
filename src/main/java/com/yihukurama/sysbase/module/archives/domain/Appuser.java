@@ -1,11 +1,18 @@
 package com.yihukurama.sysbase.module.archives.domain;
 
 import com.yihukurama.sysbase.model.AppuserEntity;
+import com.yihukurama.tkmybatisplus.app.annotation.SqlWhere;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
 public class Appuser extends AppuserEntity {
+
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LIKE,proprtityName = "nick_name")
+    @Override
+    public String getNickName() {
+        return super.getNickName();
+    }
 
 
     public static final int CREATE_ORIGN_10 = 10;

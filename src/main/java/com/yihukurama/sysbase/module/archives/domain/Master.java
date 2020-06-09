@@ -8,6 +8,14 @@ import lombok.Data;
 @Data
 public class Master extends MasterEntity {
 
+
+    @SqlWhere(value = SqlWhere.SqlWhereValue.LIKE,proprtityName = "nick_name")
+    @Override
+    public String getNickName() {
+        return super.getNickName();
+    }
+
+
     /**
      * 传入的多个技能，用;隔开
      */
