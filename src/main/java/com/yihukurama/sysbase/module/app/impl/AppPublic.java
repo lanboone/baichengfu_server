@@ -114,6 +114,9 @@ public class AppPublic implements IAppPublic {
                 return Result.failed(null,"用户名密码不正确",-3);
             }
             loginAppuser = appuserEntityList.get(0);
+            if(loginAppuser.getIsLimitLogin()!=null && loginAppuser.getIsLimitLogin().equals(1)){
+                return Result.failed(null,"后台已限制该账号登录",-50);
+            }
             loginAppuser.setToken(token);
             appuserService.update(loginAppuser);
             return Result.successed(loginAppuser,"登录成功");
@@ -140,7 +143,9 @@ public class AppPublic implements IAppPublic {
             return Result.failed(null,"该token已失效",-4);
         }
         AppuserEntity loginAppuser = appuserEntityList.get(0);
-
+        if(loginAppuser.getIsLimitLogin()!=null && loginAppuser.getIsLimitLogin().equals(1)){
+            return Result.failed(null,"后台已限制该账号登录",-50);
+        }
         return Result.successed(loginAppuser,"登录成功");
     }
 
@@ -250,6 +255,9 @@ public class AppPublic implements IAppPublic {
             return Result.failed(null,"该qq或微信暂未注册，请先注册",-5);
         }
         AppuserEntity loginAppuser = appuserEntityList.get(0);
+        if(loginAppuser.getIsLimitLogin()!=null && loginAppuser.getIsLimitLogin().equals(1)){
+            return Result.failed(null,"后台已限制该账号登录",-50);
+        }
         //生成token
         String token = UUID.randomUUID().toString().replaceAll("-","");
         loginAppuser.setToken(token);

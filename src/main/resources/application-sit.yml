@@ -86,6 +86,7 @@ wxpayconfig:
   mchKey: xxxxxxx
   notifyUrl: http://test.baichengfu.com/baichengfu/api/wx/pay/pay_notify
   p2pwd: 180917
+  keyPath: /root/prod/baichengfu/wxpay/apiclient_cert.p12
 
 # 用户名（这里为空）
 mqtt:
