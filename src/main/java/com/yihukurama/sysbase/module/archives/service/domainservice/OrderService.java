@@ -59,7 +59,7 @@ public class OrderService extends CrudService<OrderEntity>{
         }
         Integer totalConsumPoint = orderEntity.getConsumPoint() == null? 0 : orderEntity.getConsumPoint();
 
-        if(totalConsumPoint<integral){
+        if(totalConsumPoint<=integral){
             throw new TipsException("用户积分不足");
         }
         OrderEntity resultOrderEntity = super.create(orderEntity);
