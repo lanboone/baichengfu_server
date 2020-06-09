@@ -1,6 +1,7 @@
 package com.yihukurama.sysbase.module.pay.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.lly835.bestpay.config.WxPayConfig;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
@@ -26,6 +27,7 @@ import com.yihukurama.tkmybatisplus.framework.web.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.net.ssl.SSLContext;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +39,7 @@ public class WxPayService implements IPay {
     OrderService orderService;
 
     @Autowired
-    WxPaySDKConfig wxPayConfig;
+    WxPaySDKConfig wxPaySDKConfig;
     @Autowired
     OrderProductService orderProductService;
     @Autowired
@@ -50,6 +52,14 @@ public class WxPayService implements IPay {
 
         //支付类, 所有方法都在这个类里
         BestPayServiceImpl bestPayService = new BestPayServiceImpl();
+        WxPayConfig wxPayConfig = new WxPayConfig();
+        wxPayConfig.setAppAppId(wxPaySDKConfig.getAppAppId());
+        wxPayConfig.setAppId(wxPaySDKConfig.getAppId());
+        wxPayConfig.setAppSecret(wxPaySDKConfig.getAppSecret());
+        wxPayConfig.setMchId(wxPaySDKConfig.getMchId());
+        wxPayConfig.setMchKey(wxPaySDKConfig.getMchKey());
+        wxPayConfig.setKeyPath(wxPaySDKConfig.getKeyPath());
+        wxPayConfig.setNotifyUrl(wxPaySDKConfig.getNotifyUrl());
         bestPayService.setWxPayConfig(wxPayConfig);
         LogUtil.debugLog(this, JSON.toJSONString(wxPayConfig));
         PayRequest payRequest = new PayRequest();
@@ -69,6 +79,14 @@ public class WxPayService implements IPay {
 
         //支付类, 所有方法都在这个类里
         BestPayServiceImpl bestPayService = new BestPayServiceImpl();
+        WxPayConfig wxPayConfig = new WxPayConfig();
+        wxPayConfig.setAppAppId(wxPaySDKConfig.getAppAppId());
+        wxPayConfig.setAppId(wxPaySDKConfig.getAppId());
+        wxPayConfig.setAppSecret(wxPaySDKConfig.getAppSecret());
+        wxPayConfig.setMchId(wxPaySDKConfig.getMchId());
+        wxPayConfig.setMchKey(wxPaySDKConfig.getMchKey());
+        wxPayConfig.setKeyPath(wxPaySDKConfig.getKeyPath());
+        wxPayConfig.setNotifyUrl(wxPaySDKConfig.getNotifyUrl());
         bestPayService.setWxPayConfig(wxPayConfig);
 
         RefundRequest refundRequest = new RefundRequest();
@@ -90,7 +108,7 @@ public class WxPayService implements IPay {
             LogUtil.errorLog(this, "解析支付结果失败");
         }
 
-        if(!wxPayConfig.getAppId().equals(map.get("appid"))){
+        if(!wxPaySDKConfig.getAppId().equals(map.get("appid"))){
             return responseWxPayFail("非本公众号产生的支付操作");
         }
 
@@ -120,6 +138,14 @@ public class WxPayService implements IPay {
                 return responseWxPaySuccess();
             }
             BestPayServiceImpl bestPayService = new BestPayServiceImpl();
+            WxPayConfig wxPayConfig = new WxPayConfig();
+            wxPayConfig.setAppAppId(wxPaySDKConfig.getAppAppId());
+            wxPayConfig.setAppId(wxPaySDKConfig.getAppId());
+            wxPayConfig.setAppSecret(wxPaySDKConfig.getAppSecret());
+            wxPayConfig.setMchId(wxPaySDKConfig.getMchId());
+            wxPayConfig.setMchKey(wxPaySDKConfig.getMchKey());
+            wxPayConfig.setKeyPath(wxPaySDKConfig.getKeyPath());
+            wxPayConfig.setNotifyUrl(wxPaySDKConfig.getNotifyUrl());
             bestPayService.setWxPayConfig(wxPayConfig);
 
             PayResponse payResponse = bestPayService.asyncNotify(origin);
