@@ -63,6 +63,14 @@ public class TopicCommentEntity extends BaseEntity
 	@ApiModelProperty(value="创建人id")
 	@Column(name="creater_id")
 	private String createrId;
+
+	/**
+	 *发布人
+	 **/
+	@ApiModelProperty(value="发布人")
+	@Column(name="creater_name")
+	private String creater_name;
+
 	/**
 	*父评论id
 	**/
