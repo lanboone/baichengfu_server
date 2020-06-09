@@ -1,5 +1,7 @@
 package com.yihukurama.sysbase.module.archives.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.sysbase.model.AppuserShopcarEntity;
 import com.yihukurama.sysbase.model.OrderEntity;
 import com.yihukurama.sysbase.model.OrderProductEntity;
@@ -44,11 +46,15 @@ public class Order extends OrderEntity {
      * 查询时 大于等于该时间
      */
     @ApiModelProperty(value = "查询时 大于等于该时间")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date gtCreateDate;
     /**
      * 查询时 小于等于该时间
      */
     @ApiModelProperty(value = "查询时 小于等于该时间")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date ltCreateDate;
     @SqlWhere(value = SqlWhere.SqlWhereValue.GT,proprtityName = "create_date")
     public Date getGtCreateDate() {

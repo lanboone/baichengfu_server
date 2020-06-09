@@ -1,5 +1,7 @@
 package com.yihukurama.sysbase.module.archives.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yihukurama.sysbase.model.AppuserSellEntity;
 import com.yihukurama.tkmybatisplus.app.annotation.SqlWhere;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,6 +25,8 @@ public class AppuserSell extends AppuserSellEntity {
      * 查询时 大于等于该时间
      */
     @ApiModelProperty(value = "查询时 大于等于该时间")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date gtCreateDate;
     /**
      * 查询时 小于等于该时间

@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 06/06/2020 17:47:11
+ Date: 09/06/2020 12:58:48
 */
 
 SET NAMES utf8mb4;
@@ -1130,6 +1130,7 @@ CREATE TABLE `tb_topic_comment`  (
   `comment_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '话题评论内容',
   `is_delete` int(11) NULL DEFAULT 0 COMMENT '删除状态 0正常 1删除',
   `creater_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
+  `creater_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发布人',
   `create_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `operator_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最后修改人id',
   `operate_date` datetime(0) NULL COMMENT '最后修改日期',
