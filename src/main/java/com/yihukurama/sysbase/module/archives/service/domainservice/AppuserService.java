@@ -58,6 +58,7 @@ public class AppuserService extends CrudService<AppuserEntity>{
     @Override
     public AppuserEntity update(AppuserEntity appuserEntity) throws TipsException {
         if(appuserEntity instanceof Appuser){
+            Appuser appuser = (Appuser) appuserEntity;
             AppuserEntity orgAppuser = this.load(appuserEntity);
             if(EmptyUtil.isEmpty(orgAppuser.getNickName())){
                 orgAppuser.setNickName("");
@@ -76,6 +77,13 @@ public class AppuserService extends CrudService<AppuserEntity>{
             if(orgAppuser.getAddressId()!=null && !orgAppuser.getAddressId().equals(appuserEntity.getAddressId())){
                 //更新地址
                 appEventPublisher.publishEvent(new AppuserEvent(appuserEntity,AppuserEvent.TYPE_30));
+            }
+            if(appuser.getCreateOrign() != null){
+                if(appuser.getCreateOrign().equals(Appuser.CREATE_ORIGN_10)){
+                    //后台更新用户
+                    String pwd = securityService.pwdEncrypt(appuserEntity.getUserPassword());
+                    appuserEntity.setUserPassword(pwd);
+                }
             }
         }
 
