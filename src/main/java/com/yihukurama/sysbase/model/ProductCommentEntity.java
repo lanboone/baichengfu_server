@@ -23,6 +23,15 @@ import java.util.Date;
 public class ProductCommentEntity extends BaseEntity
 {
 
+
+	/**
+	 *商品分类名
+	 **/
+	@ApiModelProperty(value="商品分类名")
+	@Column(name="product_standard_name")
+	private String productStandardName;
+
+
 	/**
 	 *10 显示  20 隐藏
 	 **/
